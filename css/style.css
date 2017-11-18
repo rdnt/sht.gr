@@ -73,7 +73,7 @@ body {
     left: calc(50% - 43px);
     top: calc(50% - 44.5px);
     position: fixed;
-    /*animation: load 1.5s infinite cubic-bezier(0,.5,.5,1) alternate;*/
+    animation: load 1.5s infinite cubic-bezier(0,.5,.5,1) alternate;
 }
 
 @keyframes load {
@@ -123,28 +123,6 @@ body {
     100% {
         transform: translateX(0%);
         opacity: 1;
-    }
-}
-
-@keyframes init {
-    0% {
-        transform: scale(200);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-@keyframes end {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(0);
-        opacity: 0;
     }
 }
 
