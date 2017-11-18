@@ -10,27 +10,25 @@ $(function(){
 $(window).on('load', function(){
 
 
+
+    $("#right-panel").addClass("slide-right");
+    $("#left-panel").addClass("slide-left");
+
+
+
     setTimeout(function(){
-
-        $("#right-panel").addClass("init-center");
-        $("#left-panel").addClass("init-center");
-
-    }, 500);
-
-    setTimeout(function(){
-
-        $("#right-panel").removeClass("init-right slide-in");
-        $("#left-panel").removeClass("init-left slide-in");
-
-        $("#right-panel").addClass("slide-right");
-        $("#left-panel").addClass("slide-left");
-
-        $("#loader").addClass("transparent");
-
         setTimeout(function(){
-            $("#loader").addClass("display-none");
-        }, 1000);
-    }, 1500);
+            $("#right-panel").removeClass("init-right");
+            $("#left-panel").removeClass("init-left");
+            setTimeout(function(){
+                $("#loader").addClass("display-none");
+            }, 1000);
+        }, 500);
+        $("#logo-wrapper").addClass("invisible");
+        setTimeout(function(){
+            $("#loader").addClass("transparent");
+        }, 50);
+    }, 1100);
 
 
 });

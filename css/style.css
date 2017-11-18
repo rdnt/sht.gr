@@ -7,21 +7,16 @@ body {
     height: 100%;
     width: 100%;
     background-color: #0a0b0c;
-    background-color: transparent;
 }
 
 .slide-right {
-    animation: slide-right 1.5s cubic-bezier(1,0,0,1);
+    animation: slide-in 1s cubic-bezier(.5,.5,0,0), maintain-center .1s 1s linear, slide-right 1.5s 1.1s cubic-bezier(1,0,0,1);
     transform: translateX(100%);
 }
 
 .slide-left {
-    animation: slide-left 1.5s cubic-bezier(1,0,0,1);
+    animation: slide-in 1s cubic-bezier(.5,.5,0,0), maintain-center .1s 1s linear, slide-left 1.5s 1.1s cubic-bezier(1,0,0,1);
     transform: translateX(-100%);
-}
-
-.slide-in {
-    animation: slide-in 1s cubic-bezier(.5,.5,0,0);
 }
 
 .keep-at-center {
@@ -87,6 +82,15 @@ body {
     }
     100% {
         transform: scale(1.1);
+    }
+}
+
+@keyframes maintain-center {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(0%);
     }
 }
 
