@@ -3,12 +3,12 @@
 <html lang="en">
 <head>
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/head.php"; ?>
-<title><?=page_title("Home")?></title>
+<title><?=page_title("Login")?></title>
 </head>
 <body>
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/nav.php"; ?>
 <main>
-<?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/pages/home.php"; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/pages/login.php"; ?>
 </main>
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/footer.php"; ?>
 </body>
