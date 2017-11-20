@@ -6,15 +6,11 @@ $(function(){
 
 });
 
-// Page loaded
+// Page content loaded
 $(window).on('load', function(){
-
-
 
     $("#right-panel").addClass("slide-right");
     $("#left-panel").addClass("slide-left");
-
-
 
     setTimeout(function(){
         setTimeout(function(){
@@ -29,6 +25,5 @@ $(window).on('load', function(){
             $("#loader").addClass("transparent");
         }, 50);
     }, 1100);
-
 
 });
