@@ -1,6 +1,6 @@
 <?php
 // Used to reset the files' cache
-$version = "0.0.0";
+$version = "0.0.1";
 // Disable preloader for all users
 $preloader = 1;
 // Enable error reporting
