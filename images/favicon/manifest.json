@@ -13,8 +13,5 @@
         }
     ],
     "theme_color": "#0a0b0c",
-    "background_color": "#0a0b0c",
-    "start_url": "https://debug.sht.gr",
-    "display": "standalone",
-    "orientation": "portrait"
+    "background_color": "#0a0b0c"
 }
