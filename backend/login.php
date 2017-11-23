@@ -1,18 +1,15 @@
 <?php
 
-usleep(200000);
-date_default_timezone_set("Europe/Athens");
-
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
+function escape_form_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = test_input($_POST["username"]);
-    $password = test_input($_POST["password"]);
+    $username = escape_form_input($_POST["username"]);
+    $password = escape_form_input($_POST["password"]);
 
     if($username and $password) {
         // Both username and password fields are filled
@@ -56,9 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Empty Password";
     }
     else {
-        echo "Both Empty";
+        echo "Empty Username and Password";
     }
-
 }
 else {
     http_response_code(404);
