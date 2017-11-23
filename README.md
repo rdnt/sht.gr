@@ -7,4 +7,4 @@ You are free to suggest improvements on certain parts of this project and take s
 
 Any reproductions of my work **must** include a link to this repository and the following copyright notice.
 
-© 2012 - 2017 ShtHappens796 - All Rights Reserved
+© 2017 Tasos Papalyras - All Rights Reserved
