@@ -33,7 +33,6 @@ function push_assets($version) {
         "/js/materialize.min.js?v=$version" => "script"
     );
 
-    $string = null;
     $counter = count($assets);
     foreach ($assets as $asset => $as) {
         $counter--;
