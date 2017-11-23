@@ -13,6 +13,7 @@ function page_title($title) {
     return "SHT <> $title";
 }
 
+
 if ($errors) {
     // Error reporting
     ini_set('display_errors', 1);
