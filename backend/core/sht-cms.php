@@ -34,6 +34,7 @@ function push_assets($version) {
     );
 
     $counter = count($assets);
+    
     foreach ($assets as $asset => $as) {
         $counter--;
         $string = "Link: <$asset>; rel=preload; as=$as";
