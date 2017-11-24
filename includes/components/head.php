@@ -8,10 +8,11 @@
 <link rel="shortcut icon" href="/images/favicon/favicon.ico">
 <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
 <meta name="theme-color" content="#0a0b0c">
-<?php if ($preloader == 1): ?>
+<?php if ($cached == 1): ?>
 <link href="/css/materialize.min.css?v=<?=$version?>" type="text/css" rel="stylesheet" media="screen"/>
 <link href="/css/style.css?v=<?=$version?>" type="text/css" rel="stylesheet" media="screen"/>
 <?php else: ?>
 <link href="/css/materialize.min.css?v=<?=$version?>" rel="stylesheet" media="(max-height:0px)" onload="if(media!='all')media='all'"/>
 <link href="/css/style.css?v=<?=$version?>" rel="stylesheet" media="(max-height:0px)" onload="if(media!='all')media='all'"/>
+<?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/loader_styles.php"; ?>
 <?php endif; ?>
