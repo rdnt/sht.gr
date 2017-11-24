@@ -1,12 +1,14 @@
 <?php
 // Used to reset the files' cache
-$version = "0.1.1";
+$version = "0.1.2";
 // Disable preloader for all users
 $preloader = 0;
 // Enable error reporting
 $errors = 1;
 // Default timezone to Europe/Athens
 date_default_timezone_set("Europe/Athens");
+// Domain
+ $domain = $_SERVER['SERVER_NAME'];
 
 function page_title($title) {
     // Returns formatted page title
@@ -40,6 +42,21 @@ function push_assets($version) {
         $string = "Link: <$asset>; rel=preload; as=$as";
         header($string, false);
     }
+}
+
+if (isset($_SESSION["lastvisit"])) {
+    // Returning visitor
+    if ($_SESSION["lastvisit"] < date("U") + 86400) {
+        // Returning visitor that came here recently (less than a day ago)
+        $_SESSION["lastvisit"] = date("U");
+        $cached = 1;
+    }
+}
+else {
+    // New visitor
+    $_SESSION["lastvisit"] = date("U");
+    $cached = 0;
+    $preloader = 1;
 }
 
 push_assets($version);
