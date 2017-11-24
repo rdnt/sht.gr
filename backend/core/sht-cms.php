@@ -2,7 +2,7 @@
 // Used to reset the files' cache
 $version = "0.1.1";
 // Disable preloader for all users
-$preloader = 1;
+$preloader = 0;
 // Enable error reporting
 $errors = 1;
 // Default timezone to Europe/Athens
@@ -41,5 +41,7 @@ function push_assets($version) {
         header($string, false);
     }
 }
+
+push_assets($version);
 
 ?>
