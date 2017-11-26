@@ -1,6 +1,6 @@
 <style>
 body {
-    background-color: #ffffff;
+    background-color: #000;
     margin: 0;
 }
 #loader {
