@@ -1,12 +1,13 @@
+/* HTML */
 html {
     height: 100%;
 }
 
 body {
-    background-color: #ffffff;
+    background-color: #000;
     margin: 0;
 }
-
+/* Material Icons */
 @font-face {
     font-family: 'Material Icons';
     font-style: normal;
@@ -43,7 +44,6 @@ body {
     /* Support for IE. */
     font-feature-settings: 'liga';
 }
-
 /* Loader */
 #loader {
     position: absolute;
@@ -51,6 +51,7 @@ body {
     width: 100%;
     background-color: #0a0b0c;
     overflow: hidden;
+    z-index: 1000;
 }
 
 .slide-right {
@@ -180,4 +181,80 @@ body {
     left: 0px;
     position: absolute;
     top: 38px;
+}
+/* Colors */
+.sht-black {
+    background-color: #0a0b0c;
+}
+
+.sht-black-text {
+    color: #0a0b0c;
+}
+/* Navigation */
+nav {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    padding-top: 20px;
+    z-index: 1000;
+}
+
+nav ul {
+    line-height: 40px;
+}
+
+nav ul li a span {
+    display:block;
+    transform: skew(-45deg);
+}
+
+.reverse-nav li a {
+    transform: skew(-45deg);
+}
+
+.reverse-nav li a span {
+    transform: skew(45deg);
+}
+
+nav ul a:hover {
+    background-color: transparent;
+}
+
+nav ul li a {
+    padding: 0 30px;
+    background-color: rgba(255, 255, 255, .0);
+    transform: skew(45deg);
+}
+
+nav ul li a:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 40px;
+    border-bottom: 0px solid rgba(255, 255, 255, 0.2);
+    width: 100%;
+    left: 0;
+    -webkit-transition: 0.2s ease;
+    transition: 0.2s ease;
+}
+
+nav ul li a:hover:after {
+    top: 0;
+    border-bottom: 40px solid rgba(255, 255, 255, .2);
+}
+
+nav ul li a:active:after {
+    border-bottom: 40px solid rgba(255, 255, 255, 0.25);
+}
+
+nav ul li a.active:after {
+    top: 0;
+    border-bottom: 40px solid rgba(255, 255, 255, 0.15);
+}
+
+nav ul li a.active:hover:after {
+    border-bottom: 40px solid rgba(255, 255, 255, 0.2);
+}
+
+nav ul li a.active:active:after {
+    border-bottom: 40px solid rgba(255, 255, 255, 0.25);
 }
