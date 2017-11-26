@@ -5,6 +5,7 @@
 
         $menuitems["/"] = "HOME";
         $menuitems["/projects.php"] = "PROJECTS";
+        $menuitems["/music.php"] = "MUSIC";
         $menuitems["/about.php"] = "ABOUT";
 
         foreach ($menuitems as $url => $name) {
