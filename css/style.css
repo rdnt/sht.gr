@@ -52,6 +52,7 @@ body {
     background-color: #0a0b0c;
     overflow: hidden;
     z-index: 1000;
+    pointer-events: none;
 }
 
 .slide-right {
@@ -195,7 +196,8 @@ nav {
     -webkit-box-shadow: none;
     box-shadow: none;
     padding-top: 20px;
-    z-index: 1000;
+    z-index: 999;
+    position: absolute;
 }
 
 nav ul {
@@ -217,6 +219,10 @@ nav ul li a span {
 
 nav ul a:hover {
     background-color: transparent;
+}
+
+nav ul li {
+    margin-left: 2px;
 }
 
 nav ul li a {
@@ -257,4 +263,18 @@ nav ul li a.active:hover:after {
 
 nav ul li a.active:active:after {
     border-bottom: 40px solid rgba(255, 255, 255, 0.25);
+}
+/* Home Parallax */
+#home-parallax {
+    height: 100vh;
+    color: #fff;
+    font-weight: 300;
+}
+
+#home-parallax .parallax {
+    opacity: .5;
+}
+
+#home-parallax h5, h3, h6 {
+    font-weight: 300;
 }
