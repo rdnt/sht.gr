@@ -1,4 +1,4 @@
-<nav class="transparent" role="navigation">
+<nav class="transparent">
     <div class="nav-wrapper container">
         <ul class="left hide-on-med-and-down">
         <?php
