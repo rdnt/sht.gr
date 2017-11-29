@@ -1,10 +1,13 @@
-<form action="/backend/login.php" method="post">
 
-    <input type="text" placeholder="Username" name="username" required>
+    <div id="login-container">
+        <form action="/backend/login.php" method="post">
 
-    <input type="password" placeholder="Password" name="password" required>
+            <input type="text" placeholder="Username" name="username" required>
 
-    <button type="submit">Login</button>
+            <input type="password" placeholder="Password" name="password" required>
+
+            <button type="submit">Login</button>
 
 
-</form>
+        </form>
+    </div>
