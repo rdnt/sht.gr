@@ -6,7 +6,6 @@
 <title><?=page_title("Login")?></title>
 </head>
 <body>
-<?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/nav.php"; ?>
 <main>
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/pages/login.php"; ?>
 </main>
