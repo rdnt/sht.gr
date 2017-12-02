@@ -4,7 +4,7 @@ html {
 }
 
 body {
-    background-color: #000;
+    background-color: #ffffff;
     margin: 0;
 }
 /* Material Icons */
@@ -269,6 +269,7 @@ nav ul li a.active:active:after {
     height: 100vh;
     color: #fff;
     font-weight: 300;
+    z-index: 1;
 }
 
 #home-parallax .parallax {
@@ -276,5 +277,28 @@ nav ul li a.active:active:after {
 }
 
 #home-parallax h5, h3, h6 {
+    font-weight: 300;
+}
+#parallax-bg {
+    background-color: #000000;
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    z-index: 0;
+}
+#parallax-img {
+    opacity: 0;
+    -webkit-transition: opacity 2s ease;
+    transition: opacity 2s ease;
+}
+/* Home Arrow */
+.arrow {
+    height: 50px;
+    position: absolute;
+    bottom: 20px;
+    transform: translateX(-50%);
+}
+/* Text Weights */
+.light-text {
     font-weight: 300;
 }

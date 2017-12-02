@@ -59,7 +59,7 @@ else {
     $preloader = 1;
 }
 
-$preloader = 1;
+//$preloader = 1;
 
 push_assets($version);
 
