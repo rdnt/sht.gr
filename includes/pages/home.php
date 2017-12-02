@@ -11,4 +11,44 @@
     <div  class="parallax"><img id="parallax-img" class="transparent" alt="" src="/images/home/parallax.jpg"></div>
 </div>
 <a id="main"></a>
-Content
+<div class="container home-section">
+    <div class="row valign-wrapper">
+        <div class="col l6 right-align valign">
+            <h4 class="light-text">Code</h4>
+            <h5 class="light-text">Whether it being a very specific project or a routine activity, programs play a big part in our lives.<br>Especially mine.</h5>
+            <a>Coding Projects</a>
+        </div>
+        <div class="col l5 offset-l1 valign">
+            <div style="background-color:#ffdddd;height:300px;width:300px;"></div>
+        </div>
+    </div>
+</div>
+
+<div id="gaming-parallax" class="parallax-container valign-wrapper">
+    <div class="section container row valign-wrapper">
+
+            <div class="col l5 valign">
+                <div class="right" style="background-color:#ddffdd;height:300px;width:300px;"></div>
+            </div>
+            <div class="col l6 offset-l1 valign">
+                <h4 class="light-text">Gaming</h4>
+                <h5 class="light-text">Exit reality and enter the virtual.<br>Where your imagination can grow indefinitely.<br>Where you make things happen.</h5>
+                <a>Gaming Activities</a>
+            </div>
+
+    </div>
+    <div  class="parallax"><img id="parallax-img" class="transparent" alt="" src="/images/home/parallax.jpg"></div>
+</div>
+
+<div class="container home-section">
+    <div class="row valign-wrapper">
+        <div class="col l6 right-align valign">
+            <h4 class="light-text">Music</h4>
+            <h5 class="light-text">A straightforward way for me to relax and express myself. But it doesn't end there. It never will.</h5>
+            <a>Music Catalog</a>
+        </div>
+        <div class="col l5 offset-l1 valign">
+            <div style="background-color:#ddddff;height:300px;width:300px;"></div>
+        </div>
+    </div>
+</div>
