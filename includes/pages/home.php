@@ -23,7 +23,6 @@
         </div>
     </div>
 </div>
-
 <div id="gaming-parallax" class="parallax-container valign-wrapper">
     <div class="section container row valign-wrapper">
 
@@ -37,9 +36,8 @@
             </div>
 
     </div>
-    <div  class="parallax"><img id="parallax-img" class="transparent" alt="" src="/images/home/parallax.jpg"></div>
+    <div  class="parallax"><img id="gaming-img" class="transparent" alt="" src="/images/home/gaming-bg.png"></div>
 </div>
-
 <div class="container home-section">
     <div class="row valign-wrapper">
         <div class="col l6 right-align valign">

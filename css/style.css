@@ -275,10 +275,11 @@ nav ul li a.active:active:after {
 #home-parallax .parallax {
     opacity: .5;
 }
+
 #gaming-parallax .parallax {
-    min-height: 0;
-    height: 0;
+    opacity: .5;
 }
+
 #gaming-parallax .row {
     margin-bottom: 0;
 }
@@ -286,6 +287,7 @@ nav ul li a.active:active:after {
 #home-parallax h5, h3, h6 {
     font-weight: 300;
 }
+
 #parallax-bg {
     background-color: #000000;
     position: absolute;
@@ -293,10 +295,17 @@ nav ul li a.active:active:after {
     width: 100%;
     z-index: 0;
 }
+
 #parallax-img {
     opacity: 0;
     -webkit-transition: opacity 2s ease;
     transition: opacity 2s ease;
+}
+
+#gaming-img {
+    opacity: 0;
+    -webkit-transition: opacity 1s ease;
+    transition: opacity 1s ease;
 }
 /* Home */
 .arrow {
