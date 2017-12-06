@@ -1,9 +1,10 @@
 <style>
 body {
     margin: 0;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 #loader {
+    top: 0;
     position: absolute;
     height: 100%;
     width: 100%;
