@@ -10,16 +10,18 @@
 // DOM content loaded
 $(function(){
 
-    $("#right-panel").addClass("slide-in");
-    $("#left-panel").addClass("slide-in");
+
 
 });
 
 // Page content loaded
 $(window).on('load', function(){
-    
-    $("#right-panel").addClass("slide-right");
-    $("#left-panel").addClass("slide-left");
+
+
+    setTimeout(function(){
+        $("#right-panel").addClass("slide-in slide-right");
+        $("#left-panel").addClass("slide-in slide-left");
+    }, 100);
 
     setTimeout(function(){
         setTimeout(function(){
