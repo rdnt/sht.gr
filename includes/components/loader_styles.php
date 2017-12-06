@@ -1,7 +1,7 @@
 <style>
 body {
-    background-color: #000;
     margin: 0;
+    overflow: hidden;
 }
 #loader {
     position: absolute;
