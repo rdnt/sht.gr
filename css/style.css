@@ -205,8 +205,12 @@ nav ul {
 }
 
 nav ul li a span {
-    display:block;
+    position: relative;
+    display: block;
     transform: skew(-45deg);
+    z-index: 1;
+    -webkit-transition: color .2s ease;
+    transition: color .2s ease;
 }
 
 .reverse-nav li a {
@@ -236,33 +240,38 @@ nav ul li a:after {
     display: block;
     position: absolute;
     top: 40px;
-    border-bottom: 0px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 0px solid rgba(255, 255, 255, .2);
     width: 100%;
     left: 0;
-    -webkit-transition: 0.2s ease;
-    transition: 0.2s ease;
+    -webkit-transition: .2s ease;
+    transition: .2s ease;
 }
 
 nav ul li a:hover:after {
     top: 0;
-    border-bottom: 40px solid rgba(255, 255, 255, .2);
+    border-bottom: 40px solid rgba(255, 255, 255, 1);
+}
+
+nav ul li a:hover span {
+    color: #000000;
 }
 
 nav ul li a:active:after {
-    border-bottom: 40px solid rgba(255, 255, 255, 0.25);
+    top: 0;
+    border-bottom: 40px solid rgba(220, 220, 220, 1);
 }
 
 nav ul li a.active:after {
     top: 0;
-    border-bottom: 40px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 40px solid rgba(255, 255, 255, .2);
 }
 
 nav ul li a.active:hover:after {
-    border-bottom: 40px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 40px solid rgba(255, 255, 255, 1);
 }
 
 nav ul li a.active:active:after {
-    border-bottom: 40px solid rgba(255, 255, 255, 0.25);
+    border-bottom: 40px solid rgba(220, 220, 220, 1);
 }
 /* Home Parallax */
 #home-parallax {
