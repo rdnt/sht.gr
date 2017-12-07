@@ -12,8 +12,8 @@ body {
     font-family: 'Material Icons';
     font-style: normal;
     font-weight: 400;
-    src: url(/fonts/material-icons/MaterialIcons-Regular.eot); /* For IE6-8 */
-    src: local('/fonts/material-icons/Material Icons'),
+    src: url(/fonts/material-icons/MaterialIcons-Regular.eot?#fuckyouie) format('embedded-opentype'),
+         local('/fonts/material-icons/Material Icons'),
          local('/fonts/material-icons/MaterialIcons-Regular'),
          url(/fonts/material-icons/MaterialIcons-Regular.woff2) format('woff2'),
          url(/fonts/material-icons/MaterialIcons-Regular.woff) format('woff'),
@@ -109,7 +109,6 @@ body {
     width: 89px;
     left: calc(50% - 43px);
     top: calc(50% - 44.5px);
-    position: fixed;
     animation: load 1.5s infinite cubic-bezier(0,.5,.5,1) alternate;
     z-index: 1;
 }
@@ -256,11 +255,15 @@ nav ul li a:hover span {
     color: #000000;
 }
 
+nav ul li a:focus:after {
+    top: 0;
+    border-bottom: 40px solid rgba(255, 255, 255, 1);
+}
+
 nav ul li a:active:after {
     top: 0;
     border-bottom: 40px solid rgba(220, 220, 220, 1);
 }
-
 nav ul li a.active:after {
     top: 0;
     border-bottom: 40px solid rgba(255, 255, 255, .2);

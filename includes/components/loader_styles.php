@@ -67,7 +67,6 @@ body {
     width: 89px;
     left: calc(50% - 43px);
     top: calc(50% - 44.5px);
-    position: fixed;
     animation: load 1.5s infinite cubic-bezier(0,.5,.5,1) alternate;
     z-index: 1000;
 }
