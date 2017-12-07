@@ -6,7 +6,7 @@ Development versions prior to v1.0.0 will be visible at https://debug.sht.gr/
 
 ## Dependencies
 This project uses the MaterializeCSS framework.
-Its license and source code can be found [here](https://github.com/ShtHappens796/sht.gr/releases).
+Its license and source code can be found [here](https://github.com/Dogfalo/materialize).
 
 ## Changelogs
 Changelogs can be found for each and every release [here](https://github.com/ShtHappens796/sht.gr/releases).
