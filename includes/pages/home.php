@@ -4,7 +4,7 @@
         <div class="center-align">
             <h5>Hey there.</h5>
             <h2 class="light-text">I am Tasos.</h2>
-            <h5>Web Design, Application Development, 3d Graphics & Animation, Music Production</h5>
+            <h5>I do web design, application development, 3d graphics & animation and music production.</h5>
             <a href="#main"><img alt="" class="arrow" src="/images/home/arrow_down.svg"></a>
         </div>
     </div>
