@@ -32,11 +32,6 @@
          id="feGaussianBlur2" />
     </filter>
   </defs>
-  <path
-     id="path7"
-     d="M-1-1h514v514H-1z"
-     stroke="null"
-     fill="none" />
   <g
      id="g35"
      stroke="null">
@@ -47,7 +42,8 @@
        fill="#171816" />
     <path
        id="path11"
-       d="M406 242h30v28h-30z" />
+       d="M406 242h30v28h-30z"
+       fill="#111410" />
     <ellipse
        id="ellipse13"
        ry="164"

@@ -352,11 +352,7 @@ nav ul li a.active:active:after {
 
 .watch-container .crown {
     position: absolute;
-    top: 231px;
-    left: 340px;
-    height: 56px;
-    width: 22px;
-    margin: -25px 0 0 -12px;
+    margin: -43px 0 0 -129px; /* 120 .. 128 */
 }
 
 .watch-container .screen {
