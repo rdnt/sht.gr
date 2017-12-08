@@ -12,7 +12,7 @@ date_default_timezone_set("Europe/Athens");
 
 function page_title($title) {
     // Returns formatted page title
-    return "SHT <> $title";
+    return "SHT ＼ $title";
 }
 
 if ($errors) {
