@@ -22,6 +22,7 @@
             <div class="watch-container">
                 <img class="case" src="/images/home/case.svg">
                 <img class="crown" src="/images/home/crown.svg">
+                <div class="hover-overlay"></div>
                 <img class="screen" src="/images/home/screen.svg">
             </div>
         </div>
