@@ -19,7 +19,11 @@
             <a>Coding Projects</a>
         </div>
         <div class="col l5 offset-l1 valign">
-            <div style="background-color:#ffdddd;height:300px;width:300px;"></div>
+            <div class="watch-container">
+                <img class="case" src="/images/home/case.svg">
+                <img class="crown" src="/images/home/crown.png">
+                <img class="screen" src="/images/home/screen.svg">
+            </div>
         </div>
     </div>
 </div>

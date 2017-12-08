@@ -336,3 +336,31 @@ nav ul li a.active:active:after {
 .light-text {
     font-weight: 300;
 }
+/* Home Tech */
+.watch-container {
+    height: 300px;
+    width: 300px;
+    transform: scale(0.685);
+    transform-origin: 0 0;
+    padding: 1px;
+}
+
+.watch-container .case {
+    position: absolute;
+    margin: -25px 0 0 -100px;
+}
+
+.watch-container .crown {
+    position: absolute;
+    top: 231px;
+    left: 340px;
+    height: 56px;
+    width: 22px;
+    margin: -25px 0 0 -12px;
+}
+
+.watch-container .screen {
+    position: absolute;
+    margin: -25px 0 0 -100px;
+    transform: rotate(-30deg);
+}
