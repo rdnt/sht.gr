@@ -15,7 +15,7 @@
     <div class="row valign-wrapper">
         <div class="col l6 right-align valign">
             <h4 class="light-text">Code</h4>
-            <h5 class="light-text">Whether it being a very specific project or a routine activity, programs play a big part in our workplace.<br>Especially mine.</h5>
+            <h5 class="light-text">Whether it being a very specific project or a routine activity, programming plays a big part in a workplace.<br>Especially in mine.</h5>
             <a>Coding Projects</a>
         </div>
         <div class="col l5 offset-l1 valign">
