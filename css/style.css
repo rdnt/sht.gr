@@ -350,9 +350,14 @@ nav ul li a.active:active:after {
     margin: -25px 0 0 -100px;
 }
 
+.watch-container .shadow {
+    position: absolute;
+    margin: -25px 0 0 -100px;
+}
+
 .watch-container .crown {
     position: absolute;
-    margin: -43px 0 0 -129px; /* 120 .. 128 */
+    margin: -26px 0 0 -100px; /* 120 .. 128 */
 }
 
 .watch-container .screen {

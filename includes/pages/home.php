@@ -20,6 +20,7 @@
         </div>
         <div class="col l5 offset-l1 valign">
             <div class="watch-container">
+                <img class="shadow" src="/images/home/shadow.svg">
                 <img class="case" src="/images/home/case.svg">
                 <img class="crown" src="/images/home/crown.svg">
                 <div class="hover-overlay"></div>
