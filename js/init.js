@@ -10,14 +10,23 @@ $(function(){
 
 });
 
+function animate_watch() {
+    if($(this).scrollTop()>=$('#watch-container').position().top - $(window).height()){
+        $("#watch-container .screen").addClass("animate-watch");
+
+        setTimeout(function(){
+            $("#watch-container .hover-overlay").addClass("hover");
+        }, 1800);
+    }
+}
+
 // Page content loaded
 $(window).on('load', function(){
 
-    $("#watch-container .screen").addClass("animate-watch");
-
-    setTimeout(function(){
-        $("#watch-container .hover-overlay").addClass("hover");
-    }, 1800);
+    animate_watch();
+    $(window).scroll(function() {
+        animate_watch();
+    });
 
     setTimeout(function(){
         $("#right-panel").addClass("slide-in slide-right");
