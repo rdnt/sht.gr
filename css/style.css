@@ -246,13 +246,21 @@ nav ul li a:after {
     transition: .2s ease;
 }
 
+nav ul li a:hover span {
+    color: #000000;
+}
+
+nav ul li a:focus span {
+    color: #000000;
+}
+
+nav ul li a:active span {
+    color: #000000;
+}
+
 nav ul li a:hover:after {
     top: 0;
     border-bottom: 40px solid rgba(255, 255, 255, 1);
-}
-
-nav ul li a:hover span {
-    color: #000000;
 }
 
 nav ul li a:focus:after {
@@ -264,6 +272,7 @@ nav ul li a:active:after {
     top: 0;
     border-bottom: 40px solid rgba(220, 220, 220, 1);
 }
+
 nav ul li a.active:after {
     top: 0;
     border-bottom: 40px solid rgba(255, 255, 255, .2);
@@ -273,9 +282,19 @@ nav ul li a.active:hover:after {
     border-bottom: 40px solid rgba(255, 255, 255, 1);
 }
 
+nav ul li a.active:focus:after {
+    top: 0;
+    border-bottom: 40px solid rgba(255, 255, 255, 1);
+}
+
 nav ul li a.active:active:after {
     border-bottom: 40px solid rgba(220, 220, 220, 1);
 }
+
+
+
+
+
 /* Home Parallax */
 #home-parallax {
     height: 100vh;
