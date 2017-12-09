@@ -19,7 +19,7 @@
             <a>Coding Projects</a>
         </div>
         <div class="col l5 offset-l1 valign">
-            <div class="watch-container">
+            <div id="watch-container">
                 <img class="shadow" src="/images/home/shadow.svg">
                 <img class="case" src="/images/home/case.svg">
                 <img class="crown" src="/images/home/crown.svg">
