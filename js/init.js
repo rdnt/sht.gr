@@ -17,6 +17,11 @@ $(function(){
 // Page content loaded
 $(window).on('load', function(){
 
+    $("#watch-container .screen").addClass("animate-watch");
+
+    setTimeout(function(){
+        $("#watch-container .hover-overlay").addClass("hover");
+    }, 1800);
 
     setTimeout(function(){
         $("#right-panel").addClass("slide-in slide-right");

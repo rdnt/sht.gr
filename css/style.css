@@ -290,11 +290,6 @@ nav ul li a.active:focus:after {
 nav ul li a.active:active:after {
     border-bottom: 40px solid rgba(220, 220, 220, 1);
 }
-
-
-
-
-
 /* Home Parallax */
 #home-parallax {
     height: 100vh;
@@ -356,7 +351,7 @@ nav ul li a.active:active:after {
     font-weight: 300;
 }
 /* Home Tech */
-.watch-container {
+#watch-container {
     height: 300px;
     width: 300px;
     transform: scale(0.685);
@@ -364,31 +359,32 @@ nav ul li a.active:active:after {
     padding: 1px;
 }
 
-.watch-container .case {
+#watch-container .case {
     position: absolute;
     margin: -25px 0 0 -100px;
 }
 
-.watch-container .shadow {
+#watch-container .shadow {
     position: absolute;
     margin: -25px 0 0 -100px;
 }
 
-.watch-container .crown {
+#watch-container .crown {
     position: absolute;
     margin: -26px 0 0 -100px; /* 120 .. 128 */
 }
 
-.watch-container .screen {
+#watch-container .screen {
     position: absolute;
     margin: -25px 0 0 -100px;
     transform: rotate(-30deg);
     -webkit-transition: all .2s ease;
     transition: all .2s ease;
     pointer-events: none;
+    opacity: 0;
 }
 
-.watch-container .hover-overlay {
+#watch-container .hover-overlay {
     position: absolute;
     top: 112px;
     left: 37px;
@@ -398,6 +394,22 @@ nav ul li a.active:active:after {
     opacity: .2;
 }
 
-.watch-container .hover-overlay:hover ~ .screen {
+#watch-container .hover:hover ~ .screen {
     transform: rotate(30deg);
+}
+
+.animate-watch {
+    animation: watch-rotate 1.5s cubic-bezier(0,.5,.5,1);
+    opacity: 1 !important;
+}
+
+@keyframes watch-rotate {
+    0% {
+        transform: rotate(390deg);
+        opacity: 0;
+    }
+    100% {
+        transform: rotate(-30deg);
+        opacity: 1;
+    }
 }
