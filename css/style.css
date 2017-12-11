@@ -92,7 +92,11 @@ body {
 }
 
 .invisible {
-    opacity: 0;
+    opacity: 0 !important;
+}
+
+.visible {
+    opacity: 1 !important;
 }
 
 .display-none {
@@ -357,6 +361,9 @@ nav ul li a.active:active:after {
     transform: scale(0.685);
     transform-origin: 0 0;
     padding: 1px;
+    opacity: 0;
+    -webkit-transition: all .4s ease;
+    transition: all .4s ease;
 }
 
 #watch-container .case {
@@ -412,4 +419,57 @@ nav ul li a.active:active:after {
         transform: rotate(-30deg);
         opacity: 1;
     }
+}
+
+#code-container {
+    opacity: 0;
+}
+
+#gaming-container {
+    opacity: 0;
+}
+
+#music-container {
+    opacity: 0;
+}
+
+.animate-code {
+    animation: fade-left .65s cubic-bezier(0,.5,.5,1);
+    opacity: 1 !important;
+}
+
+.animate-gaming {
+    animation: fade-right .65s cubic-bezier(0,.5,.5,1);
+    opacity: 1 !important;
+}
+
+.animate-music {
+    animation: fade-left .65s cubic-bezier(0,.5,.5,1);
+    opacity: 1 !important;
+}
+
+@keyframes fade-left {
+    0% {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-right {
+    0% {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.sht-home h5 {
+    line-height: 1.3em;
 }
