@@ -10,22 +10,41 @@ $(function(){
 
 });
 
-function animate_watch() {
-    if($(this).scrollTop()>=$('#watch-container').position().top - $(window).height()){
+function animate_code() {
+    if($(this).scrollTop()>=$('#code').position().top - $(window).height() + 300) {
+        $("#code-container").addClass("animate-code");
         $("#watch-container .screen").addClass("animate-watch");
-
+        $("#watch-container").addClass("visible");
         setTimeout(function(){
             $("#watch-container .hover-overlay").addClass("hover");
         }, 1800);
     }
 }
 
+function animate_gaming() {
+    if($(this).scrollTop()>=$('#gaming').position().top - $(window).height() + 300) {
+        $("#gaming-container").addClass("animate-gaming");
+    }
+}
+
+function animate_music() {
+    if($(this).scrollTop()>=$('#music').position().top - $(window).height() + 300) {
+        $("#music-container").addClass("animate-music");
+    }
+}
+
+
+
 // Page content loaded
 $(window).on('load', function(){
 
-    animate_watch();
+    animate_code();
+    animate_gaming();
+    animate_music();
     $(window).scroll(function() {
-        animate_watch();
+        animate_code();
+        animate_gaming();
+        animate_music();
     });
 
     setTimeout(function(){
