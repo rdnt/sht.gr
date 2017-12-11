@@ -1,0 +1,7 @@
+{
+  "name": "sht.gr",
+  "devDependencies": {
+    "jquery": "^3.2.1",
+    "materialize-css": "1.0.0-alpha.2",
+  }
+}
