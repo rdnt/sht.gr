@@ -11,7 +11,7 @@ $(function(){
 });
 
 function animate_code() {
-    if($(this).scrollTop()>=$('#code').position().top - $(window).height() + 300) {
+    if($(this).scrollTop()>=$('#code').position().top - $(window).height() + 100) {
         $("#code-container").addClass("animate-code");
         $("#watch-container .screen").addClass("animate-watch");
         $("#watch-container").addClass("visible");
@@ -22,13 +22,13 @@ function animate_code() {
 }
 
 function animate_gaming() {
-    if($(this).scrollTop()>=$('#gaming').position().top - $(window).height() + 300) {
+    if($(this).scrollTop()>=$('#gaming').position().top - $(window).height() + 100) {
         $("#gaming-container").addClass("animate-gaming");
     }
 }
 
 function animate_music() {
-    if($(this).scrollTop()>=$('#music').position().top - $(window).height() + 300) {
+    if($(this).scrollTop()>=$('#music').position().top - $(window).height() + 100) {
         $("#music-container").addClass("animate-music");
     }
 }
