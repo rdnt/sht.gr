@@ -7,7 +7,7 @@
 </head>
 <body>
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/preloader.php"; ?>
-<?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/nav.php"; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/dark-nav.php"; ?>
 <main>
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/pages/projects.php"; ?>
 </main>
