@@ -294,6 +294,63 @@ nav ul li a.active:focus:after {
 nav ul li a.active:active:after {
     border-bottom: 40px solid rgba(220, 220, 220, 1);
 }
+/* Dark Nav */
+nav.dark ul li a:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 40px;
+    border-bottom: 0px solid rgba(10, 11, 12, .2);
+    width: 100%;
+    left: 0;
+    -webkit-transition: .2s ease;
+    transition: .2s ease;
+}
+
+nav.dark ul li a:hover span {
+    color: #ffffff;
+}
+
+nav.dark ul li a:focus span {
+    color: #ffffff;
+}
+
+nav.dark ul li a:active span {
+    color: #ffffff;
+}
+
+nav.dark ul li a:hover:after {
+    top: 0;
+    border-bottom: 40px solid rgba(10, 11, 12, 1);
+}
+
+nav.dark ul li a:focus:after {
+    top: 0;
+    border-bottom: 40px solid rgba(10, 11, 12, 1);
+}
+
+nav.dark ul li a:active:after {
+    top: 0;
+    border-bottom: 40px solid rgba(10, 11, 12, 1);
+}
+
+nav.dark ul li a.active:after {
+    top: 0;
+    border-bottom: 40px solid rgba(10, 11, 12, .1);
+}
+
+nav.dark ul li a.active:hover:after {
+    border-bottom: 40px solid rgba(10, 11, 12, 1);
+}
+
+nav.dark ul li a.active:focus:after {
+    top: 0;
+    border-bottom: 40px solid rgba(10, 11, 12, 1);
+}
+
+nav.dark ul li a.active:active:after {
+    border-bottom: 40px solid rgba(10, 11, 12, 1);
+}
 /* Home Parallax */
 #home-parallax {
     height: 100vh;
