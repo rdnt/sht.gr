@@ -10,10 +10,10 @@
 
         foreach ($menuitems as $url => $name) {
             if (strcmp($url, $_SERVER['REQUEST_URI']) === 0) {
-                echo "<li><a class=\"active black-text\" href=\"$url\"><span>$name</span></a></li>";
+                echo "<li><a class=\"active\" href=\"$url\"><span>$name</span></a></li>";
             }
             else {
-                echo "<li><a class=\"black-text\" href=\"$url\"><span>$name</span></a></li>";
+                echo "<li><a href=\"$url\"><span>$name</span></a></li>";
             }
         }
 
