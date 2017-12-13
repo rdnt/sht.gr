@@ -6,5 +6,7 @@
             "email": "shithappens796@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "robthree/twofactorauth": "^1.6"
+    }
 }
