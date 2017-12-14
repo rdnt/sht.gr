@@ -6,8 +6,8 @@ Development versions prior to v1.0.0 will be visible at https://debug.sht.gr/
 
 ## Dependencies
 This project uses:
-+ The MaterializeCSS framework. [Dogfalo/materialize](https://github.com/Dogfalo/materialize).
-+ RobThree's TwoFactorAuth php library. [RobThree/TwoFactorAuth](https://github.com/RobThree/TwoFactorAuth).
++ The MaterializeCSS framework: [Dogfalo/materialize](https://github.com/Dogfalo/materialize).
++ RobThree's TwoFactorAuth php library: [RobThree/TwoFactorAuth](https://github.com/RobThree/TwoFactorAuth).
 
 ## Changelogs
 Changelogs can be found for each and every release [here](https://github.com/ShtHappens796/sht.gr/releases).
