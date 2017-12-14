@@ -15,4 +15,3 @@
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/scripts.php"; ?>
 </body>
 </html>
- 
