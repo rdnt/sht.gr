@@ -1,4 +1,4 @@
 .ftpconfig
-data/
-projects/
+/data/
+/projects/
 /vendor/
