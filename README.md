@@ -5,8 +5,11 @@ This is probably the 5th iteration of my website's codebase (I've lost count).
 Development versions prior to v1.0.0 will be visible at https://debug.sht.gr/
 
 ## Dependencies
-This project uses the MaterializeCSS framework.
+This project uses:
++ The MaterializeCSS framework.
 Its license and source code can be found [here](https://github.com/Dogfalo/materialize).
++ RobThree's TwoFactorAuth php library.
+Its license and source code can be found [here](https://github.com/RobThree/TwoFactorAuth).
 
 ## Changelogs
 Changelogs can be found for each and every release [here](https://github.com/ShtHappens796/sht.gr/releases).
