@@ -419,6 +419,10 @@ nav.dark ul li a {
 .light-text {
     font-weight: 300;
 }
+
+.normal-text {
+    font-weight: 400;
+}
 /* Home Tech */
 #watch-container {
     height: 300px;
@@ -537,4 +541,58 @@ nav.dark ul li a {
 
 .sht-home h5 {
     line-height: 1.3em;
+}
+
+footer h6 {
+    font-size: 1.35rem;
+    color: #ffffff;
+    font-weight: 300;
+}
+
+footer h5 {
+    font-size: 2rem;
+    color: #ffffff;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+footer .footer-main {
+    position: relative;
+    left: -10px;
+    padding: 0;
+    padding-top: 45px;
+    padding-bottom: 30px;
+}
+
+footer .footer-copyright {
+    background-color: #060708;
+    padding: 22px 0 20px 0;
+    font-size: 1.0rem;
+}
+
+footer .footer-copyright a {
+    font-weight: 400;
+}
+
+footer .footer-copyright span {
+    font-size: 1.2rem;
+    color: #ffffff;
+    font-weight: 300;
+}
+
+footer ul.social-links li {
+    display: inline;
+}
+
+footer ul.social-links li a img {
+    padding: 5px;
+}
+
+footer .sitemap ul li a {
+    font-size: 1.35rem;
+    font-weight: 300;
+}
+
+footer ul {
+    margin: 0;
 }

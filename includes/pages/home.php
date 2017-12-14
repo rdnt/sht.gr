@@ -48,7 +48,7 @@
         <div  class="parallax"><img id="gaming-img" class="transparent" alt="" src="/images/home/gaming-bg.png"></div>
     </div>
     <a id="music"></a>
-    <div class="z-depth-2">
+    <div class="z-depth-3">
         <div class="container home-section">
             <div class="row valign-wrapper">
                 <div id="music-container" class="col l6 right-align valign">
