@@ -585,7 +585,10 @@ footer ul.social-links li {
 }
 
 footer ul.social-links li a img {
-    padding: 5px;
+    padding: 5px 0;
+    height: 45px;
+    width: 45px;
+    filter: invert(100%);
 }
 
 footer .sitemap ul li a {
