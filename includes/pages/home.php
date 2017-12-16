@@ -39,6 +39,7 @@
                 <div class="col l5 valign">
                     <div class="right" id="gamepad-container">
                         <img class="cable" src="/images/home/gamepad/cable.svg">
+                        <img class="sgamepad" src="/images/home/gamepad/sgamepad.svg">
                         <img class="gamepad" src="/images/home/gamepad/gamepad.svg">
                         <div class="hover-overlay"></div>
                         <img class="pad" src="/images/home/gamepad/pad.svg">

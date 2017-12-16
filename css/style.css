@@ -542,6 +542,15 @@ nav.dark ul li a {
     transition: all .3s ease;
 }
 
+#gamepad-container .sgamepad {
+    position: absolute;
+    transform: scale(0.8);
+    margin: -36px 0 0 -100px;
+    opacity: .15;
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+}
+
 #gamepad-container #dot1, #dot2, #dot3, #dot4 {
     position: absolute;
     transform: scale(1.2);
