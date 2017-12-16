@@ -2,7 +2,7 @@
  <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
  <defs>
   <filter height="200%" width="200%" y="-50%" x="-50%" id="svg_3_blur">
-   <feGaussianBlur stdDeviation="1" in="SourceGraphic"/>
+   <feGaussianBlur stdDeviation="2" in="SourceGraphic"/>
   </filter>
  </defs>
  <g>
