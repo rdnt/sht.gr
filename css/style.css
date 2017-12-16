@@ -376,6 +376,7 @@ nav.dark ul li a {
 }
 
 #gaming-parallax .parallax {
+    background-color: #d4d4d4;
     opacity: .5;
 }
 
@@ -593,10 +594,10 @@ nav.dark ul li a {
 
 #gamepad-container .hover-overlay {
     position: absolute;
-    top: 128px;
-    left: 326px;
-    height: 80px;
-    width: 80px;
+    top: 132px;
+    left: 316px;
+    height: 70px;
+    width: 70px;
 }
 
 #gamepad-container .hover-overlay:hover ~ .pad {

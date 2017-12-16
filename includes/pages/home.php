@@ -23,11 +23,11 @@
                 </div>
                 <div class="col l5 offset-l1 valign">
                     <div id="watch-container">
-                        <img class="shadow" src="/images/home/shadow.svg">
-                        <img class="case" src="/images/home/case.svg">
-                        <img class="crown" src="/images/home/crown.svg">
+                        <img class="shadow" src="/images/home/watch/shadow.svg">
+                        <img class="case" src="/images/home/watch/case.svg">
+                        <img class="crown" src="/images/home/watch/crown.svg">
                         <div class="hover-overlay"></div>
-                        <img class="screen" src="/images/home/screen.svg">
+                        <img class="screen" src="/images/home/watch/screen.svg">
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                     <a class="anchor black" href="/gaming.php">Gaming Activities</a>
                 </div>
         </div>
-        <div  class="parallax"><img id="gaming-img" class="transparent" alt="" src="/images/home/gaming-bg.png"></div>
+        <div class="parallax"><img id="gaming-img" class="transparent" alt="" src="/images/home/gaming-bg.png"></div>
     </div>
     <a id="music"></a>
     <div class="z-depth-3">
