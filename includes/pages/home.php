@@ -37,7 +37,21 @@
     <div id="gaming-parallax" class="parallax-container valign-wrapper">
         <div class="section container row valign-wrapper">
                 <div class="col l5 valign">
-                    <div class="right" style="background-color:#ddffdd;height:300px;width:300px;"></div>
+                    <div class="right" id="gamepad-container">
+                        <img class="cable" src="/images/home/gamepad/cable.svg">
+                        <img class="gamepad" src="/images/home/gamepad/gamepad.svg">
+                        <div class="hover-overlay"></div>
+                        <img class="pad" src="/images/home/gamepad/pad.svg">
+                        <img class="spad" src="/images/home/gamepad/spad.svg">
+                        <img id="sdot1" src="/images/home/gamepad/sdot.svg">
+                        <img id="sdot2" src="/images/home/gamepad/sdot.svg">
+                        <img id="sdot3" src="/images/home/gamepad/sdot.svg">
+                        <img id="sdot4" src="/images/home/gamepad/sdot.svg">
+                        <img id="dot1" src="/images/home/gamepad/dot.svg">
+                        <img id="dot2" src="/images/home/gamepad/dot.svg">
+                        <img id="dot3" src="/images/home/gamepad/dot.svg">
+                        <img id="dot4" src="/images/home/gamepad/dot.svg">
+                    </div>
                 </div>
                 <div id="gaming-container" class="col l6 offset-l1 valign">
                     <h4 class="light-text">Gaming</h4>
