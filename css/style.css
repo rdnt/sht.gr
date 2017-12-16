@@ -427,6 +427,11 @@ nav.dark ul li a {
 .normal-text {
     font-weight: 400;
 }
+
+.sht-home a.anchor {
+    font-size: 1.3rem;
+    font-weight: 400;
+}
 /* Home Tech */
 #watch-container {
     height: 300px;
@@ -565,8 +570,8 @@ footer .footer-main {
     position: relative;
     left: -10px;
     padding: 0;
-    padding-top: 45px;
-    padding-bottom: 30px;
+    padding-top: 46px;
+    padding-bottom: 34px;
 }
 
 footer .footer-copyright {
@@ -594,6 +599,17 @@ footer ul.social-links li a img {
     height: 45px;
     width: 45px;
     filter: invert(100%);
+    opacity: .7;
+    -webkit-transition: 0.2s ease;
+    transition: 0.2s ease;
+}
+
+footer ul.social-links li a img:hover {
+    opacity: 1;
+}
+
+footer ul.social-links li a img:active {
+    opacity: .8;
 }
 
 footer .sitemap ul li a {
@@ -603,4 +619,41 @@ footer .sitemap ul li a {
 
 footer ul {
     margin: 0;
+}
+
+.anchor {
+    position: relative;
+    padding: 1px;
+    background-color: rgba(0,0,0,0) !important;
+}
+
+.anchor:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0;
+    left: 0;
+    margin-top: -2px;
+    -webkit-transition: 0.2s ease;
+    transition: 0.2s ease;
+}
+
+.anchor:hover:after {
+    width: 100%;
+}
+
+.anchor.white:after {
+    border-bottom: 1px solid rgba(255, 255, 255, .5);
+}
+
+.anchor.white:active:after {
+    border-bottom: 1px solid rgba(255, 255, 255, 1);
+}
+
+.anchor.black:after {
+    border-bottom: 1px solid rgba(0, 0, 0, .5);
+}
+
+.anchor.black:active:after {
+    border-bottom: 1px solid rgba(0, 0, 0, 1);
 }

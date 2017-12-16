@@ -19,7 +19,7 @@
                 <div id="code-container" class="col l6 right-align valign">
                     <h4 class="light-text">Code</h4>
                     <h5 class="light-text">Whether it being a very specific project or a routine activity, programming plays a big part in a workplace.<br>Especially in mine.</h5>
-                    <a>Coding Projects</a>
+                    <a class="anchor black" href="/projects.php">Coding Projects</a>
                 </div>
                 <div class="col l5 offset-l1 valign">
                     <div id="watch-container">
@@ -42,7 +42,7 @@
                 <div id="gaming-container" class="col l6 offset-l1 valign">
                     <h4 class="light-text">Gaming</h4>
                     <h5 class="light-text">Exit reality and enter the virtual.<br>Where your imagination can grow indefinitely.<br>Where you make things happen.</h5>
-                    <a>Gaming Activities</a>
+                    <a class="anchor black" href="/gaming.php">Gaming Activities</a>
                 </div>
         </div>
         <div  class="parallax"><img id="gaming-img" class="transparent" alt="" src="/images/home/gaming-bg.png"></div>
@@ -54,7 +54,7 @@
                 <div id="music-container" class="col l6 right-align valign">
                     <h4 class="light-text">Music</h4>
                     <h5 class="light-text">A straightforward way to relax and express oneself.<br>But it doesn't end there.<br>It never will.</h5>
-                    <a>Music Catalog</a>
+                    <a class="anchor black" href="/music.php">Music Catalog</a>
                 </div>
                 <div class="col l5 offset-l1 valign">
                     <div style="background-color:#ddddff;height:300px;width:300px;"></div>
