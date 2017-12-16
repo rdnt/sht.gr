@@ -479,7 +479,7 @@ nav.dark ul li a {
     opacity: .2;
 }
 
-#watch-container .hover:hover ~ .screen {
+#watch-container .hover-overlay:hover ~ .screen {
     transform: rotate(30deg);
 }
 
@@ -501,6 +501,118 @@ nav.dark ul li a {
 
 #code-container {
     opacity: 0;
+}
+
+#gamepad-container {
+    position: relative;
+    height: 300px;
+    width: 500px;
+    margin-left: -100px
+    padding: 1px;
+    opacity: 1;
+    -webkit-transition: all .4s ease;
+    transition: all .4s ease;
+    transform: translateY(-400px);
+}
+
+@keyframes move-gamepad {
+    0% {
+        transform: translateY(-400px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animate-gamepad {
+    animation: move-gamepad 1.5s cubic-bezier(0,.5,.5,1);
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+#gamepad-container .gamepad, .dots, .pad, .spad {
+    position: absolute;
+    transform: scale(0.8);
+    margin: -40px 0 0 -100px;
+    pointer-events: none;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+#gamepad-container #dot1, #dot2, #dot3, #dot4 {
+    position: absolute;
+    transform: scale(1.2);
+    padding: 1px;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+#gamepad-container #dot1 {
+    margin: 130px 0 0 73px;
+}
+
+#gamepad-container #dot2 {
+    margin: 130px 0 0 125px;
+}
+
+#gamepad-container #dot3 {
+    margin: 183px 0 0 73px;
+}
+
+#gamepad-container #dot4 {
+    margin: 183px 0 0 125px;
+}
+
+#gamepad-container #sdot1, #sdot2, #sdot3, #sdot4 {
+    position: absolute;
+    transform: scale(1.2);
+    padding: 1px;
+}
+
+#gamepad-container #dot1:hover, #dot2:hover, #dot3:hover, #dot4:hover {
+    transform: scale(1.2) translateY(4px);
+}
+
+#gamepad-container #sdot1 {
+    margin: 124px 0 0 63px;
+}
+
+#gamepad-container #sdot2 {
+    margin: 124px 0 0 115px;
+}
+
+#gamepad-container #sdot3 {
+    margin: 177px 0 0 63px;
+}
+
+#gamepad-container #sdot4 {
+    margin: 177px 0 0 115px;
+}
+
+#gamepad-container .hover-overlay {
+    position: absolute;
+    top: 128px;
+    left: 326px;
+    height: 80px;
+    width: 80px;
+}
+
+#gamepad-container .hover-overlay:hover ~ .pad {
+    transform: scale(0.8) translateY(4px);
+}
+
+#gamepad-container .spad {
+    margin: -36px 0 0 -100px;
+    opacity: .33;
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+}
+
+#gamepad-container .cable {
+    position: absolute;
+    margin: -336px 0 0 -100px;
 }
 
 #gaming-container {
@@ -643,15 +755,15 @@ footer ul {
 }
 
 .anchor.white:after {
-    border-bottom: 1px solid rgba(255, 255, 255, .5);
-}
-
-.anchor.white:active:after {
     border-bottom: 1px solid rgba(255, 255, 255, 1);
 }
 
+.anchor.white:active:after {
+    border-bottom: 1px solid rgba(255, 255, 255, .75);
+}
+
 .anchor.black:after {
-    border-bottom: 1px solid rgba(0, 0, 0, .5);
+    border-bottom: 1px solid rgba(0, 0, 0, .6);
 }
 
 .anchor.black:active:after {

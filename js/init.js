@@ -24,6 +24,7 @@ function animate_code() {
 function animate_gaming() {
     if($(this).scrollTop()>=$('#gaming').position().top - $(window).height() + 100) {
         $("#gaming-container").addClass("animate-gaming");
+        $("#gamepad-container").addClass("animate-gamepad");
     }
 }
 
