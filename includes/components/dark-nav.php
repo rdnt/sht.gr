@@ -4,6 +4,7 @@
         <?php
 
         $menuitems["/"] = "HOME";
+        $menuitems["/blog.php"] = "BLOG";
         $menuitems["/projects.php"] = "PROJECTS";
         $menuitems["/music.php"] = "MUSIC";
         $menuitems["/about.php"] = "ABOUT";
