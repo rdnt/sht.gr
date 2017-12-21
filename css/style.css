@@ -8,7 +8,7 @@ main {
 }
 
 body {
-    background-color: #ffffff;
+    background-color: #fafbfc;
     margin: 0;
 }
 /* Material Icons */
@@ -22,6 +22,21 @@ body {
          url(/fonts/material-icons/MaterialIcons-Regular.woff2) format('woff2'),
          url(/fonts/material-icons/MaterialIcons-Regular.woff) format('woff'),
          url(/fonts/material-icons/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Samsung Sharp Sans Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('/fonts/samsung/Samsung Sharp Sans Regular'), url(/fonts/samsung/SamsungSharpSansRegular.woff) format('woff');
+}
+
+
+@font-face {
+    font-family: 'Samsung Sharp Sans Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('/fonts/samsung/Samsung Sharp Sans Bold'), url(/fonts/samsung/SamsungSharpSansBold.woff) format('woff');
 }
 
 .material-icons {
@@ -202,7 +217,7 @@ body {
 nav {
     -webkit-box-shadow: none;
     box-shadow: none;
-    padding-top: 20px;
+    padding-top: 30px;
     z-index: 999;
     position: absolute;
 }
@@ -339,7 +354,7 @@ nav.dark ul li a:focus:after {
 
 nav.dark ul li a:active:after {
     top: 0;
-    border-bottom: 40px solid rgba(10, 11, 12, 1);
+    border-bottom: 40px solid rgba(60, 61, 62, 1);
 }
 
 nav.dark ul li a.active:after {
@@ -357,7 +372,7 @@ nav.dark ul li a.active:focus:after {
 }
 
 nav.dark ul li a.active:active:after {
-    border-bottom: 40px solid rgba(10, 11, 12, 1);
+    border-bottom: 40px solid rgba(60, 61, 62, 1);
 }
 
 nav.dark ul li a {
@@ -369,6 +384,15 @@ nav.dark ul li a {
     color: #fff;
     font-weight: 300;
     z-index: 1;
+}
+
+#home-parallax .intro {
+    position: relative;
+    margin-top: 42px;
+    font-size: 4rem;
+    font-family: 'Samsung Sharp Sans Regular';
+    line-height: 3.5rem;
+    opacity: .9;
 }
 
 #home-parallax .parallax {
@@ -778,4 +802,68 @@ footer ul {
 
 .anchor.black:active:after {
     border-bottom: 1px solid rgba(0, 0, 0, 1);
+}
+
+#login-container {
+    height: 100vh;
+    width: 100%;
+    background-color: #ff0000;
+}
+
+.login-wrapper {
+    width: 350px;
+    height: 350px;
+}
+/* Blog */
+.page-container {
+    padding-top: 82px;
+    padding-top: 102px;
+}
+
+.posts {
+}
+
+.post {
+    margin-bottom: 22px;
+    padding: 30px;
+    background-color: #ffffff;
+}
+
+.sht-depth-3 {
+    -webkit-box-shadow: 0 8px 17px 2px rgba(0,0,0,0.035), 0 3px 14px 2px rgba(0,0,0,0.03), 0 5px 5px -3px rgba(0,0,0,0.05);
+    box-shadow: 0 8px 17px 2px rgba(0,0,0,0.035), 0 3px 14px 2px rgba(0,0,0,0.03), 0 5px 5px -3px rgba(0,0,0,0.05);
+}
+
+.post .title {
+    font-size: 3rem;
+    margin-top: -2px;
+    font-family: 'Samsung Sharp Sans Bold';
+    line-height: 3.5rem;
+    color: #505050;
+}
+
+.post .date {
+    font-size: 1.3rem;
+    margin-top: -8px;
+    margin-bottom: 4px;
+}
+
+.post .content {
+    font-size: 1.4rem;
+    margin-top: 10px;
+    margin-bottom: -4px;
+}
+
+.sidebar {
+    background-color: #ffffff;
+}
+
+.sidebar .content {
+    padding: 30px;
+    height: 600px;
+}
+
+
+.collapsible-header {
+    display: block;
 }
