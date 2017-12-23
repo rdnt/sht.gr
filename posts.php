@@ -3,13 +3,13 @@
 <html lang="en">
 <head>
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/head.php"; ?>
-<title><?=page_title("Blog")?></title>
+<title><?=page_title("Posts")?></title>
 </head>
 <body>
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/preloader.php"; ?>
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/dark-nav.php"; ?>
 <main>
-<?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/pages/blog.php"; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/pages/posts.php"; ?>
 </main>
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/footer.php"; ?>
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/scripts.php"; ?>

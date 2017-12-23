@@ -15,6 +15,7 @@ function animate_code() {
     if($(this).scrollTop()>=$('#code').position().top - $(window).height() + 100) {
         $("#code-container").addClass("animate-code");
         $("#watch-container .screen").addClass("animate-watch");
+        $("#watch-container .crown").addClass("animate-watch-crown");
         $("#watch-container").addClass("visible");
         setTimeout(function(){
             $("#watch-container .hover-overlay").addClass("hover");

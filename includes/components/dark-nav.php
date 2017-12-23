@@ -4,7 +4,7 @@
         <?php
 
         $menuitems["/"] = "HOME";
-        $menuitems["/blog.php"] = "BLOG";
+        $menuitems["/posts.php"] = "POSTS";
         $menuitems["/projects.php"] = "PROJECTS";
         $menuitems["/music.php"] = "MUSIC";
         $menuitems["/about.php"] = "ABOUT";
@@ -29,3 +29,4 @@
         <a href="#" data-target="nav-mobile" class="sidenav-trigger hide-on-large-only"><i class="material-icons">menu</i></a>
     </div>
 </nav>
+<div class="nav-background sht-depth-2"></div>
