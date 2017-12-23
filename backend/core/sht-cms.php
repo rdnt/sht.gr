@@ -1,66 +1,116 @@
 <?php
-// Used to reset the files' cache
-$version = "0.1.7";
-// Disable preloader for all users
-$preloader = 0;
-// Enable error reporting
-$errors = 1;
-// Default timezone to Europe/Athens
-date_default_timezone_set("Europe/Athens");
-// Domain
- $domain = $_SERVER['SERVER_NAME'];
 
-function page_title($title) {
-    // Returns formatted page title
-    return "SHT ＼ $title";
-}
+class SHT_CMS {
 
-if ($errors) {
-    // Error reporting
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-}
+    private $version;
+    private $domain;
+    private $errors;
+    private $preloader;
+    private $cache;
+    private $author;
 
-if (session_status() == PHP_SESSION_NONE) {
-    // Start the session if it wasn't already started
-    session_start();
-}
+    function __construct() {
+        $this->version = "0.1.7";
+        $this->domain = $_SERVER['HTTP_HOST'];
+        $this->errors = 1;
+        $this->preloader = 0;
+        $this->cache = 0;
+        $this->author = "ShtHappens796";
 
-function push_assets($version) {
-    $assets = array(
-        "/css/style.css?v=$version" => "style",
-        "/js/init.js?v=$version" => "script",
-        "/css/materialize.min.css?v=$version" => "style",
-        "/js/materialize.min.js?v=$version" => "script"
-    );
+        date_default_timezone_set("Europe/Athens");
 
-    $counter = count($assets);
+        if ($this->errors) {
+            // Error reporting
+            ini_set('display_errors', 1);
+            ini_set('display_startup_errors', 1);
+            error_reporting(E_ALL);
+        }
 
-    foreach ($assets as $asset => $as) {
-        $counter--;
-        $string = "Link: <$asset>; rel=preload; as=$as";
-        header($string, false);
+        if (session_status() == PHP_SESSION_NONE) {
+            // Start the session if it wasn't already started
+            session_start();
+        }
+
+        if (isset($_SESSION["lastvisit"])) {
+            // Returning visitor
+            if ($_SESSION["lastvisit"] < date("U") + 86400) {
+                // Returning visitor that came here recently (less than a day ago)
+                $_SESSION["lastvisit"] = date("U");
+                $this->cache = 1;
+            }
+        }
+        else {
+            // New visitor
+            $_SESSION["lastvisit"] = date("U");
+            $this->cache = 0;
+            $this->preloader = 1;
+        }
+
     }
-}
 
-if (isset($_SESSION["lastvisit"])) {
-    // Returning visitor
-    if ($_SESSION["lastvisit"] < date("U") + 86400) {
-        // Returning visitor that came here recently (less than a day ago)
-        $_SESSION["lastvisit"] = date("U");
-        $cached = 1;
+    public function getVersion() {
+        return $this->version;
     }
-}
-else {
-    // New visitor
-    $_SESSION["lastvisit"] = date("U");
-    $cached = 0;
-    $preloader = 1;
+
+    public function getDomain() {
+        return $this->domain;
+    }
+
+    public function getAuthor() {
+        return $this->author;
+    }
+
+    public function getPreloader() {
+        return $this->preloader;
+    }
+
+    public function getCache() {
+        return $this->cache;
+    }
+
+    public static function escape_form_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
+    public static function error($data) {
+        echo $data;
+        die();
+    }
+
+    public static function log($data) {
+
+    }
+
+    public static function page_title($data) {
+        // Returns formatted page title
+        return "SHT ＼ $data";
+    }
+
+    public static function push_assets($version) {
+        $assets = array(
+            "/css/style.css?v=$version" => "style",
+            "/js/init.js?v=$version" => "script",
+            "/css/materialize.min.css?v=$version" => "style",
+            "/js/materialize.min.js?v=$version" => "script"
+        );
+
+        $counter = count($assets);
+
+        foreach ($assets as $asset => $as) {
+            $counter--;
+            $string = "Link: <$asset>; rel=preload; as=$as";
+            header($string, false);
+        }
+    }
+
 }
 
-//$preloader = 1;
+$sht = new SHT_CMS;
 
-push_assets($version);
+
+$sht->push_assets($sht->getVersion());
 
 ?>
