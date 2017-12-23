@@ -45,6 +45,8 @@ class SHT_CMS {
             $this->cache = 0;
             $this->preloader = 1;
         }
+        // Until login script is created
+        $_SESSION["login"] = "ShtHappens796";
 
     }
 
@@ -75,13 +77,31 @@ class SHT_CMS {
         return $data;
     }
 
-    public static function error($data) {
+    public static function response($data) {
         echo $data;
         die();
     }
 
-    public static function log($data) {
+    public static function log($action, $data) {
+        $logs_folder = $_SERVER['DOCUMENT_ROOT']."/data/logs/";
+        $latest_log = $logs_folder . "latest.log";
+        if (!file_exists($logs_folder)) {
+            // Logs folder does not exist; create
+            mkdir($logs_folder);
+        }
 
+        $date = date("M d Y H:i:s");
+        $message = $date . " $action: $data.\n";
+
+        if (file_exists($latest_log)) {
+            // Latest log exists
+            $log_data = file_get_contents($latest_log);
+            $log_data .= $message;
+        }
+        else {
+            $log_data = $message;
+        }
+        file_put_contents($latest_log, $log_data);
     }
 
     public static function page_title($data) {
@@ -104,6 +124,26 @@ class SHT_CMS {
             $string = "Link: <$asset>; rel=preload; as=$as";
             header($string, false);
         }
+    }
+
+    public static function slugify($data) {
+        // replace non letter or digits by -
+        $data = preg_replace('~[^\pL\d]+~u', '-', $data);
+        // transliterate
+        $data = iconv('utf-8', 'us-ascii//TRANSLIT', $data);
+        // remove unwanted characters
+        $data = preg_replace('~[^-\w]+~', '', $data);
+        // trim
+        $data = trim($data, '-');
+        // remove duplicate -
+        $data = preg_replace('~-+~', '-', $data);
+        // lowercase
+        $data = strtolower($data);
+
+        if (empty($data)) {
+            return null;
+        }
+        return $data;
     }
 
 }

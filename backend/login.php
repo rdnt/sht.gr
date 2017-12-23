@@ -1,15 +1,10 @@
 <?php
 
-function escape_form_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
+include_once $_SERVER['DOCUMENT_ROOT']."/backend/core/sht-cms.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = escape_form_input($_POST["username"]);
-    $password = escape_form_input($_POST["password"]);
+    $username = $sht->escape_form_input($_POST["username"]);
+    $password = $sht->escape_form_input($_POST["password"]);
 
     if($username and $password) {
         // Both username and password fields are filled

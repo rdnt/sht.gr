@@ -1,62 +1,29 @@
 <?php
 
-function escape_form_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-
-function response($message) {
-    echo $message;
-    die();
-}
-
-function log_action() {
-
-}
-
-function slugify($data) {
-    // replace non letter or digits by -
-    $data = preg_replace('~[^\pL\d]+~u', '-', $data);
-    // transliterate
-    $data = iconv('utf-8', 'us-ascii//TRANSLIT', $data);
-    // remove unwanted characters
-    $data = preg_replace('~[^-\w]+~', '', $data);
-    // trim
-    $data = trim($data, '-');
-    // remove duplicate -
-    $data = preg_replace('~-+~', '-', $data);
-    // lowercase
-    $data = strtolower($data);
-
-    if (empty($data)) {
-        return null;
-    }
-    return $data;
-}
+include_once $_SERVER['DOCUMENT_ROOT']."/backend/core/sht-cms.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $title = escape_form_input($_POST["title"]);
-    $description = escape_form_input($_POST["description"]);
-    $content = escape_form_input($_POST["content"]);
-    $username = $_SESSION['login'];
+    // Method is POST
+    if (!empty($_POST["title"]) and !empty($_POST["description"]) and !empty($_POST["content"])) {
+        // All fields submitted
+        $title = $sht->escape_form_input($_POST["title"]);
+        $description = $sht->escape_form_input($_POST["description"]);
+        $content = $sht->escape_form_input($_POST["content"]);
 
-    if ($username) {
-        // User is logged in
-        $user_path = $_SERVER['DOCUMENT_ROOT']."/data/accounts/$username.json";
-        $account = file_exists($user_path);
-        if ($account) {
-            // User logged in is indeed a user
-            $user = file_get_contents($user_path);
-            $userdata = json_decode($user, true);
+        if (isset($_SESSION["login"])) {
+            // User is logged in
+            $username = $_SESSION["login"];
+            $user_path = $_SERVER['DOCUMENT_ROOT']."/data/accounts/$username.json";
+            $account = file_exists($user_path);
+            if ($account) {
+                // User logged in is indeed a user
+                $user = file_get_contents($user_path);
+                $userdata = json_decode($user, true);
 
-            $admin = $userdata['admin'];
-            if ($admin) {
-                // User posting has admin rights
-                if($title and $description and $content) {
-                    // All data has been submitted
-                    $slug = slugify($title);
+                $admin = $userdata['admin'];
+                if ($admin) {
+                    // User posting has admin rights
+                    $slug = $sht->slugify($title);
 
                     $post_json_path = $_SERVER['DOCUMENT_ROOT']."/data/posts/$slug.json";
                     $post_md_path = $_SERVER['DOCUMENT_ROOT']."/data/posts/$slug.md";
@@ -79,30 +46,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         file_put_contents($post_json_path, json_encode($postjson, JSON_PRETTY_PRINT));
                         file_put_contents($post_md_path, $content);
-                        response("SUCCESS");
+
+                        $sht->log("NEW_POST", "$slug created by $username");
+
+                        $sht->response("SUCCESS");
                     }
                     else {
-                        response("POST_ALREADY_EXISTS");
+                        $sht->response("POST_ALREADY_EXISTS");
                     }
                 }
                 else {
-                    response("FORM_INCOMPLETE");
+                    $sht->response("PERMISSION_DENIED");
                 }
             }
             else {
-                response("PERMISSION_DENIED");
+                $sht->response("ACCOUNT_DOES_NOT_EXIST");
             }
         }
         else {
-            response("ACCOUNT_DOES_NOT_EXIST");
+            $sht->response("LOGIN_REQUIRED");
         }
     }
     else {
-        response("LOGIN_REQUIRED");
+        $sht->response("FORM_INCOMPLETE");
     }
 }
 else {
-    response("POST_REQUIRED");
+    $sht->response("POST_REQUIRED");
 }
 
 ?>
