@@ -21,45 +21,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($account) {
                     // User exists
                     $user = file_get_contents($_SERVER['DOCUMENT_ROOT']."/data/accounts/$username.json");
-                    $data = json_decode($user, true);
+                    $userdata = json_decode($user, true);
 
-                    $valid = password_verify($password, $data['hashed_password']);
+                    $valid = password_verify($password, $userdata['hashed_password']);
                     if($valid) {
                         // Password is correct
                         $_SESSION['login'] = $username;
                         $_SESSION['messages'] = $login_msg;
-                        echo "Success";
+                        echo "SUCCESS";
                     }
                     else {
-                        echo "Incorrect Password";
+                        echo "INCORRECT_PASSWORD";
                     }
                 }
                 else {
-                    echo "Incorrect Username";
+                    echo "ACCOUNT_DOES_NOT_EXIST";
                 }
             }
             else {
-                echo "Incorrect Password";
+                echo "INVALID_PASSWORD";
             }
         }
         else {
-            echo "Incorrect Username";
+            echo "INVALID_USERNAME";
         }
     }
     else if (!$username and $password){
-        echo "Empty Username";
+        echo "EMPTY_USERNAME";
     }
     else if ($username and !$password){
-        echo "Empty Password";
+        echo "EMPTY_PASSWORD";
     }
     else {
-        echo "Empty Username and Password";
+        echo "EMPTY_USERNAME_PASSWORD";
     }
 }
 else {
-    http_response_code(404);
-    include_once $_SERVER['DOCUMENT_ROOT']."/errors/404.php";
-    die();
+    echo "POST_REQUIRED";
 }
 
 ?>

@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/head.php"; ?>
-<title><?=page_title("About")?></title>
+<title><?=$sht->page_title("About")?></title>
 </head>
 <body>
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/preloader.php"; ?>
