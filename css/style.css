@@ -863,15 +863,20 @@ footer ul {
     background-color: #ffffff;
 }
 
+.login-wrapper input {
+}
+
 .login-wrapper h5 {
+    font-size: 1.8rem;
+    color: #444444;
 }
 
 .login-wrapper .cms {
     position: absolute;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 400;
     color: #777777;
-    bottom: 20px;
+    bottom: 16px;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -882,8 +887,35 @@ footer ul {
 
 .login-wrapper #login_form button {
     margin-top: 20px;
-    float: right;
 }
+
+.login-wrapper #login_form .anchor {
+    position: absolute;
+    margin-top: 23px;
+    font-size: 1.2rem;
+}
+
+.login-wrapper #login_form .input-field.col label {
+    left: 0;
+}
+
+.login-wrapper #login_form input:focus+label {
+    color: #9e9e9e;
+}
+
+.login-wrapper #login_form .input-field input:focus {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+}
+
+.login-wrapper #login_form input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
+.login-wrapper #login_form input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
 /* Blog */
 .posts {
 }
