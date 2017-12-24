@@ -6,7 +6,7 @@ use \RobThree\Auth\TwoFactorAuth;
 include_once $_SERVER['DOCUMENT_ROOT']."/backend/core/sht-cms.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $sht->escape_form_input($_POST["username"]);
+    $username = $_SESSION['login_pending'];
     $code = $sht->escape_form_input($_POST["code"]);
 
     if ($username and $code) {
@@ -15,38 +15,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $account = file_exists($user_path);
         if ($account) {
             // User exists
-            if (isset($_SESSION["login_pending"])) {
-                // There is indeed a login pending
-                if (strcmp($username, $_SESSION["login_pending"]) === 0) {
-                    // User logging in is the same as the user that send the POST
-                    $user = file_get_contents($user_path);
-                    $userdata = json_decode($user, true);
+            $user = file_get_contents($user_path);
+            $userdata = json_decode($user, true);
 
-                    if ($userdata["two_step_auth"] == 1) {
-                        // User has enabled two-factor authentication
-                        $tfa = new TwoFactorAuth('SHT CMS');
-                        if ($tfa->verifyCode($userdata["secret"], $code) === true) {
-                            unset($_SESSION['login_pending']);
-                            $_SESSION['login'] = $username;
-                            $sht->response("SUCCESS");
-                            echo $username;
-                        }
-                        else {
-                            $sht->response("INVALID_CODE");
-                        }
-                    }
-                    else {
+            if ($userdata["two_step_auth"] == 1) {
+                // User has enabled two-factor authentication
+                $tfa = new TwoFactorAuth('SHT CMS');
+                if ($tfa->verifyCode($userdata["secret"], $code) === true) {
+                    // Code entered is correct
+                    if ($userdata["three_step_auth"] != 1) {
+                        // User doesn't have three factor authentication enabled
                         unset($_SESSION['login_pending']);
                         $_SESSION['login'] = $username;
                         $sht->response("SUCCESS");
                     }
+                    else {
+                        $sht->response("REQUIRE_THREE_STEP_AUTH");
+                    }
                 }
                 else {
-                    $sht->response("INVALID_USERNAME");
+                    $sht->response("INVALID_CODE");
                 }
             }
             else {
-                $sht->response("PERMISSION_DENIED");
+                unset($_SESSION['login_pending']);
+                $_SESSION['login'] = $username;
+                $sht->response("SUCCESS");
             }
         }
         else {

@@ -867,18 +867,20 @@ footer ul {
     overflow-y: hidden;
 }
 
-.login-wrapper .default {
+.login-wrapper #default {
     position: absolute;
     width: 400px;
     height: 500px;
     padding: 30px;
+    pointer-events: none;
 }
 
-.login-wrapper>.containers {
+.login-wrapper #containers {
     width: 1200px;
     height: 500px;
     overflow-x: auto;
-    animation: login-slide 5s 1s;
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
 }
 
 .login-content, .code-content, .fingerprint-content {
@@ -900,32 +902,23 @@ footer ul {
     background-color: rgba(0,0,255, .1);
 }
 */
-@keyframes login-slide {
-    0% {
-        transform: translateX(0);
-    }
-    30% {
-        transform: translateX(0);
-    }
-    40% {
-        transform: translateX(-33.333%);
-    }
-    70% {
-        transform: translateX(-33.333%);
-    }
-    80% {
-        transform: translateX(-66.666%);
-    }
-    100% {
-        transform: translateX(-66.666%);
-    }
+
+.login-one-step {
+    transform: translateX(0);
+}
+
+.login-two-step {
+    transform: translateX(-33.333%);
+}
+
+.login-three-step {
+    transform: translateX(-66.666%);
 }
 
 .login-wrapper h5 {
     font-size: 1.9rem;
     color: #444444;
 }
-
 
 .login-wrapper h6 {
     font-size: 1.4rem;
@@ -942,12 +935,8 @@ footer ul {
     transform: translateX(-50%);
 }
 
-.login-wrapper #login_form, #fingerprint_form {
+.login-wrapper #login_form, #code_form, #fingerprint_form {
     margin-top: 150px;
-}
-
-.login-wrapper #code_form {
-    margin-top: 219px;
 }
 
 #fingerprint_form {
@@ -956,17 +945,21 @@ footer ul {
 
 #fingerprint_form h6 {
     position: relative;
-    top: 130px;
+    top: 140px;
     text-align: center;
 }
 
 #fingerprint_form i {
     position: absolute;
-    font-size: 5rem;
-    margin-top: 40px;
+    font-size: 6rem;
+    margin-top: 50px;
     animation: fingerprint-pulse 1.5s infinite alternate ease-in-out;
     left: 50%;
     transform: translateX(-50%);
+}
+
+#fingerprint_form button {
+    display: none;
 }
 
 @keyframes fingerprint-pulse {

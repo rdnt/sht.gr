@@ -1,13 +1,13 @@
 <div id="login-bg-container"></div>
 <div id="login-container">
     <div class="login-wrapper sht-depth-3">
-        <div class="default">
-            <h5>Login</h5>
-            <h6>Insert your credentials below</h6>
+        <div id="default">
+            <h5 id="step">Login</h5>
+            <h6 id="description">Insert your credentials below.</h6>
 
             <h6 class="cms">SHT CMS v<?=$sht->getVersion()?></h6>
         </div>
-        <div class="containers">
+        <div id="containers">
             <div class="login-content">
 
                 <form id="login_form" action="/backend/login.php" method="post">
@@ -38,7 +38,7 @@
                         </div>
 
 
-                    <button class="btn blue right" type="submit">Verify</button>
+                    <button class="btn blue right" type="submit">Submit</button>
                 </form>
 
             </div>
@@ -46,11 +46,8 @@
             <div class="fingerprint-content">
                 <form id="fingerprint_form" action="/backend/2fa-login.php" method="post">
 
-
                     <i class="material-icons">fingerprint</i>
                     <h6>Awaiting fingerprint</h6>
-
-
 
                 </form>
 
