@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         $sht->log("LOGIN", "$username has logged in", $_SERVER['REMOTE_ADDR']);
 
-                        $sht->response("SUCCESS");
+                        $sht->response("REQUIRE_TWO_STEP_AUTH");
                     }
                     else {
                         $sht->response("INCORRECT_PASSWORD");

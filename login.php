@@ -10,5 +10,59 @@
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/pages/login.php"; ?>
 </main>
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/scripts.php"; ?>
+
+<script>
+$("#login_form").submit(function(e) {
+    $.ajax({
+        method: "POST",
+        url: "/backend/login.php",
+        data: $("#login_form").serialize(),
+        success: function(data) {
+            if ($.trim(data) === "SUCCESS") {
+                // One factor authentication successful
+                window.location.replace("/");
+            }
+            else if ($.trim(data) === "REQUIRE_TWO_STEP_AUTH") {
+                // Move to 2fa
+                $(".login-wrapper #containers").addClass("login-two-step");
+                document.getElementById("step").innerHTML = "Two Factor Authentication";
+                document.getElementById("description").innerHTML = "Insert the 6-digit code from your authenticator.";
+                setTimeout(function(){
+                    document.getElementById("code").focus();
+                }, 500);
+            }
+            else {
+                // Error
+                console.log($.trim(data));
+            }
+        }
+    });
+    e.preventDefault();
+});
+$("#code_form").submit(function(e) {
+    $.ajax({
+        method: "POST",
+        url: "/backend/2fa-login.php",
+        data: $("#code_form").serialize(),
+        success: function(data) {
+            if ($.trim(data) === "SUCCESS") {
+                // Two factor authentication successful
+                window.location.replace("/");
+            }
+            else if ($.trim(data) === "REQUIRE_THREE_STEP_AUTH") {
+                // Move to 3fa
+                $(".login-wrapper #containers").addClass("login-three-step");
+                document.getElementById("step").innerHTML = "Three Factor Authentication";
+                document.getElementById("description").innerHTML = "Open the SHT CMS app on your phone and authenticate using your fingerprint.";
+            }
+            else {
+                // Error
+                console.log($.trim(data));
+            }
+        }
+    });
+    e.preventDefault();
+});
+</script>
 </body>
 </html>

@@ -40,7 +40,7 @@ function animate_music() {
 
 // Page content loaded
 $(window).on('load', function(){
-
+    /*
     animate_code();
     animate_gaming();
     animate_music();
@@ -49,7 +49,7 @@ $(window).on('load', function(){
         animate_gaming();
         animate_music();
     });
-
+    */
     setTimeout(function(){
         $("#right-panel").addClass("slide-in slide-right");
         $("#left-panel").addClass("slide-in slide-left");
