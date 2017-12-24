@@ -8,6 +8,7 @@ class SHT_CMS {
     private $preloader;
     private $cache;
     private $author;
+    private $directories;
 
     function __construct() {
         $this->version = "0.1.7";
@@ -16,6 +17,14 @@ class SHT_CMS {
         $this->preloader = 0;
         $this->cache = 0;
         $this->author = "ShtHappens796";
+        $base_dir = $_SERVER['DOCUMENT_ROOT'];
+        $this->directories = array(
+            "accounts" => $base_dir . "/data/accounts/",
+            "logs" => $base_dir . "/data/logs/",
+            "posts" => $base_dir . "/data/posts/"
+        );
+
+
 
         date_default_timezone_set("Europe/Athens");
 
@@ -45,9 +54,6 @@ class SHT_CMS {
             $this->cache = 0;
             $this->preloader = 1;
         }
-        // Until login script is created
-        $_SESSION["login"] = "ShtHappens796";
-
     }
 
     public function getVersion() {
@@ -70,19 +76,23 @@ class SHT_CMS {
         return $this->cache;
     }
 
-    public static function escape_form_input($data) {
+    static function escape_form_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
         return $data;
     }
 
-    public static function response($data) {
+    static function response($data) {
         echo $data;
         die();
     }
 
-    public static function log($action, $data) {
+    public function getDir($dir) {
+        return $this->directories[$dir];
+    }
+
+    static function log($action, $data, $ip = null) {
         $logs_folder = $_SERVER['DOCUMENT_ROOT']."/data/logs/";
         $latest_log = $logs_folder . "latest.log";
         if (!file_exists($logs_folder)) {
@@ -91,7 +101,15 @@ class SHT_CMS {
         }
 
         $date = date("M d Y H:i:s");
-        $message = $date . " $action: $data.\n";
+
+        if ($ip) {
+            $address = " from " . $ip;
+        }
+        else {
+            $address = null;
+        }
+
+        $message = $date . " $action: $data$address.\n";
 
         if (file_exists($latest_log)) {
             // Latest log exists
@@ -104,12 +122,12 @@ class SHT_CMS {
         file_put_contents($latest_log, $log_data);
     }
 
-    public static function page_title($data) {
+    static function page_title($data) {
         // Returns formatted page title
         return "SHT ＼ $data";
     }
 
-    public static function push_assets($version) {
+    static function push_assets($version) {
         $assets = array(
             "/css/style.css?v=$version" => "style",
             "/js/init.js?v=$version" => "script",
@@ -126,7 +144,7 @@ class SHT_CMS {
         }
     }
 
-    public static function slugify($data) {
+    static function slugify($data) {
         // replace non letter or digits by -
         $data = preg_replace('~[^\pL\d]+~u', '-', $data);
         // transliterate

@@ -12,47 +12,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Username has proper length
             if (strlen($password) > 6 and strlen($password) < 32) {
                 // Password has proper length
-                $account = file_exists($_SERVER['DOCUMENT_ROOT']."/data/accounts/$username.json");
+                $account = file_exists($sht->getDir("accounts") . "$username.json");
                 if ($account) {
                     // User exists
-                    $user = file_get_contents($_SERVER['DOCUMENT_ROOT']."/data/accounts/$username.json");
+                    $user = file_get_contents($sht->getDir("accounts") . "$username.json");
                     $userdata = json_decode($user, true);
 
                     $valid = password_verify($password, $userdata['hashed_password']);
                     if($valid) {
                         // Password is correct
-                        $_SESSION['login'] = $username;
-                        $_SESSION['messages'] = $login_msg;
-                        echo "SUCCESS";
+                        // Store the username in the session cookie
+                        $_SESSION['login_pending'] = $username;
+
+                        $sht->log("LOGIN", "$username has logged in", $_SERVER['REMOTE_ADDR']);
+
+                        $sht->response("SUCCESS");
                     }
                     else {
-                        echo "INCORRECT_PASSWORD";
+                        $sht->response("INCORRECT_PASSWORD");
                     }
                 }
                 else {
-                    echo "ACCOUNT_DOES_NOT_EXIST";
+                    $sht->response("ACCOUNT_DOES_NOT_EXIST");
                 }
             }
             else {
-                echo "INVALID_PASSWORD";
+                $sht->response("INVALID_PASSWORD");
             }
         }
         else {
-            echo "INVALID_USERNAME";
+            $sht->response("INVALID_USERNAME");
         }
     }
     else if (!$username and $password){
-        echo "EMPTY_USERNAME";
+        $sht->response("EMPTY_USERNAME");
     }
     else if ($username and !$password){
-        echo "EMPTY_PASSWORD";
+        $sht->response("EMPTY_PASSWORD");
     }
     else {
-        echo "EMPTY_USERNAME_PASSWORD";
+        $sht->response("EMPTY_USERNAME_PASSWORD");
     }
 }
 else {
-    echo "POST_REQUIRED";
+    $sht->response("POST_REQUIRED");
 }
 
 ?>
