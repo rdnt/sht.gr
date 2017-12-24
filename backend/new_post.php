@@ -26,26 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $slug = $sht->slugify($title);
 
                     $post_json_path = $_SERVER['DOCUMENT_ROOT']."/data/posts/$slug.json";
-                    $post_md_path = $_SERVER['DOCUMENT_ROOT']."/data/posts/$slug.md";
 
                     $post_data = file_exists($post_json_path);
-                    $post_content =  file_exists($post_md_path);
 
-                    if (!$post_data and !$post_content) {
+                    if (!$post_data) {
                         // Post doesn't already exist.
-                        $postjson = array(
-                            "title"        => $title,
-                            "slug"         => $slug,
-                            "description"  => $description,
-                            "author"       => $username,
-                            "date_created" => date("Ymd_His"),
-                            "date_updated" => date("Ymd_His"),
-                            "reactions"       => 0,
-                            "comments"     => array()
-                        );
+                        $post = new POST($title, $description, $username, $content);
 
-                        file_put_contents($post_json_path, json_encode($postjson, JSON_PRETTY_PRINT));
-                        file_put_contents($post_md_path, $content);
+                        file_put_contents($post_json_path, json_encode($post, JSON_PRETTY_PRINT));
 
                         $sht->log("NEW_POST", "$slug created by $username");
 
