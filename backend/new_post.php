@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_SESSION["login"])) {
             // User is logged in
             $username = $_SESSION["login"];
-            $user_path = $_SERVER['DOCUMENT_ROOT']."/data/accounts/$username.json";
+            $user_path = $sht->getDir("accounts") . "$username.json";
             $account = file_exists($user_path);
             if ($account) {
                 // User logged in is indeed a user
@@ -25,15 +25,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // User posting has admin rights
                     $slug = $sht->slugify($title);
 
-                    $post_json_path = $_SERVER['DOCUMENT_ROOT']."/data/posts/$slug.json";
+                    $post__path = $sht->getDir("accounts") . "$slug.json";
 
-                    $post_data = file_exists($post_json_path);
+                    $post_data = file_exists($post__path);
 
                     if (!$post_data) {
                         // Post doesn't already exist.
                         $post = new POST($title, $description, $username, $content);
 
-                        file_put_contents($post_json_path, json_encode($post, JSON_PRETTY_PRINT));
+                        file_put_contents($post__path, json_encode($post, JSON_PRETTY_PRINT));
 
                         $sht->log("NEW_POST", "$slug created by $username");
 

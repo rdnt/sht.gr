@@ -28,7 +28,7 @@
             foreach($posts as $post) {
 
                 $title = $post->getTitle();
-                $date = $post->printDate("Ymd_His", "F d, Y");
+                $date = $post->printDate("Ymd_His", "F d, Y - H:i");
                 $content = $post->getContent();
 
                 echo<<<HEREDOC
@@ -56,7 +56,7 @@ HEREDOC;
             }
 
             ?>
-            
+
         </div>
         <div class="col l4 m12 s12">
             <div class="sidebar sht-depth-3">
