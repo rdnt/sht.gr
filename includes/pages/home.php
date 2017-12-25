@@ -8,7 +8,7 @@
             <a href="#main"><img alt="" class="arrow" src="/images/home/arrow_down.svg"></a>
         </div>
     </div>
-    <div  class="parallax"><img id="parallax-img" class="transparent" alt="" src="/images/home/parallax.jpg"></div>
+    <div  class="parallax"><img alt="" id="parallax-img" class="transparent" src="/images/home/parallax.jpg"></div>
 </div>
 <a id="main"></a>
 <div class="sht-home">
@@ -23,11 +23,11 @@
                 </div>
                 <div class="col l5 offset-l1 valign">
                     <div id="watch-container">
-                        <img class="shadow" src="/images/home/watch/shadow.svg">
-                        <img class="case" src="/images/home/watch/case.svg">
-                        <img class="crown" src="/images/home/watch/crown.svg">
+                        <img alt="" class="shadow" src="/images/home/watch/shadow.svg">
+                        <img alt="" class="case" src="/images/home/watch/case.svg">
+                        <img alt="" class="crown" src="/images/home/watch/crown.svg">
                         <div class="hover-overlay"></div>
-                        <img class="screen" src="/images/home/watch/screen.svg">
+                        <img alt="" class="screen" src="/images/home/watch/screen.svg">
                     </div>
                 </div>
             </div>
@@ -38,20 +38,20 @@
         <div class="section container row valign-wrapper">
                 <div class="col l5 valign">
                     <div class="right" id="gamepad-container">
-                        <img class="cable" src="/images/home/gamepad/cable.svg">
-                        <img class="sgamepad" src="/images/home/gamepad/sgamepad.svg">
-                        <img class="gamepad" src="/images/home/gamepad/gamepad.svg">
+                        <img alt="" class="cable" src="/images/home/gamepad/cable.svg">
+                        <img alt="" class="sgamepad" src="/images/home/gamepad/sgamepad.svg">
+                        <img alt="" class="gamepad" src="/images/home/gamepad/gamepad.svg">
                         <div class="hover-overlay"></div>
-                        <img class="pad" src="/images/home/gamepad/pad.svg">
-                        <img class="spad" src="/images/home/gamepad/spad.svg">
-                        <img id="sdot1" src="/images/home/gamepad/sdot.svg">
-                        <img id="sdot2" src="/images/home/gamepad/sdot.svg">
-                        <img id="sdot3" src="/images/home/gamepad/sdot.svg">
-                        <img id="sdot4" src="/images/home/gamepad/sdot.svg">
-                        <img id="dot1" src="/images/home/gamepad/dot.svg">
-                        <img id="dot2" src="/images/home/gamepad/dot.svg">
-                        <img id="dot3" src="/images/home/gamepad/dot.svg">
-                        <img id="dot4" src="/images/home/gamepad/dot.svg">
+                        <img alt="" class="pad" src="/images/home/gamepad/pad.svg">
+                        <img alt="" class="spad" src="/images/home/gamepad/spad.svg">
+                        <img alt="" id="sdot1" src="/images/home/gamepad/sdot.svg">
+                        <img alt="" id="sdot2" src="/images/home/gamepad/sdot.svg">
+                        <img alt="" id="sdot3" src="/images/home/gamepad/sdot.svg">
+                        <img alt="" id="sdot4" src="/images/home/gamepad/sdot.svg">
+                        <img alt="" id="dot1" src="/images/home/gamepad/dot.svg">
+                        <img alt="" id="dot2" src="/images/home/gamepad/dot.svg">
+                        <img alt="" id="dot3" src="/images/home/gamepad/dot.svg">
+                        <img alt="" id="dot4" src="/images/home/gamepad/dot.svg">
                     </div>
                 </div>
                 <div id="gaming-container" class="col l6 offset-l1 valign">
@@ -60,7 +60,7 @@
                     <a class="anchor black" href="/gaming.php">Gaming Activities</a>
                 </div>
         </div>
-        <div class="parallax"><img id="gaming-img" class="transparent" alt="" src="/images/home/gaming-bg.png"></div>
+        <div class="parallax"><img alt="" id="gaming-img" class="transparent" src="/images/home/gaming-bg.png"></div>
     </div>
     <a id="music"></a>
     <div class="z-depth-3">
