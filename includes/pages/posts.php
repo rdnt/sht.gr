@@ -47,7 +47,7 @@
                     <div class="read-more-btn">
                         <a href="#">
                             read more
-                            <img src="images/home/arrow_down_black.svg">
+                            <img alt="" src="images/home/arrow_down_black.svg">
                         </a>
                     </div>
                 </div>
