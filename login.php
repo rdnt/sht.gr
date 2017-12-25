@@ -54,6 +54,41 @@ $("#code_form").submit(function(e) {
                 $(".login-wrapper #containers").addClass("login-three-step");
                 document.getElementById("step").innerHTML = "Three Factor Authentication";
                 document.getElementById("description").innerHTML = "Open the SHT CMS app on your phone and authenticate using your fingerprint.";
+                do_fingerprint_auth();
+            }
+            else {
+                // Error
+                console.log($.trim(data));
+            }
+        }
+    });
+    e.preventDefault();
+});
+function do_fingerprint_auth() {
+    console.log("Started fingerprint auth");
+    var token = Math.random().toString(36).substr(2, 10);
+    document.getElementById("token").value = token;
+    (function theLoop (i) {
+        setTimeout(function () {
+            document.getElementById("fingerprint_auth_btn").click();
+            if (--i) {
+                theLoop(i);
+            }
+        }, 1000);
+    })(30);
+}
+$("#fingerprint_form").submit(function(e) {
+    $.ajax({
+        method: "POST",
+        url: "/backend/3fa-login.php",
+        data: $("#fingerprint_form").serialize(),
+        success: function(data) {
+            if ($.trim(data) === "SUCCESS") {
+                // Two factor authentication successful
+                window.location.replace("/");
+            }
+            else if ($.trim(data) === "AWAITING_FINGERPRINT") {
+                // Waiting for fingerprint
             }
             else {
                 // Error

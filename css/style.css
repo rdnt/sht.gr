@@ -958,7 +958,7 @@ footer ul {
     transform: translateX(-50%);
 }
 
-#fingerprint_form button {
+#fingerprint_form button, #fingerprint_form input {
     display: none;
 }
 

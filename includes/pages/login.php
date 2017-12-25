@@ -46,8 +46,10 @@
             <div class="fingerprint-content">
                 <form id="fingerprint_form" action="/backend/2fa-login.php" method="post">
 
+                    <input id="token" name="token" type="text" required>
                     <i class="material-icons">fingerprint</i>
                     <h6>Awaiting fingerprint</h6>
+                    <button id="fingerprint_auth_btn" class="btn blue right" type="submit">Submit</button>
 
                 </form>
 

@@ -22,11 +22,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if($valid) {
                         // Password is correct
                         // Store the username in the session cookie
-                        $_SESSION['login_pending'] = $username;
-
-                        $sht->log("LOGIN", "$username has logged in", $_SERVER['REMOTE_ADDR']);
-
-                        $sht->response("REQUIRE_TWO_STEP_AUTH");
+                        if ($userdata["two_step_auth"] != 1) {
+                            $_SESSION['login'] = $username;
+                            $sht->log("LOGIN", "$username has logged in", $_SERVER['REMOTE_ADDR']);
+                            $sht->response("SUCCESS");
+                        }
+                        else {
+                            $_SESSION['login_two_factor'] = $username;
+                            $sht->log("LOGIN", "$username is logging in using two factor authentication", $_SERVER['REMOTE_ADDR']);
+                            $sht->response("REQUIRE_TWO_STEP_AUTH");
+                        }
                     }
                     else {
                         $sht->response("INCORRECT_PASSWORD");
