@@ -949,29 +949,38 @@ footer ul {
     text-align: center;
 }
 
-#fingerprint_form i {
+#fingerprint_form #fingerprint-ico {
     position: absolute;
     font-size: 6rem;
     margin-top: 50px;
-    animation: fingerprint-pulse 1.5s infinite alternate ease-in-out;
     left: 50%;
     transform: translateX(-50%);
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
 }
 
-#fingerprint_form button, #fingerprint_form input {
-    display: none;
+#fingerprint_form #fingerprint-ico.blue {
+    opacity: 1;
+}
+
+.animated-fingerprint {
+    animation: fingerprint-pulse 1.6s infinite alternate ease-in-out;
 }
 
 @keyframes fingerprint-pulse {
     0% {
-        opacity: .8;
+        opacity: 1;
     }
-    70% {
+    50% {
         opacity: .5;
     }
     100% {
-        opacity: .5;
+        opacity: 1;
     }
+}
+
+#fingerprint_form button, #fingerprint_form input {
+    display: none;
 }
 
 .login-wrapper #login_form button, #code_form button {
