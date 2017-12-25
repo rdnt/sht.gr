@@ -85,7 +85,7 @@ class SHT_CMS {
 
     static function response($data) {
         echo $data;
-        die();
+        //var_dump($_SESSION);//die();
     }
 
     public function getDir($dir) {
