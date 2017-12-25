@@ -64,13 +64,16 @@ $("#code_form").submit(function(e) {
     });
     e.preventDefault();
 });
+var fingerprint_signal = 0;
 function do_fingerprint_auth() {
     console.log("Started fingerprint auth");
     var token = Math.random().toString(36).substr(2, 10);
     document.getElementById("token").value = token;
     (function theLoop (i) {
         setTimeout(function () {
-            document.getElementById("fingerprint_auth_btn").click();
+            if (fingerprint_signal == 0) {
+                document.getElementById("fingerprint_auth_btn").click();
+            }
             if (--i) {
                 theLoop(i);
             }
@@ -85,7 +88,15 @@ $("#fingerprint_form").submit(function(e) {
         success: function(data) {
             if ($.trim(data) === "SUCCESS") {
                 // Two factor authentication successful
-                window.location.replace("/");
+                console.log($.trim(data));
+                fingerprint_signal = 1;
+                $("#fingerprint_form i").addClass("blue-text");
+                $(".animated-fingerprint").one('animationiteration webkitAnimationIteration', function() {
+                    $(this).removeClass("animated-fingerprint");
+                    setTimeout(function () {
+                        window.location.replace("/");
+                    }, 500);
+                });
             }
             else if ($.trim(data) === "AWAITING_FINGERPRINT") {
                 // Waiting for fingerprint
