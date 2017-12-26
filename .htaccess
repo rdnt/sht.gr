@@ -1,1 +1,7 @@
-Options +Indexes
+RewriteEngine On
+
+# Disable automatic directory detection
+DirectorySlash Off
+
+RewriteCond %{DOCUMENT_ROOT}/$1.php -f
+RewriteRule ^(.+?)/?$ /$1.php [L]

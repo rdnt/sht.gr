@@ -28,7 +28,7 @@
 
             </div>
             <div class="code-content">
-                <form id="code_form" action="/backend/2fa-login.php" method="post">
+                <form id="code_form" action="/backend/code-authentication" method="post">
 
 
 
@@ -44,7 +44,7 @@
             </div>
 
             <div class="fingerprint-content">
-                <form id="fingerprint_form" action="/backend/2fa-login.php" method="post">
+                <form id="fingerprint_form" action="/backend/fingerprint-authentication" method="post">
 
                     <input id="token" name="token" type="text" required>
                     <i id="fingerprint-ico" class="material-icons animated-fingerprint">fingerprint</i>

@@ -22,11 +22,11 @@
                     <h5>Sitemap</h5>
                     <ul class="left">
                         <li><a class="anchor white" href="/">Home</a></li>
-                        <li><a class="anchor white" href="/projects.php">Projects</a></li>
+                        <li><a class="anchor white" href="/projects">Projects</a></li>
                     </ul>
                     <ul class="right">
-                        <li><a class="anchor white" href="/music.php">Music</a></li>
-                        <li><a class="anchor white" href="/about.php">About</a></li>
+                        <li><a class="anchor white" href="/music">Music</a></li>
+                        <li><a class="anchor white" href="/about">About</a></li>
                     </ul>
                 </div>
             </div>
