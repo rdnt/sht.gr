@@ -15,14 +15,14 @@
 $("#login_form").submit(function(e) {
     $.ajax({
         method: "POST",
-        url: "/backend/login.php",
+        url: "/backend/login",
         data: $("#login_form").serialize(),
         success: function(data) {
             if ($.trim(data) === "SUCCESS") {
                 // One factor authentication successful
                 window.location.replace("/");
             }
-            else if ($.trim(data) === "REQUIRE_TWO_STEP_AUTH") {
+            else if ($.trim(data) === "REQUIRE_CODE_AUTH") {
                 // Move to 2fa
                 $(".login-wrapper #containers").addClass("login-two-step");
                 document.getElementById("step").innerHTML = "Two Factor Authentication";
@@ -42,14 +42,14 @@ $("#login_form").submit(function(e) {
 $("#code_form").submit(function(e) {
     $.ajax({
         method: "POST",
-        url: "/backend/2fa-login.php",
+        url: "/backend/code-authentication",
         data: $("#code_form").serialize(),
         success: function(data) {
             if ($.trim(data) === "SUCCESS") {
                 // Two factor authentication successful
                 window.location.replace("/");
             }
-            else if ($.trim(data) === "REQUIRE_THREE_STEP_AUTH") {
+            else if ($.trim(data) === "REQUIRE_FINGERPRINT_AUTH") {
                 // Move to 3fa
                 $(".login-wrapper #containers").addClass("login-three-step");
                 document.getElementById("step").innerHTML = "Three Factor Authentication";
@@ -83,7 +83,7 @@ function do_fingerprint_auth() {
 $("#fingerprint_form").submit(function(e) {
     $.ajax({
         method: "POST",
-        url: "/backend/3fa-login.php",
+        url: "/backend/fingerprint-authentication",
         data: $("#fingerprint_form").serialize(),
         success: function(data) {
             if ($.trim(data) === "SUCCESS") {
@@ -100,6 +100,7 @@ $("#fingerprint_form").submit(function(e) {
             }
             else if ($.trim(data) === "AWAITING_FINGERPRINT") {
                 // Waiting for fingerprint
+                console.log($.trim(data));
             }
             else {
                 // Error

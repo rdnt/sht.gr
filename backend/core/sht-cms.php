@@ -21,7 +21,8 @@ class SHT_CMS {
         $this->directories = array(
             "accounts" => $base_dir . "/data/accounts/",
             "logs" => $base_dir . "/data/logs/",
-            "posts" => $base_dir . "/data/posts/"
+            "posts" => $base_dir . "/data/posts/",
+            "temp" => $base_dir . "/data/temp/"
         );
 
 
