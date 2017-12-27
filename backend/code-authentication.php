@@ -6,12 +6,15 @@ use \RobThree\Auth\TwoFactorAuth;
 include_once $_SERVER['DOCUMENT_ROOT']."/backend/core/sht-cms.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_SESSION['code-authentication'])) {
+    // Method is POST
+    if (isset($_SESSION['code-authentication']) and isset($_POST["code"]) and isset($_SESSION['rememberme'])) {
+        // All fields are sent
         $username = $_SESSION['code-authentication'];
         $code = $sht->escape_form_input($_POST["code"]);
+        $rememberme = $_SESSION['rememberme'];
 
         if ($username and $code) {
-            // Both username and code fields are filled
+            // No fields are empty
             $user_path = $sht->getDir("accounts") . "$username.json";
             $account = file_exists($user_path);
             if ($account) {
@@ -29,6 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             // Log them in
                             unset($_SESSION['code-authentication']);
                             $_SESSION['login'] = $username;
+                            if ($rememberme == 1) {
+                                $sht->setcookie($username);
+                            }
                             $sht->log("LOGIN", "$username has logged in", $_SERVER['REMOTE_ADDR']);
                             $sht->response("SUCCESS");
                         }

@@ -1018,8 +1018,29 @@ footer ul {
     -webkit-box-shadow: 0 0 0 30px white inset;
 }
 
+.login-wrapper #login_form #rememberme_container {
+    position: absolute;
+}
 
+.login-wrapper #login_form #rememberme_container input {
+    position: relative;
+    margin-top: 13px;
+}
 
+.login-wrapper #login_form #rememberme_container span {
+    position: absolute;
+    width: 200px !important;
+    line-height: 1.4rem;
+}
+
+[type="checkbox"].filled-in:checked+span:not(.lever):after {
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #2196F3;
+    background-color: #2196F3;
+    z-index: 0;
+}
 
 /* Blog */
 .posts {
@@ -1096,4 +1117,11 @@ footer ul {
 
 .collapsible-header {
     display: block;
+}
+
+input:-webkit-autofill + label {
+    -webkit-transform: translateY(-14px) scale(0.8) !important;
+    transform: translateY(-14px) scale(0.8) !important;
+    -webkit-transform-origin: 0 0 !important;
+    transform-origin: 0 0 !important;
 }

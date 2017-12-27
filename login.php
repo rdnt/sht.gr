@@ -74,7 +74,6 @@ $("#code_form").submit(function(e) {
 });
 var fingerprint_signal = 0;
 function do_fingerprint_auth() {
-    console.log("Started fingerprint auth");
     var token = Math.random().toString(36).substr(2, 10);
     document.getElementById("token").value = token;
     (function theLoop (i) {
