@@ -23,13 +23,21 @@ $("#login_form").submit(function(e) {
                 window.location.replace("/");
             }
             else if ($.trim(data) === "REQUIRE_CODE_AUTH") {
-                // Move to 2fa
+                // Move to code authentication
                 $(".login-wrapper #containers").addClass("login-two-step");
                 document.getElementById("step").innerHTML = "Two Factor Authentication";
                 document.getElementById("description").innerHTML = "Insert the 6-digit code from your authenticator.";
                 setTimeout(function(){
                     document.getElementById("code").focus();
                 }, 500);
+            }
+            else if ($.trim(data) === "REQUIRE_FINGERPRINT_AUTH") {
+                // Move to fingerprint authentication
+                $(".login-wrapper #containers .code-content").addClass("hidden");
+                $(".login-wrapper #containers").addClass("login-two-step");
+                document.getElementById("step").innerHTML = "Two Factor Authentication";
+                document.getElementById("description").innerHTML = "Open the SHT CMS app on your phone and authenticate using your fingerprint.";
+                do_fingerprint_auth();
             }
             else {
                 // Error
