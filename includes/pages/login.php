@@ -13,13 +13,13 @@
                 <form id="login_form" action="/backend/login.php" method="post">
 
                         <div class="input-field col s12">
-                            <input id="username" name="username" type="text" required autofocus>
-                            <label for="username">Username</label>
+                            <input placeholder=" " id="username" name="username" type="text" required autofocus>
+                            <label class="active" for="username">Username</label>
                         </div>
 
                         <div class="input-field col s12">
-                            <input id="password" name="password" type="password" required>
-                            <label for="password">Password</label>
+                            <input placeholder=" " id="password" name="password" type="password" required>
+                            <label class="active" for="password">Password</label>
                         </div>
 
 
