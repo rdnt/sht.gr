@@ -1,6 +1,8 @@
 <?php
 
 include_once $_SERVER['DOCUMENT_ROOT']."/backend/core/sht-cms.php";
+// Fingerprint authentication timeframe
+$timeframe = 15;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Method is POST
@@ -41,9 +43,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $temp_user_data = json_decode($temp_user, true);
                         if ($temp_user_data["allow"] == 1
                             and strcmp($token, $temp_user_data["token"]) === 0
-                            and date("U") - $temp_user_data["date"] < 30) {
+                            and date("U") - $temp_user_data["date"] < $timeframe) {
                             // Authenticated using fingerprint for this token,
-                            // not 30 seconds after the login was requested
+                            // not n seconds after the login was requested
                             // Log the user in
                             unset($_SESSION['fingerprint-authentication']);
                             unlink($temp_path);
@@ -54,21 +56,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $sht->log("LOGIN", "$username has logged in", $_SERVER['REMOTE_ADDR']);
                             $sht->response("SUCCESS");
                         }
+                        else if (strcmp($token, $temp_user_data["token"]) !== 0) {
+                            // Another login is taking place right now
+                            if (date("U") - $temp_user_data["date"] >= $timeframe) {
+                                // n seconds have passed after that login,
+                                // nullify the login and start await
+                                //$temp_user_data["old"] = $token;
+                                //file_put_contents($temp_path, json_encode($temp_user_data, JSON_PRETTY_PRINT));
+
+                                $temp_user = array(
+                                    "username" => $username,
+                                    "token"    => $token,
+                                    "date"     => date("U"),
+                                    "allow"    => 0
+                                );
+                                file_put_contents($temp_path, json_encode($temp_user, JSON_PRETTY_PRINT));
+                                $sht->response("FINGERPRINT_AUTH_RESET");
+                            }
+                            else {
+                                $sht->response("FINGERPRINT_AUTH_DUPLICATE");
+                            }
+                        }
+                        else if ($temp_user_data["allow"] != 1 and date("U") - $temp_user_data["date"] >= $timeframe) {
+                            // Still waiting for a fingerprint but timeout has passed
+                            // Nullify the login
+                            $temp_user_data["allow"] = -1;
+                            $temp_user_data["old"] = $token;
+                            file_put_contents($temp_path, json_encode($temp_user_data, JSON_PRETTY_PRINT));
+                            $sht->response("FINGERPRINT_AUTH_TIMEOUT");
+                        }
                         else if ($temp_user_data["allow"] != 1) {
                             $sht->response("AWAITING_FINGERPRINT");
                         }
-                        else if (strcmp($token, $temp_user_data["token"]) !== 0) {
-                            // Another login is taking place right now and for
-                            // The next 1-30 seconds
-                            $sht->response("FINGERPRINT_AUTH_DUPLICATE");
-                        }
-                        else if (date("U") - $temp_user_data["date"] < 30) {
-                            // 30 seconds have passed, nullify the login
-                            unlink($temp_path);
-                            $sht->response("FINGERPRINT_AUTH_TIMEOUT");
-                        }
-                        else {
-                            $sht->response("PERMISSION_DENIED");
+                        else if (date("U") - $temp_user_data["date"] >= $timeframe) {
+                            // n seconds have passed, but the login was not confirmed
+                            if (date("U") - $temp_user_data["date"] >= $timeframe * 2) {
+                                // Last login was n seconds ago, allow this one
+                                // to continue (a minute has passed)
+                                $temp_user = array(
+                                    "username" => $username,
+                                    "token"    => $token,
+                                    "date"     => date("U"),
+                                    "allow"    => 0
+                                );
+                                file_put_contents($temp_path, json_encode($temp_user, JSON_PRETTY_PRINT));
+                                $sht->response("FINGERPRINT_AUTH_RESET");
+                            }
+                            else {
+                                // This login is less than n seconds after last login
+                                // Do not allow it
+                                $sht->response("PERMISSION_DENIED");
+                            }
                         }
                     }
                 }

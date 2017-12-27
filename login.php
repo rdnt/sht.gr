@@ -85,7 +85,7 @@ function do_fingerprint_auth() {
                 theLoop(i);
             }
         }, 1000);
-    })(30);
+    })(60);
 }
 $("#fingerprint_form").submit(function(e) {
     $.ajax({
