@@ -3,12 +3,15 @@
 include_once $_SERVER['DOCUMENT_ROOT']."/backend/core/sht-cms.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_SESSION['fingerprint-authentication'])) {
+    // Method is POST
+    if (isset($_SESSION['fingerprint-authentication']) and isset($_POST["token"]) and isset($_SESSION['rememberme'])) {
+        // All fields are sent
         $username = $_SESSION['fingerprint-authentication'];
         $token = $sht->escape_form_input($_POST["token"]);
+        $rememberme = $_SESSION['rememberme'];
 
         if ($username and $token) {
-            // Both username and token fields are filled
+            // No fields are empty
             $user_path = $sht->getDir("accounts") . "$username.json";
             $account = file_exists($user_path);
             if ($account) {
@@ -45,6 +48,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             unset($_SESSION['fingerprint-authentication']);
                             unlink($temp_path);
                             $_SESSION['login'] = $username;
+                            if ($rememberme == 1) {
+                                $sht->setcookie($username);
+                            }
                             $sht->log("LOGIN", "$username has logged in", $_SERVER['REMOTE_ADDR']);
                             $sht->response("SUCCESS");
                         }

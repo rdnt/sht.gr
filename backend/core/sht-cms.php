@@ -25,8 +25,6 @@ class SHT_CMS {
             "temp" => $base_dir . "/data/temp/"
         );
 
-
-
         date_default_timezone_set("Europe/Athens");
 
         if ($this->errors) {
@@ -163,6 +161,18 @@ class SHT_CMS {
             return null;
         }
         return $data;
+    }
+
+    static function setcookie($username) {
+        $sht = new SHT_CMS;
+        $user_path = $sht->getDir("accounts") . "$username.json";
+        $user = file_get_contents($user_path);
+        $userdata = json_decode($user, true);
+        $uuid = uniqid();
+        $secret = rtrim(base64_encode(md5(microtime())),"=");
+        $userdata['rememberme'][$uuid] = $secret;
+        file_put_contents($user_path, json_encode($userdata, JSON_PRETTY_PRINT));
+        setcookie('rememberme', $username . " " . $uuid, time()+60*60*24*7, '/', $sht->getDomain());
     }
 
 }
