@@ -20,9 +20,6 @@
 
         ?>
         </ul>
-
-
-
         <ul id="nav-mobile" class="sidenav">
             <li><a href="/">Home</a></li>
         </ul>

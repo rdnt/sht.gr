@@ -59,6 +59,11 @@ $("#login_form").submit(function(e) {
     });
     e.preventDefault();
 });
+$('#code').bind('input propertychange', function() {
+    if ($(this).val().length == 6) {
+        document.getElementById("code_auth_btn").click();
+    }
+});
 $("#code_form").submit(function(e) {
     $.ajax({
         method: "POST",
