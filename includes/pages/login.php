@@ -12,13 +12,13 @@
 
                 <form id="login_form" action="/backend/login.php" method="post">
 
-                        <div class="input-field col s12">
-                            <input id="username" name="username" type="text" required autofocus>
+                        <div id="username-container" class="input-field col s12">
+                            <input id="username" name="username" type="text" autofocus>
                             <label for="username">Username</label>
                         </div>
 
-                        <div class="input-field col s12">
-                            <input id="password" name="password" type="password" required>
+                        <div id="password-container" class="input-field col s12">
+                            <input id="password" name="password" type="password">
                             <label for="password">Password</label>
                         </div>
 
@@ -39,7 +39,7 @@
 
 
 
-                        <div class="input-field col s12">
+                        <div id="code-container" class="input-field col s12">
                             <input id="code" name="code" type="text" required>
                             <label for="code">Authentication Code</label>
                         </div>

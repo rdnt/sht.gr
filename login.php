@@ -12,6 +12,24 @@
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/scripts.php"; ?>
 
 <script>
+function shake(div) {
+    var interval = 100;
+    var distance = 4;
+    var times = 2;
+
+    $(div).css('position', 'relative');
+
+    for (var iter = 0; iter < (times + 1); iter++) {
+        $(div).animate({
+            left: ((iter % 2 == 0 ? distance : distance * -1))
+        }, interval);
+    }
+
+    $(div).animate({
+        left: 0
+    }, interval);
+
+}
 $("#login_form").submit(function(e) {
     $.ajax({
         method: "POST",
@@ -51,9 +69,30 @@ $("#login_form").submit(function(e) {
                 }, 100);
                 do_fingerprint_auth();
             }
-            else {
+            else if ($.trim(data) === "EMPTY_USERNAME_PASSWORD") {
                 // Error
-                console.log($.trim(data));
+                invalid_field("#username", "grey");
+                invalid_field("#password", "grey");
+            }
+            else if ($.trim(data) === "EMPTY_USERNAME") {
+                // Error
+                invalid_field("#username", "grey");
+            }
+            else if ($.trim(data) === "EMPTY_PASSWORD") {
+                // Error
+                invalid_field("#password", "grey");
+            }
+            else if ($.trim(data) === "INVALID_USERNAME" || $.trim(data) === "ACCOUNT_DOES_NOT_EXIST") {
+                // Error
+                invalid_field("#username", "red");
+            }
+            else if ($.trim(data) === "INVALID_PASSWORD") {
+                // Error
+                invalid_field("#password", "red");
+            }
+            else {
+                invalid_field("#username", "red");
+                invalid_field("#password", "red");
             }
         }
     });
@@ -64,6 +103,14 @@ $('#code').bind('input propertychange', function() {
         document.getElementById("code_auth_btn").click();
     }
 });
+function invalid_field(id, color) {
+    $(id).addClass("login-fail-" + color);
+    setTimeout(function(){$(id).removeClass("login-fail-" + color)}, 250);
+    setTimeout(function(){$(id).addClass("login-fail-" + color)}, 500);
+    setTimeout(function(){$(id).removeClass("login-fail-" + color)}, 750);
+    console.log("NOW");
+    shake(id + "-container");
+};
 $("#code_form").submit(function(e) {
     $.ajax({
         method: "POST",
@@ -86,6 +133,14 @@ $("#code_form").submit(function(e) {
                     $("#description").fadeIn(100);
                 }, 100);
                 do_fingerprint_auth();
+            }
+            else if ($.trim(data) === "EMPTY_CODE") {
+                // Error
+                invalid_field("#code", "grey");
+            }
+            else if ($.trim(data) === "INCORRECT_CODE") {
+                // Error
+                invalid_field("#code", "red");
             }
             else {
                 // Error
@@ -116,7 +171,7 @@ function do_fingerprint_auth() {
             }
         }, 1000);
     })(30);
-}
+};
 $("#fingerprint_form").submit(function(e) {
     $.ajax({
         method: "POST",
