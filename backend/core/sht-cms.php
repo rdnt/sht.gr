@@ -139,7 +139,7 @@ class SHT_CMS {
 
             $user_path = $accounts . $cookie_data[0] . ".json";
             $account = file_exists($user_path);
-            
+
             if ($account) {
                 // Account exists
                 $user = file_get_contents($user_path);
@@ -216,10 +216,9 @@ class SHT_CMS {
         $user = file_get_contents($user_path);
         $userdata = json_decode($user, true);
         $uuid = uniqid();
-        $secret = rtrim(base64_encode(md5(microtime())),"=");
-        $userdata['rememberme'][$uuid] = time()+60*60*24*7;
+        $userdata['rememberme'][$uuid] = time()+60*60*24*31;
         file_put_contents($user_path, json_encode($userdata, JSON_PRETTY_PRINT));
-        setcookie('rememberme', $username . " " . $uuid, time()+60*60*24*7, '/', $sht->getDomain());
+        setcookie('rememberme', $username . " " . $uuid, time()+60*60*24*31, '/', $sht->getDomain());
     }
 }
 
