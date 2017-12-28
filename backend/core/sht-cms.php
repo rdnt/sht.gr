@@ -24,6 +24,10 @@ class SHT_CMS {
             "posts" => $base_dir . "/data/posts/",
             "temp" => $base_dir . "/data/temp/"
         );
+        $this->patterns = array(
+            "username" => "/^((?=.*[a-z])|(?=.*[A-Z]))[a-zA-Z0-9]{5,16}$/",
+            "password" => "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,32}$/",
+        );
 
         date_default_timezone_set("Europe/Athens");
 
@@ -94,6 +98,10 @@ class SHT_CMS {
 
     public function getDir($dir) {
         return $this->directories[$dir];
+    }
+
+    public function getPattern($pattern) {
+        return $this->patterns[$pattern];
     }
 
     static function log($action, $data, $ip = null) {

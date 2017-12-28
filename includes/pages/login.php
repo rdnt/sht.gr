@@ -45,7 +45,7 @@
                         </div>
 
 
-                    <button class="btn blue right" type="submit">Submit</button>
+                    <button id="code_auth_btn" class="btn blue right" type="submit">Submit</button>
                 </form>
 
             </div>
