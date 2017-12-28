@@ -41,7 +41,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 "code-authentication-secret"        => "",
                                                 "fingerprint-authentication"        => 0,
                                             	"fingerprint-authentication-secret" => "",
-                                            	"admin-role"                        => 0
+                                            	"admin-role"                        => 0,
+                                                "rememberme"                        => array()
                                             );
                                             // Save the data
                                             file_put_contents($user_path, json_encode($user_data, JSON_PRETTY_PRINT));
