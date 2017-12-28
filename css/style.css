@@ -949,14 +949,14 @@ footer ul {
 
 #fingerprint_form h6 {
     position: relative;
-    top: 140px;
+    top: 155px;
     text-align: center;
 }
 
 #fingerprint_form #fingerprint-ico {
     position: absolute;
     font-size: 6rem;
-    margin-top: 50px;
+    margin-top: 55px;
     left: 50%;
     transform: translateX(-50%);
     -webkit-transition: all .5s ease;
