@@ -90,7 +90,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         else {
             $sht->response("EMPTY_USERNAME_PASSWORD");
-            var_dump($_POST);
         }
     }
     else {

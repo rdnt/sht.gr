@@ -560,7 +560,7 @@ nav.dark ul li a {
     }
 }
 
-#code-container {
+.sht-home #code-container {
     opacity: 0;
 }
 
@@ -1119,4 +1119,14 @@ input:-webkit-autofill + label {
     transform: translateY(-14px) scale(0.8) !important;
     -webkit-transform-origin: 0 0 !important;
     transform-origin: 0 0 !important;
+}
+
+.login-fail-red {
+    border-bottom: 1px solid #f44336 !important;
+    box-shadow: 0 1px 0 0 #f44336 !important;
+}
+
+.login-fail-grey {
+    border-bottom: 1px solid #555555 !important;
+    box-shadow: 0 1px 0 0 #555555 !important;
 }
