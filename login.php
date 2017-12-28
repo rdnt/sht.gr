@@ -103,6 +103,12 @@ function do_fingerprint_auth() {
             if (--i && fingerprint_flag != -1) {
                 theLoop(i);
             }
+            else {
+                $("#fingerprint_form i").addClass("red-text");
+                $(".animated-fingerprint").one('animationiteration webkitAnimationIteration', function() {
+                    $(this).removeClass("animated-fingerprint");
+                });
+            }
         }, 1000);
     })(30);
 }
