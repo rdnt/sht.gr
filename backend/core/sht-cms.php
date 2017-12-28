@@ -337,12 +337,4 @@ class POST implements JsonSerializable {
 
 $sht = new SHT_CMS;
 
-if (isset($_SESSION['login'])) {
-    echo "Logged in as " . $_SESSION['login'];
-}
-else {
-    echo time();
-}
-
-
 ?>
