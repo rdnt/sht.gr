@@ -2,7 +2,7 @@
 
 include_once $_SERVER['DOCUMENT_ROOT']."/backend/core/sht-cms.php";
 // Fingerprint authentication timeframe
-$timeframe = 15;
+$timeframe = 35;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Method is POST
