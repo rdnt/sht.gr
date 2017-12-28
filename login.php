@@ -91,6 +91,7 @@ $("#code_form").submit(function(e) {
     e.preventDefault();
 });
 var fingerprint_signal = 0;
+var fingerprint_flag = 0;
 function do_fingerprint_auth() {
     var token = Math.random().toString(36).substr(2, 10);
     document.getElementById("token").value = token;
@@ -99,7 +100,7 @@ function do_fingerprint_auth() {
             if (fingerprint_signal == 0) {
                 document.getElementById("fingerprint_auth_btn").click();
             }
-            if (--i) {
+            if (--i && fingerprint_flag != -1) {
                 theLoop(i);
             }
         }, 1000);
@@ -113,7 +114,6 @@ $("#fingerprint_form").submit(function(e) {
         success: function(data) {
             if ($.trim(data) === "SUCCESS") {
                 // Two factor authentication successful
-                console.log($.trim(data));
                 fingerprint_signal = 1;
                 $("#fingerprint_form i").addClass("blue-text");
                 $(".animated-fingerprint").one('animationiteration webkitAnimationIteration', function() {
@@ -125,7 +125,14 @@ $("#fingerprint_form").submit(function(e) {
             }
             else if ($.trim(data) === "AWAITING_FINGERPRINT") {
                 // Waiting for fingerprint
-                console.log($.trim(data));
+            }
+            else if ($.trim(data) === "FINGERPRINT_AUTH_TIMEOUT") {
+                // Fingerprint request has timed out
+                fingerprint_flag = -1;
+                $("#fingerprint_form i").addClass("red-text");
+                $(".animated-fingerprint").one('animationiteration webkitAnimationIteration', function() {
+                    $(this).removeClass("animated-fingerprint");
+                });
             }
             else {
                 // Error
