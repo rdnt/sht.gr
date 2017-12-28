@@ -25,8 +25,14 @@ $("#login_form").submit(function(e) {
             else if ($.trim(data) === "REQUIRE_CODE_AUTH") {
                 // Move to code authentication
                 $(".login-wrapper #containers").addClass("login-two-step");
-                document.getElementById("step").innerHTML = "Two Factor Authentication";
-                document.getElementById("description").innerHTML = "Insert the 6-digit code from your authenticator.";
+                $("#step").fadeOut(100);
+                $("#description").fadeOut(100);
+                setTimeout(function () {
+                    document.getElementById("step").innerHTML = "Two Factor Authentication";
+                    document.getElementById("description").innerHTML = "Insert the 6-digit code from your authenticator.";
+                        $("#step").fadeIn(100);
+                        $("#description").fadeIn(100);
+                }, 100);
                 setTimeout(function(){
                     document.getElementById("code").focus();
                 }, 500);
@@ -35,8 +41,14 @@ $("#login_form").submit(function(e) {
                 // Move to fingerprint authentication
                 $(".login-wrapper #containers .code-content").addClass("hidden");
                 $(".login-wrapper #containers").addClass("login-two-step");
-                document.getElementById("step").innerHTML = "Two Factor Authentication";
-                document.getElementById("description").innerHTML = "Open the SHT CMS app on your phone and authenticate using your fingerprint.";
+                $("#step").fadeOut(100);
+                $("#description").fadeOut(100);
+                setTimeout(function () {
+                    document.getElementById("step").innerHTML = "Two Factor Authentication";
+                    document.getElementById("description").innerHTML = "Open the SHT CMS app on your phone and authenticate using your fingerprint.";
+                        $("#step").fadeIn(100);
+                        $("#description").fadeIn(100);
+                }, 100);
                 do_fingerprint_auth();
             }
             else {
@@ -60,8 +72,14 @@ $("#code_form").submit(function(e) {
             else if ($.trim(data) === "REQUIRE_FINGERPRINT_AUTH") {
                 // Move to 3fa
                 $(".login-wrapper #containers").addClass("login-three-step");
-                document.getElementById("step").innerHTML = "Three Factor Authentication";
-                document.getElementById("description").innerHTML = "Open the SHT CMS app on your phone and authenticate using your fingerprint.";
+                $("#step").fadeOut(100);
+                $("#description").fadeOut(100);
+                setTimeout(function () {
+                    document.getElementById("step").innerHTML = "Three Factor Authentication";
+                    document.getElementById("description").innerHTML = "Open the SHT CMS app on your phone and authenticate using your fingerprint.";
+                    $("#step").fadeIn(100);
+                    $("#description").fadeIn(100);
+                }, 100);
                 do_fingerprint_auth();
             }
             else {
