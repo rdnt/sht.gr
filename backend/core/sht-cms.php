@@ -53,6 +53,11 @@ class SHT_CMS {
             $this->cache = 0;
             $this->preloader = 1;
         }
+
+        $this->check_cookie($this->getDir("accounts"));
+
+        $this->push_assets($this->getVersion());
+
     }
 
     public function getVersion() {
@@ -108,7 +113,7 @@ class SHT_CMS {
             $address = null;
         }
 
-        $message = $date . " $action: $data$address.\n";
+        $message = $date . " $action: $data$address\n";
 
         if (file_exists($latest_log)) {
             // Latest log exists
@@ -124,6 +129,48 @@ class SHT_CMS {
     static function page_title($data) {
         // Returns formatted page title
         return "SHT ＼ $data";
+    }
+
+    static function check_cookie($accounts) {
+
+        if(isset($_COOKIE['rememberme'])) {
+
+            $cookie_data = explode(" ", $_COOKIE['rememberme']);
+
+            $user_path = $accounts . $cookie_data[0] . ".json";
+            $account = file_exists($user_path);
+            
+            if ($account) {
+                // Account exists
+                $user = file_get_contents($user_path);
+                $userdata = json_decode($user, true);
+                $flag = 0;
+                foreach ($userdata["rememberme"] as $key => $value) {
+                    if (strcmp($cookie_data[1], $key) === 0) {
+                        // Cookie ID found
+                        $flag = 1;
+                        if (time() < $value) {
+                            // Cookie has not expired yet, log the user in
+                            $_SESSION['login'] = $cookie_data[0];
+                            SHT_CMS::log("LOGIN", "$cookie_data[0] has logged in using a cookie", $_SERVER['REMOTE_ADDR']);
+                        }
+                        else {
+                            // Cookie has expired, remove it
+                            setcookie("rememberme", "", time() - 3600);
+                        }
+                    }
+                }
+                if ($flag == 0) {
+                    // User matches but cookie not found in userdata, remove it
+                    setcookie("rememberme", "", time() - 3600);
+                }
+            }
+            else {
+                // Invalid cookie, remove it
+                setcookie("rememberme", "", time() - 3600);
+            }
+        }
+
     }
 
     static function push_assets($version) {
@@ -170,11 +217,10 @@ class SHT_CMS {
         $userdata = json_decode($user, true);
         $uuid = uniqid();
         $secret = rtrim(base64_encode(md5(microtime())),"=");
-        $userdata['rememberme'][$uuid] = $secret;
+        $userdata['rememberme'][$uuid] = time()+60*60*24*7;
         file_put_contents($user_path, json_encode($userdata, JSON_PRETTY_PRINT));
         setcookie('rememberme', $username . " " . $uuid, time()+60*60*24*7, '/', $sht->getDomain());
     }
-
 }
 
 class POST implements JsonSerializable {
@@ -292,7 +338,12 @@ class POST implements JsonSerializable {
 
 $sht = new SHT_CMS;
 
+if (isset($_SESSION['login'])) {
+    echo "Logged in as " . $_SESSION['login'];
+}
+else {
+    echo time();
+}
 
-$sht->push_assets($sht->getVersion());
 
 ?>

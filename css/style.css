@@ -1020,16 +1020,11 @@ footer ul {
 
 .login-wrapper #login_form #rememberme_container {
     position: absolute;
-}
-
-.login-wrapper #login_form #rememberme_container input {
-    position: relative;
-    margin-top: 13px;
+    top: 347px;
 }
 
 .login-wrapper #login_form #rememberme_container span {
-    position: absolute;
-    width: 200px !important;
+    width: 200px;
     line-height: 1.4rem;
 }
 
