@@ -1,8 +1,12 @@
 # sht.gr
-A complete rewrite of my personal website's code from the ground up, open sourced.
+A complete rewrite of my personal website from the ground up, open sourced.
 
 This is probably the 5th iteration of my website's codebase (I've lost count).
 Development versions prior to v1.0.0 will be visible at https://debug.sht.gr/
+
+## <img align="left" alt="" src="https://debug.sht.gr/images/home/sht_cms.svg" width="100">SHT CMS
+
+My website's backend is powered by SHT CMS, a content management system I am creating for my projects.
 
 ## Dependencies
 This project uses:
