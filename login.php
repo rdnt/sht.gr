@@ -10,7 +10,6 @@
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/pages/login.php"; ?>
 </main>
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/scripts.php"; ?>
-
 <script>
 function shake(div) {
     var interval = 100;
@@ -110,7 +109,7 @@ function invalid_field(id, color) {
     setTimeout(function(){$(id).removeClass("login-fail-" + color)}, 750);
     console.log("NOW");
     shake(id + "-container");
-};
+}
 $("#code_form").submit(function(e) {
     $.ajax({
         method: "POST",
@@ -171,7 +170,7 @@ function do_fingerprint_auth() {
             }
         }, 1000);
     })(30);
-};
+}
 $("#fingerprint_form").submit(function(e) {
     $.ajax({
         method: "POST",
