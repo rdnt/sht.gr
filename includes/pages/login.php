@@ -5,7 +5,8 @@
             <h5 id="step">Login</h5>
             <h6 id="description">Insert your credentials below.</h6>
 
-            <h6 class="cms">SHT CMS v<?=$sht->getVersion()?></h6>
+            <h6 class="cms">SHT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CMS</h6>
+            <img alt="" class="cms-img" src="/images/home/sht_cms.svg">
         </div>
         <div id="containers">
             <div class="login-content">

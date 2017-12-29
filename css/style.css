@@ -932,11 +932,21 @@ footer ul {
 .login-wrapper .cms {
     position: absolute;
     font-size: 1.2rem;
-    font-weight: 400;
-    color: #aaaaaa;
+    font-weight: 500;
+    color: #cccccc;
     bottom: 16px;
+    left: calc(50% + 2px);
+    transform: translateX(-50%);
+}
+
+.login-wrapper .cms-img {
+    position: absolute;
+    bottom: 6.5px;
+    height: 50px;
+    width: 50px;
     left: 50%;
     transform: translateX(-50%);
+    opacity: .25;
 }
 
 .login-wrapper #login_form, #code_form, #fingerprint_form {
