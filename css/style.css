@@ -843,7 +843,7 @@ footer ul {
 #login-container {
     position: absolute;
     left: calc(50% - 200px);
-    top: calc(50% - 250px);
+    top: calc(50% - 300px);
     width: 400px;
 }
 
@@ -864,7 +864,7 @@ footer ul {
 
 .login-wrapper {
     width: 400px;
-    height: 500px;
+    height: 600px;
     padding: 0px;
     background-color: #ffffff;
     overflow-x: hidden;
@@ -874,14 +874,14 @@ footer ul {
 .login-wrapper #default {
     position: absolute;
     width: 400px;
-    height: 500px;
+    height: 600px;
     padding: 30px;
     pointer-events: none;
 }
 
 .login-wrapper #containers {
     width: 1200px;
-    height: 500px;
+    height: 600px;
     overflow-x: auto;
     -webkit-transition: all .5s ease;
     transition: all .5s ease;
@@ -933,14 +933,14 @@ footer ul {
     position: absolute;
     font-size: 1.2rem;
     font-weight: 400;
-    color: #777777;
+    color: #aaaaaa;
     bottom: 16px;
     left: 50%;
     transform: translateX(-50%);
 }
 
 .login-wrapper #login_form, #code_form, #fingerprint_form {
-    margin-top: 150px;
+    margin-top: 200px;
 }
 
 #fingerprint_form {
@@ -987,7 +987,7 @@ footer ul {
     display: none;
 }
 
-.login-wrapper #login_form button, #code_form button {
+.login-wrapper #login_form button, #code_form button, #register_form button {
     margin-top: 20px;
 }
 
@@ -997,15 +997,15 @@ footer ul {
     font-size: 1.2rem;
 }
 
-.login-wrapper #login_form .input-field.col label, #code_form .input-field.col label {
+.login-wrapper #login_form .input-field.col label, #code_form .input-field.col label, #register_form .input-field.col label {
     left: 0;
 }
 
-.login-wrapper #login_form input:focus+label, #code_form input:focus+label {
+.login-wrapper #login_form input:focus+label, #code_form input:focus+label, #register_form input:focus+label {
     color: #9e9e9e;
 }
 
-.login-wrapper #login_form .input-field input:focus, #code_form .input-field input:focus {
+.login-wrapper #login_form .input-field input:focus, #code_form .input-field input:focus, #register_form .input-field input:focus  {
      border-bottom: 1px solid #000;
      box-shadow: 0 1px 0 0 #000;
 }
@@ -1020,7 +1020,7 @@ footer ul {
 
 .login-wrapper #login_form #rememberme_container {
     position: absolute;
-    top: 347px;
+    top: 397px;
 }
 
 .login-wrapper #login_form #rememberme_container span {
@@ -1129,4 +1129,8 @@ input:-webkit-autofill + label {
 .login-fail-grey {
     border-bottom: 1px solid #555555 !important;
     box-shadow: 0 1px 0 0 #555555 !important;
+}
+
+.login-wrapper #register_form {
+    margin-top: 140px;
 }

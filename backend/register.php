@@ -8,8 +8,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // All fields are sent
         $username = $sht->escape_form_input($_POST["username"]);
         $email = $sht->escape_form_input($_POST["email"]);
-        $password = $sht->escape_form_input($_POST["repeat_password"]);
-        $repeat_password = $sht->escape_form_input($_POST["password"]);
+        $password = $sht->escape_form_input($_POST["password"]);
+        $repeat_password = $sht->escape_form_input($_POST["repeat_password"]);
 
         if ($username) {
             // Username not empty
