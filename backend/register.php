@@ -1,5 +1,8 @@
 <?php
-
+// Load required libraries
+require_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
+use Defuse\Crypto\KeyProtectedByPassword;
+// Include SHT CMS Core
 include_once $_SERVER['DOCUMENT_ROOT']."/backend/core/sht-cms.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -33,14 +36,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             // Account doesn't already exist
                                             // Generate the password hash
                                             $password_hash = password_hash($password, PASSWORD_DEFAULT);
+                                            // Generate and encode the user's encryption key
+                                            $protected_key = KeyProtectedByPassword::createRandomPasswordProtectedKey($password);
+                                            $protected_key_encoded = $protected_key->saveToAsciiSafeString();
                                             // Initialize user data
                                             $user_data = array(
                                                 "username"                          => $username,
                                                 "password-hash"                     => $password_hash,
-                                                "code-authentication"               => 0,
-                                                "code-authentication-secret"        => "",
-                                                "fingerprint-authentication"        => 0,
-                                            	"fingerprint-authentication-secret" => "",
+                                                "encoded-encryption-key"            => $protected_key_encoded,
+                                                "code-auth"                         => 0,
+                                                "encrypted-code-auth-secret"        => "",
+                                                "fingerprint-auth"                  => 0,
+                                            	"fingerprint-auth"                  => "",
                                             	"admin-role"                        => 0,
                                                 "rememberme"                        => array()
                                             );

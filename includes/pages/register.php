@@ -11,7 +11,7 @@
         <div id="containers">
             <div class="login-content">
 
-                <form id="register_form" action="/backend/register.php" method="post">
+                <form id="register_form" method="post">
 
                         <div id="username-container" class="input-field col s12">
                             <input id="username" name="username" type="text" autofocus>

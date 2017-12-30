@@ -11,7 +11,7 @@
         <div id="containers">
             <div class="login-content">
 
-                <form id="login_form" action="/backend/login.php" method="post">
+                <form id="login_form" method="post">
 
                         <div id="username-container" class="input-field col s12">
                             <input id="username" name="username" type="text" autofocus>
@@ -36,7 +36,7 @@
 
             </div>
             <div class="code-content">
-                <form id="code_form" action="/backend/code-authentication" method="post">
+                <form id="code_form" method="post">
 
 
 
@@ -52,7 +52,7 @@
             </div>
 
             <div class="fingerprint-content">
-                <form id="fingerprint_form" action="/backend/fingerprint-authentication" method="post">
+                <form id="fingerprint_form" method="post">
 
                     <input id="token" name="token" type="text" required>
                     <i id="fingerprint-ico" class="material-icons animated-fingerprint">fingerprint</i>

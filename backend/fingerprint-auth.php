@@ -1,14 +1,14 @@
 <?php
-
+// Include SHT CMS Core
 include_once $_SERVER['DOCUMENT_ROOT']."/backend/core/sht-cms.php";
 // Fingerprint authentication timeframe
 $timeframe = 35;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Method is POST
-    if (isset($_SESSION['fingerprint-authentication']) and isset($_POST["token"]) and isset($_SESSION['rememberme'])) {
+    if (isset($_SESSION['fingerprint-auth']) and isset($_POST["token"]) and isset($_SESSION['rememberme'])) {
         // All fields are sent
-        $username = $_SESSION['fingerprint-authentication'];
+        $username = $_SESSION['fingerprint-auth'];
         $token = $sht->escape_form_input($_POST["token"]);
         $rememberme = $_SESSION['rememberme'];
 
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $user = file_get_contents($user_path);
                 $userdata = json_decode($user, true);
 
-                if ($userdata["fingerprint-authentication"] == 1) {
+                if ($userdata["fingerprint-auth"] == 1) {
                     // User has indeed enabled fingerprint authentication
                     $temp_path = $sht->getDir("temp") . "$username.json";
                     $temp_file = file_exists($temp_path);
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             // Authenticated using fingerprint for this token,
                             // not n seconds after the login was requested
                             // Log the user in
-                            unset($_SESSION['fingerprint-authentication']);
+                            unset($_SESSION['fingerprint-auth']);
                             unlink($temp_path);
                             $_SESSION['login'] = $username;
                             if ($rememberme == 1) {
@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
                 else {
                     // User doesn't have fingerprint authentication enabled
-                    unset($_SESSION['fingerprint-authentication']);
+                    unset($_SESSION['fingerprint-auth']);
                     $sht->response("PERMISSION_DENIED");
                 }
             }

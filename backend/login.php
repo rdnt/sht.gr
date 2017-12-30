@@ -1,5 +1,8 @@
 <?php
-
+// Load required libraries
+require_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
+use Defuse\Crypto\KeyProtectedByPassword;
+// Include SHT CMS Core
 include_once $_SERVER['DOCUMENT_ROOT']."/backend/core/sht-cms.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -33,8 +36,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $valid = password_verify($password, $userdata['password-hash']);
                         if($valid) {
                             // Password is correct
-                            // Store the username in the session cookie
-                            if ($userdata["code-authentication"] != 1 and $userdata["fingerprint-authentication"] != 1) {
+                            // Store the user key in the session storage
+                            $protected_key_encoded = $userdata["encoded-encryption-key"];
+                            $protected_key = KeyProtectedByPassword::loadFromAsciiSafeString($protected_key_encoded);
+                            $user_key = $protected_key->unlockKey($password);
+                            $user_key_encoded = $user_key->saveToAsciiSafeString();
+
+                            if ($userdata["code-auth"] != 1 and $userdata["fingerprint-auth"] != 1) {
                                 // User has no other authentication methods
                                 // Log them in
                                 $_SESSION['login'] = $username;
@@ -45,18 +53,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 $sht->response("SUCCESS");
                             }
                             else {
-                                if ($userdata["code-authentication"] == 1) {
+                                if ($userdata["code-auth"] == 1) {
                                     // User has code authentication enabled
-                                    $_SESSION['code-authentication'] = $username;
+                                    $_SESSION['code-auth'] = $username;
+                                    $_SESSION['user-key'] = $user_key_encoded;
                                     if ($rememberme == 1) {
                                         $_SESSION['rememberme'] = 1;
                                     }
                                     $sht->log("LOGIN", "$username is logging in using code authentication", $_SERVER['REMOTE_ADDR']);
                                     $sht->response("REQUIRE_CODE_AUTH");
+
                                 }
-                                else if ($userdata["fingerprint-authentication"] == 1) {
+                                else if ($userdata["fingerprint-auth"] == 1) {
                                     // User has fingerprint  authentication enabled and not code generator
-                                    $_SESSION['fingerprint-authentication'] = $username;
+                                    $_SESSION['fingerprint-auth'] = $username;
                                     if ($rememberme == 1) {
                                         $_SESSION['rememberme'] = 1;
                                     }
