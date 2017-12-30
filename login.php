@@ -113,7 +113,7 @@ function invalid_field(id, color) {
 $("#code_form").submit(function(e) {
     $.ajax({
         method: "POST",
-        url: "/backend/code-authentication",
+        url: "/backend/code-auth",
         data: $("#code_form").serialize(),
         success: function(data) {
             if ($.trim(data) === "SUCCESS") {
@@ -174,7 +174,7 @@ function do_fingerprint_auth() {
 $("#fingerprint_form").submit(function(e) {
     $.ajax({
         method: "POST",
-        url: "/backend/fingerprint-authentication",
+        url: "/backend/fingerprint-auth",
         data: $("#fingerprint_form").serialize(),
         success: function(data) {
             if ($.trim(data) === "SUCCESS") {

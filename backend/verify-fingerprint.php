@@ -15,9 +15,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user = file_get_contents($user_path);
             $userdata = json_decode($user, true);
 
-            if (strcmp($secret, $userdata["fingerprint-authentication-secret"]) === 0) {
+            if (strcmp($secret, $userdata["fingerprint-auth-secret"]) === 0) {
                 // User authenticator sent the correct token
-                if ($userdata["fingerprint-authentication"] == 1) {
+                if ($userdata["fingerprint-auth"] == 1) {
                     // User has indeed enabled fingerprint authentication
                     $temp_path = $sht->getDir("temp") . "$username.json";
                     $temp_file = file_exists($temp_path);
