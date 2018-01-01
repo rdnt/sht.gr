@@ -6,6 +6,17 @@
 <title><?=$sht->page_title("Home")?></title>
 </head>
 <body>
+<?php
+
+if (isset($_SESSION['login'])) {
+    echo $_SESSION['login'];
+}
+else {
+    echo "Not logged in";
+}
+
+
+?>
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/preloader.php"; ?>
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/includes/components/nav.php"; ?>
 <main>
