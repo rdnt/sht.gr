@@ -1,4 +1,12 @@
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/backend/core/sht-cms.php"; ?>
+<?php
+if (isset($_SESSION['login'])) {
+    // Send the user to the homepage
+    header("Location: /");
+    // Do not execute any other code
+    die();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

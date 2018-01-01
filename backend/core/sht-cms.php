@@ -45,7 +45,7 @@ class SHT_CMS {
 
         if (isset($_SESSION["lastvisit"])) {
             // Returning visitor
-            if ($_SESSION["lastvisit"] < date("U") + 86400) {
+            if (date("U") < $_SESSION["lastvisit"] + 86400000000) {
                 // Returning visitor that came here recently (less than a day ago)
                 $_SESSION["lastvisit"] = date("U");
                 $this->cache = 1;
