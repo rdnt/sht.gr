@@ -20,6 +20,13 @@
 
         ?>
         </ul>
+        <?php
+        if (isset($_SESSION['login'])) {
+            echo "<a class=\"right nav-logo\" href=\"#\"><img src=\"/images/home/logo.png\"></a>";
+        }
+        ?>
+
+
         <ul id="nav-mobile" class="sidenav">
             <li><a href="/">Home</a></li>
         </ul>

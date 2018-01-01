@@ -251,6 +251,7 @@ nav ul li a span {
 
 .reverse-nav li a {
     transform: skew(-45deg);
+    width: 50px;
 }
 
 .reverse-nav li a span {
@@ -259,6 +260,14 @@ nav ul li a span {
 
 nav ul a:hover {
     background-color: transparent;
+}
+
+.nav-logo img {
+    height: 40px;
+}
+
+.nav-logo {
+    height: 40px;
 }
 
 nav ul li {
