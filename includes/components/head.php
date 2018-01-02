@@ -8,7 +8,7 @@
 <link rel="shortcut icon" href="/images/favicon/favicon.ico">
 <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
 <meta name="theme-color" content="#0a0b0c">
-<?php if ($sht->getCache() == 1): ?>
+<?php if ($sht->getPreloader() == 0): ?>
 <link href="/css/materialize.min.css?v=<?=$sht->getVersion()?>" type="text/css" rel="stylesheet" media="screen"/>
 <link href="/css/style.css?v=<?=$sht->getVersion()?>" type="text/css" rel="stylesheet" media="screen"/>
 <?php else: ?>
