@@ -46,8 +46,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         if ($userdata["fingerprint-auth"] != 1) {
                             // User doesn't have fingerprint authentication enabled
                             // Log them in
-                            unset($_SESSION['code-auth']);
-                            unset($_SESSION['user-key']);
+                            session_destroy();
+                            session_start();
                             $_SESSION['login'] = $username;
                             if ($rememberme == 1) {
                                 $sht->setcookie($username);
@@ -87,6 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     else {
         $sht->response("PERMISSION_DENIED");
+        var_dump($_SESSION);
     }
 }
 else {

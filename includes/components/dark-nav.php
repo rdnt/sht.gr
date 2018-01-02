@@ -1,3 +1,4 @@
+<?php var_dump($_SESSION);?>
 <nav class="transparent dark">
     <div class="nav-wrapper container">
         <ul class="left hide-on-med-and-down">
@@ -20,12 +21,17 @@
 
         ?>
         </ul>
+        <ul class="right reverse-nav">
         <?php
         if (isset($_SESSION['login'])) {
-            echo "<a class=\"right nav-logo\" href=\"#\"><img src=\"/images/home/logo-dark.png\"></a>";
+            $login = $_SESSION['login'];
+            echo "<li><a href=\"#\"><span>Logged in as $login</span></a></li>";
+        }
+        else {
+            echo "<li><a href=\"/login\"><span>LOGIN</span></a></li>";
         }
         ?>
-
+        </ul>
 
         <ul id="nav-mobile" class="sidenav">
             <li><a href="/">Home</a></li>

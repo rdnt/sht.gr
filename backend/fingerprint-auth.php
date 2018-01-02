@@ -47,7 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             // Authenticated using fingerprint for this token,
                             // not n seconds after the login was requested
                             // Log the user in
-                            unset($_SESSION['fingerprint-auth']);
+                            session_destroy();
+                            session_start();
                             unlink($temp_path);
                             $_SESSION['login'] = $username;
                             if ($rememberme == 1) {
