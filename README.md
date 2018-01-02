@@ -11,7 +11,8 @@ My website's backend is powered by SHT CMS, a content management system I am cre
 ## Dependencies
 This project uses:
 + The MaterializeCSS framework: [Dogfalo/materialize](https://github.com/Dogfalo/materialize).
-+ RobThree's TwoFactorAuth php library: [RobThree/TwoFactorAuth](https://github.com/RobThree/TwoFactorAuth).
++ Rob Janssen's Two factor authentication library: [RobThree/TwoFactorAuth](https://github.com/RobThree/TwoFactorAuth).
++ Taylor Hornby's Encryption library: [defuse/php-encryption](https://github.com/defuse/php-encryption).
 
 ## Changelogs
 Changelogs can be found for each and every release [here](https://github.com/ShtHappens796/sht.gr/releases).
