@@ -1,4 +1,3 @@
-<?php var_dump($_SESSION);?>
 <nav class="transparent dark">
     <div class="nav-wrapper container">
         <ul class="left hide-on-med-and-down">
