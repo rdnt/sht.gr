@@ -10,7 +10,7 @@ class SHT_CMS {
     private $directories;
 
     function __construct() {
-        $this->version = "0.2.6";
+        $this->version = "0.2.15";
         $this->domain = $_SERVER['HTTP_HOST'];
         $this->errors = 1;
         $this->preloader = 0;
