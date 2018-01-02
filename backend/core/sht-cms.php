@@ -139,6 +139,8 @@ class SHT_CMS {
 
         if(isset($_COOKIE['rememberme'])) {
 
+            SHT_CMS::log("LOGIN", "DEBUG has logged in using a cookie", $_SERVER['REMOTE_ADDR']);
+
             $cookie_data = explode(" ", $_COOKIE['rememberme']);
 
             $user_path = $accounts . $cookie_data[0] . ".json";
@@ -335,10 +337,10 @@ class POST implements JsonSerializable {
             return 0;
         }
     }
-
-
 }
 
 $sht = new SHT_CMS;
+
+$sht->log("DEBUG", json_encode($_SESSION) . session_id() . " Page: " . $_SERVER['REQUEST_URI'], $_SERVER['REMOTE_ADDR']);
 
 ?>
