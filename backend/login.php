@@ -62,7 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     }
                                     $sht->log("LOGIN", "$username is logging in using code authentication", $_SERVER['REMOTE_ADDR']);
                                     $sht->response("REQUIRE_CODE_AUTH");
-
                                 }
                                 else if ($userdata["fingerprint-auth"] == 1) {
                                     // User has fingerprint  authentication enabled and not code generator
