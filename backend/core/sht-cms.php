@@ -40,24 +40,28 @@ class SHT_CMS {
             // Start the session if it wasn't already started
             session_start();
         }
-
+        
         if (isset($_SESSION["lastvisit"])) {
             // Returning visitor
             $_SESSION["lastvisit"] = date("U");
             if (date("U") < $_SESSION["lastvisit"] + 86400000000) {
                 // Returning visitor that came here recently (less than a day ago)
                 $this->preloader = 0;
+                echo "pre: a0 ";
             }
             else {
                 // Returning visitor that hasn't arrived in a long time
                 $this->preloader = 1;
+                echo "pre: a1 ";
             }
         }
         else {
             // New visitor
             $_SESSION["lastvisit"] = date("U");
             $this->preloader = 1;
+            echo "pre: b0 ";
         }
+
 
         $this->check_cookie($this->getDir("accounts"));
 
