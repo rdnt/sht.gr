@@ -43,11 +43,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $tfa = new TwoFactorAuth('SHT CMS');
                     if ($tfa->verifyCode($code_auth_secret, $code) === true) {
                         // Code entered is correct in this timeframe
+                        unset($_SESSION['code-auth']);
+                        unset($_SESSION['user-key']);
                         if ($userdata["fingerprint-auth"] != 1) {
                             // User doesn't have fingerprint authentication enabled
                             // Log them in
-                            session_destroy();
-                            session_start();
                             $_SESSION['login'] = $username;
                             if ($rememberme == 1) {
                                 $sht->setcookie($username);
@@ -71,6 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // User doesn't have code authentication enabled
                     unset($_SESSION['code-auth']);
                     unset($_SESSION['user-key']);
+                    unset($_SESSION['rememberme']);
                     $sht->response("PERMISSION_DENIED");
                 }
             }
@@ -87,7 +88,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     else {
         $sht->response("PERMISSION_DENIED");
-        var_dump($_SESSION);
     }
 }
 else {

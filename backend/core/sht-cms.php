@@ -40,26 +40,23 @@ class SHT_CMS {
             // Start the session if it wasn't already started
             session_start();
         }
-        
+
         if (isset($_SESSION["lastvisit"])) {
             // Returning visitor
             $_SESSION["lastvisit"] = date("U");
             if (date("U") < $_SESSION["lastvisit"] + 86400000000) {
                 // Returning visitor that came here recently (less than a day ago)
                 $this->preloader = 0;
-                echo "pre: a0 ";
             }
             else {
                 // Returning visitor that hasn't arrived in a long time
                 $this->preloader = 1;
-                echo "pre: a1 ";
             }
         }
         else {
             // New visitor
             $_SESSION["lastvisit"] = date("U");
             $this->preloader = 1;
-            echo "pre: b0 ";
         }
 
 
@@ -162,22 +159,26 @@ class SHT_CMS {
                         if (time() < $value) {
                             // Cookie has not expired yet, log the user in
                             $_SESSION['login'] = $cookie_data[0];
-                            SHT_CMS::log("LOGIN", "$cookie_data[0] has logged in using a cookie", $_SERVER['REMOTE_ADDR']);
+                            $login = $cookie_data[0];
+                            SHT_CMS::log("LOGIN", "$login has logged in using a cookie", $_SERVER['REMOTE_ADDR']);
                         }
                         else {
                             // Cookie has expired, remove it
-                            setcookie("rememberme", "", time() - 3600);
+                            $sht = new SHT_CMS;
+                            setcookie("rememberme", "", time() - 3600, '/', $sht->getDomain());
                         }
                     }
                 }
                 if ($flag == 0) {
                     // User matches but cookie not found in userdata, remove it
-                    setcookie("rememberme", "", time() - 3600);
+                    $sht = new SHT_CMS;
+                    setcookie("rememberme", "", time() - 3600, '/', $sht->getDomain());
                 }
             }
             else {
                 // Invalid cookie, remove it
-                setcookie("rememberme", "", time() - 3600);
+                $sht = new SHT_CMS;
+                setcookie("rememberme", "", time() - 3600, '/', $sht->getDomain());
             }
         }
 
@@ -344,7 +345,5 @@ class POST implements JsonSerializable {
 }
 
 $sht = new SHT_CMS;
-
-$sht->log("DEBUG", json_encode($_SESSION) . session_id() . " Page: " . $_SERVER['REQUEST_URI'], $_SERVER['REMOTE_ADDR']);
 
 ?>

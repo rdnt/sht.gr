@@ -45,9 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             if ($userdata["code-auth"] != 1 and $userdata["fingerprint-auth"] != 1) {
                                 // User has no other authentication methods
                                 // Log them in
-                                session_destroy();
-                                session_start();
                                 $_SESSION['login'] = $username;
+                                unset($_SESSION['rememberme']);
                                 if ($rememberme == 1) {
                                     $sht->setcookie($username);
                                 }

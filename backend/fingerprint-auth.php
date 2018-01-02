@@ -47,13 +47,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             // Authenticated using fingerprint for this token,
                             // not n seconds after the login was requested
                             // Log the user in
-                            session_destroy();
-                            session_start();
+                            unset($_SESSION['fingerprint-auth']);
                             unlink($temp_path);
                             $_SESSION['login'] = $username;
                             if ($rememberme == 1) {
                                 $sht->setcookie($username);
                             }
+                            unset($_SESSION['rememberme']);
                             $sht->log("LOGIN", "$username has logged in", $_SERVER['REMOTE_ADDR']);
                             $sht->response("SUCCESS");
                         }
@@ -106,6 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             else {
                                 // This login is less than n seconds after last login
                                 // Do not allow it
+                                unset($_SESSION['rememberme']);
                                 $sht->response("PERMISSION_DENIED");
                             }
                         }
