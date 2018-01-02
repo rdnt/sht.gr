@@ -6,7 +6,6 @@ class SHT_CMS {
     private $domain;
     private $errors;
     private $preloader;
-    private $cache;
     private $author;
     private $directories;
 
@@ -15,7 +14,6 @@ class SHT_CMS {
         $this->domain = $_SERVER['HTTP_HOST'];
         $this->errors = 1;
         $this->preloader = 0;
-        $this->cache = 0;
         $this->author = "ShtHappens796";
         $base_dir = $_SERVER['DOCUMENT_ROOT'];
         $this->directories = array(
@@ -45,16 +43,19 @@ class SHT_CMS {
 
         if (isset($_SESSION["lastvisit"])) {
             // Returning visitor
+            $_SESSION["lastvisit"] = date("U");
             if (date("U") < $_SESSION["lastvisit"] + 86400000000) {
                 // Returning visitor that came here recently (less than a day ago)
-                $_SESSION["lastvisit"] = date("U");
-                $this->cache = 1;
+                $this->preloader = 0;
+            }
+            else {
+                // Returning visitor that hasn't arrived in a long time
+                $this->preloader = 1;
             }
         }
         else {
             // New visitor
             $_SESSION["lastvisit"] = date("U");
-            $this->cache = 0;
             $this->preloader = 1;
         }
 
@@ -78,10 +79,6 @@ class SHT_CMS {
 
     public function getPreloader() {
         return $this->preloader;
-    }
-
-    public function getCache() {
-        return $this->cache;
     }
 
     static function escape_form_input($data) {
