@@ -20,7 +20,8 @@ class SHT_CMS {
             "accounts" => $base_dir . "/data/accounts/",
             "logs" => $base_dir . "/data/logs/",
             "posts" => $base_dir . "/data/posts/",
-            "temp" => $base_dir . "/data/temp/"
+            "temp" => $base_dir . "/data/temp/",
+            "statistics" => $base_dir . "/data/statistics/"
         );
         $this->patterns = array(
             "username" => "/^((?=.*[a-z])|(?=.*[A-Z]))[a-zA-Z0-9]{5,16}$/",
