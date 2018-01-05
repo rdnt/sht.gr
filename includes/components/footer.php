@@ -34,7 +34,7 @@
     </div>
     <div class="footer-copyright">
         <div class="container">
-            <span>© 2017 <a class="anchor white" href="/">SHT</a> - All Rights Reserved</span>
+            <span>© 2018 <a class="anchor white" href="/">SHT</a> - All Rights Reserved</span>
         </div>
     </div>
 </footer>
