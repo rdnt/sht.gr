@@ -1,4 +1,4 @@
-<?php if ($sht->getPreloader()): ?>
+<?php if ($sht->getPreloader() == 1): ?>
 <div id="loader">
     <div id="right-panel" class="init-right"></div>
     <div id="left-panel" class="init-left"></div>
