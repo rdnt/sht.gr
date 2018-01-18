@@ -21,11 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($username and $password) {
             // No fields are empty
-            if (strlen($username) >= 6 and strlen($username) <= 16) {
-            //if (preg_match('/^{6,16}$/', $username)) {
+            if (preg_match($sht->getPattern("username"), $username)) {
                 // Username has proper length
-                if (strlen($password) >= 8 and strlen($password) <= 32) {
-                //if (preg_match('/^{6,16}$/', $password)) {
+                if(preg_match($sht->getPattern("password"), $password)) {
                     // Password has proper length
                     $account = file_exists($sht->getDir("accounts") . "$username.json");
                     if ($account) {

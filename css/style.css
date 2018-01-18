@@ -894,6 +894,7 @@ footer ul {
     width: 400px;
     height: 500px;
 }
+
 /*
 .login-content {
     background-color: rgba(255,0,0, .1);
@@ -1035,8 +1036,54 @@ footer ul {
 }
 
 .login-wrapper #login_form #rememberme_container span {
-    width: 200px;
+    width: 140px;
     line-height: 1.4rem;
+}
+
+@media only screen and (max-width: 450px) {
+    .login-wrapper {
+        width: 300px;
+        height: 550px;
+        margin-top: 20px;
+    }
+    #login-container {
+        left: calc(50% - 150px);
+        width: 300px;
+        height: 550px;
+    }
+    .login-wrapper.sht-depth-3 {
+        -webkit-box-shadow: none;
+                box-shadow: none;
+    }
+    .login-wrapper #login_form button, #code_form button, #register_form button {
+        margin-top: 0;
+    }
+    #login-bg-container {
+        background: none;
+        background-color: #ffffff;
+        opacity: 1;
+    }
+    .login-wrapper #default {
+        width: 300px;
+        height: 550px;
+    }
+    .login-wrapper #containers {
+        width: 900px;
+        height: 550px;
+    }
+    .login-content, .code-content, .fingerprint-content {
+        width: 300px;
+        height: 550px;
+    }
+    .login-wrapper #login_form #rememberme_container {
+        top: 389px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .login-wrapper #login_form #rememberme_container {
+        top: 389px;
+    }
 }
 
 [type="checkbox"].filled-in:checked+span:not(.lever):after {
