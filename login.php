@@ -115,7 +115,6 @@ function invalid_field(id, color) {
     setTimeout(function(){$(id).removeClass("login-fail-" + color)}, 250);
     setTimeout(function(){$(id).addClass("login-fail-" + color)}, 500);
     setTimeout(function(){$(id).removeClass("login-fail-" + color)}, 750);
-    console.log("NOW");
     shake(id + "-container");
 }
 $("#code_form").submit(function(e) {
@@ -151,7 +150,7 @@ $("#code_form").submit(function(e) {
             }
             else {
                 // Error
-                console.log($.trim(data));
+                M.toast({html: "An unknown error has occured."});
             }
         }
     });
@@ -209,7 +208,7 @@ $("#fingerprint_form").submit(function(e) {
             }
             else {
                 // Error
-                console.log($.trim(data));
+                M.toast({html: "An unknown error has occured."});
             }
         }
     });
