@@ -49,7 +49,34 @@ $(window).on('load', function(){
         animate_gaming();
         animate_music();
     });
+
+
     */
+
+
+    $(".login-wrapper").addClass("card-arise");
+    setTimeout(function () {
+        $("#step").addClass("arise");
+        setTimeout(function () {
+            $("#description").addClass("arise");
+            setTimeout(function () {
+                $("#username-container").addClass("arise");
+                setTimeout(function () {
+                    $("#password-container").addClass("arise");
+                    setTimeout(function () {
+                        $("#rememberme_container").addClass("arise");
+                        $("#submit-btn").addClass("arise");
+                        setTimeout(function () {
+                            $("#cms-container").addClass("arise");
+                        }, 200);
+                    }, 100);
+                }, 50);
+            }, 100);
+        }, 50);
+    }, 200);
+
+
+
     setTimeout(function(){
         $("#right-panel").addClass("slide-in slide-right");
         $("#left-panel").addClass("slide-in slide-left");

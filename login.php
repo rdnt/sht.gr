@@ -187,6 +187,10 @@ $("#fingerprint_form").submit(function(e) {
             if ($.trim(data) === "SUCCESS") {
                 // Two factor authentication successful
                 fingerprint_signal = 1;
+
+                $("#fingerprint_form i").removeClass("blue-grey-text");
+                $("#fingerprint_form i").removeClass("grey-text");
+
                 $("#fingerprint_form i").addClass("blue-text");
                 $(".animated-fingerprint").one('animationiteration webkitAnimationIteration', function() {
                     $(this).removeClass("animated-fingerprint");
@@ -197,17 +201,36 @@ $("#fingerprint_form").submit(function(e) {
             }
             else if ($.trim(data) === "AWAITING_FINGERPRINT") {
                 // Waiting for fingerprint
+                $("#fingerprint_form i").removeClass("text-darken-1");
+                $("#fingerprint_form i").addClass("grey-text");
             }
             else if ($.trim(data) === "FINGERPRINT_AUTH_TIMEOUT") {
                 // Fingerprint request has timed out
                 fingerprint_flag = -1;
+                $("#fingerprint_form i").addClass("grey-text");
+                $(".animated-fingerprint").one('animationiteration webkitAnimationIteration', function() {
+                    $(this).removeClass("animated-fingerprint");
+                });
+            }
+            else if ($.trim(data) === "FINGERPRINT_AUTH_RESET") {
+                // Fingerprint request initiated
+                $("#fingerprint_form i").addClass("blue-grey-text text-darken-1");
+            }
+            else if ($.trim(data) === "FINGERPRINT_AUTH_DUPLICATE") {
+                // Fingerprint request initiated
                 $("#fingerprint_form i").addClass("red-text");
                 $(".animated-fingerprint").one('animationiteration webkitAnimationIteration', function() {
                     $(this).removeClass("animated-fingerprint");
                 });
             }
+
             else {
                 // Error
+                fingerprint_flag = -1;
+                $("#fingerprint_form i").addClass("red-text");
+                $(".animated-fingerprint").one('animationiteration webkitAnimationIteration', function() {
+                    $(this).removeClass("animated-fingerprint");
+                });
                 M.toast({html: "An unknown error has occured."});
             }
         }

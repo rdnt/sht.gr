@@ -937,7 +937,6 @@ footer ul {
     font-weight: 500;
     color: #cccccc;
     bottom: 16px;
-    left: calc(50% + 2px);
     transform: translateX(-50%);
 }
 
@@ -946,7 +945,7 @@ footer ul {
     bottom: 6.5px;
     height: 50px;
     width: 50px;
-    left: 50%;
+    left: calc(50% - 2px);
     transform: translateX(-50%);
     opacity: .25;
 }
@@ -1191,4 +1190,52 @@ input:-webkit-autofill + label {
 
 .login-wrapper #register_form {
     margin-top: 140px;
+}
+
+#username-container, #password-container, #rememberme_container, #submit-btn, #step, #description, #cms-container, .login-wrapper {
+    opacity: 0;
+}
+
+#cms-container {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+}
+
+.arise {
+    animation: arise .3s;
+    opacity: 1 !important;
+}
+
+@keyframes arise {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.card-arise {
+    animation: card-arise .5s;
+    opacity: 1 !important;
+    -webkit-box-shadow: 0 8px 17px 2px rgba(0,0,0,0.035), 0 3px 14px 2px rgba(0,0,0,0.03), 0 5px 5px -3px rgba(0,0,0,0.05);
+            box-shadow: 0 8px 17px 2px rgba(0,0,0,0.035), 0 3px 14px 2px rgba(0,0,0,0.03), 0 5px 5px -3px rgba(0,0,0,0.05);
+}
+
+@keyframes card-arise {
+    0% {
+        transform: scale(.99);
+        opacity: .8;
+        -webkit-box-shadow: none;
+                box-shadow: none;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        -webkit-box-shadow: 0 8px 17px 2px rgba(0,0,0,0.035), 0 3px 14px 2px rgba(0,0,0,0.03), 0 5px 5px -3px rgba(0,0,0,0.05);
+                box-shadow: 0 8px 17px 2px rgba(0,0,0,0.035), 0 3px 14px 2px rgba(0,0,0,0.03), 0 5px 5px -3px rgba(0,0,0,0.05);
+    }
 }

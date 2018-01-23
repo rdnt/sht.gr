@@ -1,11 +1,13 @@
 <div id="login-bg-container"></div>
 <div id="login-container">
-    <div class="login-wrapper sht-depth-3">
+    <div class="login-wrapper">
         <div id="default">
             <h5 id="step">Login</h5>
             <h6 id="description">Insert your credentials below.</h6>
-            <h6 class="cms">SHT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CMS</h6>
-            <img alt="" class="cms-img" src="/images/home/sht_cms.svg">
+            <div id="cms-container">
+                <h6 class="cms">SHT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CMS</h6>
+                <img alt="" class="cms-img" src="/images/home/sht_cms.svg">
+            </div>
         </div>
         <div id="containers">
             <div class="login-content">
@@ -22,7 +24,7 @@
                     <input type="checkbox" class="filled-in" id="rememberme" name="rememberme" value="1"/>
                     <span>Remember Me</span>
                     </label>
-                    <button class="btn blue right" type="submit">Login</button>
+                    <button id="submit-btn" class="btn blue right" type="submit">Login</button>
                 </form>
             </div>
             <div class="code-content">
