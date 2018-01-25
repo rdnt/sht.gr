@@ -5,12 +5,12 @@
             <h5>Hey there.</h5>
             <h2 class="light-text intro">I am Tasos.</h2>
             <h5>I do web design, application development, 3d graphics & animation and music production.</h5>
-            <a href="#main"><img alt="" class="arrow" src="/images/home/arrow_down.svg"></a>
+            <a href="#scroll-main"><img alt="" class="arrow" src="/images/home/arrow_down.svg"></a>
         </div>
     </div>
     <div  class="parallax"><img alt="" id="parallax-img" class="transparent" src="/images/home/parallax.jpg"></div>
 </div>
-<a id="main"></a>
+<a id="scroll-main"></a>
 <div class="sht-home">
     <a id="code"></a>
     <div class="z-depth-3">
