@@ -13,5 +13,4 @@ if (isset($_SESSION['login'])) {
 header("Location: /");
 // Do not execute any other code
 die();
-
 ?>
