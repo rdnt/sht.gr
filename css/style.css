@@ -875,6 +875,8 @@ footer ul {
     overflow-y: hidden;
     -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.035), 0 1px 10px 0 rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.075);
             box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.035), 0 1px 10px 0 rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: opacity 1s;
+    transition: opacity .3s;
 }
 
 .login-wrapper #default {
@@ -961,6 +963,7 @@ footer ul {
 
 #fingerprint_form {
     position: relative;
+    margin-top: 190px;
 }
 
 #fingerprint_form h6 {
@@ -1076,6 +1079,9 @@ footer ul {
         background-color: #ffffff;
         opacity: 1;
     }
+    #code_form button {
+        margin-top: 15px !important;
+    }
     .login-wrapper #default {
         width: 300px;
         height: 550px;
@@ -1087,6 +1093,13 @@ footer ul {
     .login-content, .code-content, .fingerprint-content {
         width: 300px;
         height: 550px;
+    }
+    .login-content {
+        margin-top: -20px;
+        position: relative;
+    }
+    .code-content {
+        margin-top: 30px;
     }
     .login-wrapper #login_form #rememberme_container {
         top: 389px;
@@ -1106,6 +1119,9 @@ footer ul {
 
     .login-wrapper #login_form button {
         margin-top: 14px;
+    }
+    .login-wrapper #fingerprint_form {
+        margin-top: 182px;
     }
 }
 

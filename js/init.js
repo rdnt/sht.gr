@@ -88,7 +88,7 @@ $(window).on('load', function(){
                         $("#submit-btn").addClass("arise");
                         setTimeout(function () {
                             $("#cms-container").addClass("arise");
-                        }, 200);
+                        }, 100);
                     }, 100);
                 }, 50);
             }, 100);
