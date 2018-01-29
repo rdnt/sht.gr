@@ -70,16 +70,17 @@ $(window).on('load', function(){
     });
 
 
-    /**/
 
 
-    $(".login-wrapper").addClass("card-arise");
+
+    $(".login-wrapper").addClass("visible");
     setTimeout(function () {
         $("#step").addClass("arise");
         setTimeout(function () {
             $("#description").addClass("arise");
             setTimeout(function () {
                 $("#username-container").addClass("arise");
+                $(".login-wrapper").addClass("card-arise");
                 setTimeout(function () {
                     $("#password-container").addClass("arise");
                     setTimeout(function () {
