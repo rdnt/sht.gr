@@ -873,6 +873,8 @@ footer ul {
     background-color: #ffffff;
     overflow-x: hidden;
     overflow-y: hidden;
+    -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.035), 0 1px 10px 0 rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.075);
+            box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.035), 0 1px 10px 0 rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.075);
 }
 
 .login-wrapper #default {
@@ -1002,7 +1004,7 @@ footer ul {
 }
 
 .login-wrapper #login_form button, #code_form button, #register_form button {
-    margin-top: 20px;
+    margin-top: 18px;
 }
 
 .login-wrapper #login_form .anchor {
@@ -1034,7 +1036,7 @@ footer ul {
 
 .login-wrapper #login_form #rememberme_container {
     position: absolute;
-    top: 397px;
+    top: 394px;
 }
 
 .login-wrapper #login_form #rememberme_container span {
@@ -1042,11 +1044,20 @@ footer ul {
     line-height: 1.4rem;
 }
 
+@media only screen and (max-width: 991px) {
+    .login-wrapper #login_form #rememberme_container {
+        margin-top: -7px;
+    }
+}
+
 @media only screen and (max-width: 450px) {
     .login-wrapper {
         width: 300px;
         height: 550px;
         margin-top: 20px;
+        -webkit-box-shadow: none !important;
+                box-shadow: none !important;
+
     }
     #login-container {
         left: calc(50% - 150px);
@@ -1057,7 +1068,7 @@ footer ul {
         -webkit-box-shadow: none;
                 box-shadow: none;
     }
-    .login-wrapper #login_form button, #code_form button, #register_form button {
+    .login-wrapper #code_form button, #register_form button {
         margin-top: 0;
     }
     #login-bg-container {
@@ -1080,11 +1091,33 @@ footer ul {
     .login-wrapper #login_form #rememberme_container {
         top: 389px;
     }
+
+    .login-wrapper #login_form #rememberme_container span {
+        margin-left: -6px;
+    }
+
+    .login-wrapper #login_form #rememberme_container span::after {
+        left: 6px;
+    }
+
+    .login-wrapper #login_form #rememberme_container span::before {
+        left: 7px;
+    }
+
+    .login-wrapper #login_form button {
+        margin-top: 14px;
+    }
 }
 
-@media only screen and (max-width: 992px) {
+@media only screen and (min-width: 1200px) {
+    .login-wrapper #login_form button {
+        margin-top: 14px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
     .login-wrapper #login_form #rememberme_container {
-        top: 389px;
+        margin-top: -4px;
     }
 }
 
@@ -1222,18 +1255,26 @@ input:-webkit-autofill + label {
 }
 
 .card-arise {
-    animation: card-arise .5s;
+    animation: card-arise .5s linear;
+    position: relative;
+    z-index: 10000000;
     opacity: 1 !important;
     -webkit-box-shadow: 0 8px 17px 2px rgba(0,0,0,0.035), 0 3px 14px 2px rgba(0,0,0,0.03), 0 5px 5px -3px rgba(0,0,0,0.05);
             box-shadow: 0 8px 17px 2px rgba(0,0,0,0.035), 0 3px 14px 2px rgba(0,0,0,0.03), 0 5px 5px -3px rgba(0,0,0,0.05);
 }
 
+@media only screen and (max-width: 450px) {
+    .card-arise {
+        animation: none;
+    }
+}
+
 @keyframes card-arise {
     0% {
         transform: scale(1);
-        opacity: .8;
-        -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,0.07), 0 0 0 0 rgba(0,0,0,0.06), 0 0 0 0 rgba(0,0,0,0.1);
-                box-shadow: 0 0 0 0 rgba(0,0,0,0.07), 0 0 0 0 rgba(0,0,0,0.06), 0 0 0 0 rgba(0,0,0,0.1);
+        opacity: 1;
+        -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.035), 0 1px 10px 0 rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.075);
+                box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.035), 0 1px 10px 0 rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.075);
     }
     100% {
         transform: scale(1);
