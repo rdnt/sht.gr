@@ -140,8 +140,6 @@ class SHT_CMS {
 
         if(isset($_COOKIE['rememberme'])) {
 
-            SHT_CMS::log("LOGIN", "DEBUG has logged in using a cookie", $_SERVER['REMOTE_ADDR']);
-
             $cookie_data = explode(" ", $_COOKIE['rememberme']);
 
             $user_path = $accounts . $cookie_data[0] . ".json";
