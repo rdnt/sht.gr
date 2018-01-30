@@ -1306,3 +1306,40 @@ input:-webkit-autofill + label {
                 box-shadow: 0 8px 17px 2px rgba(0,0,0,0.035), 0 3px 14px 2px rgba(0,0,0,0.03), 0 5px 5px -3px rgba(0,0,0,0.05);
     }
 }
+
+#fingerprint_form #fingerprint-ico {
+
+
+
+}
+
+#binary-text {
+    overflow-wrap: break-word;
+    font-size: .7em;
+    line-height: 0;
+}
+
+.binary-text-wrapper {
+    -webkit-mask-image: url("/images/home/circle.svg");
+    -webkit-mask-position: 25% 75%;
+    width: 6em;
+    height: 6em;
+    display: block;
+    line-height: .7em;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 53px;
+
+    background-color: #ffffff;
+    animation: masking 5s infinite;
+    opacity: 1;
+}
+
+@keyframes masking {
+    0% {-webkit-mask-position: 50% 50%}
+    25% {-webkit-mask-position: 40% 40%}
+    50% {-webkit-mask-position: 60% 40%}
+    75% {-webkit-mask-position: 40% 60%}
+    100% {-webkit-mask-position: 50% 50%}
+}

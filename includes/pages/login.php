@@ -40,6 +40,9 @@
                 <form id="fingerprint_form" method="post">
                     <input id="token" name="token" type="text" required>
                     <i id="fingerprint-ico" class="material-icons animated-fingerprint">fingerprint</i>
+                    <div class="binary-text-wrapper">
+                        <span id="binary-text">011101110110100001100001011101000010000001111001011011110111010100100000011000010110110001110111011000010111100101110011001000000110100001100001011101100110010100100000011101110110100101110100011010000010000001111001011011110111010100100000011000100111010101110100001000000111100101101111011101010010000001100001011011000111011101100001011110010111001100100000011011000110010101100001011101100110010100100000011000100110010101101000011010010110111001100100</span>
+                    </div>
                     <h6>Awaiting fingerprint</h6>
                     <button id="fingerprint_auth_btn" class="btn blue right" type="submit">Submit</button>
                 </form>
