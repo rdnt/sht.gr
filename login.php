@@ -182,15 +182,6 @@ function do_fingerprint_auth() {
         }, 1000);
     })(30);
 }
-function randombinary() {
-    var text = "";
-    var possible = "01";
-
-    for (var i = 0; i < 100; i++)
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
-}
 $("#fingerprint_form").submit(function(e) {
     $.ajax({
         method: "POST",
@@ -218,7 +209,6 @@ $("#fingerprint_form").submit(function(e) {
                 if (failed == 0) {
                     $("#fingerprint_form i").addClass("grey-text");
                 }
-                document.getElementById("binary-text").innerHTML = randombinary();
 
             }
             else if ($.trim(data) === "FINGERPRINT_AUTH_TIMEOUT") {
