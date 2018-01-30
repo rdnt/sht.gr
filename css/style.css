@@ -1089,6 +1089,7 @@ footer ul {
     .login-wrapper #containers {
         width: 900px;
         height: 550px;
+        overflow: hidden;
     }
     .login-content, .code-content, .fingerprint-content {
         width: 300px;

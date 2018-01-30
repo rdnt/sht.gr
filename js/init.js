@@ -88,6 +88,10 @@ $(window).on('load', function(){
                         $("#submit-btn").addClass("arise");
                         setTimeout(function () {
                             $("#cms-container").addClass("arise");
+                            $("#step").addClass("visible");
+                            $("#description").addClass("visible");
+                            $("#step").removeClass("arise");
+                            $("#description").removeClass("arise");
                         }, 100);
                     }, 100);
                 }, 50);
