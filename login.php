@@ -164,7 +164,7 @@ function do_fingerprint_auth() {
     document.getElementById("token").value = token;
     (function check_fingerprint (i) {
         setTimeout(function () {
-            if (fingerprint_signal == 0) {
+            if (fingerprint_signal == 0 && fingerprint_flag != -1) {
                 document.getElementById("fingerprint_auth_btn").click();
             }
             if (--i && fingerprint_flag != -1) {
@@ -183,7 +183,6 @@ function do_fingerprint_auth() {
     })(30);
 }
 $("#fingerprint_form").submit(function(e) {
-    fingerprint_signal = 0;
     $.ajax({
         method: "POST",
         url: "/backend/fingerprint-auth",
@@ -215,7 +214,7 @@ $("#fingerprint_form").submit(function(e) {
             else if ($.trim(data) === "FINGERPRINT_AUTH_TIMEOUT") {
                 // Fingerprint request has timed out
                 fingerprint_flag = -1;
-                $("#fingerprint_form i").addClass("grey-text");
+                $("#fingerprint_form i").addClass("red-text");
                 $(".animated-fingerprint").one('animationiteration webkitAnimationIteration', function() {
                     $(this).removeClass("animated-fingerprint");
                 });
@@ -226,6 +225,7 @@ $("#fingerprint_form").submit(function(e) {
             }
             else if ($.trim(data) === "FINGERPRINT_AUTH_DUPLICATE") {
                 // Fingerprint request initiated
+                fingerprint_flag = -1;
                 $("#fingerprint_form i").addClass("red-text");
                 $(".animated-fingerprint").one('animationiteration webkitAnimationIteration', function() {
                     $(this).removeClass("animated-fingerprint");
