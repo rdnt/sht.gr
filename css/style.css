@@ -1132,6 +1132,12 @@ footer ul {
     }
 }
 
+@media only screen and (min-width: 1200px) {
+    #fingerprint_form {
+        margin-top: 200px;
+    }
+}
+
 @media only screen and (min-width: 992px) {
     .login-wrapper #login_form #rememberme_container {
         margin-top: -4px;
