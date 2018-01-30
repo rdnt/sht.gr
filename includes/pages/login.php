@@ -28,7 +28,7 @@
                 </form>
             </div>
             <div class="code-content">
-                <form id="code_form" method="post">
+                <form id="code_form" method="post" autocomplete="off">
                     <div id="code-container" class="input-field col s12">
                         <input id="code" name="code" type="text" required>
                         <label for="code">Authentication Code</label>
