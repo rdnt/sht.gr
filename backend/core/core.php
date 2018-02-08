@@ -82,6 +82,13 @@ class SHT_CMS {
         return $this->preloader;
     }
 
+    static function escape_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
     static function escape_form_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
@@ -91,6 +98,7 @@ class SHT_CMS {
 
     static function response($data) {
         echo $data;
+        die();
     }
 
     public function getDir($dir) {
