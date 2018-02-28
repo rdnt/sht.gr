@@ -5,10 +5,7 @@ use Defuse\Crypto\KeyProtectedByPassword;
 // Include SHT CMS Core
 include_once $_SERVER['DOCUMENT_ROOT']."/backend/core/sht-cms.php";
 // Verify request method is POST
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    $sht->response("POST_REQUIRED");
-    // die
-}
+$sht->checkPOST();
 // Check if all fields are sent
 if (!isset($_POST["username"]) or !isset($_POST["password"])) {
     $sht->response("FORM_DATA_MISSING");
@@ -95,6 +92,5 @@ else if ($userdata["fingerprint-auth"] != 1) {
     $sht->log("LOGIN", "$username is logging in using fingerprint authentication", $_SERVER['REMOTE_ADDR']);
     $sht->response("REQUIRE_FINGERPRINT_AUTH");
 }
-
 
 ?>
