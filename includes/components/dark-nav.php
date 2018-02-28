@@ -4,10 +4,10 @@
         <?php
 
         $menuitems["/"] = "HOME";
-        $menuitems["/posts"] = "POSTS";
-        $menuitems["/projects"] = "PROJECTS";
-        $menuitems["/music"] = "MUSIC";
-        $menuitems["/about"] = "ABOUT";
+        //$menuitems["/posts"] = "POSTS";
+        //$menuitems["/projects"] = "PROJECTS";
+        //$menuitems["/music"] = "MUSIC";
+        //$menuitems["/about"] = "ABOUT";
 
         foreach ($menuitems as $url => $name) {
             if (strcmp($url, $_SERVER['REQUEST_URI']) === 0) {
