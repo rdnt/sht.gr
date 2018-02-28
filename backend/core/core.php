@@ -237,5 +237,27 @@ class SHT_CMS {
         file_put_contents($user_path, json_encode($userdata, JSON_PRETTY_PRINT));
         setcookie('rememberme', $username . " " . $uuid, time()+60*60*24*31, '/', $sht->getDomain());
     }
+
+    function checkPOST() {
+        if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+            $this->response("POST_REQUIRED");
+        }
+    }
+
+    function checkPOSTData() {
+        foreach (func_get_args() as $parameter) {
+            if (!isset($_POST[$parameter])) {
+                $this->response("FORM_DATA_MISSING");
+            }
+        }
+    }
+
+    function checkSESSIONData() {
+        foreach (func_get_args() as $parameter) {
+            if (!isset($_SESSION[$parameter])) {
+                $this->response("LOGIN_SESSION_TIMEOUT");
+            }
+        }
+    }
 }
 ?>

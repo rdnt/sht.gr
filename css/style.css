@@ -1259,6 +1259,24 @@ input:-webkit-autofill + label {
     position: absolute;
     bottom: 16px;
     left: 50%;
+    display: none;
+}
+
+#dots-container {
+    position: absolute;
+    bottom: 38px;
+    left: calc(50% - 2px);
+    transform: translateX(-50%);
+}
+
+#dots-container .dot {
+    height: 10px;
+    width: 10px;
+    display: inline-block;
+    float: left;
+    background-color: #dddddd;
+    margin: 5px;
+    border-radius: 50%;
 }
 
 .arise {
