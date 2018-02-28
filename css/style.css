@@ -1259,7 +1259,7 @@ input:-webkit-autofill + label {
     position: absolute;
     bottom: 16px;
     left: 50%;
-    display: none;
+    /*display: none;*/
 }
 
 #dots-container {
