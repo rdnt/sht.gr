@@ -1,0 +1,4 @@
+.ftpconfig
+.ftpignore
+/data/
+*.css
