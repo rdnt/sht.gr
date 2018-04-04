@@ -17,12 +17,11 @@ $GLOBALS['debug'] = true;
 // Abstract class that contains all core functions needed
 abstract class Core {
     // Private datamembers
-    protected $root;
-    protected $current_page;
+    private $root;
+    private $current_page;
     protected $name;
     protected $title_separator;
     protected $patterns;
-    protected $debug;
     protected $pages;
     protected $blueprints;
     // Constructor
@@ -32,7 +31,6 @@ abstract class Core {
         $this->current_page = $_SERVER['REQUEST_URI'];
         $this->name = "Core";
         $this->title_separator = "›";
-        $this->debug = true;
         // Start the session if it wasn't already started
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
@@ -43,12 +41,11 @@ abstract class Core {
             error_reporting(E_ALL);
         }
     }
-    function getRoot() {
-        return $this->root;
-    }
+    // Returns the current page URI
     function getCurrentPage() {
         return $this->current_page;
     }
+    // Returns the name of the page
     function getPageName() {
         if(array_key_exists($this->getCurrentPage(), $this->pages)){
             return $this->pages[$this->getCurrentPage()];
@@ -64,7 +61,7 @@ abstract class Core {
     }
     // Returns the page path
     function getPagePath($page) {
-        $pages_path = $this->getRoot() . "/includes/pages/";
+        $pages_path = $this->root . "/includes/pages/";
         return $pages_path . $page . ".php";
     }
     // Get a specific page part based on a separator
@@ -72,10 +69,10 @@ abstract class Core {
         $page = $this->getPageName();
         if (!$separator) {
             if (file_exists($this->getPagePath($page))) {
-                require $this->getPagePath($page);
+                require_once $this->getPagePath($page);
             }
             else {
-                require $this->getPagePath("error404");
+                require_once $this->getPagePath("error404");
             }
             return;
         }
@@ -93,35 +90,24 @@ abstract class Core {
     static function initialize() {
         CORE::loadModules("/backend/core/modules");
         CORE::loadModules("/backend/shell/modules");
-
     }
     // Loads all the modules
     static function loadModules($path) {
-        // Module injection
+        // Prepare the iterator
         $core = new RecursiveDirectoryIterator($_SERVER['DOCUMENT_ROOT'] . $path);
         $iterator = new RecursiveIteratorIterator($core);
         $modules = new RegexIterator($iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
-
+        // Load all modules in the directory structure recursively
         foreach ($modules as $component => $filename) {
             require_once $component;
             $component_name = str_replace(".php", "", basename($component));
         }
-
     }
     // Returns the regular expression for the requested property
     function getPattern($pattern) {
         return $this->patterns[$pattern];
     }
-
-    function getPageFilename($page) {
-        if(array_key_exists($page, $this->pages)){
-            return $this->pages[$this->getCurrentPage()];
-        }
-        else {
-            return "/error";
-        }
-    }
-
+    // Returns the blueprint selected for a page
     function getBlueprint($page) {
         if(array_key_exists($page, $this->blueprints)){
             return $this->blueprints[$page];
@@ -130,23 +116,20 @@ abstract class Core {
             return "default";
         }
     }
-
+    // Returns the absolute path of a blueprint
     function getBlueprintPath($page) {
-        $blueprints_path = $this->getRoot() . "/includes/blueprints/";
+        $blueprints_path = $this->root . "/includes/blueprints/";
         $blueprint = $this->getBlueprint($this->getCurrentPage());
         return $blueprints_path . $blueprint . ".php";
     }
-
+    // Renders a page depending on a blueprint
     function loadPage() {
         $shell = $this;
         $name = $this->getPageName();
-        require $this->getBlueprintPath($name);
+        require_once $this->getBlueprintPath($name);
     }
-
 }
-
 // Initialize SHT Core
 CORE::initialize();
 require_once $_SERVER['DOCUMENT_ROOT'] . "/backend/shell/Shell.php";
-
 $shell->loadPage();
