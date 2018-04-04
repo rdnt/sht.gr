@@ -12,6 +12,7 @@ class Shell extends Core {
         $this->blueprints = array(
             //"/" => "default",
         );
+        $this->loadPage();
     }
 
 }
