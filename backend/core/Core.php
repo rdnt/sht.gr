@@ -54,7 +54,7 @@ abstract class Core {
             return $this->pages[$this->getCurrentPage()];
         }
         else {
-            return "/error";
+            return "404";
         }
     }
     // Returns the current page's title based on the request URI
@@ -75,7 +75,7 @@ abstract class Core {
                 require $this->getPagePath($page);
             }
             else {
-                echo "Error 404";
+                require $this->getPagePath("error404");
             }
             return;
         }
