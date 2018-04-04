@@ -41,6 +41,27 @@ abstract class Core {
             error_reporting(E_ALL);
         }
     }
+    // Initializes SHT Core
+    static function initialize() {
+        CORE::loadModules("/backend/core/modules");
+        CORE::loadModules("/backend/shell/modules");
+    }
+    // Loads all the modules
+    static function loadModules($path) {
+        // Prepare the iterator
+        $core = new RecursiveDirectoryIterator($_SERVER['DOCUMENT_ROOT'] . $path);
+        $iterator = new RecursiveIteratorIterator($core);
+        $modules = new RegexIterator($iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
+        // Load all modules in the directory structure recursively
+        foreach ($modules as $component => $filename) {
+            require_once $component;
+            $component_name = str_replace(".php", "", basename($component));
+        }
+    }
+    // Returns the regular expression for the requested property
+    function getPattern($pattern) {
+        return $this->patterns[$pattern];
+    }
     // Returns the current page URI
     function getCurrentPage() {
         return $this->current_page;
@@ -87,26 +108,6 @@ abstract class Core {
             eval($segment);
         }
     }
-    static function initialize() {
-        CORE::loadModules("/backend/core/modules");
-        CORE::loadModules("/backend/shell/modules");
-    }
-    // Loads all the modules
-    static function loadModules($path) {
-        // Prepare the iterator
-        $core = new RecursiveDirectoryIterator($_SERVER['DOCUMENT_ROOT'] . $path);
-        $iterator = new RecursiveIteratorIterator($core);
-        $modules = new RegexIterator($iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
-        // Load all modules in the directory structure recursively
-        foreach ($modules as $component => $filename) {
-            require_once $component;
-            $component_name = str_replace(".php", "", basename($component));
-        }
-    }
-    // Returns the regular expression for the requested property
-    function getPattern($pattern) {
-        return $this->patterns[$pattern];
-    }
     // Returns the blueprint selected for a page
     function getBlueprint($page) {
         if(array_key_exists($page, $this->blueprints)){
@@ -129,7 +130,6 @@ abstract class Core {
         require_once $this->getBlueprintPath($name);
     }
 }
-// Initialize SHT Core
+
 CORE::initialize();
 require_once $_SERVER['DOCUMENT_ROOT'] . "/backend/shell/Shell.php";
-$shell->loadPage();
