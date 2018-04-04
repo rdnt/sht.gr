@@ -1,3 +1,5 @@
+Options +FollowSymlinks
+
 RewriteEngine On
 
 # Disable automatic directory detection
@@ -5,3 +7,7 @@ DirectorySlash Off
 
 RewriteCond %{DOCUMENT_ROOT}/$1.php -f
 RewriteRule ^(.+?)/?$ /$1.php [L]
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ /index.php [NC,L,QSA]
