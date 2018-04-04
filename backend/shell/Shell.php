@@ -8,12 +8,9 @@ class Shell extends Core {
         parent::__construct();
         $this->pages = array(
             "/" => "home",
-            "/index" => "home",
-            "/home" => "home"
         );
         $this->blueprints = array(
-            "/" => "default",
-            "/index" => "default",
+            //"/" => "default",
         );
     }
 
