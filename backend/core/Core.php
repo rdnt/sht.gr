@@ -24,13 +24,12 @@ abstract class Core {
     protected $patterns;
     protected $pages;
     protected $blueprints;
+    protected $data_paths;
     // Constructor
     function __construct() {
         // Initialize private datamembers
         $this->root = $_SERVER['DOCUMENT_ROOT'];
         $this->current_page = $_SERVER['REQUEST_URI'];
-        $this->name = "Core";
-        $this->title_separator = "›";
         // Start the session if it wasn't already started
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
@@ -57,6 +56,18 @@ abstract class Core {
             require_once $component;
             $component_name = str_replace(".php", "", basename($component));
         }
+    }
+    // Create data paths if they don't exist
+    function createDataPaths() {
+        foreach ($this->data_paths as $path) {
+            if (!file_exists($this->root . $path)) {
+                mkdir($this->root . $path);
+            }
+        }
+    }
+    // Returns the document root
+    function getRoot() {
+        return $this->root;
     }
     // Returns the regular expression for the requested property
     function getPattern($pattern) {
@@ -125,9 +136,10 @@ abstract class Core {
     }
     // Renders a page depending on a blueprint
     function loadPage() {
-        $shell = $this;
-        $name = $this->getPageName();
-        require_once $this->getBlueprintPath($name);
+        if (substr($this->getCurrentPage(), 0, 9) !== "/backend/") {
+            $name = $this->getPageName();
+            require_once $this->getBlueprintPath($name);
+        }
     }
 }
 
