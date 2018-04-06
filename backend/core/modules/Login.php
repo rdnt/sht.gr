@@ -31,7 +31,13 @@ trait Login {
             $this->response("PASSWORDS_DO_NOT_MATCH");
         }
     }
-    // Checks if a user is logged in
+    // Checks if the user is logged in
+    function checkLogin() {
+        if (!isset($_SESSION['login'])) {
+            $this->response("NOT_LOGGED_IN");
+        }
+    }
+    // Checks if a user is logged out
     function checkLogout() {
         if (isset($_SESSION['login'])) {
             $this->response("ALREADY_LOGGED_IN");
