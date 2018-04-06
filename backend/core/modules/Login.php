@@ -37,4 +37,14 @@ trait Login {
             $this->response("ALREADY_LOGGED_IN");
         }
     }
+    // Logs the user out
+    function logout() {
+        if (isset($_SESSION['login'])) {
+            unset($_SESSION['login']);
+            $this->response("SUCCESS");
+        }
+        else {
+            $this->response("NOT_LOGGED_IN");
+        }
+    }
 }
