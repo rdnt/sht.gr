@@ -33,8 +33,8 @@ trait Login {
     }
     // Checks if a user is logged in
     function checkLogin() {
-        if (!isset($_SESSION['login'])) {
-            $this->response("NOT_LOGGED_IN");
+        if (isset($_SESSION['login'])) {
+            $this->response("ALREADY_LOGGED_IN");
         }
     }
 }
