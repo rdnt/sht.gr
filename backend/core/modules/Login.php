@@ -16,4 +16,25 @@ trait Login {
             $this->response("INCORRECT_PASSWORD");
         }
     }
+    // Returns an json array containing all userdata
+    function getUserdata($username) {
+        $user = file_get_contents($this->getRoot() . "/data/accounts/$username.json");
+        return json_decode($user, true);
+    }
+    // Saves json data for the specific user
+    function saveUserdata($username, $data) {
+        file_put_contents($this->getRoot() . "/data/accounts/$username.json", json_encode($data, JSON_PRETTY_PRINT));
+    }
+    // Compares password and repeat_password
+    function comparePasswords($password, $repeat_password) {
+        if ($password !== $repeat_password) {
+            $this->response("PASSWORDS_DO_NOT_MATCH");
+        }
+    }
+    // Checks if a user is logged in
+    function checkLogin() {
+        if (!isset($_SESSION['login'])) {
+            $this->response("NOT_LOGGED_IN");
+        }
+    }
 }
