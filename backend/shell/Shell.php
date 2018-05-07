@@ -3,6 +3,7 @@
 class Shell extends Core {
     // Include the components
     use FormHandling;
+    use Github;
     use Login;
 
     function __construct(){
