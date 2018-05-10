@@ -17,6 +17,7 @@ $GLOBALS['debug'] = true;
 // Abstract class that contains all core functions needed
 abstract class Core {
     // Private datamembers
+    private $domain;
     private $root;
     private $current_page;
     protected $name;
@@ -28,6 +29,7 @@ abstract class Core {
     // Constructor
     function __construct() {
         // Initialize private datamembers
+        $this->domain = $_SERVER['SERVER_NAME'];
         $this->root = $_SERVER['DOCUMENT_ROOT'];
         $this->current_page = $_SERVER['REQUEST_URI'];
         // Start the session if it wasn't already started
@@ -76,6 +78,13 @@ abstract class Core {
     // Returns the current page URI
     function getCurrentPage() {
         return $this->current_page;
+    }
+    function getDomain() {
+        return $this->domain;
+    }
+    function redirect($page) {
+        header("Location: " . $_SERVER['REQUEST_SCHEME'] . "://" . $this->getDomain() . $page);
+        die();
     }
     // Returns the name of the page
     function getPageName() {

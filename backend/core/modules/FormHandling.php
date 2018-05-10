@@ -43,4 +43,10 @@ trait FormHandling {
             }
         }
     }
+    // Verifies POST data by combining the required checks
+    function verifyPOSTData() {
+        $this->checkPOST();
+        call_user_func_array(array($this, 'checkPOSTData'), func_get_args());
+        call_user_func_array(array($this, 'checkPOSTDataContents'), func_get_args());
+    }
 }
