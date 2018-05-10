@@ -3,16 +3,11 @@
 trait FormHandling {
     // Echoes a response and kills the running script
     function response($response, $json = null) {
-        if ($json) {
-            $json_array = array(
-                "response" => $response,
-                "data"     => $json
-            );
-            echo json_encode($json_array);
-        }
-        else {
-            echo $response;
-        }
+        $json_array = array(
+            "response" => $response,
+            "data"     => $json
+        );
+        echo json_encode($json_array);
         die();
     }
     // Checks if a value matches the regular expression of the giveen property
