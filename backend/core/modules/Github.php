@@ -7,10 +7,10 @@ trait Github {
         $branch = "$root/.git/refs/heads/$branch";
         $master = "$root/.git/refs/heads/master";
         if (file_exists($branch)) {
-            return substr(file_get_contents($branch), 0, 6);
+            return substr(file_get_contents($branch), 0, 7);
         }
         else if (file_exists($master)) {
-            return substr(file_get_contents($master), 0, 6);
+            return substr(file_get_contents($master), 0, 7);
         }
         else {
             return "unknown";
