@@ -24,14 +24,21 @@ abstract class Core {
     protected $title_separator;
     protected $patterns;
     protected $pages;
-    protected $blueprints;
     protected $data_paths;
+    protected $folders;
+    protected $title;
     // Constructor
     function __construct() {
         // Initialize private datamembers
         $this->domain = $_SERVER['SERVER_NAME'];
         $this->root = $_SERVER['DOCUMENT_ROOT'];
         $this->current_page = $_SERVER['REQUEST_URI'];
+        if (array_key_exists($this->current_page, $this->pages)){
+            $this->title = $this->name . " $this->title_separator " . $this->pages[$this->current_page][0];
+        }
+        else {
+            $this->title = $this->name . " $this->title_separator Error 404";
+        }
         // Start the session if it wasn't already started
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
@@ -40,31 +47,6 @@ abstract class Core {
             ini_set('display_errors', 1);
             ini_set('display_startup_errors', 1);
             error_reporting(E_ALL);
-        }
-    }
-    // Initializes SHT Core
-    static function initialize() {
-        CORE::loadModules("/backend/core/modules");
-        CORE::loadModules("/backend/shell/modules");
-    }
-    // Loads all the modules
-    static function loadModules($path) {
-        // Prepare the iterator
-        $core = new RecursiveDirectoryIterator($_SERVER['DOCUMENT_ROOT'] . $path);
-        $iterator = new RecursiveIteratorIterator($core);
-        $modules = new RegexIterator($iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
-        // Load all modules in the directory structure recursively
-        foreach ($modules as $component => $filename) {
-            require_once $component;
-            $component_name = str_replace(".php", "", basename($component));
-        }
-    }
-    // Create data paths if they don't exist
-    function createDataPaths() {
-        foreach ($this->data_paths as $path) {
-            if (!file_exists($this->root . $path)) {
-                mkdir($this->root . $path);
-            }
         }
     }
     // Returns the document root
@@ -82,38 +64,54 @@ abstract class Core {
     function getDomain() {
         return $this->domain;
     }
+    // Initializes SHT Core
+    static function initialize() {
+        CORE::loadModules("/backend/core/modules");
+        CORE::loadModules("/backend/shell/modules");
+    }
+    // Loads all the modules
+    static function loadModules($path) {
+        // Prepare the iterator
+        $core = new RecursiveDirectoryIterator($_SERVER['DOCUMENT_ROOT'] . $path);
+        $iterator = new RecursiveIteratorIterator($core);
+        $modules = new RegexIterator($iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
+        // Load all modules in the directory structure recursively
+        foreach ($modules as $component => $filename) {
+            require_once $component;
+        }
+    }
+    // Create data paths if they don't exist
+    function createDataPaths() {
+        foreach ($this->data_paths as $path) {
+            if (!file_exists($this->root . $path)) {
+                mkdir($this->root . $path);
+            }
+        }
+    }
+    // Redirects to a specific page
     function redirect($page) {
         header("Location: " . $_SERVER['REQUEST_SCHEME'] . "://" . $this->getDomain() . $page);
         die();
     }
-    // Returns the name of the page
-    function getPageName() {
-        if(array_key_exists($this->getCurrentPage(), $this->pages)){
-            return $this->pages[$this->getCurrentPage()];
-        }
-        else {
-            return "404";
-        }
-    }
     // Returns the current page's title based on the request URI
     function getPageTitle() {
-        $name = $this->getPageName();
-        return $this->name . " $this->title_separator " . ucfirst($name);
+        return $this->title;
     }
     // Returns the page path
     function getPagePath($page) {
-        $pages_path = $this->root . "/includes/pages/";
-        return $pages_path . $page . ".php";
+        if (array_key_exists($this->current_page, $this->pages)){
+            return $this->root . "/includes/pages/" . $this->pages[$page][1] . ".php";
+        }
+        else {
+            return $this->root . "/includes/error/404.php";
+        }
     }
     // Get a specific page part based on a separator
     function getPageSegment($separator = null, $offset = 0) {
-        $page = $this->getPageName();
+        $page = $this->getCurrentPage();
         if (!$separator) {
             if (file_exists($this->getPagePath($page))) {
                 require_once $this->getPagePath($page);
-            }
-            else {
-                require_once $this->getPagePath("error404");
             }
             return;
         }
@@ -130,23 +128,23 @@ abstract class Core {
     }
     // Returns the blueprint selected for a page
     function getBlueprint($page) {
-        if(array_key_exists($page, $this->blueprints)){
-            return $this->blueprints[$page];
+        if(array_key_exists($page, $this->pages)){
+            return $this->pages[$page][2];
         }
         else {
-            return "default";
+            return "error";
         }
     }
     // Returns the absolute path of a blueprint
-    function getBlueprintPath($page) {
+    function getBlueprintPath() {
         $blueprints_path = $this->root . "/includes/blueprints/";
         $blueprint = $this->getBlueprint($this->getCurrentPage());
         return $blueprints_path . $blueprint . ".php";
     }
     // Renders a page depending on a blueprint
-    function loadPage() {
+    function renderPage() {
         if (substr($this->getCurrentPage(), 0, 9) !== "/backend/") {
-            $name = $this->getPageName();
+            $name = $this->getCurrentPage();
             require_once $this->getBlueprintPath($name);
         }
     }

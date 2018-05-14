@@ -7,7 +7,6 @@ class Shell extends Core {
     use Login;
 
     function __construct(){
-        parent::__construct();
         $this->name = "SHT Core";
         $this->title_separator = "-";
         $this->patterns = array();
@@ -15,13 +14,11 @@ class Shell extends Core {
             "/data/"
         );
         $this->pages = array(
-            "/" => "home"
+            "/" => ["Home", "home", "default"]
         );
-        $this->blueprints = array(
-            "/" => "default"
-        );
-        $this->loadPage();
+        parent::__construct();
         $this->createDataPaths();
+        $this->renderPage();
     }
 
 }
