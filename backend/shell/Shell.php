@@ -5,13 +5,15 @@ class Shell extends Core {
     use FormHandling;
     use Github;
     use Login;
+    use Logging;
 
     function __construct(){
         $this->name = "SHT Core";
         $this->title_separator = "-";
         $this->patterns = array();
         $this->data_paths = array(
-            "/data/"
+            "/data/",
+            "/data/logs/"
         );
         $this->pages = array(
             "/" => ["Home", "home", "default"]
