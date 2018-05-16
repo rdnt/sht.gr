@@ -38,4 +38,14 @@ trait Logging {
         // Save the latest log
         file_put_contents($log, $data);
     }
+    // Deletes the logs
+    function purgeLogs() {
+        $logs_folder = $this->getRoot() . "/data/logs/";
+        $logs = glob("$logs_folder*.log");
+        foreach($logs as $log) {
+            if(is_file($log)) {
+                unlink($log);
+            }
+        }
+    }
 }
