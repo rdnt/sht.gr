@@ -151,7 +151,7 @@ abstract class Core {
     function renderPage() {
         if (substr($this->getCurrentPage(), 0, 9) !== "/backend/") {
             $name = $this->getCurrentPage();
-            require_once $this->getBlueprintPath($name);
+            require_once $this->getBlueprintPath();
         }
     }
 }
