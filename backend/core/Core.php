@@ -35,6 +35,11 @@ abstract class Core {
     // Constructor
     function __construct() {
         // Initialize private datamembers
+        if ($GLOBALS['debug'] === true) {
+            ini_set('display_errors', 1);
+            ini_set('display_startup_errors', 1);
+            error_reporting(E_ALL);
+        }
         $this->domain = $_SERVER['SERVER_NAME'];
         $this->root = $_SERVER['DOCUMENT_ROOT'];
         $this->current_page = $_SERVER['REQUEST_URI'];
@@ -44,15 +49,12 @@ abstract class Core {
         else {
             $this->title = $this->name . " $this->title_separator Error 404";
         }
+        if(!isset($_COOKIE['PHPSESSID'])) {
+            $this->pushAssets();
+        }
         // Start the session if it wasn't already started
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
-            $this->pushAssets();
-        }
-        if ($GLOBALS['debug'] === true) {
-            ini_set('display_errors', 1);
-            ini_set('display_startup_errors', 1);
-            error_reporting(E_ALL);
         }
     }
     // Returns the document root
@@ -66,6 +68,10 @@ abstract class Core {
     // Returns the current page URI
     function getCurrentPage() {
         return $this->current_page;
+    }
+    // Overrides the current page URI
+    function setCurrentPage($page) {
+        $this->current_page = $page;
     }
     function getDomain() {
         return $this->domain;
