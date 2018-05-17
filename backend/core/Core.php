@@ -3,15 +3,20 @@
 $GLOBALS['debug'] = true;
 
 /**
+ *
  * SHT Core
  *
- * A placeholder class for my projects that contains helpful methods.
+ * The Core provides a basic interface for any project I create,
+ * handles module autoloading, request redirection to the backend,
+ * asset pushing, blueprint-based page rendering and basically any functionality
+ * that all of my projects need. It is extendable,
  *
  * @author    Tasos Papalyras <tasos@sht.gr>
- * @copyright 2018 SHT
+ * @copyright 2018 ShtHappens796
  * @license   https://github.com/ShtHappens796/Core/blob/master/LICENSE MIT
  * @version   0.1.0
  * @link      https://github.com/ShtHappens796/Core
+ *
  */
 
 // Abstract class that contains all core functions needed
@@ -25,8 +30,8 @@ abstract class Core {
     protected $patterns;
     protected $pages;
     protected $data_paths;
-    protected $folders;
     protected $title;
+    protected $assets;
     // Constructor
     function __construct() {
         // Initialize private datamembers
@@ -42,6 +47,7 @@ abstract class Core {
         // Start the session if it wasn't already started
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
+            $this->pushAssets();
         }
         if ($GLOBALS['debug'] === true) {
             ini_set('display_errors', 1);
@@ -64,7 +70,7 @@ abstract class Core {
     function getDomain() {
         return $this->domain;
     }
-    // Initializes SHT Core
+    // Initializes the Core
     static function initialize() {
         CORE::loadModules("/backend/core/modules");
         CORE::loadModules("/backend/shell/modules");
@@ -149,6 +155,6 @@ abstract class Core {
         }
     }
 }
-
+// Initialize the Core
 CORE::initialize();
 require_once $_SERVER['DOCUMENT_ROOT'] . "/backend/shell/Shell.php";

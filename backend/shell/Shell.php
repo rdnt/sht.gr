@@ -2,13 +2,14 @@
 
 class Shell extends Core {
     // Include the components
+    use AssetPushing;
     use FormHandling;
     use Github;
-    use Login;
     use Logging;
-
+    use Login;
+    // Shell constructor method
     function __construct(){
-        $this->name = "SHT Core";
+        $this->name = "Core";
         $this->title_separator = "-";
         $this->patterns = array();
         $this->data_paths = array(
@@ -18,11 +19,11 @@ class Shell extends Core {
         $this->pages = array(
             "/" => ["Home", "home", "default"]
         );
+        $this->assets = array();
         parent::__construct();
         $this->createDataPaths();
         $this->renderPage();
     }
-
 }
 // Initialize Shell object
 $shell = new Shell;
