@@ -19,6 +19,11 @@ class Shell extends Core {
         $this->pages = array(
             "/" => ["Home", "home", "default"]
         );
+        $this->folders = array(
+            "css",
+            "js",
+            "data"
+        );
         $this->assets = array();
         parent::__construct();
         $this->createDataPaths();
