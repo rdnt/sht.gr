@@ -1,7 +1,5 @@
 <?php
 
-$GLOBALS['debug'] = true;
-
 /**
  *
  * SHT Core
@@ -19,6 +17,7 @@ $GLOBALS['debug'] = true;
  *
  */
 
+$GLOBALS['debug'] = true;
 // Abstract class that contains all core functions needed
 abstract class Core {
     // Private datamembers
@@ -79,8 +78,8 @@ abstract class Core {
     }
     // Initializes the Core
     static function initialize() {
-        CORE::loadModules("/backend/core/modules");
-        CORE::loadModules("/backend/shell/modules");
+        CORE::loadModules("/api/core/modules");
+        CORE::loadModules("/api/shell/modules");
     }
     // Loads all the modules
     static function loadModules($path) {
@@ -141,7 +140,7 @@ abstract class Core {
     }
     // Returns the blueprint selected for a page
     function getBlueprint($page) {
-        $parameters = explode($page, "/");
+        $parameters = explode("/", $page);
         $page = $parameters[0];
         if (array_key_exists($page, $this->pages)){
             return $this->pages[$page][2];
@@ -158,9 +157,9 @@ abstract class Core {
     }
     // Renders a page depending on a blueprint
     function renderPage() {
-        $parameters = explode($this->getCurrentPage(), "/");
+        $parameters = explode("/", $this->getCurrentPage());
         $folder = $parameters[0];
-        if (!in_array($folder, $this->folders) && $folder !== "backend") {
+        if (!in_array($folder, $this->folders) && $folder !== "api") {
             $name = $this->getCurrentPage();
             require_once $this->getBlueprintPath();
         }
@@ -168,4 +167,4 @@ abstract class Core {
 }
 // Initialize the Core
 CORE::initialize();
-require_once $_SERVER['DOCUMENT_ROOT'] . "/backend/shell/Shell.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/api/shell/Shell.php";

@@ -1,5 +1,5 @@
 var ajaxRequestPending = 0;
-function asyncFormSubmission(form_id, target_url = null, init, callback, min_delay = 0, error_delay = 0, rapid_error = false) {
+function asyncFormSubmission(form_id, target_url, init, callback, min_delay, error_delay, rapid_error) {
     $(form_id).submit(function(e) {
         e.preventDefault();
         if (!ajaxRequestPending) {
