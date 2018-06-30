@@ -198,13 +198,31 @@ abstract class Core {
                 $this->blueprint = $data[2];
             }
         }
-        // Acquire the first segment of the requested path
+    }
+    // Returns the blueprint selected for a page
+    function getBlueprint($page) {
+        $parameters = explode("/", $page);
+        $page = $parameters[1];
+        if (array_key_exists($page, $this->pages)){
+            return $this->pages[$page][2];
+        }
+        else {
+            return "error";
+        }
+    }
+    // Returns the absolute path of a blueprint
+    function getBlueprintPath() {
+        $blueprints_path = $this->root . "/includes/blueprints/";
+        $blueprint = $this->getBlueprint($this->getCurrentPage());
+        return $blueprints_path . $blueprint . ".php";
+    }
+    // Renders a page depending on a blueprint
+    function renderPage() {
         $parameters = explode("/", $this->getCurrentPage());
-        array_shift($parameters);
-        $folder = $parameters[0];
-        // If the page is inside a folder or is found
-        if (!$this->page && !in_array($folder, $this->folders)) {
-            $this->setCurrentPage("/error/404");
+        $folder = $parameters[1];
+        if (!in_array($folder, $this->folders) && $folder !== "api") {
+            $name = $this->getCurrentPage();
+            require_once $this->getBlueprintPath();
         }
         // Format the page title
         $this->formatTitle();
