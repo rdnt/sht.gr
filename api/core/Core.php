@@ -9,10 +9,10 @@
  * asset pushing, blueprint-based page rendering and basically any functionality
  * that all of my projects need. It is extendable,
  *
- * @author    Tasos Papalyras <shithappens796@gmail.com>
+ * @author    Tasos Papalyras <tasos@sht.gr>
  * @copyright 2018 ShtHappens796
  * @license   https://github.com/ShtHappens796/Core/blob/master/LICENSE MIT
- * @version   1.0.0 (28 August 2018)
+ * @version   0.1.0
  * @link      https://github.com/ShtHappens796/Core
  *
  */
@@ -20,26 +20,19 @@
 $GLOBALS['debug'] = true;
 // Abstract class that contains all core functions needed
 abstract class Core {
-    // Publicly accessible db object
-    public $db;
     // Private datamembers
+    private $domain;
     private $root;
     private $current_page;
-    // Protected datamembers (interfacing with the Shell)
     protected $name;
     protected $title_separator;
     protected $patterns;
     protected $pages;
     protected $data_paths;
     protected $title;
-    protected $page;
-    protected $blueprint;
-    protected $content;
     protected $assets;
     protected $folders;
-    /**
-     * Constructs the shell object
-     */
+    // Constructor
     function __construct() {
         // Initialize private datamembers
         if ($GLOBALS['debug'] === true) {
@@ -47,33 +40,48 @@ abstract class Core {
             ini_set('display_startup_errors', 1);
             error_reporting(E_ALL);
         }
+        $this->domain = $_SERVER['SERVER_NAME'];
         $this->root = $_SERVER['DOCUMENT_ROOT'];
         $this->current_page = $_SERVER['REQUEST_URI'];
-        // Set default timezone
-        date_default_timezone_set("Europe/Athens");
-        // If the session is not started push the assets for faster loading
-        // (Depends on server configuration)
-        if (!isset($_COOKIE['session'])) {
+        if (array_key_exists($this->current_page, $this->pages)){
+            $this->title = $this->name . " $this->title_separator " . $this->pages[$this->current_page][0];
+        }
+        else {
+            $this->title = $this->name . " $this->title_separator Error 404";
+        }
+        if(!isset($_COOKIE['PHPSESSID'])) {
             $this->pushAssets();
         }
         // Start the session if it wasn't already started
         if (session_status() == PHP_SESSION_NONE) {
-            session_name('session');
             session_start();
         }
     }
-    /**
-     * Initializes the Core and loads all the files required
-     */
+    // Returns the document root
+    function getRoot() {
+        return $this->root;
+    }
+    // Returns the regular expression for the requested property
+    function getPattern($pattern) {
+        return $this->patterns[$pattern];
+    }
+    // Returns the current page URI
+    function getCurrentPage() {
+        return $this->current_page;
+    }
+    // Overrides the current page URI
+    function setCurrentPage($page) {
+        $this->current_page = $page;
+    }
+    function getDomain() {
+        return $this->domain;
+    }
+    // Initializes the Core
     static function initialize() {
         CORE::loadModules("/api/core/modules");
         CORE::loadModules("/api/shell/modules");
     }
-    /**
-     * Loads all the modules
-     *
-     * @param string $path The path to recursively load the modules from
-     */
+    // Loads all the modules
     static function loadModules($path) {
         // Prepare the iterator
         $core = new RecursiveDirectoryIterator($_SERVER['DOCUMENT_ROOT'] . $path);
@@ -84,46 +92,7 @@ abstract class Core {
             require_once $component;
         }
     }
-    /**
-     * Returns the document root
-     *
-     * @return string The document root
-     */
-    function getRoot() {
-        return $this->root;
-    }
-    /**
-     * Returns the regular expression that corresponse to the input key
-     *
-     * @return string The regex pattern
-     */
-    function getPattern($pattern) {
-        return $this->patterns[$pattern];
-    }
-    /**
-     * Returns the current page path
-     *
-     * @return string The page path
-     */
-    function getCurrentPage() {
-        return $this->current_page;
-    }
-    /**
-     * Overrides the current page path
-     *
-     * @param string $page The page path to force
-     */
-    function setCurrentPage($url) {
-        $pages = array_merge($this->pages, $this->errors);
-        $data = $pages[$url];
-        $this->current_page = $url;
-        $this->page = $data[0];
-        $this->content = $data[1];
-        $this->blueprint = $data[2];
-    }
-    /**
-     * Create required data paths if they don't exist
-     */
+    // Create data paths if they don't exist
     function createDataPaths() {
         foreach ($this->data_paths as $path) {
             if (!file_exists($this->root . $path)) {
@@ -131,101 +100,71 @@ abstract class Core {
             }
         }
     }
-    /**
-     * Link the database object to the core
-     */
-    function linkDB($db) {
-        $this->db = $db;
-    }
-    /**
-     * Loads a component on the page's content
-     *
-     * @param string $component The component to load
-     */
-    function loadComponent($component) {
-        $shell = $this->shell;
-        $$shell = $this;
-        require_once($this->root . "/includes/components/$component.php");
-    }
-    /**
-     * Inserts the main content into the page
-     */
-    function loadContent($index = -1) {
-        // Create a variable variable reference to the shell object
-        // in order to be able to access the shell object by its name and not
-        // $this when in page context
-        $shell = $this->shell;
-        $$shell = $this;
-        $path = $this->root . "/includes/pages/" . $this->content . ".php";
-        if (file_exists($path)) {
-            if ($index != -1) {
-                $page = file_get_contents($path);
-                $segments = explode("<!--- SCRIPTS --->", $page);
-                if(array_key_exists($index, $segments)) {
-                    $segment = $segments[$index];
-                    if (substr($segment, 0, 5) !== "<?") {
-                        $segment = "?>" . $segment;
-                    }
-
-                    eval($segment);
-                }
-                return;
-            }
-            require_once $path;
-        }
-    }
-    /**
-     * Renders a page based on its blueprint's format
-     */
-    function renderPage() {
-        // Loop all pages
-        $pages = array_merge($this->pages, $this->errors);
-        foreach ($pages as $url => $data) {
-            // If URL starts with a hash it is a dropdown and index 3 is an
-            // array with the dropdown items
-            if (substr($url, 0, 1) === '#') {
-                foreach ($data[3] as $inner_url => $inner_data) {
-                    if ($this->current_page === $inner_url) {
-                        $this->page = $inner_data[0];
-                        $this->content = $inner_data[1];
-                        $this->blueprint = $inner_data[2];
-                    }
-                }
-            }
-            else if ($this->current_page === $url) {
-                $this->page = $data[0];
-                $this->content = $data[1];
-                $this->blueprint = $data[2];
-            }
-        }
-        // Acquire the first segment of the requested path
-        $parameters = explode("/", $this->getCurrentPage());
-        array_shift($parameters);
-        $folder = $parameters[0];
-        // If the page is inside a folder or is found
-        if (!$this->page && !in_array($folder, $this->folders)) {
-            $this->setCurrentPage("/error/404");
-        }
-        // Format the page title
-        $this->formatTitle();
-        // Renders the pagecontent based on the appropriate blueprint
-        $path = $this->root . "/includes/blueprints/" . $this->blueprint . ".php";
-        $shell = $this;
-        if (!in_array($folder, $this->folders)) {
-            require_once $path;
-        }
-
-    }
-    /**
-     * Redirects to a specific page and stops script execution
-     *
-     * @param string $page The page to redirect to
-     */
+    // Redirects to a specific page
     function redirect($page) {
-        header("Location: " . $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['SERVER_NAME'] . $page);
+        header("Location: " . $_SERVER['REQUEST_SCHEME'] . "://" . $this->getDomain() . $page);
         die();
+    }
+    // Returns the current page's title based on the request URI
+    function getPageTitle() {
+        return $this->title;
+    }
+    // Returns the page path
+    function getPagePath($page) {
+        if (array_key_exists($this->current_page, $this->pages)){
+            return $this->root . "/includes/pages/" . $this->pages[$page][1] . ".php";
+        }
+        else {
+            return $this->root . "/includes/error/404.php";
+        }
+    }
+    // Get a specific page part based on a separator
+    function getPageSegment($separator = null, $offset = 0) {
+        $page = $this->getCurrentPage();
+        if (!$separator) {
+            if (file_exists($this->getPagePath($page))) {
+                require_once $this->getPagePath($page);
+            }
+            return;
+        }
+        $path = $this->getPagePath($page);
+        $string = file_get_contents($path);
+        $segments = explode($separator, $string);
+        if(array_key_exists($offset, $segments)){
+            $segment = $segments[$offset];
+            if (substr($segment, 0, 5) !== "<?php") {
+                $segment = "?>" . $segment;
+            }
+            eval($segment);
+        }
+    }
+    // Returns the blueprint selected for a page
+    function getBlueprint($page) {
+        $parameters = explode("/", $page);
+        $page = $parameters[0];
+        if (array_key_exists($page, $this->pages)){
+            return $this->pages[$page][2];
+        }
+        else {
+            return "error";
+        }
+    }
+    // Returns the absolute path of a blueprint
+    function getBlueprintPath() {
+        $blueprints_path = $this->root . "/includes/blueprints/";
+        $blueprint = $this->getBlueprint($this->getCurrentPage());
+        return $blueprints_path . $blueprint . ".php";
+    }
+    // Renders a page depending on a blueprint
+    function renderPage() {
+        $parameters = explode("/", $this->getCurrentPage());
+        $folder = $parameters[0];
+        if (!in_array($folder, $this->folders) && $folder !== "api") {
+            $name = $this->getCurrentPage();
+            require_once $this->getBlueprintPath();
+        }
     }
 }
 // Initialize the Core
 CORE::initialize();
-require_once dirname(dirname(__DIR__)) . "/api/shell/Shell.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/api/shell/Shell.php";
