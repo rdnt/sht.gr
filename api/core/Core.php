@@ -140,8 +140,6 @@ abstract class Core {
     }
     // Returns the blueprint selected for a page
     function getBlueprint($page) {
-        $parameters = explode("/", $page);
-        $page = $parameters[1];
         if (array_key_exists($page, $this->pages)){
             return $this->pages[$page][2];
         }
