@@ -141,7 +141,7 @@ abstract class Core {
     // Returns the blueprint selected for a page
     function getBlueprint($page) {
         $parameters = explode("/", $page);
-        $page = $parameters[0];
+        $page = $parameters[1];
         if (array_key_exists($page, $this->pages)){
             return $this->pages[$page][2];
         }
@@ -158,7 +158,7 @@ abstract class Core {
     // Renders a page depending on a blueprint
     function renderPage() {
         $parameters = explode("/", $this->getCurrentPage());
-        $folder = $parameters[0];
+        $folder = $parameters[1];
         if (!in_array($folder, $this->folders) && $folder !== "api") {
             $name = $this->getCurrentPage();
             require_once $this->getBlueprintPath();
