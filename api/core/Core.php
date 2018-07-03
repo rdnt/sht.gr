@@ -49,11 +49,21 @@ abstract class Core {
         }
         $this->root = $_SERVER['DOCUMENT_ROOT'];
         $this->current_page = $_SERVER['REQUEST_URI'];
-        // Set default timezone
-        date_default_timezone_set("Europe/Athens");
-        // If the session is not started push the assets for faster loading
-        // (Depends on server configuration)
-        if (!isset($_COOKIE['session'])) {
+        foreach ($this->pages as $url => $page) {
+            if (substr($url, 0, 1) === '#') {
+                foreach ($page[3] as $inner_url => $item) {
+                    if ($this->current_page === $inner_url) {
+                        $this->page = $item[0];
+                        $this->found = true;
+                    }
+                }
+            }
+            else if ($this->current_page === $url) {
+                $this->page = $page[0];
+                $this->found = true;
+            }
+        }
+        if(!isset($_COOKIE['PHPSESSID'])) {
             $this->pushAssets();
         }
         // Start the session if it wasn't already started
