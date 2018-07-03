@@ -30,8 +30,10 @@ abstract class Core {
     protected $pages;
     protected $data_paths;
     protected $title;
+    protected $page;
     protected $assets;
     protected $folders;
+    protected $found;
     // Constructor
     function __construct() {
         // Initialize private datamembers
@@ -43,11 +45,19 @@ abstract class Core {
         $this->domain = $_SERVER['SERVER_NAME'];
         $this->root = $_SERVER['DOCUMENT_ROOT'];
         $this->current_page = $_SERVER['REQUEST_URI'];
-        if (array_key_exists($this->current_page, $this->pages)){
-            $this->title = $this->name . " $this->title_separator " . $this->pages[$this->current_page][0];
-        }
-        else {
-            $this->title = $this->name . " $this->title_separator Error 404";
+        foreach ($this->pages as $url => $page) {
+            if (substr($url, 0, 1) === '#') {
+                foreach ($page[3] as $inner_url => $item) {
+                    if ($this->current_page === $inner_url) {
+                        $this->page = $item[0];
+                        $this->found = true;
+                    }
+                }
+            }
+            else if ($this->current_page === $url) {
+                $this->page = $page[0];
+                $this->found = true;
+            }
         }
         if(!isset($_COOKIE['PHPSESSID'])) {
             $this->pushAssets();

@@ -26,6 +26,10 @@ class Shell extends Core {
         );
         $this->assets = array();
         parent::__construct();
+        $this->title = $this->name . " $this->title_separator " . $this->page;
+        if (!$this->found) {
+            $this->title = $this->name . " $this->title_separator " . "Error 404";
+        }
         $this->createDataPaths();
         $this->renderPage();
     }
