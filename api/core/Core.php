@@ -43,7 +43,7 @@ abstract class Core {
             error_reporting(E_ALL);
         }
         $this->domain = $_SERVER['SERVER_NAME'];
-        $this->root = $_SERVER['DOCUMENT_ROOT'];
+        $this->root = getcwd();
         $this->current_page = $_SERVER['REQUEST_URI'];
         foreach ($this->pages as $url => $page) {
             if (substr($url, 0, 1) === '#') {
@@ -94,7 +94,7 @@ abstract class Core {
     // Loads all the modules
     static function loadModules($path) {
         // Prepare the iterator
-        $core = new RecursiveDirectoryIterator($_SERVER['DOCUMENT_ROOT'] . $path);
+        $core = new RecursiveDirectoryIterator(getcwd() . $path);
         $iterator = new RecursiveIteratorIterator($core);
         $modules = new RegexIterator($iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
         // Load all modules in the directory structure recursively
@@ -127,6 +127,9 @@ abstract class Core {
         else {
             return $this->root . "/includes/error/404.php";
         }
+    }
+    function loadComponent($component) {
+        require_once($this->root . "/includes/components/$component.php");
     }
     // Get a specific page part based on a separator
     function getPageSegment($separator = null, $offset = 0) {
@@ -175,4 +178,4 @@ abstract class Core {
 }
 // Initialize the Core
 CORE::initialize();
-require_once $_SERVER['DOCUMENT_ROOT'] . "/api/shell/Shell.php";
+require_once dirname(dirname(__DIR__)) . "/api/shell/Shell.php";

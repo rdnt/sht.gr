@@ -7,4 +7,5 @@ RewriteRule ^(.+?)/?$ /$1.php [L]
 
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ /index [NC,L,QSA]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [NC,L,QSA]
