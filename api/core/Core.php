@@ -47,7 +47,8 @@ abstract class Core {
             ini_set('display_startup_errors', 1);
             error_reporting(E_ALL);
         }
-        $this->root = $_SERVER['DOCUMENT_ROOT'];
+        $this->domain = $_SERVER['SERVER_NAME'];
+        $this->root = getcwd();
         $this->current_page = $_SERVER['REQUEST_URI'];
         foreach ($this->pages as $url => $page) {
             if (substr($url, 0, 1) === '#') {
@@ -86,7 +87,7 @@ abstract class Core {
      */
     static function loadModules($path) {
         // Prepare the iterator
-        $core = new RecursiveDirectoryIterator($_SERVER['DOCUMENT_ROOT'] . $path);
+        $core = new RecursiveDirectoryIterator(getcwd() . $path);
         $iterator = new RecursiveIteratorIterator($core);
         $modules = new RegexIterator($iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
         // Load all modules in the directory structure recursively
@@ -184,23 +185,15 @@ abstract class Core {
             require_once $path;
         }
     }
-    /**
-     * Renders a page based on its blueprint's format
-     */
-    function renderPage() {
-        // Loop all pages
-        $pages = array_merge($this->pages, $this->errors);
-        foreach ($pages as $url => $data) {
-            // If URL starts with a hash it is a dropdown and index 3 is an
-            // array with the dropdown items
-            if (substr($url, 0, 1) === '#') {
-                foreach ($data[3] as $inner_url => $inner_data) {
-                    if ($this->current_page === $inner_url) {
-                        $this->page = $inner_data[0];
-                        $this->content = $inner_data[1];
-                        $this->blueprint = $inner_data[2];
-                    }
-                }
+    function loadComponent($component) {
+        require_once($this->root . "/includes/components/$component.php");
+    }
+    // Get a specific page part based on a separator
+    function getPageSegment($separator = null, $offset = 0) {
+        $page = $this->getCurrentPage();
+        if (!$separator) {
+            if (file_exists($this->getPagePath($page))) {
+                require_once $this->getPagePath($page);
             }
             else if ($this->current_page === $url) {
                 $this->page = $data[0];
