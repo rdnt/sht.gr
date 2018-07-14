@@ -48,19 +48,23 @@ abstract class Core {
             error_reporting(E_ALL);
         }
         $this->domain = $_SERVER['SERVER_NAME'];
-        $this->root = getcwd();
+        $this->root = $_SERVER['DOCUMENT_ROOT'];
         $this->current_page = $_SERVER['REQUEST_URI'];
         foreach ($this->pages as $url => $page) {
             if (substr($url, 0, 1) === '#') {
                 foreach ($page[3] as $inner_url => $item) {
                     if ($this->current_page === $inner_url) {
                         $this->page = $item[0];
+                        $this->content = $item[1];
+                        $this->blueprint = $item[2];
                         $this->found = true;
                     }
                 }
             }
             else if ($this->current_page === $url) {
                 $this->page = $page[0];
+                $this->content = $page[1];
+                $this->blueprint = $page[2];
                 $this->found = true;
             }
         }
@@ -87,7 +91,7 @@ abstract class Core {
      */
     static function loadModules($path) {
         // Prepare the iterator
-        $core = new RecursiveDirectoryIterator(getcwd() . $path);
+        $core = new RecursiveDirectoryIterator($_SERVER['DOCUMENT_ROOT'] . $path);
         $iterator = new RecursiveIteratorIterator($core);
         $modules = new RegexIterator($iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
         // Load all modules in the directory structure recursively
@@ -158,31 +162,13 @@ abstract class Core {
         $$shell = $this;
         require_once($this->root . "/includes/components/$component.php");
     }
-    /**
-     * Inserts the main content into the page
-     */
-    function loadContent($index = -1) {
-        // Create a variable variable reference to the shell object
-        // in order to be able to access the shell object by its name and not
-        // $this when in page context
-        $shell = $this->shell;
-        $$shell = $this;
-        $path = $this->root . "/includes/pages/" . $this->content . ".php";
-        if (file_exists($path)) {
-            if ($index != -1) {
-                $page = file_get_contents($path);
-                $segments = explode("<!--- SCRIPTS --->", $page);
-                if(array_key_exists($index, $segments)) {
-                    $segment = $segments[$index];
-                    if (substr($segment, 0, 5) !== "<?") {
-                        $segment = "?>" . $segment;
-                    }
-
-                    eval($segment);
-                }
-                return;
-            }
-            require_once $path;
+    // Returns the page path
+    function getPagePath($page) {
+        if ($this->found) {
+            return $this->root . "/includes/pages/" . $this->content . ".php";
+        }
+        else {
+            return $this->root . "/includes/error/404.php";
         }
     }
     function loadComponent($component) {
@@ -195,17 +181,22 @@ abstract class Core {
             if (file_exists($this->getPagePath($page))) {
                 require_once $this->getPagePath($page);
             }
-            else if ($this->current_page === $url) {
-                $this->page = $data[0];
-                $this->content = $data[1];
-                $this->blueprint = $data[2];
+            return;
+        }
+        $path = $this->getPagePath($page);
+        $string = file_get_contents($path);
+        $segments = explode($separator, $string);
+        if(array_key_exists($offset, $segments)) {
+            $segment = $segments[$offset];
+            if (substr($segment, 0, 5) !== "<?php") {
+                $segment = "?>" . $segment;
             }
         }
     }
     // Returns the blueprint selected for a page
     function getBlueprint($page) {
-        if (array_key_exists($page, $this->pages)){
-            return $this->pages[$page][2];
+        if ($this->found) {
+            return $this->blueprint;
         }
         else {
             return "error";
