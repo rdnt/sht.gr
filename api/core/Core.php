@@ -31,6 +31,8 @@ abstract class Core {
     protected $data_paths;
     protected $title;
     protected $page;
+    protected $blueprint;
+    protected $content;
     protected $assets;
     protected $folders;
     protected $found;
@@ -43,19 +45,23 @@ abstract class Core {
             error_reporting(E_ALL);
         }
         $this->domain = $_SERVER['SERVER_NAME'];
-        $this->root = getcwd();
+        $this->root = $_SERVER['DOCUMENT_ROOT'];
         $this->current_page = $_SERVER['REQUEST_URI'];
         foreach ($this->pages as $url => $page) {
             if (substr($url, 0, 1) === '#') {
                 foreach ($page[3] as $inner_url => $item) {
                     if ($this->current_page === $inner_url) {
                         $this->page = $item[0];
+                        $this->content = $item[1];
+                        $this->blueprint = $item[2];
                         $this->found = true;
                     }
                 }
             }
             else if ($this->current_page === $url) {
                 $this->page = $page[0];
+                $this->content = $page[1];
+                $this->blueprint = $page[2];
                 $this->found = true;
             }
         }
@@ -94,7 +100,7 @@ abstract class Core {
     // Loads all the modules
     static function loadModules($path) {
         // Prepare the iterator
-        $core = new RecursiveDirectoryIterator(getcwd() . $path);
+        $core = new RecursiveDirectoryIterator($_SERVER['DOCUMENT_ROOT'] . $path);
         $iterator = new RecursiveIteratorIterator($core);
         $modules = new RegexIterator($iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
         // Load all modules in the directory structure recursively
@@ -121,8 +127,8 @@ abstract class Core {
     }
     // Returns the page path
     function getPagePath($page) {
-        if (array_key_exists($this->current_page, $this->pages)){
-            return $this->root . "/includes/pages/" . $this->pages[$page][1] . ".php";
+        if ($this->found) {
+            return $this->root . "/includes/pages/" . $this->content . ".php";
         }
         else {
             return $this->root . "/includes/error/404.php";
@@ -143,7 +149,7 @@ abstract class Core {
         $path = $this->getPagePath($page);
         $string = file_get_contents($path);
         $segments = explode($separator, $string);
-        if(array_key_exists($offset, $segments)){
+        if(array_key_exists($offset, $segments)) {
             $segment = $segments[$offset];
             if (substr($segment, 0, 5) !== "<?php") {
                 $segment = "?>" . $segment;
@@ -153,8 +159,8 @@ abstract class Core {
     }
     // Returns the blueprint selected for a page
     function getBlueprint($page) {
-        if (array_key_exists($page, $this->pages)){
-            return $this->pages[$page][2];
+        if ($this->found) {
+            return $this->blueprint;
         }
         else {
             return "error";
