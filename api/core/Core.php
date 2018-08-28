@@ -12,7 +12,7 @@
  * @author    Tasos Papalyras <shithappens796@gmail.com>
  * @copyright 2018 ShtHappens796
  * @license   https://github.com/ShtHappens796/Core/blob/master/LICENSE MIT
- * @version   1.0.0 (28 August 2018)
+ * @version   0.2.0 (28 August 2018)
  * @link      https://github.com/ShtHappens796/Core
  *
  */
@@ -37,6 +37,7 @@ abstract class Core {
     protected $content;
     protected $assets;
     protected $folders;
+    protected $found;
     /**
      * Constructs the shell object
      */
@@ -78,28 +79,6 @@ abstract class Core {
         }
     }
     /**
-     * Initializes the Core and loads all the files required
-     */
-    static function initialize() {
-        CORE::loadModules("/api/core/modules");
-        CORE::loadModules("/api/shell/modules");
-    }
-    /**
-     * Loads all the modules
-     *
-     * @param string $path The path to recursively load the modules from
-     */
-    static function loadModules($path) {
-        // Prepare the iterator
-        $core = new RecursiveDirectoryIterator($_SERVER['DOCUMENT_ROOT'] . $path);
-        $iterator = new RecursiveIteratorIterator($core);
-        $modules = new RegexIterator($iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
-        // Load all modules in the directory structure recursively
-        foreach ($modules as $component => $filename) {
-            require_once $component;
-        }
-    }
-    /**
      * Returns the document root
      *
      * @return string The document root
@@ -128,13 +107,38 @@ abstract class Core {
      *
      * @param string $page The page path to force
      */
-    function setCurrentPage($url) {
-        $pages = array_merge($this->pages, $this->errors);
-        $data = $pages[$url];
-        $this->current_page = $url;
-        $this->page = $data[0];
-        $this->content = $data[1];
-        $this->blueprint = $data[2];
+    function setCurrentPage($page) {
+        $this->current_page = $page;
+    }
+    /**
+     * Returns the domain name the project is running on
+     *
+     * @return string Domain Name
+     */
+    function getDomain() {
+        return $this->domain;
+    }
+    /**
+     * Initializes the Core and loads all the files required
+     */
+    static function initialize() {
+        CORE::loadModules("/api/core/modules");
+        CORE::loadModules("/api/shell/modules");
+    }
+    /**
+     * Loads all the modules
+     *
+     * @param string $path The path to recursively load the modules from
+     */
+    static function loadModules($path) {
+        // Prepare the iterator
+        $core = new RecursiveDirectoryIterator($_SERVER['DOCUMENT_ROOT'] . $path);
+        $iterator = new RecursiveIteratorIterator($core);
+        $modules = new RegexIterator($iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
+        // Load all modules in the directory structure recursively
+        foreach ($modules as $component => $filename) {
+            require_once $component;
+        }
     }
     /**
      * Create required data paths if they don't exist
@@ -147,22 +151,28 @@ abstract class Core {
         }
     }
     /**
-     * Link the database object to the core
+     * Redirects to a specific page and stops script execution
+     *
+     * @param string $page The page to redirect to
      */
-    function linkDB($db) {
-        $this->db = $db;
+    function redirect($page) {
+        header("Location: " . $_SERVER['REQUEST_SCHEME'] . "://" . $this->getDomain() . $page);
+        die();
     }
     /**
-     * Loads a component on the page's content
+     * Returns the current page's title based on the request URI
      *
-     * @param string $component The component to load
+     * @return string Title
      */
-    function loadComponent($component) {
-        $shell = $this->shell;
-        $$shell = $this;
-        require_once($this->root . "/includes/components/$component.php");
+    function getPageTitle() {
+        return $this->title;
     }
-    // Returns the page path
+    /**
+     * Returns the current page's path based on the selected page
+     *
+     * @param string $page Selected page
+     * @return string Page path
+     */
     function getPagePath($page) {
         if ($this->found) {
             return $this->root . "/includes/pages/" . $this->content . ".php";
@@ -171,10 +181,20 @@ abstract class Core {
             return $this->root . "/includes/error/404.php";
         }
     }
+    /**
+     * Loads a component on the page's content
+     *
+     * @param string $component The component to load
+     */
     function loadComponent($component) {
         require_once($this->root . "/includes/components/$component.php");
     }
-    // Get a specific page part based on a separator
+    /**
+     * Get a specific page segment based on a separator
+     *
+     * @param string $separator The separator to use
+     * @param string $offset The offset of the selected segment
+     */
     function getPageSegment($separator = null, $offset = 0) {
         $page = $this->getCurrentPage();
         if (!$separator) {
@@ -193,7 +213,12 @@ abstract class Core {
             }
         }
     }
-    // Returns the blueprint selected for a page
+    /**
+     * Returns the blueprint for a page
+     *
+     * @param string $param The selected page
+     * @return string The blueprint name
+     */
     function getBlueprint($page) {
         if ($this->found) {
             return $this->blueprint;
@@ -202,13 +227,19 @@ abstract class Core {
             return "error";
         }
     }
-    // Returns the absolute path of a blueprint
+    /**
+     * Returns the absolute path of a blueprint
+     *
+     * @return string The blueprint path
+     */
     function getBlueprintPath() {
         $blueprints_path = $this->root . "/includes/blueprints/";
         $blueprint = $this->getBlueprint($this->getCurrentPage());
         return $blueprints_path . $blueprint . ".php";
     }
-    // Renders a page depending on a blueprint
+    /**
+     * Renders a page based on its blueprint's format
+     */
     function renderPage() {
         $parameters = explode("/", $this->getCurrentPage());
         $folder = $parameters[1];
