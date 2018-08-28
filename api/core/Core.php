@@ -9,10 +9,10 @@
  * asset pushing, blueprint-based page rendering and basically any functionality
  * that all of my projects need. It is extendable,
  *
- * @author    Tasos Papalyras <tasos@sht.gr>
+ * @author    Tasos Papalyras <shithappens796@gmail.com>
  * @copyright 2018 ShtHappens796
  * @license   https://github.com/ShtHappens796/Core/blob/master/LICENSE MIT
- * @version   0.1.0
+ * @version   0.2.0 (28 August 2018)
  * @link      https://github.com/ShtHappens796/Core
  *
  */
@@ -36,7 +36,9 @@ abstract class Core {
     protected $assets;
     protected $folders;
     protected $found;
-    // Constructor
+    /**
+     * Constructs the shell object
+     */
     function __construct() {
         // Initialize private datamembers
         if ($GLOBALS['debug'] === true) {
@@ -73,31 +75,58 @@ abstract class Core {
             session_start();
         }
     }
-    // Returns the document root
+    /**
+     * Returns the document root
+     *
+     * @return string The document root
+     */
     function getRoot() {
         return $this->root;
     }
-    // Returns the regular expression for the requested property
+    /**
+     * Returns the regular expression that corresponse to the input key
+     *
+     * @return string The regex pattern
+     */
     function getPattern($pattern) {
         return $this->patterns[$pattern];
     }
-    // Returns the current page URI
+    /**
+     * Returns the current page path
+     *
+     * @return string The page path
+     */
     function getCurrentPage() {
         return $this->current_page;
     }
-    // Overrides the current page URI
+    /**
+     * Overrides the current page path
+     *
+     * @param string $page The page path to force
+     */
     function setCurrentPage($page) {
         $this->current_page = $page;
     }
+    /**
+     * Returns the domain name the project is running on
+     *
+     * @return string Domain Name
+     */
     function getDomain() {
         return $this->domain;
     }
-    // Initializes the Core
+    /**
+     * Initializes the Core and loads all the files required
+     */
     static function initialize() {
         CORE::loadModules("/api/core/modules");
         CORE::loadModules("/api/shell/modules");
     }
-    // Loads all the modules
+    /**
+     * Loads all the modules
+     *
+     * @param string $path The path to recursively load the modules from
+     */
     static function loadModules($path) {
         // Prepare the iterator
         $core = new RecursiveDirectoryIterator($_SERVER['DOCUMENT_ROOT'] . $path);
@@ -108,7 +137,9 @@ abstract class Core {
             require_once $component;
         }
     }
-    // Create data paths if they don't exist
+    /**
+     * Create required data paths if they don't exist
+     */
     function createDataPaths() {
         foreach ($this->data_paths as $path) {
             if (!file_exists($this->root . $path)) {
@@ -116,16 +147,29 @@ abstract class Core {
             }
         }
     }
-    // Redirects to a specific page
+    /**
+     * Redirects to a specific page and stops script execution
+     *
+     * @param string $page The page to redirect to
+     */
     function redirect($page) {
         header("Location: " . $_SERVER['REQUEST_SCHEME'] . "://" . $this->getDomain() . $page);
         die();
     }
-    // Returns the current page's title based on the request URI
+    /**
+     * Returns the current page's title based on the request URI
+     *
+     * @return string Title
+     */
     function getPageTitle() {
         return $this->title;
     }
-    // Returns the page path
+    /**
+     * Returns the current page's path based on the selected page
+     *
+     * @param string $page Selected page
+     * @return string Page path
+     */
     function getPagePath($page) {
         if ($this->found) {
             return $this->root . "/includes/pages/" . $this->content . ".php";
@@ -134,10 +178,20 @@ abstract class Core {
             return $this->root . "/includes/error/404.php";
         }
     }
+    /**
+     * Loads a component on the page's content
+     *
+     * @param string $component The component to load
+     */
     function loadComponent($component) {
         require_once($this->root . "/includes/components/$component.php");
     }
-    // Get a specific page part based on a separator
+    /**
+     * Get a specific page segment based on a separator
+     *
+     * @param string $separator The separator to use
+     * @param string $offset The offset of the selected segment
+     */
     function getPageSegment($separator = null, $offset = 0) {
         $page = $this->getCurrentPage();
         if (!$separator) {
@@ -157,7 +211,12 @@ abstract class Core {
             eval($segment);
         }
     }
-    // Returns the blueprint selected for a page
+    /**
+     * Returns the blueprint for a page
+     *
+     * @param string $param The selected page
+     * @return string The blueprint name
+     */
     function getBlueprint($page) {
         if ($this->found) {
             return $this->blueprint;
@@ -166,13 +225,19 @@ abstract class Core {
             return "error";
         }
     }
-    // Returns the absolute path of a blueprint
+    /**
+     * Returns the absolute path of a blueprint
+     *
+     * @return string The blueprint path
+     */
     function getBlueprintPath() {
         $blueprints_path = $this->root . "/includes/blueprints/";
         $blueprint = $this->getBlueprint($this->getCurrentPage());
         return $blueprints_path . $blueprint . ".php";
     }
-    // Renders a page depending on a blueprint
+    /**
+     * Renders a page based on its blueprint's format
+     */
     function renderPage() {
         $parameters = explode("/", $this->getCurrentPage());
         $folder = $parameters[1];
