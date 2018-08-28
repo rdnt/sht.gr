@@ -12,7 +12,7 @@
  * @author    Tasos Papalyras <shithappens796@gmail.com>
  * @copyright 2018 ShtHappens796
  * @license   https://github.com/ShtHappens796/Core/blob/master/LICENSE MIT
- * @version   0.2.0 (28 August 2018)
+ * @version   1.0.0 (28 August 2018)
  * @link      https://github.com/ShtHappens796/Core
  *
  */
