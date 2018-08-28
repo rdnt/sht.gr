@@ -1,7 +1,13 @@
 <?php
 // Trait that handles logging
 trait Logging {
-    // Logs an action
+    /**
+     * Logs an action
+     *
+     * @param string $action The action to log
+     * @param string $data The action data to log
+     * @param string $origin The origin client IP of the action
+     */
     function log($action, $data, $origin = null) {
         // Get the latest.log path
         $logs_folder = $this->getRoot() . "/data/logs/";
@@ -38,10 +44,13 @@ trait Logging {
         // Save the latest log
         file_put_contents($log, $data);
     }
-    // Deletes the logs
+    /**
+     * Deletes the logs
+     */
     function purgeLogs() {
         $logs_folder = $this->getRoot() . "/data/logs/";
         $logs = glob("$logs_folder*.log");
+        // Delete all logfiles
         foreach($logs as $log) {
             if(is_file($log)) {
                 unlink($log);

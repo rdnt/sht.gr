@@ -1,13 +1,23 @@
 <?php
-
+/**
+ * Shell Class
+ *
+ * The Shell extends the Core and is the class that initializes any
+ * project-specific datamembers along with defining the rendering logic of
+ * each page. An object of the shell class allows for ease-of-access
+ * of core functions or module-related functions.
+ *
+ */
 class Shell extends Core {
     // Include the components
     use AssetPushing;
+    use Encryption;
     use FormHandling;
     use Github;
     use Logging;
-    use Login;
-    // Shell constructor method
+    /**
+     * Shell constructor method
+     */
     function __construct(){
         $this->name = "Core";
         $this->title_separator = "-";
@@ -24,8 +34,11 @@ class Shell extends Core {
             "js",
             "data"
         );
-        $this->assets = array();
+        $this->assets = array(
+            "/css/core.css" => "style"
+        );
         parent::__construct();
+        $this->pushAssets();
         $this->title = $this->name . " $this->title_separator " . $this->page;
         if (!$this->found) {
             $this->title = $this->name . " $this->title_separator " . "Error 404";
@@ -34,5 +47,5 @@ class Shell extends Core {
         $this->renderPage();
     }
 }
-// Initialize Shell object
+// Initialize the Shell object
 $shell = new Shell;
