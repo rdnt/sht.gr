@@ -18,7 +18,8 @@ class Shell extends Core {
     /**
      * Shell constructor method
      */
-    function __construct(){
+    function __construct($shell = null) {
+        $this->shell = $shell;
         $this->name = "Core";
         $this->title_separator = "-";
         $this->patterns = array();
@@ -44,8 +45,15 @@ class Shell extends Core {
             $this->title = $this->name . " $this->title_separator " . "Error 404";
         }
         $this->createDataPaths();
-        $this->renderPage();
     }
 }
-// Initialize the Shell object
-$shell = new Shell;
+// Set the shell object name (for accessing in page segments and APIs)
+$shell = "vault";
+// Initialize the Shell object using a variable variable
+$$shell = new Shell($shell);
+// Initialize the connection to the database (optional) ------- |
+$db = new Database('localhost', 'root', $shell); //             |  OPTIONAL DB
+// Link the shell object with the database for easy accessing   |  CONNECTION
+$$shell->linkDB($db); // -------------------------------------- |
+// Render the page
+$$shell->renderPage();

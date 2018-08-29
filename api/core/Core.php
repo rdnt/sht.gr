@@ -36,6 +36,8 @@ abstract class Core {
     protected $assets;
     protected $folders;
     protected $found;
+    protected $db;
+    protected $shell;
     /**
      * Constructs the shell object
      */
@@ -148,6 +150,12 @@ abstract class Core {
         }
     }
     /**
+     * Link the database object to the core
+     */
+    function linkDB($db) {
+        $this->db = $db;
+    }
+    /**
      * Redirects to a specific page and stops script execution
      *
      * @param string $page The page to redirect to
@@ -194,6 +202,11 @@ abstract class Core {
      */
     function getPageSegment($separator = null, $offset = 0) {
         $page = $this->getCurrentPage();
+        // Create a variable variable reference to the shell object
+        // in order to be able to access the shell object by its name and not
+        // $this when in page context
+        $shell = $this->shell;
+        $$shell = $this;
         if (!$separator) {
             if (file_exists($this->getPagePath($page))) {
                 require_once $this->getPagePath($page);
