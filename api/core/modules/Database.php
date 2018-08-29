@@ -39,7 +39,7 @@ class Database extends mysqli {
             return false;
         }
     }
-    
+
     /**
      * Performs a multi-query against the database and returns the status
      *
