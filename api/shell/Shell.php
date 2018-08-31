@@ -19,6 +19,7 @@ class Shell extends Core {
      * Shell constructor method
      */
     function __construct($shell = null) {
+        parent::__construct();
         $this->shell = $shell;
         $this->name = "Core";
         $this->title_separator = "-";
@@ -30,7 +31,13 @@ class Shell extends Core {
         $this->pages = array(
             "/" => ["Home", "home", "default"]
         );
+        $this->errors = array(
+            "/error/404" => ["404 Not Found", "error/404", "error"],
+            "/error/503" => ["503 Service Unavailable", "error/503", "error"]
+        );
+        $this->pages = array_merge($this->pages, $this->errors);
         $this->folders = array(
+            "api",
             "css",
             "js",
             "data"
@@ -38,21 +45,22 @@ class Shell extends Core {
         $this->assets = array(
             "/css/core.css" => "style"
         );
-        parent::__construct();
         $this->pushAssets();
-        $this->title = $this->name . " $this->title_separator " . $this->page;
-        if (!$this->found) {
-            $this->title = $this->name . " $this->title_separator " . "Error 404";
-        }
         $this->createDataPaths();
+    }
+    /**
+     * Formats the title
+     */
+    function formatTitle() {
+        $this->title = $this->name . " $this->title_separator " . $this->page;
     }
 }
 // Set the shell object name (for accessing in page segments and APIs)
-$shell = "vault";
+$shell = "core";
 // Initialize the Shell object using a variable variable
 $$shell = new Shell($shell);
 // Initialize the connection to the database (optional) ------- |
-$db = new Database('localhost', 'root', $shell); //             |  OPTIONAL DB
+$db = new Database($$shell, 'localhost', 'root', $shell); //    |  OPTIONAL DB
 // Link the shell object with the database for easy accessing   |  CONNECTION
 $$shell->linkDB($db); // -------------------------------------- |
 // Render the page
