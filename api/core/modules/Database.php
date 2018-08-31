@@ -3,8 +3,15 @@
 class Database extends mysqli {
     protected $shell;
     // Connects to the database if the connection is not already active
-    function __construct($host, $user, $db = null) {
-        $pass = file_get_contents(dirname($_SERVER['DOCUMENT_ROOT']) . "/db.pass");
+    function __construct($shell, $host, $user, $db = null) {
+        $this->shell = $shell;
+        $db_pass = dirname($_SERVER['DOCUMENT_ROOT']) . "/db.pass";
+        if (!file_exists($db_pass)) {
+            $this->shell->log("DATABASE", "Missing password file");
+            $this->shell->setCurrentPage("/error/503");
+            return;
+        }
+        $pass = file_get_contents($db_pass);
         // Connect to the database server while suppressing warnings
         if ($db) {
             @parent::__construct("p:" . $host, $user, $pass, $db);
@@ -12,12 +19,10 @@ class Database extends mysqli {
         else {
             @parent::__construct("p:" . $host, $user, $pass);
         }
-
         if (mysqli_connect_error()) {
             // Log the error
-            $shell = new Shell();
-            $shell->log("DATABASE", mysqli_connect_errno() . " - " . mysqli_connect_error());
-            die();
+            $this->shell->log("DATABASE", mysqli_connect_error());
+            $this->shell->setCurrentPage("/error/503");
         }
     }
     // Performs a query against the database and returns the result

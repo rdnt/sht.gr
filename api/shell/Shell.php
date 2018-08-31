@@ -40,6 +40,11 @@ class Shell extends Core {
             "/error/404" => ["404 Not Found", "error/404", "error"],
             "/error/503" => ["503 Service Unavailable", "error/503", "error"]
         );
+        $this->errors = array(
+            "/error/404" => ["404 Not Found", "error/404", "error"],
+            "/error/503" => ["503 Service Unavailable", "error/503", "error"]
+        );
+        $this->pages = array_merge($this->pages, $this->errors);
         $this->folders = array(
             "api",
             "css",
