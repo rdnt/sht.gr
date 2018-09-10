@@ -26,13 +26,16 @@ class Database extends mysqli {
         }
     }
     // Performs a query against the database and returns the result
-    function query($sql) {
+    function query($sql, $single_value = false) {
         $response = parent::query($sql);
         if (!is_bool($response)) {
             $data = array();
             // return all rows
             while($row = $response->fetch_row()) {
                 $data[] = $row;
+            }
+            if ($single_value) {
+                return $data[0][0];
             }
             return $data;
         }
