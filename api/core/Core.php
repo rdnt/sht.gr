@@ -25,7 +25,6 @@ abstract class Core {
     // Private datamembers
     private $root;
     private $current_page;
-    private $db;
     // Protected datamembers (interfacing with the Shell)
     protected $name;
     protected $title_separator;
