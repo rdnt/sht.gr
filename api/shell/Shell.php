@@ -11,6 +11,7 @@
 class Shell extends Core {
     // Include required components
     use AssetPushing;
+    use Date;
     use Encryption;
     use FormHandling;
     use Github;
