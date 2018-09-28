@@ -145,22 +145,35 @@ abstract class Core {
         require_once($this->root . "/includes/components/$component.php");
     }
     /**
+     * Inserts the main content into the page
+     */
+    function loadContent($index = -1) {
+        // Create a variable variable reference to the shell object
+        // in order to be able to access the shell object by its name and not
+        // $this when in page context
+        $shell = $this->shell;
+        $$shell = $this;
+        $path = $this->root . "/includes/pages/" . $this->content . ".php";
+        if (file_exists($path)) {
+            if ($index != -1) {
+                $page = file_get_contents($path);
+                $segments = explode("<!--- SCRIPTS --->", $page);
+                if(array_key_exists($index, $segments)) {
+                    $segment = $segments[$index];
+                    if (substr($segment, 0, 5) !== "<?") {
+                        $segment = "?>" . $segment;
+                    }
+
+                    eval($segment);
+                }
+                return;
+            }
+            require_once $path;
+        }
+    }
+    /**
      * Renders a page based on its blueprint's format
      */
-     /**
-      * Inserts the main content into the page
-      */
-     function loadContent() {
-         // Create a variable variable reference to the shell object
-         // in order to be able to access the shell object by its name and not
-         // $this when in page context
-         $shell = $this->shell;
-         $$shell = $this;
-         $path = $this->root . "/includes/pages/" . $this->content . ".php";
-         if (file_exists($path)) {
-             require_once $path;
-         }
-     }
     function renderPage() {
         // Loop all pages
         foreach ($this->pages as $url => $data) {
@@ -186,7 +199,7 @@ abstract class Core {
         array_shift($parameters);
         $folder = $parameters[0];
         // If the page is inside a folder or is found
-        if (in_array($folder, $this->folders) or !$this->page) {
+        if (!$this->page && !in_array($folder, $this->folders)) {
             $this->setCurrentPage("/error/404");
         }
         // Format the page title
@@ -194,7 +207,10 @@ abstract class Core {
         // Renders the pagecontent based on the appropriate blueprint
         $path = $this->root . "/includes/blueprints/" . $this->blueprint . ".php";
         $shell = $this;
-        require_once $path;
+        if (!in_array($folder, $this->folders)) {
+            require_once $path;
+        }
+
     }
     /**
      * Redirects to a specific page and stops script execution
