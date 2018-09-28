@@ -2,7 +2,15 @@
 // Trait that handles database connections and performing querries
 class Database extends mysqli {
     protected $shell;
-    // Connects to the database if the connection is not already active
+    /**
+     * Connects to the database using a persistent socket if the connection
+     * is not already active
+     *
+     * @param string $shell The shell object
+     * @param string $host The hostname to which to connect to
+     * @param string $user Database username
+     * @param string $db Reference to the database connection
+     */
     function __construct($shell, $host, $user, $db = null) {
         $this->shell = $shell;
         $db_pass = dirname($_SERVER['DOCUMENT_ROOT']) . "/db.pass";
@@ -25,7 +33,13 @@ class Database extends mysqli {
             $this->shell->setCurrentPage("/error/503");
         }
     }
-    // Performs a query against the database and returns the result
+    /**
+     * Performs a query against the database and returns the result
+     *
+     * @param string $sql The sql query
+     * @param boolean $single_value If true, the first column of the first row
+     *               is returned ONLY
+     */
     function query($sql, $single_value = false) {
         $response = parent::query($sql);
         if (!is_bool($response)) {
@@ -42,7 +56,11 @@ class Database extends mysqli {
         // Return boolean response
         return $response;
     }
-    // Parses the password that helps encrypt userdata inside the database
+    /**
+     * Parses the password that helps encrypt userdata inside the database
+     *
+     * @return string The password for the specified database user
+     */
     function getSecretKey() {
         return file_get_contents(dirname($_SERVER['DOCUMENT_ROOT']) . "/db.key");
     }
