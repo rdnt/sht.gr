@@ -9,7 +9,7 @@
  *
  */
 class Shell extends Core {
-    // Include the components
+    // Include required components
     use AssetPushing;
     use Encryption;
     use FormHandling;
