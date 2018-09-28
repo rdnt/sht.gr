@@ -142,6 +142,8 @@ abstract class Core {
      * @param string $component The component to load
      */
     function loadComponent($component) {
+        $shell = $this->shell;
+        $$shell = $this;
         require_once($this->root . "/includes/components/$component.php");
     }
     /**
