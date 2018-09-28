@@ -22,15 +22,15 @@ class Shell extends Core {
     function __construct($shell = null) {
         parent::__construct();
         $this->shell = $shell;
-        $this->name = "Core";
-        $this->title_separator = "-";
+        $this->name = "SHT";
+        $this->title_separator = "//";
         $this->patterns = array();
         $this->data_paths = array(
             "/data/",
             "/data/logs/"
         );
         $this->pages = array(
-            "/" => ["Home", "home", "default"]
+            "/" => ["Hey there", "home", "default"]
         );
         $this->errors = array(
             "/error/404" => ["404 Not Found", "error/404", "error"],
@@ -53,7 +53,7 @@ class Shell extends Core {
      * Formats the title
      */
     function formatTitle() {
-        $this->title = $this->name . " $this->title_separator " . $this->page;
+        $this->title = $this->page . " $this->title_separator " . $this->name;
     }
 }
 // Set the shell object name (for accessing in page segments and APIs)
