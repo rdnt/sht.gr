@@ -16,6 +16,7 @@ class Shell extends Core {
     use FormHandling;
     use Github;
     use Logging;
+    use SHT;
     /**
      * Shell constructor method
      */
@@ -30,13 +31,15 @@ class Shell extends Core {
             "/data/logs/"
         );
         $this->pages = array(
-            "/" => ["Hey there", "home", "default"]
+            "/" => ["Home", "home", "default"],
+            "/projects" => ["Projects", "projects", "default"],
+            "/ardent" => ["Ardent Radio", "ardent", "default"],
+            "/login" => ["Login", "login", "default"]
         );
         $this->errors = array(
             "/error/404" => ["404 Not Found", "error/404", "error"],
             "/error/503" => ["503 Service Unavailable", "error/503", "error"]
         );
-        $this->pages = array_merge($this->pages, $this->errors);
         $this->folders = array(
             "api",
             "css",
@@ -57,7 +60,7 @@ class Shell extends Core {
     }
 }
 // Set the shell object name (for accessing in page segments and APIs)
-$shell = "core";
+$shell = "sht";
 // Initialize the Shell object using a variable variable
 $$shell = new Shell($shell);
 // Initialize the connection to the database (optional) ------- |

@@ -114,7 +114,8 @@ abstract class Core {
      * @param string $page The page path to force
      */
     function setCurrentPage($url) {
-        $data = $this->pages[$url];
+        $pages = array_merge($this->pages, $this->errors);
+        $data = $pages[$url];
         $this->current_page = $url;
         $this->page = $data[0];
         $this->content = $data[1];
@@ -142,6 +143,8 @@ abstract class Core {
      * @param string $component The component to load
      */
     function loadComponent($component) {
+        $shell = $this->shell;
+        $$shell = $this;
         require_once($this->root . "/includes/components/$component.php");
     }
     /**
@@ -176,7 +179,8 @@ abstract class Core {
      */
     function renderPage() {
         // Loop all pages
-        foreach ($this->pages as $url => $data) {
+        $pages = array_merge($this->pages, $this->errors);
+        foreach ($pages as $url => $data) {
             // If URL starts with a hash it is a dropdown and index 3 is an
             // array with the dropdown items
             if (substr($url, 0, 1) === '#') {
