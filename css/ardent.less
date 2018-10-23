@@ -1,0 +1,96 @@
+// out: ../css/ardent.css, compress: true
+
+.player {
+    position: absolute;
+    height: 100px;
+    width: 100%;
+    bottom: 20px;
+    overflow: hidden;
+    background-color: rgba(255,255,255,.01);
+
+    #segment {
+        position: absolute;
+        display: block;
+        top: 0;
+        width: 2px;
+        height: 100px;
+        left: 50%;
+        background-color: rgba(255,255,255,.1);
+        z-index: 3;
+        border-radius: 1px;
+        &::before, &::after {
+            position: absolute;
+            //top: 20px;
+            content: '';
+            display: block;
+            width: 2px;
+            height: 26px;
+            background-color: rgba(255,0,0,1);
+            opacity: 0;
+            transition: opacity .5s ease;
+        }
+        &::before {
+            transform: translateY(22px);
+        }
+        &::after {
+            transform: translateY(52px);
+        }
+        &.a {
+            &::before {
+                opacity: .7;
+            }
+        }
+        &.b {
+            &::after {
+                opacity: .7;
+            }
+        }
+    }
+    #tracks {
+        position: relative;
+        z-index: 2;
+        margin-top: 20px;
+        transform: translateX(0);
+        //transition: 1s linear;
+        margin-left: 50%;
+
+
+        .group {
+            display: block;
+            width: auto;
+            height: 30px;
+            //overflow-x: hidden;
+            background-color: transparent;
+            font-size: 0;
+            white-space:nowrap;
+            .track {
+                position: absolute;
+                height: 26px;
+                margin: 2px 0;
+                background-color: #fff;
+                opacity: 0.1;
+                border-radius: 3px;
+                transition: background-color .5s ease, opacity .25s ease;
+                &:hover {
+                    opacity: .15;
+                    cursor: pointer;
+                }
+                &.active {
+                    opacity: .8;
+                    //background-color: #2AF5FF;
+                    background-color: 1;
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+            }
+            &.b {
+                .track.active {
+                    //background-color: #27FB6B;
+                }
+            }
+        }
+
+    }
+
+}

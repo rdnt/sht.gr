@@ -68,8 +68,8 @@ $shell = "sht";
 // Initialize the Shell object using a variable variable
 $$shell = new Shell($shell);
 // Initialize the connection to the database (optional) ------- |
-$db = new Database($$shell, 'localhost', 'root', $shell); //    |  OPTIONAL DB
+//$db = new Database($$shell, 'localhost', 'root', $shell); //    |  OPTIONAL DB
 // Link the shell object with the database for easy accessing   |  CONNECTION
-$$shell->linkDB($db); // -------------------------------------- |
+//$$shell->linkDB($db); // -------------------------------------- |
 // Render the page
 $$shell->renderPage();
