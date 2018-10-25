@@ -9,6 +9,7 @@
  *
  */
 class Shell extends Core {
+
     // Include required components
     use AssetPushing;
     use Date;
@@ -16,6 +17,7 @@ class Shell extends Core {
     use FormHandling;
     use Github;
     use Logging;
+
     /**
      * Shell constructor method
      */
@@ -41,10 +43,6 @@ class Shell extends Core {
         );
         $this->pushAssets();
         $this->createDataPaths();
-    }
-
-    function formatTitle() {
-        $this->title = $this->name . " " . $this->separator . " " . $this->getPage();
     }
 
 }
