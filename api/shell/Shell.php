@@ -23,37 +23,30 @@ class Shell extends Core {
         parent::__construct();
         $this->shell = $shell;
         $this->name = "Core";
-        $this->title_separator = "-";
+        $this->separator = "-";
         $this->patterns = array();
         $this->data_paths = array(
             "/data/",
             "/data/logs/"
         );
         $this->pages = array(
-            "/" => ["Home", "home", "default"]
+            "/" => ["Home", "home", "default"],
         );
         $this->errors = array(
             "/error/404" => ["404 Not Found", "error/404", "error"],
             "/error/503" => ["503 Service Unavailable", "error/503", "error"]
         );
-        $this->folders = array(
-            "api",
-            "css",
-            "js",
-            "data"
-        );
         $this->assets = array(
-            "/css/core.css" => "style"
+            "css/core.css" => "style"
         );
         $this->pushAssets();
         $this->createDataPaths();
     }
-    /**
-     * Formats the title
-     */
+
     function formatTitle() {
-        $this->title = $this->name . " $this->title_separator " . $this->page;
+        $this->title = $this->name . " " . $this->separator . " " . $this->getPage();
     }
+
 }
 // Set the shell object name (for accessing in page segments and APIs)
 $shell = "core";
