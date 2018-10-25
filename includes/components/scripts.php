@@ -1,2 +1,2 @@
-<script src="/js/jquery.min.js?v=<?=$this->getLatestCommit()?>"></script>
-<script src="/js/async.js?v=<?=$this->getLatestCommit()?>"></script>
+<?=$core->loadScript("jquery.min.js")?>
+<?=$core->loadScript("async.js")?>
