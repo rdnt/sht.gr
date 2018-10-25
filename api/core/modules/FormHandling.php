@@ -1,6 +1,8 @@
 <?php
+
 // Trait that handles endpoint operations
 trait FormHandling {
+
     /**
      * Echoes an appropriately formatted response and stops script execution
      *
@@ -17,6 +19,7 @@ trait FormHandling {
         // Stop script execution
         die();
     }
+
     /**
      * Checks if a value matches the regular expression of the giveen property
      *
@@ -29,6 +32,7 @@ trait FormHandling {
             $this->response("INVALID_" . strtoupper($key));
         }
     }
+
     /**
      * Checks if the request method is POST
      */
@@ -38,6 +42,7 @@ trait FormHandling {
             $this->response("POST_REQUIRED");
         }
     }
+
     /**
      * Checks if all the required arguments are sent
      *
@@ -50,6 +55,7 @@ trait FormHandling {
             }
         }
     }
+
     /**
      * Verify that none of the required data are empty
      *
@@ -62,6 +68,7 @@ trait FormHandling {
             }
         }
     }
+
     /**
      * Verifies POST data by combining the required checks
      *
@@ -73,4 +80,5 @@ trait FormHandling {
         call_user_func_array(array($this, 'checkPOSTData'), func_get_args());
         call_user_func_array(array($this, 'checkPOSTDataContents'), func_get_args());
     }
+
 }

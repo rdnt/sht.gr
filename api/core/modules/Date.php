@@ -1,6 +1,8 @@
 <?php
+
 // Trait that handles date formatting
 trait Date {
+
     /**
      * Extracts the format of the date supplied, formats and returns it
      *
@@ -12,4 +14,5 @@ trait Date {
         $date = strtotime($date);
         return date($format, $date);
     }
+
 }

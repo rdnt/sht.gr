@@ -1,6 +1,8 @@
 <?php
+
 // Trait that handles content encryption
 trait Encryption {
+
     /**
      * Encrypts a message using AES-256-GCM and the given key
      *
@@ -33,6 +35,7 @@ trait Encryption {
         // Return the formatted cipherblock
         return implode (".", $cipherblock);
     }
+
     /**
      * Decrypts a message using the given key, IV and the integrity tag
      *
@@ -54,4 +57,5 @@ trait Encryption {
         // If decryption or authentication fails, false is returned
         return openssl_decrypt($ciphertext, $cipher, $key, 0, $iv, $tag);
     }
+
 }

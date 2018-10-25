@@ -1,10 +1,13 @@
 <?php
+
 // Trait that handles one time password generation and two-factor authentication
 class OneTimePassword {
+
     // Private datamembers
     private $table;
     private $timer;
     private $pin_length;
+
     /**
      * Initializes the OneTimePassword object
      *
@@ -16,6 +19,7 @@ class OneTimePassword {
         $this->timer = $timer;
         $this->pin_length = $pinlength;
     }
+
     /**
      * Generates a new cryptographically random key with the specified size
      *
@@ -34,6 +38,7 @@ class OneTimePassword {
         }
         return $secret;
     }
+
     /**
      * Converts base32 encoded string to binary format
      *
@@ -51,6 +56,7 @@ class OneTimePassword {
         }
         return($result);
     }
+
     /**
      * Returns the n-digit code that is valid for the specified timeSlice
      *
@@ -77,8 +83,10 @@ class OneTimePassword {
         $modulo = pow(10, $this->pin_length);
         return (string)str_pad($value % $modulo, $this->pin_length, '0', STR_PAD_LEFT);
     }
+
     /**
      * Verifies that the code entered matches the computed one.
+     *
      * @param string $secret_key
      * @param string $code
      * @param int $discrepancy specifies the allowed time drift in 30 second units
@@ -94,11 +102,22 @@ class OneTimePassword {
         }
     }
 
+    /**
+     * Returns the current time slice
+     *
+     * @return int Timeslice
+     */
     function getTimeSlice() {
         return floor(time() / $this->timer);
     }
 
+    /**
+     * Returns the remaining seconds till the current code no longer applies
+     *
+     * @return int seconds
+     */
     function getRemainingSeconds() {
         return $this->timer - floor(time() % $this->timer);
     }
+
 }

@@ -1,7 +1,10 @@
 <?php
+
 // Trait that handles database connections and performing querries
 class Database extends mysqli {
+
     protected $shell;
+
     /**
      * Connects to the database using a persistent socket if the connection
      * is not already active
@@ -33,6 +36,7 @@ class Database extends mysqli {
             $this->shell->setCurrentPage("/error/503");
         }
     }
+
     /**
      * Performs a query against the database and returns the result
      *
@@ -56,6 +60,7 @@ class Database extends mysqli {
         // Return boolean response
         return $response;
     }
+
     /**
      * Parses the password that helps encrypt userdata inside the database
      *
@@ -64,4 +69,5 @@ class Database extends mysqli {
     function getSecretKey() {
         return file_get_contents(dirname($_SERVER['DOCUMENT_ROOT']) . "/db.key");
     }
+
 }

@@ -1,11 +1,12 @@
 <?php
+
 // Trait that handles login
 trait Github {
+
     /**
      * Returns the last commit hash of a branch
      *
-     * @param string $branch The selected branch, defaults to master if none
-     *                       specified.
+     * @param string $branch The selected branch, defaults to master
      * @return string The latest commit hash
      */
     function getLatestCommit($branch = "master") {
@@ -23,4 +24,5 @@ trait Github {
             return "unknown";
         }
     }
+
 }

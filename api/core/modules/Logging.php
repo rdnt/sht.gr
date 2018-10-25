@@ -1,6 +1,8 @@
 <?php
+
 // Trait that handles logging
 trait Logging {
+
     /**
      * Logs an action
      *
@@ -44,6 +46,7 @@ trait Logging {
         // Save the latest log
         file_put_contents($log, $data);
     }
+
     /**
      * Deletes the logs
      */
@@ -57,4 +60,5 @@ trait Logging {
             }
         }
     }
+
 }
