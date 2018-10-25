@@ -296,6 +296,5 @@ abstract class Core {
 
 // Initialize the Core
 CORE::initialize();
-
 // Require the shell
 require_once dirname(dirname(__DIR__)) . "/api/shell/Shell.php";

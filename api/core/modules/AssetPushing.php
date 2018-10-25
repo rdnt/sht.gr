@@ -1,6 +1,8 @@
 <?php
+
 // Trait that handles HTTP2 pushing of certain assets
 trait AssetPushing {
+
     /**
      * Pushes the assets as headers in HTTPv2 responses
      */
@@ -18,4 +20,5 @@ trait AssetPushing {
             }
         }
     }
+
 }
