@@ -10,7 +10,7 @@
  * that all of my projects need. It is extendable,
  *
  * @author    Tasos Papalyras <tasos@sht.gr>
- * @copyright 2018 ShtHappens796
+ * @copyright 2018 Tasos Papalyras
  * @license   https://github.com/ShtHappens796/Core/blob/master/LICENSE MIT
  * @version   2.0.0 (25 October 2018)
  * @link      https://github.com/ShtHappens796/Core
