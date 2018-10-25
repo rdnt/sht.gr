@@ -19,6 +19,7 @@
 
 // Abstract class that contains all core functions needed
 abstract class Core {
+
     // Publicly accessible db object
     public $db;
     // Private inner datamembers
@@ -290,8 +291,11 @@ abstract class Core {
         header("Location: " . $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['SERVER_NAME'] . $page);
         die();
     }
+
 }
+
 // Initialize the Core
 CORE::initialize();
+
 // Require the shell
 require_once dirname(dirname(__DIR__)) . "/api/shell/Shell.php";
