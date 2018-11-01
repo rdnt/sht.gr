@@ -1,96 +1,80 @@
-// out: ../css/ardent.css, compress: true
-
+// out: ../css/ardent.css, compress: false
 .player {
-    position: absolute;
-    height: 100px;
-    width: 100%;
-    bottom: 20px;
-    overflow: hidden;
-    background-color: rgba(255,255,255,.01);
-
-    #segment {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    left: 200px;
+    top: 150px;
+    .ring {
         position: absolute;
-        display: block;
-        top: 0;
-        width: 2px;
-        height: 100px;
-        left: 50%;
-        background-color: rgba(255,255,255,.1);
-        z-index: 3;
-        border-radius: 1px;
-        &::before, &::after {
-            position: absolute;
-            //top: 20px;
-            content: '';
-            display: block;
-            width: 2px;
-            height: 26px;
-            background-color: rgba(255,0,0,1);
-            opacity: 0;
-            transition: opacity .5s ease;
-        }
-        &::before {
-            transform: translateY(22px);
-        }
-        &::after {
-            transform: translateY(52px);
-        }
-        &.a {
-            &::before {
-                opacity: .7;
-            }
-        }
-        &.b {
-            &::after {
-                opacity: .7;
-            }
-        }
-    }
-    #tracks {
-        position: relative;
         z-index: 2;
-        margin-top: 20px;
-        transform: translateX(0);
-        //transition: 1s linear;
-        margin-left: 50%;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
 
 
-        .group {
-            display: block;
-            width: auto;
-            height: 30px;
-            //overflow-x: hidden;
-            background-color: transparent;
-            font-size: 0;
-            white-space:nowrap;
-            .track {
+
+
+        .center {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            z-index: 5;
+            background-color: #fff;
+            transition: transform .3s ease;
+            img {
                 position: absolute;
-                height: 26px;
-                margin: 2px 0;
-                background-color: #fff;
-                opacity: 0.1;
-                border-radius: 3px;
-                transition: background-color .5s ease, opacity .25s ease;
-                &:hover {
-                    opacity: .15;
-                    cursor: pointer;
-                }
-                &.active {
-                    opacity: .8;
-                    //background-color: #2AF5FF;
-                    background-color: 1;
-                    &:hover {
-                        opacity: 1;
-                    }
+                display: block;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                transform: translateX(4.5%);
+                pointer-events: none;
+            }
+            &:hover ~ .background {
+                transform: scale(1.2);
+            }
+            &:active {
+                transform: scale(0.92);
+                & ~ .background {
+                    transform: scale(1.25);
                 }
             }
-            &.b {
-                .track.active {
-                    //background-color: #27FB6B;
-                }
-            }
+        }
+        .controls {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-20%, -50%) scale(1);
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 50px 0 50px 86.6px;
+            border-color: transparent transparent transparent #111;
+
+
+        }
+        .background {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 0 0 0 30px #fff;
+            background-color: #fff;
+            opacity: .05;
+            transition: transform .3s ease;
+            pointer-events: none;
         }
 
     }
 
+}
+
+.unselectable {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

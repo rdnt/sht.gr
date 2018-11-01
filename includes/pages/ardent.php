@@ -1,14 +1,10 @@
-<div class="player">
-    <div id="segment"></div>
-    <div id="tracks">
-        <div class="group a">
-            <div class="track"></div>
-            <div class="track"></div>
+<div class="player unselectable">
+    <div class="ring">
+        <div class="center">
+            <img src="/images/play.svg">
         </div>
-        <div class="group b">
-            <div class="track"></div>
-            <div class="track"></div>
+        <div class="background">
         </div>
     </div>
-    
+
 </div>
