@@ -49,11 +49,16 @@ class Database extends mysqli {
         if (!is_bool($response)) {
             $data = array();
             // return all rows
-            while($row = $response->fetch_row()) {
-                $data[] = $row;
-            }
-            if ($single_value) {
-                return $data[0][0];
+            while($row = $response->fetch_assoc()) {
+                if (sizeof($row) > 2) {
+                    $data[array_shift($row)] = $row;
+                }
+                if (sizeof($row) == 2) {
+                    $data[array_shift($row)] = reset($row);
+                }
+                else if (sizeof($row) == 1) {
+                    $data = reset($row);
+                }
             }
             return $data;
         }
