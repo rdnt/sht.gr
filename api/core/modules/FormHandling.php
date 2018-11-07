@@ -49,9 +49,29 @@ trait FormHandling {
      * @param string $data The sent POST keys
      */
     function checkPOSTData() {
-        foreach (func_get_args() as $parameter) {
-            if (!isset($_POST[$parameter])) {
-                $this->response("FORM_DATA_MISSING");
+        foreach (func_get_args() as $parameters) {
+            if (is_array($parameters)) {
+                foreach ($parameters as $outer_parameter => $data) {
+                    if (is_array($data)) {
+                        foreach ($data as $inner_parameter) {
+                            if (!isset($_POST[$outer_parameter][$inner_parameter])) {
+                                $this->response("FORM_DATA_MISSING");
+                            }
+                        }
+                    }
+                    else {
+                        if (!isset($_POST[$data])) {
+                            $this->response("FORM_DATA_MISSING");
+                        }
+                    }
+                }
+            }
+            else {
+                foreach (func_get_args() as $parameter) {
+                    if (!isset($_POST[$parameter])) {
+                        $this->response("FORM_DATA_MISSING");
+                    }
+                }
             }
         }
     }
@@ -62,9 +82,29 @@ trait FormHandling {
      * @param string $data The sent POST keys
      */
     function checkPOSTDataContents() {
-        foreach (func_get_args() as $parameter) {
-            if (empty($_POST[$parameter])) {
-                $this->response("FORM_DATA_EMPTY");
+        foreach (func_get_args() as $parameters) {
+            if (is_array($parameters)) {
+                foreach ($parameters as $outer_parameter => $data) {
+                    if (is_array($data)) {
+                        foreach ($data as $inner_parameter) {
+                            if (empty($_POST[$outer_parameter][$inner_parameter])) {
+                                $this->response("FORM_DATA_EMPTY");
+                            }
+                        }
+                    }
+                    else {
+                        if (empty($_POST[$data])) {
+                            $this->response("FORM_DATA_EMPTY");
+                        }
+                    }
+                }
+            }
+            else {
+                foreach (func_get_args() as $parameter) {
+                    if (empty($_POST[$parameter])) {
+                        $this->response("FORM_DATA_EMPTY");
+                    }
+                }
             }
         }
     }
@@ -78,7 +118,7 @@ trait FormHandling {
         $this->checkPOST();
         // Call the checkPOSTData(contents) functions with the input keys
         call_user_func_array(array($this, 'checkPOSTData'), func_get_args());
-        call_user_func_array(array($this, 'checkPOSTDataContents'), func_get_args());
+        //call_user_func_array(array($this, 'checkPOSTDataContents'), func_get_args());
     }
 
 }
