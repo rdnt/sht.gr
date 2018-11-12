@@ -190,7 +190,6 @@ abstract class Core {
         array_shift($parameters);
 
         $this->formatTitle();
-        var_dump($current_page);
         if (file_exists($this->root . $current_page) && !array_key_exists($current_page, $this->pages)) {
             $this->setCurrentPage("/error/403");
             $path = $this->root . "/includes/blueprints/" . $this->blueprint . ".php";
