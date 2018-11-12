@@ -164,9 +164,6 @@ abstract class Core {
     function renderPage() {
         // Loop all pages
         $folder = $this->project_folder;
-        if ($folder) {
-            $folder = "/" . $folder;
-        }
         $pages = array_merge($this->pages, $this->errors);
         foreach ($pages as $url => $data) {
             // If URL starts with a hash it is a dropdown and index 3 is an
