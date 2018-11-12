@@ -33,9 +33,10 @@ class Shell extends Core {
         );
         $this->pages = array(
             "/" => ["Home", "home", "default"],
-            "/page" => ["Page", "page", "default"]
+            "/page" => ["Page", "page", "default"],
         );
         $this->errors = array(
+            "/error/403" => ["403 Forbidden", "error/403", "error"],
             "/error/404" => ["404 Not Found", "error/404", "error"],
             "/error/503" => ["503 Service Unavailable", "error/503", "error"]
         );

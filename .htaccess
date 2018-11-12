@@ -1,14 +1,6 @@
-# Follow symbolic links
 Options +FollowSymlinks
-
+ErrorDocument 403 index.php
 RewriteEngine On
-
-# Redirect any request that is not a valid file or directory to index.php
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php [NC,L,QSA]
-
-# Redirect all requests that are not directories to index.php while in the API subfolder
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^api/(.+)$ index.php [NC,QSA,L]

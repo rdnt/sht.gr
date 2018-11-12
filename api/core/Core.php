@@ -188,10 +188,26 @@ abstract class Core {
         $current_page = substr($this->current_page, strlen($dir));
         $parameters = explode("/", $current_page);
         array_shift($parameters);
-        $folder = $dir . "/" . $parameters[0];
 
         $this->formatTitle();
-        if ($parameters[0] == "api") {
+        var_dump($current_page);
+        if (file_exists($this->root . $current_page) && !array_key_exists($current_page, $this->pages)) {
+            $this->setCurrentPage("/error/403");
+            $path = $this->root . "/includes/blueprints/" . $this->blueprint . ".php";
+            $shell = $this->shell;
+            $$shell = $this;
+            require_once $path;
+        }
+        else if ($parameters[0] != "api") {
+            if (!$this->page || $current_page == "/api/") {
+                $this->setCurrentPage("/error/404");
+            }
+            $path = $this->root . "/includes/blueprints/" . $this->blueprint . ".php";
+            $shell = $this->shell;
+            $$shell = $this;
+            require_once $path;
+        }
+        else {
             $path = $this->root . $current_page . ".php";
             if (file_exists($path)) {
                 $shell = $this->shell;
@@ -205,15 +221,6 @@ abstract class Core {
                 $$shell = $this;
                 require_once $path;
             }
-        }
-        else {
-            if (!$this->page) {
-                $this->setCurrentPage("/error/404");
-            }
-            $path = $this->root . "/includes/blueprints/" . $this->blueprint . ".php";
-            $shell = $this->shell;
-            $$shell = $this;
-            require_once $path;
         }
     }
 
