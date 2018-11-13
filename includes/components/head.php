@@ -6,3 +6,4 @@
 <link href="/css/sht.css?v=<?=$this->getLatestCommit()?>" type="text/css" rel="stylesheet" media="screen"/>
 <link href="/css/ardent.css?v=<?=$this->getLatestCommit()?>" type="text/css" rel="stylesheet" media="screen"/>
 <link href="/css/responsive.css?v=<?=$this->getLatestCommit()?>" type="text/css" rel="stylesheet" media="screen"/>
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800" rel="stylesheet">

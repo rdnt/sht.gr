@@ -1,136 +1,206 @@
 // out: ardent.css, compress: true, autoprefixer: defaults
-.player {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    left: 200px;
-    top: 150px;
-    .ring {
-        position: absolute;
-        z-index: 2;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        &:hover .background {
-            transform: scale(1.4);
-        }
-        &:active {
-            .center {
-                transform: scale(0.92);
-            }
-            & .background {
-                transform: scale(1.475);
-            }
-        }
-        .center {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            z-index: 5;
-            background-color: #fff;
-            transition: transform .3s ease;
-            img {
-                position: absolute;
-                display: block;
-                width: 100%;
-                height: 100%;
-                border-radius: 50%;
-                transform: translateX(4.5%) scale(.9);
-                pointer-events: none;
-            }
-        }
-        .background {
-            position: absolute;
-            z-index: 1;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            transform: scale(1.225);
-            background-color: #fff;
-            opacity: .05;
-            transition: transform .3s ease;
-            pointer-events: none;
-        }
-    }
-    .progress {
-        position: absolute;
-        z-index: 2;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        background-color: rgba(255,0,0,.2);
-        transform: scale(1.225);
-        padding: 10%;
-        top: -10%;
-        left: -10%;
-    }
+@width: 100;
+@circle: @width* 3.1415926 * 2;
 
 
 
-
-
+body, html {
+    background-image: url("/images/alan.jpg");
+    background-size: cover;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
+
+
+main {
+
+    overflow: hidden;
+}
+
+.container2 {
+    width: calc(~"20%");
+    height: 100vh;
+    background-color: rgba(3, 6, 23, .85);
+    float: left;
+    position: fixed;
+    z-index: 20;
+}
+
+
+.container {
+    width: calc(~"80% - 140px");
+    padding: 70px;
+    padding-left: calc(~"20% + 70px");
+    background-color: rgba(9, 11, 32, .5);
+    .playlist {
+        width: 100%;
+        height: auto;
+        .track {
+            width: 100%;
+            background-color: rgba(255,255,255,.04);
+            border-radius: 0px;
+            position: relative;
+            display: table;
+            margin-bottom: 7px;
+            height: 70px;
+            .inner {
+                width: 100%;
+                position: relative;
+                display: table-row;
+                height: 70px;
+                .cover {
+                    position: absolute;
+                    height: 70px;
+                    width: 70px;
+                    display: table-cell;
+                    img {
+                        position: absolute;
+                        height: calc(~"100%");
+                        margin: 0;
+                        width: calc(~"100%");
+                        border-radius: 0px;
+                    }
+                }
+
+
+
+                .play-button {
+                    display: table-cell;
+                    position: absolute;
+                    width: 70px;
+                    margin-left: -90px;
+                    height: 70px;
+                    overflow: hidden;
+
+                    .ring {
+                        position: absolute;
+                        z-index: 2;
+                        width: 50%;
+                        height: 50%;
+                        padding: 25%;
+                        border-radius: 50%;
+                        &:hover {
+                            .background {
+                                transform: scale(1.4);
+                            }
+                        }
+                        &:active {
+                            .center {
+                                transform: scale(0.92);
+                            }
+                            & .background {
+                                transform: scale(1.475);
+                            }
+                        }
+                        .center {
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 50%;
+                            z-index: 5;
+                            background-color: rgba(255,255,255,1);
+                            transition: transform .3s ease;
+                            position: relative;
+                            img {
+                                position: absolute;
+                                display: block;
+                                width: 100%;
+                                height: 100%;
+                                border-radius: 50%;
+                                transform: translateX(4.5%) scale(.9);
+                                pointer-events: none;
+                            }
+                        }
+                        .background {
+                            position: absolute;
+                            z-index: 1;
+                            top: 0;
+                            width: 50%;
+                            height: 50%;
+                            margin-top: 25%;
+                            border-radius: 50%;
+                            transform: scale(1.225);
+                            background-color: #fff;
+                            opacity: .1;
+                            transition: transform .3s ease;
+                            pointer-events: none;
+                        }
+                        .progress {
+                            position: absolute;
+                            width: 200%;
+                            height: 200%;
+                            top: -50%;
+                            left: -50%;
+                            opacity: .5;
+                            transition: transform .3s ease;
+                            transform: scale(1);
+                            pointer-events: none;
+                            .circle {
+                                transform: rotate(-90deg) scale(1);
+                                transform-origin: 50% 50%;
+                                stroke-dasharray: 219.912 219.912;
+                                animation: rotate 30s linear;
+                                @keyframes rotate {
+                                    0% {
+                                        stroke-dashoffset: 219.912;
+                                    }
+                                    100% {
+                                        stroke-dashoffset: 109.956;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .title {
+                    position: relative;
+                    display: table-cell;
+                    span {
+                        line-height: 70px;
+                        font-size: 1.1rem;
+                        margin-left: 70px;
+                        font-family: 'Nunito', sans-serif;
+                        font-weight: 600;
+                        opacity: .75;
+                        padding: 0 20px 0 40px;
+                    }
+                }
+                .duration {
+                    position: relative;
+                    display: table-cell;
+                    span {
+                        line-height: 70px;
+                        font-size: 1.1rem;
+                        padding: 0 20px;
+                        font-family: 'Nunito', sans-serif;
+                        font-weight: 600;
+                        opacity: .75;
+                    }
+                }
+                .plays {
+                    position: relative;
+                    display: table-cell;
+                    span {
+                        line-height: 70px;
+                        font-size: 1.1rem;
+                        margin-right: 70px;
+                        font-family: 'Nunito', sans-serif;
+                        font-weight: 600;
+                        padding: 0 40px 0 20px;
+                        opacity: .75;
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+
+
+
+
 
 .unselectable {
   user-select: none;
-}
-
-
-
-
-
-
-
-
-
-.timer {
-    position: absolute;
-    right: 20px;
-    top: 21px;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    overflow: hidden;
-    .inner {
-        background: linear-gradient(left, #aaa 50%, #1b1b1b 50%);
-        border-radius: 50%;
-        height: 30px;
-        width: 30px;
-        position: relative;
-        animation: time 30s steps(360, start);
-        .mask {
-            border-radius: 100% 0 0 100% / 50% 0 0 50%;
-            height: 100%;
-            left: 0;
-            position: absolute;
-            top: 0;
-            width: 50%;
-            animation: mask 30s steps(180, start) forwards;
-            transform-origin: 100% 50%;
-        }
-        @keyframes time {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-        @keyframes mask {
-            0% {
-                background: #1b1b1b;
-                transform: rotate(0deg);
-            }
-            50% {
-                background: #1b1b1b;
-                transform: rotate(-180deg);
-            }
-            50.00001% {
-                background: #aaa;
-                transform: rotate(0deg);
-            }
-            100% {
-                background: #aaa;
-                transform: rotate(-180deg);
-            }
-        }
-    }
 }
