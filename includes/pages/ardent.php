@@ -4,6 +4,9 @@
 <div class="container">
 
     <div class="playlist">
+        <div class="intro">
+            <img src="/images/ardent.png">
+        </div>
         <div class="header">
             <div class="inner">
                 <div class="spacer"></div>
@@ -21,7 +24,6 @@
         <?php for($i=1; $i<=17; $i++): ?>
             <div class="track">
                 <div class="inner">
-
                     <div class="button play"></div>
                     <div class="title">
                         <span>Ardent Radio – Episode <?=str_pad($i, 2, 0, STR_PAD_LEFT)?></span>

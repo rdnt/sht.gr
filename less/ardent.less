@@ -4,7 +4,7 @@
 
 .container {
     width: calc(~"100% - 140px");
-    padding: 70px;
+    padding: 40px 50px;
 }
 
 
@@ -13,6 +13,23 @@
 .playlist {
     width: 100%;
     height: auto;
+    .intro {
+        width: 100%;
+        height: 300px;
+        position: relative;
+        margin-bottom: 20px;
+        img {
+            display:block;
+            position: absolute;
+            max-height: 100%;
+            max-width: 100%;
+            top: 50%;
+            left: 50%;
+            margin: 0;
+            transform: translate(-50%, -50%);
+            opacity: .85;
+        }
+    }
     .track {
         color: #000;
     }
@@ -114,6 +131,7 @@
     bottom: 0;
     background-color: #fff;
     border-top: 2px solid #ddd;
+    box-shadow: 0 0 20px 0 #eee;
     .progress {
         z-index: 120;
         position: absolute;
@@ -156,7 +174,7 @@
         height: calc(~"100vh - 100px");
         background-color: #000;
         pointer-events: none;
-        opacity: .015;
+        opacity: .01;
         animation: 100s progress linear;
     }
 }
