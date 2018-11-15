@@ -6,7 +6,7 @@
 </head>
 <body>
 <?php $shell->loadComponent("nav"); ?>
-<main>
+<main class="light playing">
 <?php $shell->loadContent()?>
 </main>
 <?php $shell->loadComponent("footer"); ?>

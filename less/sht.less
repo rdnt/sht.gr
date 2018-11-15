@@ -1,18 +1,18 @@
-// out: ../css/sht.css, compress: true
-html {
-    background-color: #fff;
-}
+// out: ../css/sht.css, compress: true, autoprefixer: defaults
 html, body {
     margin: 0;
     font-family: 'Roboto',sans-serif;
-    background-color: #0a0b0c;
+    background-color: #fff;
     height: 100vh;
+    overflow: hidden;
 }
 main {
     width: 100%;
-    min-height: calc(~"100vh - 120px");
-    height: auto;
-    overflow-y: visible;
+    overflow-y: scroll;
+    height: 100vh;
+    &.playing {
+        height: calc(~"100vh - 100px");
+    }
 }
 nav {
     position: absolute;
