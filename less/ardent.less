@@ -35,17 +35,31 @@
 
 
 
-            .play-button, .spacer {
+            .button, .spacer {
                 display: block;
                 float: left;
                 width: 100px;
                 height: 70px;
-                img {
+                position: relative;
+                &:after {
+                    position: absolute;
                     width: 70px;
-                    pointer-events: none;
-                    opacity: .75;
+                    height: 70px;
+                    content: '';
+                    top: 0;
                     left: 0;
+                    opacity: .75;
                     transform: scale(.75);
+                }
+                &.play {
+                    &:after {
+                        content: url('/images/play.svg');
+                    }
+                }
+                &.pause {
+                    &:after {
+                        content: url('/images/pause.svg');
+                    }
                 }
             }
             .title {

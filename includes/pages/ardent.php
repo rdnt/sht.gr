@@ -22,9 +22,7 @@
             <div class="track">
                 <div class="inner">
 
-                    <div class="play-button">
-                        <img src="/images/play.svg">
-                    </div>
+                    <div class="button play"></div>
                     <div class="title">
                         <span>Ardent Radio – Episode <?=str_pad($i, 2, 0, STR_PAD_LEFT)?></span>
                     </div>
