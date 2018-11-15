@@ -1,12 +1,12 @@
-<div class="container2">
 
-</div>
 <div class="container">
 
+    <div class="intro">
+        <img src="/images/ardent_black.png">
+    </div>
+
     <div class="playlist">
-        <div class="intro">
-            <img src="/images/ardent.png">
-        </div>
+
         <div class="header">
             <div class="inner">
                 <div class="spacer"></div>
