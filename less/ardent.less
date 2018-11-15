@@ -137,6 +137,82 @@
     background-color: #fff;
     border-top: 2px solid #ddd;
     box-shadow: 0 0 20px 0 #eee;
+    .controls {
+        position: relative;
+        width: 220px;
+        height: 100%;
+        margin: 0 auto;
+        text-align: center;
+        .control {
+            border-radius: 50%;
+            &:before {
+                width: 100%;
+                height: 100%;
+                background-color: #000;
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0;
+                border-radius: 50%;
+                transform: scale(.8);
+                transition: .3s ease;
+                opacity: 0;
+            }
+            &:after {
+                width: 100%;
+                height: 100%;
+                background-size: 100% 100%;
+                display: block;
+                content: ' ';
+                position: absolute;
+            }
+            &:hover {
+                &:before {
+                    transform: scale(1.2);
+                    opacity: .08;
+                }
+            }
+        }
+        .left, .right {
+            width: 50px;
+            height: 50px;
+            margin: 25px 0;
+        }
+        .left {
+            float: left;
+            transform: rotate(180deg);
+            position: relative;
+            &:after {
+                background-image: url('/images/play.svg');
+            }
+        }
+        .center {
+            float: left;
+            width: 70px;
+            height: 70px;
+            margin: 15px;
+            border-radius: 50%;
+            position: relative;
+            //transform: scale(1.25);
+            &.play {
+                &:after {
+                    background-image: url('/images/play.svg');
+                }
+            }
+            &.pause {
+                &:after {
+                    background-image: url('/images/play.svg');
+                }
+            }
+        }
+        .right {
+            float: left;
+            position: relative;
+            &:after {
+                background-image: url('/images/play.svg');
+            }
+        }
+    }
     .progress {
         z-index: 120;
         position: absolute;
@@ -152,7 +228,7 @@
         &:hover {
             background-color: #555;
             &:after {
-                transform: scale(1.5);
+                transform: scale(1.8);
                 background-color: #444;
                 box-shadow: 0 0 0 6px rgba(255,255,255,.8);
             }
@@ -176,12 +252,12 @@
         position: absolute;
         z-index: 110;
         top: calc(~"-100vh + 100px");
-        width: calc(~"100% + 5px");
+        width: calc(~"100% - 14px");
         margin-left: 7px;
         height: calc(~"100vh - 100px");
         background-color: #000;
         pointer-events: none;
-        opacity: .05;
+        opacity: .03;
         animation: 100s progress linear;
     }
 }
