@@ -1,7 +1,7 @@
 <nav>
-    <div class="header">
-        <span>Back</span>
-    </div>
+    <a class="header" href="/ardent">
+        <img src="/images/logo.svg">
+    </a>
     <ul class="navigation">
         <li class="active">
             <span>Ardent Radio</span>

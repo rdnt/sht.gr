@@ -13,6 +13,7 @@ nav {
     top: 0;
     width: 260px;
     padding: 20px;
+    height: 100vh;
     background-color: #fff;
     display: block;
     position: absolute;
@@ -20,7 +21,8 @@ nav {
     transition: .3s ease;
     opacity: .5;
     .header {
-        width: calc(~"100% - 10px");
+        display: block;
+        width: auto;
         height: 60px;
         border-right: 10px solid #fff;
         position: relative;
@@ -39,7 +41,7 @@ nav {
         &:after {
             top: 10px;
             content: '';
-            background-image: url('/images/left_arrow.png');
+            background-image: url('/images/triangles.svg');
             background-size: 100% 100%;
             display: block;
             transform: scale(.8);
@@ -50,7 +52,7 @@ nav {
             //background-color: #eee;
             border-radius: 50%;
         }
-        span {
+        img {
             display: block;
             line-height: 60px;
             position: relative;
@@ -68,7 +70,7 @@ nav {
     }
     &:hover {
         opacity: 1;
-        .header span {
+        .header img {
             transform: translateX(0);
             opacity: 1;
         }
