@@ -6,7 +6,6 @@
     z-index: 9999;
     transform: translateX(-100%);
     &.dark, &.light {
-        //animation: shift 2s cubic-bezier(0.77, 0, 0.175, 1);
         transition: transform 2.5s cubic-bezier(0.77, 0, 0.175, 1);
         transform: translateX(50%);
     }
@@ -15,17 +14,6 @@
     }
     &.light {
         background-color: #fafbfc;
-    }
-    @keyframes shift {
-        0% {
-            transform: translateX(-100%);
-        }
-        // 50% {
-        //     transform: translateX(-25%);
-        // }
-        100% {
-            transform: translateX(50%);
-        }
     }
 }
 
@@ -38,12 +26,12 @@ nav.dark {
         ul {
             li {
                 &:before {
-                    background-color: #bbb !important;
-                    box-shadow: 0 0 0 2px #888;
+                    background-color: #999 !important;
+                    box-shadow: 0 0 0 2px #666;
                 }
                 &.active:before {
                     background-color: #2476d3 !important;
-                    box-shadow: 0 0 0 2px #6db8eb;
+                    box-shadow: 0 0 0 2px #0446a3;
                 }
                 &:after {
                     background-color: #555 !important;
