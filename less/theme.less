@@ -1,0 +1,85 @@
+// out: ../css/theme.css, compress: true, autoprefixer: defaults
+.theme-overlay {
+    position: absolute;
+    width: 200vw;
+    height: 100vh;
+    z-index: 9999;
+    transform: translateX(-100%);
+    &.dark, &.light {
+        //animation: shift 2s cubic-bezier(0.77, 0, 0.175, 1);
+        transition: transform 2.5s cubic-bezier(0.77, 0, 0.175, 1);
+        transform: translateX(50%);
+    }
+    &.dark {
+        background-color: #333;
+    }
+    &.light {
+        background-color: #fafbfc;
+    }
+    @keyframes shift {
+        0% {
+            transform: translateX(-100%);
+        }
+        // 50% {
+        //     transform: translateX(-25%);
+        // }
+        100% {
+            transform: translateX(50%);
+        }
+    }
+}
+
+main.dark {
+    background-color: #111;
+}
+nav.dark {
+    background-color: #111;
+    &:hover {
+        ul {
+            li {
+                &:before {
+                    background-color: #bbb !important;
+                    box-shadow: 0 0 0 2px #888;
+                }
+                &.active:before {
+                    background-color: #2476d3 !important;
+                    box-shadow: 0 0 0 2px #6db8eb;
+                }
+                &:after {
+                    background-color: #555 !important;
+                    border: 1px solid #444;
+                }
+                a span {
+                    color: #eee;
+                }
+            }
+        }
+    }
+    .header {
+        .triangles {
+            background-color: #eee;
+            background-image: url("/images/logo_dark.png");
+        }
+        .logo {
+            background-image: url("/images/logo.svg");
+        }
+        &:hover .triangles {
+            box-shadow: 0 0 0 15px rgba(255,255,255,.1);
+        }
+    }
+    ul {
+        li {
+            &:before {
+                background-color: #555 !important;
+                box-shadow: 0 0 0 2px #333;
+            }
+            &:after {
+                background-color: #303030 !important;
+                border: 1px solid #252525;
+            }
+            a span {
+                color: #aaa;
+            }
+        }
+    }
+}

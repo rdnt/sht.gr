@@ -1,7 +1,8 @@
-<nav class="hover">
+<div class="theme-overlay"></div>
+<nav>
     <a class="header" href="/ardent">
-        <img class="triangles" src="/images/logo.png">
-        <img class="logo" src="/images/logo.svg">
+        <div class="triangles"></div>
+        <div class="logo"></div>
     </a>
     <ul class="navigation">
         <?=$sht->renderNav()?>
