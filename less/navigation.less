@@ -1,0 +1,159 @@
+// out: ../css/navigation.css, compress: true, autoprefixer: defaults
+nav {
+    top: 0;
+    width: 260px;
+    padding: 40px;
+    height: auto;
+    background-color: #fff;
+    display: block;
+    position: absolute;
+    z-index: 1000;
+    transition: .3s ease;
+    opacity: .5;
+    .header {
+        display: block;
+        width: auto;
+        height: 60px;
+        top: 0;
+        &:hover img.triangles {
+            box-shadow: 0 0 0 15px #f2f2f2;
+        }
+        img.triangles {
+            content: '';
+            opacity: 1;
+            display: block;
+            float: left;
+            transform: scale(1);
+            width: 60px;
+            height: 60px;
+            background-color: #333;
+            border-radius: 50%;
+            transition: box-shadow .3s ease;
+
+        }
+        img.logo {
+            display: block;
+            float: left;
+            height: 60px;
+            width: auto;
+            left: 30px;
+            top: 0;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 400;
+            transform: translateX(-4px);
+            opacity: 1;
+            transition: .5s ease;
+            box-shadow: 0 0 0 0 #eee;
+        }
+    }
+    &.hover {
+        opacity: 1;
+        .header img {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        li {
+            opacity: 1;
+            &:nth-child(1) {
+                transform: translateY(6px);
+            }
+            &:nth-child(2) {
+                transform: translateY(12px);
+            }
+            &:nth-child(3) {
+                transform: translateY(16px);
+            }
+            &:nth-child(4) {
+                transform: translateY(20px);
+            }
+            &:after, &:before {
+                opacity: 1;
+            }
+            &:before {
+                transform: scale(1.1);
+                background-color: #666;
+                box-shadow: 0 0 0 2px #ccc;
+            }
+            &.active:before {
+                background-color: #2476d3;
+                box-shadow: 0 0 0 2px #6db8eb;
+            }
+            &:hover {
+                &:before {
+                    transform: scale(1.2);
+                }
+                span {
+                    opacity: 1;
+                    transform: translateX(4px);
+                }
+            }
+            a  {
+                pointer-events: all;
+                span {
+                    opacity: .5;
+                }
+            }
+        }
+    }
+    ul {
+        margin-top: 16px;
+        li {
+            font-size: 0;
+            width: auto;
+            height: 30px;
+            top: 0px;
+            transition: .5s ease;
+            transform: translateY(0);
+            position: relative;
+            display: inline-block;
+            &:before {
+                top: 0;
+                content: ' ';
+                display: block;
+                left: 0;
+                border-radius: 50%;
+                position: absolute;
+                margin: 10px 24px;
+                z-index: 10;
+                width: 12px;
+                height: 12px;
+                background-color: #666;
+                transition: .5s ease;
+                //border: 2px solid #e3e3e3;
+                box-shadow: 0 0 0 2px #e3e3e3;
+            }
+            &:not(:last-child):after {
+                top: 8px;
+                content: '';
+                display: block;
+                position: absolute;
+                margin: 7px 28px;
+                width: 2px;
+                border: 1px solid #eee;
+                height: 30px;
+                background-color: #cfd3d3;
+                transition: .5s ease;
+            }
+            a {
+                display: block;
+                text-decoration: none;
+                color: #333;
+                margin-left: 60px;
+                height: 100%;
+                pointer-events: none;
+                span {
+                    display: block;
+                    line-height: 30px;
+                    height: 30px;
+                    position: relative;
+                    transition: .5s ease;
+                    text-align: left;
+                    font-size: 1.1rem;
+                    font-family: 'Nunito', sans-serif;
+                    font-weight: 400;
+                    opacity: 0;
+                }
+            }
+        }
+    }
+}

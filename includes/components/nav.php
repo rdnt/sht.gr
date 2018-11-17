@@ -1,16 +1,9 @@
-<!-- <nav>
+<nav class="hover">
+    <a class="header" href="/ardent">
+        <img class="triangles" src="/images/logo.png">
+        <img class="logo" src="/images/logo.svg">
+    </a>
     <ul class="navigation">
         <?=$sht->renderNav()?>
     </ul>
-    <div class="glitch up"></div>
-    <div class="glitch up black"></div>
-</nav> -->
-
-
-
-<!--<div class="logo-container">
-    <div class="logo">
-        <div class="right"></div>
-        <div class="left"></div>
-    </div>
-</div>-->
+</nav>

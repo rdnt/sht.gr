@@ -9,7 +9,7 @@ trait SHT {
             else {
                 $active = "";
             }
-            echo "<li><a$active href=\"$page\"><span>$name</span></a></li>\n";
+            echo "<li$active><a href=\"$page\"><span>$name</span></a></li>\n";
         }
     }
 }
