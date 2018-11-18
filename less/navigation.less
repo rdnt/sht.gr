@@ -1,13 +1,9 @@
 // out: ../css/navigation.css, compress: true, autoprefixer: defaults
-.wrap-every(@n) {
-    &:nth-child(@{n}n + 1) {
-        clear: left;
-    }
-}
+
 nav {
     width: 260px;
     padding: 40px;
-    height: 100vh;
+    height: auto;
     background-color: #fff;
     display: block;
     position: absolute;
@@ -111,6 +107,19 @@ nav {
         }
     }
     ul {
+        margin: 0 !important;
+        position: relative;
+        height: auto !important;
+        display: block;
+        overflow:inherit;
+
+        &:after {
+            content: '';
+            display: block;
+            height: 100%;
+            width: 4px;
+            background-color: #0f0;
+        }
         margin-top: 16px;
         .dropdown {
             li:first-child:after {
@@ -141,8 +150,6 @@ nav {
             transition: transform .5s ease;
             transform: translateY(0);
             position: relative;
-            float: left;
-            clear:both;
             margin-bottom: -6px;
 
 

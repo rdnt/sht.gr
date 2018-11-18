@@ -39,7 +39,13 @@ class Shell extends Core {
                 "/item2" => ["Item 2", "community/shop", "default"],
                 "/item3" => ["Item 3", "community/administration", "default"]
             )],
-            "/login" => ["Login", "login", "default"]
+            "/login" => ["Login", "login", "default"],
+            "#dropdown2" => ["Another Dropdown", "", "", array(
+                "/item4" => ["Item 4", "community/members", "default"],
+                "/item5" => ["Item 5", "community/shop", "default"],
+                "/item6" => ["Item 6", "community/administration", "default"]
+            )],
+            "/register" => ["Register", "login", "default"]
         );
         $this->errors = array(
             "/error/404" => ["404 Not Found", "error/404", "error"],
