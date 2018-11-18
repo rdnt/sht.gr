@@ -8,19 +8,25 @@ trait Github {
      *                       specified.
      * @return string The latest commit hash
      */
-    function getLatestCommit($branch = "master") {
+    function getLatestCommit($branch = "master", $length = 0) {
         $branch = $this->getRoot() . "/.git/refs/heads/$branch";
         $master = $this->getRoot() . "/.git/refs/heads/master";
         if (file_exists($branch)) {
-            return substr(file_get_contents($branch), 0, 7);
+            $head = file_get_contents($branch);
         }
         else if (file_exists($master)) {
-            return substr(file_get_contents($master), 0, 7);
+            $head = file_get_contents($master);
+        }
+        if ($head) {
+            if ($length) {
+                return substr($head, 0, $length);
+            }
+            else {
+                return $head;
+            }
         }
         else {
-            // Return unknown version if no valid git repository found in
-            // project folder
-            return "unknown";
+            return;
         }
     }
 }

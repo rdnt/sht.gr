@@ -1,4 +1,4 @@
-<div class="theme-overlay"></div>
+<!-- <div class="theme-overlay"></div>
 <nav>
     <a class="header" href="/ardent">
         <div class="triangles"></div>
@@ -7,4 +7,4 @@
     <ul class="navigation">
         <?=$sht->renderNav()?>
     </ul>
-</nav>
+</nav> -->
