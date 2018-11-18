@@ -34,14 +34,12 @@ class Shell extends Core {
             "/" => ["Home", "home", "default"],
             "/projects" => ["Projects", "projects", "default"],
             "/ardent" => ["Ardent Radio", "ardent", "default"],
-            "/login" => ["Login", "login", "default"],
-            "#community" => ["Community", "", "", array(
-                "/members" => ["Members", "community/members", "default"],
-                "/shop" => ["Shop", "community/shop", "default"],
-                "/administration" => ["Administration", "community/administration", "default"],
-                "/history" => ["History", "community/history", "default"],
-                "/budget" => ["Budget", "community/budget", "default"]
-            )]
+            "#dropdown" => ["Dropdown", "", "", array(
+                "/item1" => ["Item 1", "community/members", "default"],
+                "/item2" => ["Item 2", "community/shop", "default"],
+                "/item3" => ["Item 3", "community/administration", "default"]
+            )],
+            "/login" => ["Login", "login", "default"]
         );
         $this->errors = array(
             "/error/404" => ["404 Not Found", "error/404", "error"],
