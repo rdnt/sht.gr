@@ -1,4 +1,9 @@
 // out: ../css/navigation.css, compress: true, autoprefixer: defaults
+.wrap-every(@n) {
+    &:nth-child(@{n}n + 1) {
+        clear: left;
+    }
+}
 nav {
     top: 0;
     width: 260px;
@@ -67,10 +72,28 @@ nav {
                 transform: translateY(12px);
             }
             &:nth-child(3) {
-                transform: translateY(16px);
+                transform: translateY(18px);
             }
             &:nth-child(4) {
-                transform: translateY(20px);
+                transform: translateY(24px);
+            }
+            &:nth-child(5) {
+                transform: translateY(30px);
+            }
+            &:nth-child(6) {
+                transform: translateY(36px);
+            }
+            &:nth-child(7) {
+                transform: translateY(42px);
+            }
+            &:nth-child(8) {
+                transform: translateY(48px);
+            }
+            &:nth-child(9) {
+                transform: translateY(56px);
+            }
+            &:nth-child(10) {
+                transform: translateY(60px);
             }
             &:after, &:before {
                 opacity: 1;
