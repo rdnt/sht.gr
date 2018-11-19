@@ -247,7 +247,7 @@ abstract class Core {
         if (file_exists($path)) {
             if ($index != -1) {
                 $page = file_get_contents($path);
-                $segments = explode("<!--- SCRIPTS --->", $page);
+                $segments = explode("<!-- SCRIPTS -->", $page);
                 if(array_key_exists($index, $segments)) {
                     $segment = $segments[$index];
                     if (substr($segment, 0, 5) !== "<?") {
