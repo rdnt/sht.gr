@@ -1,6 +1,11 @@
 Options +FollowSymlinks
-ErrorDocument 403 index.php
+
 RewriteEngine On
+
+RewriteCond %{DOCUMENT_ROOT}/$1.php -f
+RewriteRule ^(.+?)/?$ /$1.php [L]
+
+RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [NC,L,QSA]
-RewriteRule ^api/(.+)$ index.php [NC,QSA,L]

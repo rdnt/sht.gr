@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php $core->loadComponent("head"); ?>
-<title><?=$core->title?></title>
+<?php $shell->loadComponent("head"); ?>
+<title><?=$shell->title?></title>
 </head>
 <body>
-<?php $core->loadComponent("nav"); ?>
+<?php $shell->loadComponent("nav"); ?>
 <main>
-<?php $core->loadContent()?>
+<?php $shell->loadContent()?>
 </main>
-<?php $core->loadComponent("footer"); ?>
-<?php $core->loadComponent("scripts"); ?>
+<?php $shell->loadComponent("footer"); ?>
+<?php $shell->loadComponent("scripts"); ?>
 </body>
 </html>
