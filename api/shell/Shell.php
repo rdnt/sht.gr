@@ -16,7 +16,6 @@ class Shell extends Core {
     use FormHandling;
     use Github;
     use Logging;
-    use Schema;
     use SHT;
     /**
      * Shell constructor method
