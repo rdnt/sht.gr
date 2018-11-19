@@ -191,6 +191,7 @@ abstract class Core {
 
         $this->formatTitle();
         if (file_exists($this->root . $current_page) && !array_key_exists($current_page, $this->pages)) {
+            http_response_code(403);
             $this->setCurrentPage("/error/403");
             $path = $this->root . "/includes/blueprints/" . $this->blueprint . ".php";
             $shell = $this->shell;
@@ -199,6 +200,7 @@ abstract class Core {
         }
         else if ($parameters[0] != "api") {
             if (!$this->page || $current_page == "/api/") {
+                http_response_code(404);
                 $this->setCurrentPage("/error/404");
             }
             $path = $this->root . "/includes/blueprints/" . $this->blueprint . ".php";
@@ -214,6 +216,7 @@ abstract class Core {
                 require_once $path;
             }
             else {
+                http_response_code(404);
                 $this->setCurrentPage("/error/404");
                 $path = $this->root . "/includes/blueprints/" . $this->blueprint . ".php";
                 $shell = $this->shell;
