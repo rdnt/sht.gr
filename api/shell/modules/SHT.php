@@ -8,7 +8,7 @@ trait SHT {
                 echo "<li><a><span>$name</span></a></li>\n";
                 foreach ($data[3] as $inner_url => $item) {
                     $inner_name = strtoupper($item[0]);
-                    if ($inner_url === $this->getCurrentPage()) {
+                    if ($inner_url === $_SERVER['REQUEST_URI']) {
                         $active = " active";
                     }
                     else {
@@ -20,7 +20,7 @@ trait SHT {
             }
             else {
                 $name = strtoupper($data[0]);
-                if ($url === $this->getCurrentPage()) {
+                if ($url === $_SERVER['REQUEST_URI']) {
                     $active = " class=\"active\"";
                 }
                 else {
