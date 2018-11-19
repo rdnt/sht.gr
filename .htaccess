@@ -1,8 +1,9 @@
 Options +FollowSymlinks
-ErrorDocument 403 index.php
 RewriteEngine On
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php [NC,L,QSA]
 RewriteRule ^api/(.+)$ index.php [NC,QSA,L]
 
 RedirectMatch 403 /\.git
+ErrorDocument 403 /index.php
