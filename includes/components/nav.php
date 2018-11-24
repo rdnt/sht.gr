@@ -1,6 +1,6 @@
 <div class="theme-overlay"></div>
-<nav>
-    <a class="header" href="/ardent">
+<nav class="hover load">
+    <a class="header" href="/">
         <div class="triangles"></div>
         <div class="logo"></div>
     </a>

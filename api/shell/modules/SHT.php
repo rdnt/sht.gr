@@ -16,6 +16,7 @@ trait SHT {
                     }
                     echo "<li class=\"item$active\"><a href=\"$inner_url\"><span>$inner_name</span></a></li>\n";
                 }
+                echo "<li></li>\n";
                 echo "</div>\n";
             }
             else {

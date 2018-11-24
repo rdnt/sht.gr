@@ -13,6 +13,7 @@ nav {
         width: auto;
         height: 60px;
         top: 0;
+        margin-bottom: 18px;
         &:hover .triangles {
             box-shadow: 0 0 0 15px #f2f2f2;
         }
@@ -48,7 +49,7 @@ nav {
             background-size: 100% 100%;
         }
     }
-    &:hover {
+    &.hover {
         .header {
             .logo {
                 transform: translateX(0);
@@ -61,8 +62,8 @@ nav {
         .dropdown {
             li:hover {
                 span {
-                    opacity: 1;
-                    transform: translateX(4px) !important;
+                    opacity: .5;
+                    transform: translateX(0) !important;
                 }
             }
             li:first-child:after {
@@ -72,9 +73,55 @@ nav {
                 transform: rotate(-30deg) !important;
                 transition: .5s ease !important;
             }
+            li:nth-last-child(2) {
+                margin-bottom: -42px;
+                &:after {
+                    left: -10px;
+                    height: 36px !important;
+                    transform: rotate(30deg) !important;
+                    transition: .5s ease !important;
+                    opacity: 1;
+                }
+            }
+
         }
         li {
             opacity: 1;
+
+
+            &:nth-child(1) {
+                 transform: translateY(6px);
+            }
+            &:nth-child(2) {
+                transform: translateY(12px);
+            }
+            &:nth-child(3) {
+                transform: translateY(18px);
+            }
+            &:nth-child(4) {
+                transform: translateY(24px);
+            }
+            &:nth-child(5) {
+                transform: translateY(30px);
+            }
+            &:nth-child(6) {
+                transform: translateY(36px);
+            }
+            &:nth-child(7) {
+                transform: translateY(42px);
+            }
+            &:nth-child(8) {
+                transform: translateY(48px);
+            }
+            &:nth-child(9) {
+                transform: translateY(56px);
+            }
+            &:nth-child(10) {
+                transform: translateY(60px);
+            }
+
+
+
             &:after, &:before {
                 opacity: 1;
             }
@@ -83,6 +130,9 @@ nav {
                 background-color: #666;
                 opacity: 1;
                 box-shadow: 0 0 0 2px #ccc;
+            }
+            &.active span {
+                opacity: 1;
             }
             &.active:before {
                 background-color: #2476d3;
@@ -94,7 +144,7 @@ nav {
                 }
                 span {
                     opacity: 1;
-                    transform: translateX(4px) !important;
+                    //transform: translateX(4px) !important;
                 }
             }
 
@@ -122,13 +172,39 @@ nav {
         }
         margin-top: 16px;
         .dropdown {
+            &:last-child {
+                li:last-child {
+                    display: none;
+                }
+                li:nth-last-child(2) {
+                    &:after {
+                        display: none;
+                    }
+                }
+            }
             li:first-child:after {
                 left: 12px;
                 height: 36px !important;
                 transform: rotate(-35deg) !important;
                 transition: .5s ease !important;
             }
-
+            li:nth-last-child(2) {
+                margin-bottom: -36px;
+                transition: .5s ease;
+                &:after {
+                    left: -12px;
+                    height: 36px !important;
+                    transform: rotate(35deg) !important;
+                    transition: .5s ease !important;
+                    opacity: 1;
+                }
+            }
+            li:last-child {
+                pointer-events: none;
+                &:before {
+                    display: none;
+                }
+            }
 
             &:hover {
                 &:before {
@@ -151,9 +227,14 @@ nav {
             transform: translateY(0);
             position: relative;
             margin-bottom: -6px;
+            cursor: default;
+            &:last-child:after {
+                display: none;
+            }
 
-
-
+            &.active span {
+                transform: translateX(4px) !important;
+            }
             &.item {
                 margin-left: 20px;
             }
@@ -174,7 +255,7 @@ nav {
                 //border: 2px solid #e3e3e3;
                 box-shadow: 0 0 0 2px #e3e3e3;
             }
-            &:not(:last-child):after {
+            &:after {
                 top: 8px;
                 content: '';
                 display: block;
