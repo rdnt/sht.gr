@@ -37,7 +37,10 @@ abstract class Core {
     // Protected page data arrays
     protected $pages;
     protected $patterns;
+    // HTTP/2.0 Asset pushing
     protected $assets;
+    protected $version;
+    // Folders to create on start
     protected $data_paths;
 
     /**
@@ -51,17 +54,25 @@ abstract class Core {
         $this->project_folder = str_replace("\\", "/", $project_folder);
         // Set current request url
         $this->current_page = $_SERVER['REQUEST_URI'];
+        // Get the code version hash
+        $this->version = $this->getCommitHash();
         // Set default timezone
         date_default_timezone_set("Europe/Athens");
-        // If the session is not started push the assets for faster loading
-        // (Depends on server configuration)
-        if (!isset($_COOKIE['version'])) {
-            $this->pushAssets();
-        }
         // Start the session if it wasn't already started
         if (session_status() == PHP_SESSION_NONE) {
+            $cookie_params = session_get_cookie_params();
+            session_set_cookie_params(
+                $cookie_params["lifetime"],
+                $cookie_params["path"],
+                '',
+                $cookie_params["secure"],
+                $cookie_params["httponly"]
+            );
             session_name('session');
             session_start();
+            if (!isset($_SESSION['csrf_token'])) {
+                $_SESSION['csrf_token'] = bin2hex(openssl_random_pseudo_bytes(32));
+            }
         }
     }
 
