@@ -272,7 +272,7 @@ abstract class Core {
      */
     function loadStyle($style) {
         $project_dir = $this->project_folder;
-        $commit_hash = $this->getLatestCommit();
+        $commit_hash = $this->getCommitHash();
         return "<link href=\"$project_dir/css/$style?v=$commit_hash\" type=\"text/css\" rel=\"stylesheet\" media=\"screen\"/>\n";
     }
 
@@ -284,7 +284,7 @@ abstract class Core {
      */
     function loadScript($script) {
         $project_dir = $this->project_folder;
-        $commit_hash = $this->getLatestCommit();
+        $commit_hash = $this->getCommitHash();
         return "<script src=\"$project_dir/js/$script?v=$commit_hash\"></script>\n";
     }
 

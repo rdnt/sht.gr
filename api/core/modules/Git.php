@@ -9,7 +9,7 @@ trait Git {
      * @param string $branch The selected branch, defaults to master
      * @return string The latest commit hash
      */
-    function getLatestCommit($branch = "master") {
+    function getCommitHash($branch = "master") {
         $branch = $this->getRoot() . "/.git/refs/heads/$branch";
         $master = $this->getRoot() . "/.git/refs/heads/master";
         if (file_exists($branch)) {

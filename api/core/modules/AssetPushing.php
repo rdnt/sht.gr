@@ -8,7 +8,7 @@ trait AssetPushing {
      */
     function pushAssets() {
         // Get version from github module and append it to refresh cache
-        $version = $this->getLatestCommit();
+        $version = $this->getCommitHash();
         if ($this->assets) {
             // If assets are set push each of them
             foreach ($this->assets as $asset => $type) {
