@@ -18,16 +18,16 @@ function asyncRequest(formID, targetURL, init, callback, successDelay, errorDela
                 method: "POST",
                 url: targetURL,
                 data: $(this).serialize(),
-                success: function(data) {
+                success(data) {
                     data = $.trim(data);
                     var duration = new Date() - start;
                     try {
                         data = JSON.parse(data);
                     }
                     catch(e) {
-                        data = {"response": "JSON_PARSE_FAILED", "data": data};
+                        var data = {"response": "JSON_PARSE_FAILED", "data": data};
                     }
-                    if (data['response'] === "SUCCESS" ) {
+                    if (data["response"] === "SUCCESS" ) {
                         setTimeout(function(){
                             callback(data);
                             pending = 0;
@@ -40,8 +40,8 @@ function asyncRequest(formID, targetURL, init, callback, successDelay, errorDela
                         }, errorDelay - duration);
                     }
                 },
-                error: function(request) {
-                    data = {"response": "REQUEST_FAILED", "data": request.status + " " + request.statusText.toUpperCase()};
+                error(request) {
+                    var data = {"response": "REQUEST_FAILED", "data": request.status + " " + request.statusText.toUpperCase()};
                     callback(data);
                 }
             });
