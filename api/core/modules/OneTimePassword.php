@@ -1,6 +1,6 @@
 <?php
 
-// Trait that handles one time password generation and two-factor authentication
+// Class that handles one time password generation and two-factor authentication
 class OneTimePassword {
 
     // Private datamembers

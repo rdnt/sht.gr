@@ -27,10 +27,13 @@ trait FormHandling {
      * @param string $value The value that was submitted
      */
     function validatePattern($key, $value) {
-        if (!preg_match($this->getPattern($key), $value)) {
-            // Send the correct error response
-            $this->response("INVALID_" . strtoupper($key));
+        if (!array_key_exists($key, $this->patterns)) {
+            return false;
         }
+        if (!preg_match($this->getPattern($key), $value)) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -49,6 +52,7 @@ trait FormHandling {
      * @param string $data The sent POST keys
      */
     function checkPOSTData() {
+        $response_data = array();
         foreach (func_get_args() as $parameters) {
             if (is_array($parameters)) {
                 foreach ($parameters as $outer_parameter => $data) {
@@ -59,9 +63,34 @@ trait FormHandling {
                             }
                         }
                     }
-                    else {
-                        if (!isset($_POST[$data])) {
+                    else if ($data) {
+                        if (!isset($_POST[$outer_parameter])) {
                             $this->response("FORM_DATA_MISSING");
+                        }
+                        $value = $_POST[$outer_parameter];
+                        $data = str_replace(' ', '', $data);
+                        $checks = explode(';', $data);
+                        foreach ($checks as $check) {
+                            if (substr($check, 0, strlen("validate:")) === "validate:") {
+                                $regex = substr($check, strlen("validate:"));
+                                $valid = $this->validatePattern($regex, $value);
+                            }
+                            else {
+                                $valid = true;
+                            }
+                            if (substr($check, 0, strlen("constraints:")) === "constraints:") {
+                                $constraints = substr($check, strlen("constraints:"));
+                                $escaped_value = addslashes($value);
+                                $escaped_value = "'" . $escaped_value . "'";
+                                $constraints = str_replace($outer_parameter, $escaped_value, $constraints);
+                                $in_range = $this->applyConstraints($value, $constraints);
+                            }
+                            else {
+                                $in_range = true;
+                            }
+                        }
+                        if (!$valid or !$in_range) {
+                            $response_data[] = $outer_parameter;
                         }
                     }
                 }
@@ -74,39 +103,20 @@ trait FormHandling {
                 }
             }
         }
+        if (!empty($response_data)) {
+            $this->response("INVALID_DATA", $response_data);
+        }
     }
 
-    /**
-     * Verify that none of the required data are empty
-     *
-     * @param string $data The sent POST keys
-     */
-    function checkPOSTDataContents() {
-        foreach (func_get_args() as $parameters) {
-            if (is_array($parameters)) {
-                foreach ($parameters as $outer_parameter => $data) {
-                    if (is_array($data)) {
-                        foreach ($data as $inner_parameter) {
-                            if (empty($_POST[$outer_parameter][$inner_parameter])) {
-                                $this->response("FORM_DATA_EMPTY");
-                            }
-                        }
-                    }
-                    else {
-                        if (empty($_POST[$data])) {
-                            $this->response("FORM_DATA_EMPTY");
-                        }
-                    }
-                }
-            }
-            else {
-                foreach (func_get_args() as $parameter) {
-                    if (empty($_POST[$parameter])) {
-                        $this->response("FORM_DATA_EMPTY");
-                    }
-                }
-            }
+    function escapeString($string) {
+        return htmlspecialchars($string);
+    }
+
+    function applyConstraints($variable, $constraint) {
+        if (!eval("return $constraint;")) {
+            return false;
         }
+        return true;
     }
 
     /**
@@ -116,9 +126,8 @@ trait FormHandling {
      */
     function verifyPOSTData() {
         $this->checkPOST();
-        // Call the checkPOSTData(contents) functions with the input keys
+        // Call the checkPOSTData functions with the input keys
         call_user_func_array(array($this, 'checkPOSTData'), func_get_args());
-        //call_user_func_array(array($this, 'checkPOSTDataContents'), func_get_args());
     }
 
 }

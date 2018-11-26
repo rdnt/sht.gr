@@ -1,11 +1,13 @@
 Options +FollowSymlinks
 
+# Redirect all requests to index.php
 RewriteEngine On
-
-RewriteCond %{DOCUMENT_ROOT}/$1.php -f
-RewriteRule ^(.+?)/?$ /$1.php [L]
-
-RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [NC,L,QSA]
+RewriteRule ^api/(.+)$ index.php [NC,QSA,L]
+
+#Do not allow access to git folder contents
+RedirectMatch 403 /\.git
+
+#Redirect 403 errors to index.php
+ErrorDocument 403 /index.php

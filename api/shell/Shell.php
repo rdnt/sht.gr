@@ -15,7 +15,7 @@ class Shell extends Core {
     use Date;
     use Encryption;
     use FormHandling;
-    use Github;
+    use Git;
     use Logging;
     use SHT;
 

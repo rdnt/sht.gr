@@ -1,7 +1,7 @@
 <?php
 
-// Trait that handles login
-trait Github {
+// Trait that handles current commit hash parsing
+trait Git {
 
     /**
      * Returns the last commit hash of a branch
