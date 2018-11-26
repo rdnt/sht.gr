@@ -1,21 +1,22 @@
-var ajaxRequestPending = 0;
-function asyncFormSubmission(form_id, target_url, init, callback, min_delay, error_delay, rapid_error) {
-    $(form_id).submit(function(e) {
+var pending = 0;
+function asyncRequest(formID, targetURL, init, callback, successDelay, errorDelay) {
+    $(formID).submit(function(e) {
         e.preventDefault();
-        if (!ajaxRequestPending) {
-            var url = "";
-            if (target_url instanceof Function) {
-                url = target_url();
+        if (!pending) {
+            if (targetURL instanceof Function) {
+                targetURL = targetURL();
             }
             else {
-                url = target_url;
+                targetURL = targetURL;
             }
-            init();
-            ajaxRequestPending = 1;
+            if (init instanceof Function) {
+                init();
+            }
+            pending = 1;
             var start = new Date();
             $.ajax({
-                method: "POST",
-                url: url,
+                method: 'POST',
+                url: targetURL,
                 data: $(this).serialize(),
                 success: function(data) {
                     data = $.trim(data);
@@ -24,26 +25,24 @@ function asyncFormSubmission(form_id, target_url, init, callback, min_delay, err
                         data = JSON.parse(data);
                     }
                     catch(e) {
-                        data = {"response": "JSON_PARSE_FAILED"};
+                        data = {'response': 'JSON_PARSE_FAILED', 'data': data};
                     }
-                    if (data['response'] === "SUCCESS" || rapid_error === false) {
+                    if (data['response'] === 'SUCCESS' ) {
                         setTimeout(function(){
-                            ajaxRequestPending = 0;
                             callback(data);
-                        }, min_delay - duration);
-                    }
-                    else if (rapid_error === true) {
-                        callback(data);
-                        setTimeout(function(){
-                            ajaxRequestPending = 0;
-                        }, error_delay);
+                            pending = 0;
+                        }, successDelay - duration);
                     }
                     else {
                         setTimeout(function(){
                             callback(data);
-                            ajaxRequestPending = 0;
-                        }, error_delay);
+                            pending = 0;
+                        }, errorDelay - duration);
                     }
+                },
+                error: function(request) {
+                    data = {'response': 'REQUEST_FAILED', 'data': request.status + ' ' + request.statusText.toUpperCase()};
+                    callback(data);
                 }
             });
         }

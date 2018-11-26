@@ -32,8 +32,7 @@ class Shell extends Core {
             "/data/logs/"
         );
         $this->pages = array(
-            "/" => ["Home", "home", "default"],
-            "/page" => ["Page", "page", "default"],
+            "/" => ["Home", "home", "default"]
         );
         $this->errors = array(
             "/error/403" => ["403 Forbidden", "error/403", "error"],
