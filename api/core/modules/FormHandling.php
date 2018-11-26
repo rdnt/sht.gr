@@ -68,28 +68,14 @@ trait FormHandling {
                             $this->response("FORM_DATA_MISSING");
                         }
                         $value = $_POST[$outer_parameter];
-                        $data = str_replace(' ', '', $data);
-                        $checks = explode(';', $data);
-                        foreach ($checks as $check) {
-                            if (substr($check, 0, strlen("validate:")) === "validate:") {
-                                $regex = substr($check, strlen("validate:"));
-                                $valid = $this->validatePattern($regex, $value);
-                            }
-                            else {
-                                $valid = true;
-                            }
-                            if (substr($check, 0, strlen("constraints:")) === "constraints:") {
-                                $constraints = substr($check, strlen("constraints:"));
-                                $escaped_value = addslashes($value);
-                                $escaped_value = "'" . $escaped_value . "'";
-                                $constraints = str_replace($outer_parameter, $escaped_value, $constraints);
-                                $in_range = $this->applyConstraints($value, $constraints);
-                            }
-                            else {
-                                $in_range = true;
-                            }
+                        if ($data) {
+                            $regex = substr($data, strlen("validate:"));
+                            $valid = $this->validatePattern($regex, $value);
                         }
-                        if (!$valid or !$in_range) {
+                        else {
+                            $valid = true;
+                        }
+                        if (!$valid) {
                             $response_data[] = $outer_parameter;
                         }
                     }
