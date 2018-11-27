@@ -159,8 +159,9 @@ trait Renderer {
      * @param string $style The style filename
      */
     function loadStyle($style) {
-        $project_dir = $this->getProjectFolder();
-        $commit_hash = $this->getCommitHash();
+        $style = escape($style);
+        $project_dir = escape($this->getProjectFolder());
+        $commit_hash = escape($this->getCommitHash());
         echo "<link href=\"$project_dir/css/$style?v=$commit_hash\" type=\"text/css\" rel=\"stylesheet\" media=\"screen\"/>\n";
     }
 
@@ -170,8 +171,9 @@ trait Renderer {
      * @param string $script The script filename
      */
     function loadScript($script) {
-        $project_dir = $this->getProjectFolder();
-        $commit_hash = $this->getCommitHash();
+        $script = escape($script);
+        $project_dir = escape($this->getProjectFolder());
+        $commit_hash = escape($this->getCommitHash());
         echo "<script src=\"$project_dir/js/$script?v=$commit_hash\"></script>\n";
     }
 
