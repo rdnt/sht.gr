@@ -114,10 +114,6 @@ abstract class Core {
         return $this->current_page;
     }
 
-
-
-
-
     /**
      * Returns the regular expression that corresponse to the input key
      *
@@ -167,25 +163,6 @@ abstract class Core {
             if (!file_exists($this->root . $path)) {
                 mkdir($this->root . $path);
             }
-        }
-    }
-
-
-
-
-
-    /**
-     * Inserts the main content into the page
-     */
-    function loadContent() {
-        // Create a variable variable reference to the shell object
-        // in order to be able to access the shell object by its name and not
-        // $this when in page context
-        $shell = $this->shell;
-        $$shell = $this;
-        $path = $this->root . "/includes/pages/" . $this->content . ".php";
-        if (file_exists($path)) {
-            require_once $path;
         }
     }
 
