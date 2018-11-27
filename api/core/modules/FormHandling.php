@@ -11,10 +11,10 @@ trait FormHandling {
      */
     function response($response, $json = null) {
         // Initialize json array and echo it
-        $json_array = array(
+        $json_array = [
             "response" => $response,
             "data"     => $json
-        );
+        ];
         echo json_encode($json_array);
         // Stop script execution
         die();
@@ -132,7 +132,7 @@ trait FormHandling {
     /**
      * Verifies the CSRF field was sent on POST and matches the hash for the
      * current endpoint.
-     * 
+     *
      * @param string $endpoint The endpoint URL to hash the csrf token with
      */
     function verifyCSRF() {

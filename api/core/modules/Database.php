@@ -76,7 +76,7 @@ class Database extends mysqli {
         $response = parent::query($sql, $resultmode);
         if (!is_bool($response)) {
             if (mysqli_num_rows($response) != 0) {
-                $data = array();
+                $data = [];
                 // return all rows
                 while($row = $response->fetch_assoc()) {
                     $columns = sizeof($row);

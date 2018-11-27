@@ -27,11 +27,11 @@ trait Encryption {
         $ciphertext = openssl_encrypt($message, $cipher, $key, 0, $iv, $tag);
         // Create the cipherblock array, containing the ciphertext, the iv and
         // the integrity tag
-        $cipherblock = array(
+        $cipherblock = [
             bin2hex($ciphertext),
             bin2hex($iv),
             bin2hex($tag)
-        );
+        ];
         // Return the formatted cipherblock
         return implode (".", $cipherblock);
     }
