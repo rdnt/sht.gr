@@ -162,8 +162,6 @@ trait Renderer {
      *
      * @param string $script The script filename
      */
-    function
-
     function queueScript($script) {
         $this->script_queue[] = $script;
     }
