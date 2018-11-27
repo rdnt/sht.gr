@@ -64,16 +64,28 @@ trait FormHandling {
         return $return_data;
     }
 
-    function validateParams($parameters, &$post_data, &$return_data, &$invalid_data) {
+    /**
+     * Validates all the parameters set in the parameters array recursively,
+     * Allowing automatic validation on a multidimensional POST array
+     * Regex checking on the array elements that have a non-array value,
+     * using that value as the regex index on the patterns array
+     *
+     * @param array &$parameters The parameters to validate
+     * @param array &$post_data On first iteration, the POST data, on following
+     *                          iterations, a subset of the POST data.
+     * @param array &$return_data The validated POST data array
+     * @param array &$invalid_data Contains elements that didn't pass their
+     *                             respective regex pattern, if any
+     */
+    function validateParams(&$parameters, &$post_data, &$return_data, &$invalid_data) {
         foreach ($parameters as $parameter => $data) {
-            //echo $parameter;
             if (is_int($parameter)) {
                 // Only the parameter name is set, make sure it is received
                 if (!isset($post_data[$data])) {
                     $this->response("FORM_DATA_MISSING");
                 }
+                // Add it to return data, since no validation is needed
                 $return_data[$parameter] = $data;
-                echo "$data CHECKED.\n";
             }
             else {
                 if (!is_array($data)) {
@@ -82,11 +94,14 @@ trait FormHandling {
                         $this->response("FORM_DATA_MISSING");
                     }
                     $value = $post_data[$parameter];
+                    // Regex checking
                     $valid = $this->validatePattern($data, $value);
                     if ($valid) {
+                        // Add it to return data
                         $return_data[$parameter] = $value;
                     }
                     else {
+                        // Add it to invalid_data array
                         $invalid_data[] = $parameter;
                     }
                 }
@@ -103,12 +118,23 @@ trait FormHandling {
         return htmlspecialchars($string);
     }
 
+    /**
+     * Generates a hidden csrf validation input element and echoes it in a form
+     *
+     * @param string $endpoint The endpoint URL to hash the csrf token with
+     */
     function csrf($endpoint) {
         $hash = hash_hmac('sha256', $endpoint, $_SESSION['csrf']);
         $token = substr($hash, -12);
         echo "<input name=\"csrf\" value=\"$token\" hidden>\n";
     }
 
+    /**
+     * Verifies the CSRF field was sent on POST and matches the hash for the
+     * current endpoint.
+     * 
+     * @param string $endpoint The endpoint URL to hash the csrf token with
+     */
     function verifyCSRF() {
         $endpoint = $this->getCurrentPage();
         if (!isset($_POST['csrf'])) {

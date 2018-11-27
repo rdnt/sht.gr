@@ -6,10 +6,11 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php [NC,L,QSA]
 RewriteRule ^api/(.+)$ index.php [NC,QSA,L]
 
-#Do not allow access to git folder contents
+# Do not allow access to git folder contents
 RedirectMatch 403 /\.git
 
-#Redirect 403 errors to index.php
+# Redirect 403 errors to index.php
 ErrorDocument 403 /index.php
 
+# Enable PHP short open tags ( <? )
 php_flag short_open_tag on
