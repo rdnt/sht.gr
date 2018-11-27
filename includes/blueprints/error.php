@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <? $core->loadComponent("head") ?>
-<title><?= $core->title ?></title>
+<title><?= $core->getTitle() ?></title>
 </head>
 <body>
 <main>

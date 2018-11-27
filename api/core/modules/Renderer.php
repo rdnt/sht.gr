@@ -13,6 +13,15 @@ trait Renderer {
     protected $content;
 
     /**
+     * Returns the page title
+     *
+     * @return string The page title
+     */
+    function getTitle() {
+        return escape($this->title);
+    }
+
+    /**
      * Returns the current page's name
      *
      * @return string Current page's name

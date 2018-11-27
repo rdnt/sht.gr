@@ -108,4 +108,8 @@ class Database extends mysqli {
         return file_get_contents(dirname($_SERVER['DOCUMENT_ROOT']) . "/db.key");
     }
 
+    function escape($string) {
+        return mysql_real_escape_string($string);
+    }
+
 }
