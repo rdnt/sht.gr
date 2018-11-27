@@ -11,3 +11,5 @@ RedirectMatch 403 /\.git
 
 #Redirect 403 errors to index.php
 ErrorDocument 403 /index.php
+
+php_flag short_open_tag on

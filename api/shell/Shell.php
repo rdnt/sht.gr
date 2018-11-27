@@ -17,6 +17,7 @@ class Shell extends Core {
     use FormHandling;
     use Git;
     use Logging;
+    use Renderer;
 
     /**
      * Shell constructor method
@@ -26,7 +27,12 @@ class Shell extends Core {
         $this->shell = $shell;
         $this->name = "Core";
         $this->separator = "-";
-        $this->patterns = array();
+        $this->patterns = array(
+            // Contains at least one uppercase letter, one lowercase letter, one number and one special character
+            // Can contain any of the above
+            // Length: 8-64
+            'password' => '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,64}$/'
+        );
         $this->data_paths = array(
             "/data/",
             "/data/logs/"
@@ -37,6 +43,7 @@ class Shell extends Core {
         $this->errors = array(
             "/error/403" => ["403 Forbidden", "error/403", "error"],
             "/error/404" => ["404 Not Found", "error/404", "error"],
+            "/error/501" => ["501 Not Implemented", "error/501", "error"],
             "/error/503" => ["503 Service Unavailable", "error/503", "error"]
         );
         $this->assets = array(

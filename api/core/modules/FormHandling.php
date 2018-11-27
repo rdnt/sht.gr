@@ -51,46 +51,51 @@ trait FormHandling {
      *
      * @param string $data The sent POST keys
      */
-    function checkPOSTData() {
-        $response_data = array();
-        foreach (func_get_args() as $parameters) {
-            if (is_array($parameters)) {
-                foreach ($parameters as $outer_parameter => $data) {
-                    if (is_array($data)) {
-                        foreach ($data as $inner_parameter) {
-                            if (!isset($_POST[$outer_parameter][$inner_parameter])) {
-                                $this->response("FORM_DATA_MISSING");
-                            }
-                        }
-                    }
-                    else if ($data) {
-                        if (!isset($_POST[$outer_parameter])) {
-                            $this->response("FORM_DATA_MISSING");
-                        }
-                        $value = $_POST[$outer_parameter];
-                        if ($data) {
-                            $regex = substr($data, strlen("validate:"));
-                            $valid = $this->validatePattern($regex, $value);
-                        }
-                        else {
-                            $valid = true;
-                        }
-                        if (!$valid) {
-                            $response_data[] = $outer_parameter;
-                        }
-                    }
+    function validate($parameters) {
+        $this->checkPOST();
+        $this->verifyCSRF();
+        $invalid_data = [];
+        $return_data = [];
+        $post_data = $_POST;
+        $this->validateParams($parameters, $post_data, $return_data, $invalid_data);
+        if (!empty($invalid_data)) {
+            $this->response("INVALID_DATA", $invalid_data);
+        }
+        return $return_data;
+    }
+
+    function validateParams($parameters, &$post_data, &$return_data, &$invalid_data) {
+        foreach ($parameters as $parameter => $data) {
+            if (is_int($parameter)) {
+                // Only the parameter name is set, make sure it is received
+                if (!isset($post_data[$data])) {
+                    $this->response("FORM_DATA_MISSING");
                 }
+                $value = $post_data[$data];
+                //echo "$data CHECKED.\n";
             }
             else {
-                foreach (func_get_args() as $parameter) {
-                    if (!isset($_POST[$parameter])) {
+                if (!is_array($data)) {
+                    // A regex is set, make sure the received value passes it
+                    if (!isset($post_data[$parameter])) {
                         $this->response("FORM_DATA_MISSING");
                     }
+                    $value = $post_data[$parameter];
+                    $valid = $this->validatePattern($data, $value);
+                    if ($valid) {
+                        $return_data[$parameter] = $data;
+                    }
+                    else {
+                        $invalid_data[] = $parameter;
+                    }
+                    //echo "$parameter : $data REGEX CHECKED.\n";
+                }
+                else {
+                    // A sub-array is set, recurse
+                    $this->validateParams($data, $post_data[$parameter], $return_data[$parameter], $invalid_data);
                 }
             }
-        }
-        if (!empty($response_data)) {
-            $this->response("INVALID_DATA", $response_data);
+
         }
     }
 
@@ -98,22 +103,24 @@ trait FormHandling {
         return htmlspecialchars($string);
     }
 
-    function applyConstraints($variable, $constraint) {
-        if (!eval("return $constraint;")) {
-            return false;
-        }
-        return true;
+    function csrf($endpoint) {
+        $hash = hash_hmac('sha256', $endpoint, $_SESSION['csrf']);
+        $token = substr($hash, -12);
+        echo "<input name=\"csrf\" value=\"$token\" hidden>\n";
     }
 
-    /**
-     * Verifies POST data by combining the required checks
-     *
-     * @param string $data The sent POST keys
-     */
-    function verifyPOSTData() {
-        $this->checkPOST();
-        // Call the checkPOSTData functions with the input keys
-        call_user_func_array(array($this, 'checkPOSTData'), func_get_args());
+    function verifyCSRF() {
+        $endpoint = $this->getCurrentPage();
+        if (!isset($_POST['csrf'])) {
+            $this->response("NO_CSRF_TOKEN_PROVIDED");
+        }
+        else {
+            $hash = hash_hmac('sha256', $endpoint, $_SESSION['csrf']);
+            $token = substr($hash, -12);
+            if (!hash_equals($token, $_POST['csrf'])) {
+                $this->response("INVALID_CSRF_TOKEN");
+            }
+        }
     }
 
 }
