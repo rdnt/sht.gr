@@ -2,10 +2,10 @@
 // Example response
 $params = [
     "outer_variable" => [
-        // "inner_variable" => [
-        //     "inner_string_variable",
-        //     "inner_string_variable_with_regex" => "password"
-        // ],
+        "inner_variable" => [
+            "inner_string_variable",
+            "inner_string_variable_with_regex" => "password"
+        ],
         "outer_string_variable",
         "outer_string_variable_with_regex" => "password"
     ],

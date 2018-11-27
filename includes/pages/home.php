@@ -17,10 +17,10 @@ Home
 
     <br>
 
-    <!-- inner_string_variable
-    <input name="outer_variable[inner_variable[inner_string_variable]]"><br>
+    inner_string_variable
+    <input name="outer_variable[inner_variable][inner_string_variable]"><br>
     inner_string_variable_with_regex
-    <input name="outer_variable[inner_variable[inner_string_variable_with_regex]]"><br> -->
+    <input name="outer_variable[inner_variable][inner_string_variable_with_regex]"><br>
 
 
 

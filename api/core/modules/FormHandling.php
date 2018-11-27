@@ -66,13 +66,14 @@ trait FormHandling {
 
     function validateParams($parameters, &$post_data, &$return_data, &$invalid_data) {
         foreach ($parameters as $parameter => $data) {
+            //echo $parameter;
             if (is_int($parameter)) {
                 // Only the parameter name is set, make sure it is received
                 if (!isset($post_data[$data])) {
                     $this->response("FORM_DATA_MISSING");
                 }
-                $value = $post_data[$data];
-                //echo "$data CHECKED.\n";
+                $return_data[$parameter] = $data;
+                echo "$data CHECKED.\n";
             }
             else {
                 if (!is_array($data)) {
@@ -83,16 +84,15 @@ trait FormHandling {
                     $value = $post_data[$parameter];
                     $valid = $this->validatePattern($data, $value);
                     if ($valid) {
-                        $return_data[$parameter] = $data;
+                        $return_data[$parameter] = $value;
                     }
                     else {
                         $invalid_data[] = $parameter;
                     }
-                    //echo "$parameter : $data REGEX CHECKED.\n";
                 }
                 else {
                     // A sub-array is set, recurse
-                    $this->validateParams($data, $post_data[$parameter], $return_data[$parameter], $invalid_data);
+                    $this->validateParams($data, $post_data[$parameter], $parameters[$parameter], $invalid_data);
                 }
             }
 
