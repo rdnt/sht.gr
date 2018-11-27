@@ -26,14 +26,6 @@ abstract class Core {
     private $root;
     private $project_folder;
     private $current_page;
-    // Protected title-related datamembers
-    protected $name;
-    protected $separator;
-    protected $title;
-    // Private page rendering datamembers
-    protected $page;
-    protected $blueprint;
-    protected $content;
     // Protected page data arrays
     protected $pages;
     protected $patterns;
@@ -98,15 +90,6 @@ abstract class Core {
     }
 
     /**
-     * Returns the current page's name
-     *
-     * @return string Current page's name
-     */
-    function getPage() {
-        return $this->page;
-    }
-
-    /**
      * Returns the current page's url
      *
      * @return string Current page's name
@@ -144,8 +127,8 @@ abstract class Core {
         $iterator = new RecursiveIteratorIterator($core);
         $modules = new RegexIterator($iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
         // Load all modules in the directory structure recursively
-        foreach ($modules as $component => $filename) {
-            require_once $component;
+        foreach ($modules as $component) {
+            require_once $component[0];
         }
     }
 

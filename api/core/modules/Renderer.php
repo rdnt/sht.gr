@@ -3,6 +3,24 @@
 // Trait that handles blueprint-based page rendering
 trait Renderer {
 
+    // Protected title-related datamembers
+    protected $name;
+    protected $separator;
+    protected $title;
+    // Private page rendering datamembers
+    protected $page;
+    protected $blueprint;
+    protected $content;
+
+    /**
+     * Returns the current page's name
+     *
+     * @return string Current page's name
+     */
+    function getPage() {
+        return $this->page;
+    }
+
     /**
      * Formats the current page's title
      */
