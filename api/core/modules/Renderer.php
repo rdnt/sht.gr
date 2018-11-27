@@ -136,7 +136,7 @@ trait Renderer {
     }
 
     /**
-     * Returns a formatted style include
+     * Echoes a formatted style include
      *
      * @param string $style The style filename
      */
@@ -147,7 +147,7 @@ trait Renderer {
     }
 
     /**
-     * Returns a formatted script tag
+     * Echoes a formatted script tag
      *
      * @param string $script The script filename
      */
@@ -157,10 +157,20 @@ trait Renderer {
         echo "<script src=\"$project_dir/js/$script?v=$commit_hash\"></script>\n";
     }
 
+    /**
+     * Queues a script to be included after the scripts component is loaded
+     *
+     * @param string $script The script filename
+     */
+    function
+
     function queueScript($script) {
         $this->script_queue[] = $script;
     }
 
+    /**
+     * Echoes all the queued scripts as formatted script tags
+     */
     function appendScripts() {
         foreach ($this->script_queue as $script) {
             $this->loadScript($script);
