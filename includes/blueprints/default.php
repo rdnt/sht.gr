@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<? $core->loadComponent("head") ?>
+<?php $core->loadComponent("head") ?>
 <title><?= $core->getTitle() ?></title>
 </head>
 <body>
-<? $core->loadComponent("nav") ?>
+<?php $core->loadComponent("nav") ?>
 <main>
-<? $core->loadContent() ?>
+<?php $core->loadContent() ?>
 </main>
-<? $core->loadComponent("footer") ?>
-<? $core->loadComponent("scripts") ?>
-<? $core->appendScripts() ?>
+<?php $core->loadComponent("footer") ?>
+<?php $core->loadComponent("scripts") ?>
+<?php $core->appendScripts() ?>
 </body>
 </html>

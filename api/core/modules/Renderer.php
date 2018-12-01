@@ -53,13 +53,15 @@ trait Renderer {
         $this->formatTitle();
     }
 
-    /**
-     * Renders a page based on its blueprint's format
-     */
-    function renderPage() {
-        // Loop all pages
+    function throwError($code) {
+        http_response_code($code);
+        $this->setCurrentPage("/error/$code");
+    }
+
+    function findCurrentPage() {
         $folder = $this->getProjectFolder();
         $pages = array_merge($this->pages, $this->errors);
+        // Loop all pages
         foreach ($pages as $url => $data) {
             // If URL starts with a hash it is a dropdown and index 3 is an
             // array with the dropdown items
@@ -78,59 +80,112 @@ trait Renderer {
                 $this->blueprint = $data[2];
             }
         }
-        // Acquire the first segment of the requested path
-        $dir = substr($this->getRoot(), strlen($_SERVER['DOCUMENT_ROOT']));
-        $current_page = substr($this->getCurrentPage(), strlen($dir));
-        $parameters = explode("/", $current_page);
+    }
+
+    function pageExists($page) {
+        return array_key_exists($page, $this->pages);
+    }
+
+    function includePage() {
+        $path = $this->getRoot() . "/includes/blueprints/" . $this->blueprint . ".php";
+        if (!file_exists($path)) {
+            $path = $this->getRoot() . "/includes/blueprints/default.php";
+            $this->log("RENDERER", "Page blueprint file $this->blueprint.php doesn't exist. Using default blueprint.");
+        }
+        $shell = $this->shell;
+        $$shell = $this;
+        require_once $path;
+    }
+
+    function isAPICall($actual_page) {
+        $parameters = explode("/", $actual_page);
         array_shift($parameters);
+        if ($parameters[0] == "api") {
+            return true;
+        }
+        return false;
+    }
+
+    function prepareEndpoint() {
+        echo "endpoint";
+    }
+
+    function serveResource() {
+        echo "resource";
+    }
+
+
+
+    /**
+     * Renders a page based on its blueprint's format
+     */
+    function renderPage() {
+        // Find the current page
+        $this->findCurrentPage();
+        // Acquire the first segment of the requested path
+        $dir = $this->getProjectFolder();
+        $url = substr($this->getCurrentPage(), strlen($dir));
+
+
+        $location = strtok($url, '?');
+        $path = $this->getRoot() . $location;
+
+
+        //echo "location: $location<br>";
+        //echo "path: $path<br>";
 
         $this->formatTitle();
-        if (file_exists($this->getRoot() . $current_page) && !array_key_exists($current_page, $this->pages)) {
-            http_response_code(403);
-            $this->setCurrentPage("/error/403");
+
+
+
+
+
+
+        if (!$this->canAccess($location)) {
+            $this->throwError(403);
             $path = $this->getRoot() . "/includes/blueprints/" . $this->blueprint . ".php";
-            if (!file_exists($path)) {
-                $path = $this->getRoot() . "/includes/blueprints/default.php";
-                $this->log("RENDERER", "Page blueprint file $this->blueprint.php doesn't exist. Using default blueprint.");
-            }
-            $shell = $this->shell;
-            $$shell = $this;
-            require_once $path;
-        }
-        else if ($parameters[0] != "api") {
-            if (!$this->page || $current_page == "/api/") {
-                http_response_code(404);
-                $this->setCurrentPage("/error/404");
-            }
-            $path = $this->getRoot() . "/includes/blueprints/" . $this->blueprint . ".php";
-            if (!file_exists($path)) {
-                $path = $this->getRoot() . "/includes/blueprints/default.php";
-                $this->log("RENDERER", "Page blueprint file $this->blueprint.php doesn't exist. Using default blueprint.");
-            }
-            $shell = $this->shell;
-            $$shell = $this;
-            require_once $path;
         }
         else {
-            $path = $this->getRoot() . $current_page . ".php";
-            if (file_exists($path)) {
-                $shell = $this->shell;
-                $$shell = $this;
-                require_once $path;
-            }
-            else {
-                http_response_code(404);
-                $this->setCurrentPage("/error/404");
+            if ($this->pageExists($location)) {
                 $path = $this->getRoot() . "/includes/blueprints/" . $this->blueprint . ".php";
                 if (!file_exists($path)) {
-                    $path = $this->getRoot() . "/includes/blueprints/default.php";
-                    $this->log("RENDERER", "Page blueprint file $this->blueprint.php doesn't exist. Using default blueprint.");
+                    $this->throwError(501);
+                    $path = $this->getRoot() . "/includes/blueprints/" . $this->blueprint . ".php";
                 }
-                $shell = $this->shell;
-                $$shell = $this;
-                require_once $path;
+            }
+            else if ($this->isAPICall($location)) {
+                $path = $path . ".php";
+            }
+            else if (!file_exists($path)) {
+                $this->throwError(404);
+                $path = $this->getRoot() . "/includes/blueprints/" . $this->blueprint . ".php";
             }
         }
+        $shell = $this->shell;
+        $$shell = $this;
+        require_once $path;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     /**
@@ -205,3 +260,5 @@ trait Renderer {
     }
 
 }
+
+?>

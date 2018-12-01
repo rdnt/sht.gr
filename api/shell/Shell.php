@@ -17,6 +17,7 @@ class Shell extends Core {
     use FormHandling;
     use Git;
     use Logging;
+    use Permissions;
     use Renderer;
 
     /**
@@ -24,6 +25,16 @@ class Shell extends Core {
      */
     function __construct($shell = null) {
         parent::__construct();
+        $this->private_paths = [
+            "/api/core/",
+            "/api/shell/",
+            "/includes/",
+            "/less/"
+        ];
+        $this->protected_paths = [
+            "/css/internal/" => 0,
+            "/js/internal/" => 0
+        ];
         $this->shell = $shell;
         $this->name = "Core";
         $this->separator = "-";
@@ -38,7 +49,11 @@ class Shell extends Core {
             "/data/logs/"
         ];
         $this->pages = [
-            "/" => ["Home", "home", "default"]
+            "/" => ["Home", "home", "default"],
+            "/page" => ["Page", "page", "default"],
+            "/pageC" => ["Page", "pageC", "default"],
+            "/pageB" => ["Page", "page", "defaultB"],
+            "/pageCB" => ["Page", "pageC", "defaultB"]
         ];
         $this->errors = [
             "/error/403" => ["403 Forbidden", "error/403", "error"],
