@@ -1,1 +1,1 @@
-console.log('internal');
+console.log("internal");

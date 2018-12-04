@@ -22,6 +22,7 @@ trait Permissions {
     }
 
     function setAccessLevel($username) {
+        $user_id = $this->getUserID($username);
         if ($this->db) {
             $access_level = $this->getAccessLevel($user_id);
             $_SESSION['access_level'] = $access_level;
