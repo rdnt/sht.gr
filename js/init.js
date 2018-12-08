@@ -14,8 +14,6 @@ function toggleTheme() {
 
 $(window).on("load", function() {
 
-
-
 	$("nav").hover(
 		function() {
 			$(this).addClass("hover");
@@ -32,5 +30,18 @@ $(window).on("load", function() {
 			}
 		}
 	);
+
+	$(".container").hover(function() {
+		$("#side-reveal").addClass("hover");
+		$("#background-img").addClass("hover");
+	}, function() {
+		$("#side-reveal").removeClass("hover");
+		$("#background-img").removeClass("hover");
+	});
+
+	$(".container").click(function() {
+		$("#side-reveal").addClass("active");
+		$("#background-img").addClass("active");
+	});
 
 });

@@ -39,3 +39,5 @@
         <?php endfor; ?>
     </div>
 </div>
+<div id="side-reveal"></div>
+<div id="background-img"></div>

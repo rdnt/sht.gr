@@ -7,10 +7,12 @@ html, body {
     overflow: hidden;
 }
 main {
+    position: relative;
     width: 100%;
     overflow-y: scroll;
     height: 100vh;
     background-color: #fff;
+    z-index: 100;
     &.playing {
         height: calc(~"100vh - 100px");
     }
