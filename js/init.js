@@ -1,5 +1,5 @@
 
-$(window).on("load", function() {
+function toggleTheme() {
 	setTimeout(function() {
 		$(".theme-overlay").addClass("dark");
 		$("nav, main").addClass("theming");
@@ -9,8 +9,11 @@ $(window).on("load", function() {
 				$("nav, main").removeClass("theming");
 			}, 500);
 		}, 900);
-
 	}, 1000);
+}
+
+$(window).on("load", function() {
+
 
 
 	$("nav").hover(
