@@ -1,5 +1,4 @@
 // out: ../css/navigation.css, compress: true, autoprefixer: defaults
-
 nav {
     width: 260px;
     padding: 40px;
@@ -17,7 +16,6 @@ nav {
                 transform: translateX(0);
             }
         }
-
         li {
             opacity: 1;
             &:nth-child(1) {
@@ -50,11 +48,9 @@ nav {
             &:nth-child(10) {
                 transform: translateY(60px);
             }
-
             &:after {
                 opacity: 1;
             }
-
             &.active {
                 &:before {
                     background-color: #2476d3;
@@ -101,7 +97,6 @@ nav {
             background-image: url("/images/logo.png");
             background-size: 90% 90%;
             background-position: center;
-
         }
         .logo {
             display: block;
@@ -126,7 +121,6 @@ nav {
             transition: transform .3s ease;
         }
     }
-
     ul {
         margin: 0 !important;
         position: relative;
@@ -135,16 +129,7 @@ nav {
         overflow:inherit;
         opacity: .7;
         transition: opacity .5s ease;
-
-        // &:after {
-        //     content: '';
-        //     display: block;
-        //     height: 100%;
-        //     width: 100px;
-        //     background-color: #0f0;
-        // }
         margin-top: 16px;
-
         li {
             font-size: 0;
             width: auto;
@@ -157,12 +142,6 @@ nav {
             &:last-child:after {
                 display: none;
             }
-            //
-            //
-            // &.item {
-            //     margin-left: 20px;
-            // }
-
             &:before {
                 top: 0;
                 content: ' ';
@@ -176,8 +155,6 @@ nav {
                 height: 14px;
                 background-color: #4c4c4c;
                 transition: transform .5s ease, background-color .5s ease, box-shadow .5s ease;
-                //border: 2px solid #e3e3e3;
-                //box-shadow: 0 0 0 2px #e3e3e3;
             }
             &:after {
                 top: 8px;
