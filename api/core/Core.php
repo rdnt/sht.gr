@@ -140,17 +140,6 @@ abstract class Core {
     }
 
     /**
-     * Create required data paths if they don't exist
-     */
-    function createDataPaths() {
-        foreach ($this->data_paths as $path) {
-            if (!file_exists($this->root . $path)) {
-                mkdir($this->root . $path);
-            }
-        }
-    }
-
-    /**
      * Redirects to a specific page and stops script execution
      *
      * @param string $page The page to redirect to

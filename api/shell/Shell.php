@@ -77,7 +77,6 @@ class Shell extends Core {
         // Push the assets for faster loading
         // Required HTTP/2.0 to be enabled in the server configuration file
         $this->pushAssets();
-        $this->createDataPaths();
     }
 
 }
