@@ -13,12 +13,14 @@ class Shell extends Core {
     // Include required components
     use AssetPushing;
     use Date;
+    use Database;
     use Encryption;
     use FormHandling;
     use Git;
     use Logging;
     use Permissions;
     use Renderer;
+    use RateLimiting;
 
     /**
      * Shell constructor method
@@ -82,8 +84,8 @@ class Shell extends Core {
 // Initialize the Shell object using a variable variable
 $core = new Shell();
 // Initialize the connection to the database (optional) ------- |
-$db = new DB('localhost', 'root'); //                           |  OPTIONAL DB
+$db = new DB('localhost', 'root', 'core'); //                   |  OPTIONAL DB
 // Link the shell object with the database for easy accessing   |  CONNECTION
-$core->linkDB($db); // -------------------------------------- |
+$core->linkDB($db); // ---------------------------------------- |
 // Render the page
 $core->renderPage();

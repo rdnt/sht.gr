@@ -6,7 +6,7 @@ trait RateLimiting {
     /**
      * Applies rate limiting to an operation (requires a database connection)
      */
-    function apply_rate_limiting() {
+    function apply_rate_limiting($action) {
         // Get the remote IP address
         $ip = $_SERVER['REMOTE_ADDR'];
         // Query the database for this IP
@@ -42,7 +42,7 @@ trait RateLimiting {
                 else {
                     // IP should be blocked but is not! Block it!
                     $rlip->block();
-                    $this->log("WARN", "Login is being rate-limited for $ip");
+                    $this->log("RATE-LIMIT", "Action $action is being rate-limited for $ip");
                 }
             }
         }
