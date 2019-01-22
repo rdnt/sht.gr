@@ -122,7 +122,7 @@ trait FormHandling {
     function csrf($endpoint) {
         $hash = hash_hmac('sha256', $endpoint, $_SESSION['csrf']);
         $token = substr($hash, -12);
-        echo '<input name="csrf" value="' . escape($token) . '" hidden>\n';
+        echo '<input name="csrf" value="' . escape($token) . '" hidden>' . "\n";
     }
 
     /**

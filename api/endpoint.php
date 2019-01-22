@@ -1,3 +1,7 @@
 <?php
 // Example response
-$core->response("SUCCESS");
+$params = array(
+    "password"
+);
+$post = $core->validate($params);
+$core->response("SUCCESS", $post);
