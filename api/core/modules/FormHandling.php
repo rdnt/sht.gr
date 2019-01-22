@@ -28,6 +28,7 @@ trait FormHandling {
      */
     function validatePattern($key, $value) {
         if (!array_key_exists($key, $this->patterns)) {
+            $this->log("VALIDATION", "Key $key missing from the patterns array.");
             return false;
         }
         if (!preg_match($this->getPattern($key), $value)) {
@@ -85,7 +86,7 @@ trait FormHandling {
                     $this->response("FORM_DATA_MISSING");
                 }
                 // Add it to return data, since no validation is needed
-                $return_data[$parameter] = $data;
+                $return_data[$data] = $post_data[$data];
             }
             else {
                 if (!is_array($data)) {

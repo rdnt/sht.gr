@@ -1,7 +1,7 @@
 <?php
 // Example response
 $params = array(
-    "password"
+    "password" => "asdad"
 );
 $post = $core->validate($params);
-$core->response("SUCCESS", $post);
+$core->response("SUCCESS", $post['password']);

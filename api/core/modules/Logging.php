@@ -24,27 +24,27 @@ trait Logging {
             // Add date header
             $date = date("d M Y H:i:s");
             // Create the message
-            $message = $date . " $action: $message\n";
+            $message = $date . " $action: $message" . PHP_EOL;
             if (file_exists($log)) {
                 // Latest log exists; load it
-                $message = file_get_contents($log);
+                $contents = file_get_contents($log);
                 $lines = COUNT(FILE($log));
                 if ($lines >= 1000) {
                     // Dump log and create a new one
                     $date = date("Ymd_His");
                     file_put_contents("$logs_folder$date.log", $message);
-                    $message = $message;
+                    $contents = $message;
                 }
                 else {
                     // Just append the message to existin log
-                    $message .= $message;
+                    $contents .= $message;
                 }
             }
             else {
-                $message = $message;
+                $contents = $message;
             }
             // Save the latest log
-            file_put_contents($log, $message);
+            file_put_contents($log, $contents);
         }
     }
 
