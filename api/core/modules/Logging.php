@@ -12,7 +12,7 @@ trait Logging {
      */
     function log($action, $data, $origin = null) {
         // Get the latest.log path
-        $logs_folder = $this->getRoot() . "/data/logs/";
+        $logs_folder = $this->getRoot() . "/logs/";
         $log = $logs_folder . "latest.log";
         // Add date header
         $date = date("d M Y H:i:s");
@@ -51,7 +51,7 @@ trait Logging {
      * Deletes the logs
      */
     function purgeLogs() {
-        $logs_folder = $this->getRoot() . "/data/logs/";
+        $logs_folder = $this->getRoot() . "/logs/";
         $logs = glob("$logs_folder*.log");
         // Delete all logfiles
         foreach($logs as $log) {
