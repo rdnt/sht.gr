@@ -18,30 +18,30 @@ function asyncRequest(formID, targetURL, init, callback, successDelay, errorDela
                 method: "POST",
                 url: targetURL,
                 data: $(this).serialize(),
-                success(data) {
+                success: function(data) {
                     data = $.trim(data);
                     var duration = new Date() - start;
                     try {
                         data = JSON.parse(data);
                     }
-                    catch(e) {
-                        var data = {"response": "JSON_PARSE_FAILED", "data": data};
+                    catch (e) {
+                        var data = { response: "JSON_PARSE_FAILED", data: data };
                     }
-                    if (data["response"] === "SUCCESS" ) {
-                        setTimeout(function(){
+                    if (data["response"] === "SUCCESS") {
+                        setTimeout(function() {
                             callback(data);
                             pending = 0;
                         }, successDelay - duration);
                     }
                     else {
-                        setTimeout(function(){
+                        setTimeout(function() {
                             callback(data);
                             pending = 0;
                         }, errorDelay - duration);
                     }
                 },
                 error(request) {
-                    var data = {"response": "REQUEST_FAILED", "data": request.status + " " + request.statusText.toUpperCase()};
+                    var data = { "response": "REQUEST_FAILED", "data": request.status + " " + request.statusText.toUpperCase() };
                     callback(data);
                 }
             });
