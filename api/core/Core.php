@@ -34,8 +34,6 @@ abstract class Core {
     protected $version;
 
     protected $script_queue;
-    // Folders to create on start
-    protected $data_paths;
 
     /**
      * Constructs the shell object

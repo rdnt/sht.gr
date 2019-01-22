@@ -12,6 +12,9 @@ trait Renderer {
     protected $blueprint;
     protected $content;
 
+    protected $system_dirs;
+    protected $asset_dirs;
+
     /**
      * Returns the page title
      *

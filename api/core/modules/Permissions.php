@@ -2,7 +2,7 @@
 
 trait Permissions {
 
-    protected $system_dirs;
+    
 
     function getUserID($username) {
         return $this->db->query("

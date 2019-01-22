@@ -43,9 +43,6 @@ class Shell extends Core {
             // Length: 8-64
             'password' => '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,64}$/'
         ];
-        $this->data_paths = [
-            "/logs/"
-        ];
 
         $this->asset_dirs = [
             "/images",
