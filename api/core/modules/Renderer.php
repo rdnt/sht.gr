@@ -4,13 +4,13 @@
 trait Renderer {
 
     // Protected title-related datamembers
-    protected $name;
+    protected $app;
     protected $separator;
     protected $title;
     // Private page rendering datamembers
-    protected $page;
+    protected $name;
     protected $blueprint;
-    protected $content;
+    protected $template;
 
     protected $system_dirs;
     protected $asset_dirs;
@@ -30,14 +30,14 @@ trait Renderer {
      * @return string Current page's name
      */
     function getPage() {
-        return $this->page;
+        return $this->name;
     }
 
     /**
      * Formats the current page's title
      */
     function formatTitle() {
-        $this->title = $this->name . " " . $this->separator . " " . $this->page;
+        $this->title = $this->app . " " . $this->separator . " " . $this->name;
     }
 
     /**
@@ -46,12 +46,11 @@ trait Renderer {
      * @param string $page The page path to force
      */
     function setCurrentPage($url) {
-        //$pages = array_merge($this->pages, $this->errors);
-        $error = $this->pages[$url];
+        $page = $this->pages[$url];
         $this->current_page = $url;
-        $this->page = $error->name;
-        $this->content = $error->template;
-        $this->blueprint = $error->blueprint;
+        $this->name = $page->name;
+        $this->template = $page->template;
+        $this->blueprint = $page->blueprint;
         // Re-format the title since the page data was changed
         $this->formatTitle();
     }
@@ -63,24 +62,22 @@ trait Renderer {
 
     function findCurrentPage() {
         $folder = $this->getProjectFolder();
-        //$pages = array_merge($this->pages, $this->errors);
         // Loop all pages
         foreach ($this->pages as $page) {
+
+
             // If URL starts with a hash it is a dropdown and index 3 is an
             // array with the dropdown items
-            if (substr($folder . $page->url, 0, 1) === '#') {
+
+            if ($this->getCurrentPage() === $page->url) {
+                $this->setCurrentPage($page->url);
+            }
+            if ($page->children) {
                 foreach ($page->children as $child) {
                     if ($this->getCurrentPage() === $child->url) {
-                        $this->page = $child->name;
-                        $this->content = $child->template;
-                        $this->blueprint = $child->blueprint;
+                        $this->setCurrentPage($child->url);
                     }
                 }
-            }
-            else if ($this->getCurrentPage() === $folder . $page->url) {
-                $this->page = $page->name;
-                $this->content = $page->template;
-                $this->blueprint = $page->blueprint;
             }
         }
     }
@@ -132,18 +129,24 @@ trait Renderer {
 
     function servePage($location) {
         $path = $this->getRoot() . "/includes/blueprints/" . $this->blueprint . ".php";
-        if (file_exists($path)) {
-            global $core;
-            require_once $path;
+        $template = $this->getRoot() . "/includes/pages/" . $this->template . ".php";
+        if (!file_exists($path)) {
+            $this->log("RENDERER", "Error while serving " . $this->getCurrentPage() . ": Blueprint $this->blueprint does not exist, falling back to default blueprint.");
+            $this->serveErrorPage(501, $location);
+
+        }
+        else if (!file_exists($template)) {
+            $this->log("RENDERER", "Error while serving " . $this->getCurrentPage() . ": Template $this->template does not exist.");
+            $this->serveErrorPage(501, $location);
         }
         else {
-            $this->serveErrorPage(501, $location);
+            global $core;
+            require_once $path;
         }
     }
 
 
     function isAsset($location) {
-
         $flag = false;
         foreach ($this->asset_dirs as $path) {
             if (substr($location, 0, strlen($path)) === $path) {
@@ -183,6 +186,7 @@ trait Renderer {
     function renderPage() {
 
         $this->findCurrentPage();
+
         // Acquire the first segment of the requested path
         $dir = $this->getProjectFolder();
         $url = substr($this->getCurrentPage(), strlen($dir));
@@ -247,12 +251,12 @@ trait Renderer {
         // in order to be able to access the shell object by its name and not
         // $this when in page context
         $core = $this;
-        $path = $this->getRoot() . "/includes/pages/" . $this->content . ".php";
+        $path = $this->getRoot() . "/includes/pages/" . $this->template . ".php";
         if (file_exists($path)) {
             require_once $path;
         }
         else {
-            $this->log("RENDERER", "Page content file $this->content.php doesn't exist.");
+            $this->log("RENDERER", "Page template file $this->template.php doesn't exist.");
         }
     }
 

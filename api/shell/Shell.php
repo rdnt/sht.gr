@@ -36,7 +36,7 @@ class Shell extends Core {
             "/includes"
         ];
 
-        $this->name = "Core";
+        $this->app = "Core";
         $this->separator = "-";
         $this->patterns = [
             // Contains at least one uppercase letter, one lowercase letter, one number and one special character
@@ -53,7 +53,7 @@ class Shell extends Core {
         ];
 
         new Page("/", "Home", "home", "default");
-        new Page("/test", "Home Child", "test", "default", "/");
+        new Page("/test", "Home Child", "page", "default", "/");
         new Page("/page", "Page", "page", "default");
         new Page("/pageC", "Page", "pageC", "default");
         new Page("/pageB", "Page", "page", "defaultB");
@@ -75,6 +75,7 @@ class Shell extends Core {
         // Push the assets for faster loading
         // Required HTTP/2.0 to be enabled in the server configuration file
         $this->pushAssets();
+        $this->formatTitle();
     }
 
 }
