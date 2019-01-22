@@ -2,12 +2,11 @@
 @width: 100;
 @circle: @width* 3.1415926 * 2;
 
-.container {
+main {
     width: calc(~"100% - 380px");
     margin-left: 300px;
     padding: 40px;
-    position: relative;
-    z-index: 100;
+    height: calc(~"100% - 80px");
 }
 
 
@@ -23,6 +22,7 @@
         position: relative;
         display: block;
         max-width: 100%;
+        max-height: 100%;
         left: 50%;
         top: 50%;
         margin: 0;
@@ -322,7 +322,6 @@
     left: 0;
     top: 0;
     transition: .4s ease;
-    background-image: url("/images/ardent/covers/bg1.jpg");
     opacity: 0;
     pointer-events: none;
     position: fixed;
@@ -331,12 +330,14 @@
 
     min-width: 100vw;
     min-height: 100vw;
+    transform: scale(1.2);
+    transform-origin: 50% 40%;
 
     &.hover {
-        opacity: .3;
+        opacity: .2;
     }
     &.active {
-        opacity: 1;
+        opacity: .4;
         transition: 1s cubic-bezier(0.66, 0, 0.33, 1);
     }
     &:before {

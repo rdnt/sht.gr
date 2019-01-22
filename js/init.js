@@ -20,7 +20,7 @@ $(window).on("load", function() {
 		}
 	);
 
-	$(".container").mousemove(
+	$("main").mousemove(
 		function() {
 			if ($("nav").hasClass("load")) {
 				$("nav").removeClass("hover load");
@@ -31,17 +31,17 @@ $(window).on("load", function() {
 		}
 	);
 
-	// $(".container").hover(function() {
-	// 	$("#side-reveal").addClass("hover");
-	// 	$("#background-img").addClass("hover");
-	// }, function() {
-	// 	$("#side-reveal").removeClass("hover");
-	// 	$("#background-img").removeClass("hover");
-	// });
-	//
-	// $(".container").click(function() {
-	// 	$("#side-reveal").addClass("active");
-	// 	$("#background-img").addClass("active");
-	// });
+	$("main").hover(function() {
+		$("#side-reveal").addClass("hover");
+		$("#background-img").addClass("hover");
+	}, function() {
+		$("#side-reveal").removeClass("hover");
+		$("#background-img").removeClass("hover");
+	});
+
+	$("main").click(function() {
+		$("#side-reveal").addClass("active");
+		$("#background-img").addClass("active");
+	});
 
 });

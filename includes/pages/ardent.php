@@ -1,43 +1,35 @@
-
-<div class="container">
-
-    <div class="intro">
-        <img src="/images/ardent_black.png">
+<div class="intro">
+    <img src="/images/ardent_black.png">
+</div>
+<div class="playlist">
+    <div class="header">
+        <div class="inner">
+            <div class="spacer"></div>
+            <div class="title">
+                <span>Title</span>
+            </div>
+            <div class="duration">
+                <span>Duration</span>
+            </div>
+            <div class="plays">
+                <span>Plays</span>
+            </div>
+        </div>
     </div>
-
-    <div class="playlist">
-
-        <div class="header">
+    <?php for($i=1; $i<=17; $i++): ?>
+        <div class="track">
             <div class="inner">
-                <div class="spacer"></div>
+                <div class="button play"></div>
                 <div class="title">
-                    <span>Title</span>
+                    <span>Ardent Radio – Episode <?=str_pad($i, 2, 0, STR_PAD_LEFT)?></span>
                 </div>
                 <div class="duration">
-                    <span>Duration</span>
+                    <span>1:02:15</span>
                 </div>
                 <div class="plays">
-                    <span>Plays</span>
+                    <span>114</span>
                 </div>
             </div>
         </div>
-        <?php for($i=1; $i<=17; $i++): ?>
-            <div class="track">
-                <div class="inner">
-                    <div class="button play"></div>
-                    <div class="title">
-                        <span>Ardent Radio – Episode <?=str_pad($i, 2, 0, STR_PAD_LEFT)?></span>
-                    </div>
-                    <div class="duration">
-                        <span>1:02:15</span>
-                    </div>
-                    <div class="plays">
-                        <span>114</span>
-                    </div>
-                </div>
-            </div>
-        <?php endfor; ?>
-    </div>
+    <?php endfor; ?>
 </div>
-<div id="side-reveal"></div>
-<div id="background-img"></div>
