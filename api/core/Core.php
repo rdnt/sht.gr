@@ -27,7 +27,7 @@ abstract class Core {
     private $project_folder;
     private $current_page;
     // Protected page data arrays
-    protected $pages;
+    public $pages;
     protected $patterns;
     // HTTP/2.0 Asset pushing
     protected $assets;

@@ -114,10 +114,6 @@ trait FormHandling {
         }
     }
 
-    function escapeString($string) {
-        return htmlspecialchars($string);
-    }
-
     /**
      * Generates a hidden csrf validation input element and echoes it in a form
      *

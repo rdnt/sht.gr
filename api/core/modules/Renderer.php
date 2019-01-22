@@ -43,12 +43,12 @@ trait Renderer {
      * @param string $page The page path to force
      */
     function setCurrentPage($url) {
-        $pages = array_merge($this->pages, $this->errors);
-        $data = $pages[$url];
+        //$pages = array_merge($this->pages, $this->errors);
+        $error = $this->pages[$url];
         $this->current_page = $url;
-        $this->page = $data[0];
-        $this->content = $data[1];
-        $this->blueprint = $data[2];
+        $this->page = $error->name;
+        $this->content = $error->template;
+        $this->blueprint = $error->blueprint;
         // Re-format the title since the page data was changed
         $this->formatTitle();
     }
@@ -60,44 +60,45 @@ trait Renderer {
 
     function findCurrentPage() {
         $folder = $this->getProjectFolder();
-        $pages = array_merge($this->pages, $this->errors);
+        //$pages = array_merge($this->pages, $this->errors);
         // Loop all pages
-        foreach ($pages as $url => $data) {
+        foreach ($this->pages as $page) {
             // If URL starts with a hash it is a dropdown and index 3 is an
             // array with the dropdown items
-            if (substr($folder . $url, 0, 1) === '#') {
-                foreach ($data[3] as $inner_url => $inner_data) {
-                    if ($this->getCurrentPage() === $inner_url) {
-                        $this->page = $inner_data[0];
-                        $this->content = $inner_data[1];
-                        $this->blueprint = $inner_data[2];
+            if (substr($folder . $page->url, 0, 1) === '#') {
+                foreach ($page->children as $child) {
+                    if ($this->getCurrentPage() === $child->url) {
+                        $this->page = $child->name;
+                        $this->content = $child->template;
+                        $this->blueprint = $child->blueprint;
                     }
                 }
             }
-            else if ($this->getCurrentPage() === $folder . $url) {
-                $this->page = $data[0];
-                $this->content = $data[1];
-                $this->blueprint = $data[2];
+            else if ($this->getCurrentPage() === $folder . $page->url) {
+                $this->page = $page->name;
+                $this->content = $page->template;
+                $this->blueprint = $page->blueprint;
             }
         }
     }
 
-    function pageExists($page) {
-        return array_key_exists($page, $this->pages);
-    }
+    // function pageExists($page) {
+    //     return array_key_exists($page, $this->pages);
+    // }
 
-    function includePage() {
-        $path = $this->getRoot() . "/includes/blueprints/" . $this->blueprint . ".php";
-        if (!file_exists($path)) {
-            $path = $this->getRoot() . "/includes/blueprints/default.php";
-            $this->log("RENDERER", "Page blueprint file $this->blueprint.php doesn't exist. Using default blueprint.");
-        }
-        $shell = $this->shell;
-        $$shell = $this;
-        require_once $path;
-    }
+    // function includePage() {
+    //     $path = $this->getRoot() . "/includes/blueprints/" . $this->blueprint . ".php";
+    //     if (!file_exists($path)) {
+    //         $path = $this->getRoot() . "/includes/blueprints/default.php";
+    //         $this->log("RENDERER", "Page blueprint file $this->blueprint.php doesn't exist. Using default blueprint.");
+    //     }
+    //     $core = $this;
+    //     require_once $path;
+    // }
 
-    function isAPICall($actual_page) {
+
+
+    function isEndpoint($actual_page) {
         $parameters = explode("/", $actual_page);
         array_shift($parameters);
         if ($parameters[0] == "api") {
@@ -106,12 +107,69 @@ trait Renderer {
         return false;
     }
 
-    function prepareEndpoint() {
-        echo "endpoint";
+    function serveEndpoint($location) {
+        $path = $this->getRoot() . $location . ".php";
+        if (file_exists($path)) {
+            global $core;
+            require $path;
+        }
+        else {
+            $this->serveErrorPage(403, $location);
+        }
     }
 
-    function serveResource() {
-        echo "resource";
+    function isPage($location) {
+        if (array_key_exists($location, $this->pages)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    function servePage($location) {
+        $path = $this->getRoot() . "/includes/blueprints/" . $this->blueprint . ".php";
+        if (file_exists($path)) {
+            global $core;
+            require_once $path;
+        }
+        else {
+            $this->serveErrorPage(501, $location);
+        }
+    }
+
+
+    function isAsset($location) {
+
+        $flag = false;
+        foreach ($this->asset_dirs as $path) {
+            if (substr($location, 0, strlen($path)) === $path) {
+                $flag = true;
+            }
+        }
+        if ($flag) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    function serveAsset($location) {
+        $path = $this->getRoot() . $location;
+        if (file_exists($path)) {
+            global $core;
+            require $path;
+        }
+        else {
+            $this->serveErrorPage(404, $location);
+        }
+    }
+
+
+    function serveErrorPage($code, $location) {
+        $this->throwError($code);
+        $this->servePage($location);
     }
 
 
@@ -120,7 +178,7 @@ trait Renderer {
      * Renders a page based on its blueprint's format
      */
     function renderPage() {
-        // Find the current page
+
         $this->findCurrentPage();
         // Acquire the first segment of the requested path
         $dir = $this->getProjectFolder();
@@ -128,49 +186,29 @@ trait Renderer {
 
 
         $location = strtok($url, '?');
-        $path = $this->getRoot() . $location;
 
+        $accessible = $this->isAccessible($location);
 
-        //echo "location: $location<br>";
-        //echo "path: $path<br>";
-
-        $this->formatTitle();
-
-
-
-
-
-
-        if (!$this->canAccess($location)) {
-            $this->throwError(403);
-            $path = $this->getRoot() . "/includes/blueprints/" . $this->blueprint . ".php";
+        if (!$accessible or $location === "/api/") {
+            //echo "not allowed, serving 403<br>";
+            $this->serveErrorPage(403, $location);
+        }
+        else if ($this->isEndpoint($location)) {
+            //echo "serving endpoint<br>";
+            $this->serveEndpoint($location);
+        }
+        else if ($this->isAsset($location)) {
+            //echo "serving asset<br>";
+            $this->serveAsset($location);
+        }
+        else if ($this->isPage($location)) {
+            //echo "serving page<br>";
+            $this->servePage($location);
         }
         else {
-            if ($this->pageExists($location)) {
-                $path = $this->getRoot() . "/includes/blueprints/" . $this->blueprint . ".php";
-                if (!file_exists($path)) {
-                    $this->throwError(501);
-                    $path = $this->getRoot() . "/includes/blueprints/" . $this->blueprint . ".php";
-                }
-            }
-            else if ($this->isAPICall($location)) {
-                $path = $path . ".php";
-            }
-            else if (!file_exists($path)) {
-                $this->throwError(404);
-                $path = $this->getRoot() . "/includes/blueprints/" . $this->blueprint . ".php";
-            }
+            //echo "serving 404<br>";
+            $this->serveErrorPage(404, $location);
         }
-        $shell = $this->shell;
-        $$shell = $this;
-        require_once $path;
-
-
-
-
-
-
-
 
 
 
@@ -194,8 +232,7 @@ trait Renderer {
      * @param string $component The component to load
      */
     function loadComponent($component) {
-        $shell = $this->shell;
-        $$shell = $this;
+        $core = $this;
         require_once($this->getRoot() . "/includes/components/$component.php");
     }
 
@@ -206,8 +243,7 @@ trait Renderer {
         // Create a variable variable reference to the shell object
         // in order to be able to access the shell object by its name and not
         // $this when in page context
-        $shell = $this->shell;
-        $$shell = $this;
+        $core = $this;
         $path = $this->getRoot() . "/includes/pages/" . $this->content . ".php";
         if (file_exists($path)) {
             require_once $path;

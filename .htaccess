@@ -1,28 +1,11 @@
 Options +FollowSymlinks
 
+php_value short_open_tag 1
+
 # Redirect all requests to index.php
-
-
-#RewriteEngine On
-#RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteRule ^(.*)$ index.php [NC,L,QSA]
+RewriteEngine On
+RewriteRule ^(.*)$ index.php [NC,L,QSA]
 #RewriteRule ^api/(.+)$ index.php [NC,QSA,L]
 
-
-
-# Turn rewriting on
-Options +FollowSymLinks
-RewriteEngine On
-# Redirect requests to index.php
-RewriteCond %{REQUEST_URI} !=/index.php
-RewriteRule .* /index.php
-
-
-# Do not allow access to git folder contents
-RedirectMatch 403 /\.git
-
-# Redirect 403 errors to index.php
+#Redirect 403 errors to index.php
 ErrorDocument 403 /index.php
-
-# Enable PHP short open tags ( <? )
-php_flag short_open_tag on
