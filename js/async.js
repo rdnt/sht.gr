@@ -25,7 +25,7 @@ function asyncRequest(formID, targetURL, init, callback, successDelay, errorDela
                         data = JSON.parse(data);
                     }
                     catch (e) {
-                        var data = { response: "JSON_PARSE_FAILED", data: data };
+                        data = { response: "JSON_PARSE_FAILED", data: data };
                     }
                     if (data["response"] === "SUCCESS") {
                         setTimeout(function() {
