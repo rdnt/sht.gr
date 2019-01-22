@@ -12,9 +12,13 @@ trait Logging {
      * @param string $data The action data to log
      */
     function log($action, $data) {
+        // Create logs folder if it doesn't already exist
+        $logs_folder = $this->getRoot() . "/logs/";
+        if (!file_exists($logs_folder)) {
+            mkdir($logs_folder);
+        }
         if ($this->options['logging']) {
             // Get the latest.log path
-            $logs_folder = $this->getRoot() . "/logs/";
             $log = $logs_folder . "latest.log";
             // Add date header
             $date = date("d M Y H:i:s");
