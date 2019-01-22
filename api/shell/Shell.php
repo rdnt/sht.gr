@@ -25,6 +25,7 @@ class Shell extends Core {
      */
     function __construct() {
         parent::__construct();
+        $this->logging = true;
         $this->system_dirs = [
             "/.git",
             "/api/core",
