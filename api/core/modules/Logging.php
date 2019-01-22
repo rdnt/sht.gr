@@ -12,8 +12,9 @@ trait Logging {
      * @param string $data The data to log
      */
     function log($action, $message) {
+        echo "log";
         // Allow from toggleable logging
-        if ($logging) {
+        if ($this->logging) {
             // Create logs folder if it doesn't already exist
             $logs_folder = $this->getRoot() . "/logs/";
             if (!file_exists($logs_folder)) {
