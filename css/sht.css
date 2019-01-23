@@ -1,1 +1,1 @@
-html,body{margin:0;font-family:'Roboto',sans-serif;background-color:#fff;height:100vh;overflow:hidden}main{position:relative;width:100%;overflow-y:scroll;height:100vh;z-index:100}main.playing{height:calc(100vh - 100px)}
+html,body{margin:0;font-family:'Roboto',sans-serif;background-color:#0a0b0c;height:100vh;overflow:hidden}main{position:relative;width:100%;overflow-y:scroll;height:100vh;z-index:100}main.playing{height:calc(100vh - 100px)}

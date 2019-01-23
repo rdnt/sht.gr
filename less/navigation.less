@@ -11,7 +11,7 @@ nav {
             opacity: 1;
         }
         .header {
-            opacity: .7;
+            opacity: 1;
             .logo {
                 transform: translateX(0);
             }
@@ -49,30 +49,29 @@ nav {
                 transform: translateY(60px);
             }
             &:after {
-                opacity: 1;
+                opacity: .2;
             }
             &.active {
                 &:before {
-                    background-color: #2476d3;
+                    background-color: #fff;
                     transform: scale(1.2);
                 }
-                span {
+                a {
                     opacity: 1;
                 }
             }
             &:hover {
                 &:before {
                     transform: scale(1.2);
+                    background-color: #ddd;
                 }
-                span {
-                    opacity: 1;
+                a {
+                    opacity: .9;
                 }
             }
             a  {
                 pointer-events: all;
-                span {
-                    opacity: .5;
-                }
+                opacity: .5;
             }
         }
     }
@@ -83,7 +82,7 @@ nav {
         top: 0;
         margin-bottom: 18px;
         opacity: .5;
-        transition: opacity .3s ease;
+        transition: opacity .5s ease;
         &:hover .bg {
             transform: scale(1.5);
         }
@@ -92,9 +91,9 @@ nav {
             transform: scale(1);
             width: 60px;
             height: 60px;
-            background-color: #000;
+            background-color: #fff;
             border-radius: 50%;
-            background-image: url("/images/logo.png");
+            background-image: url("/images/logo_dark.png");
             background-size: 90% 90%;
             background-position: center;
         }
@@ -107,7 +106,7 @@ nav {
             top: 0;
             transform: translateX(-4px);
             transition: transform .5s ease, opacity .3s ease;
-            background-image: url("/images/logo_dark.svg");
+            background-image: url("/images/logo.svg");
             background-size: 100% 100%;
         }
         .bg {
@@ -115,10 +114,11 @@ nav {
             display: block;
             width: 60px;
             height: 60px;
-            background-color: rgba(0,0,0,.1);
+            background-color: #fff;
             border-radius: 50%;
             transform: scale(1);
             transition: transform .3s ease;
+            opacity: .1;
         }
     }
     ul {
@@ -153,7 +153,7 @@ nav {
                 z-index: 10;
                 width: 14px;
                 height: 14px;
-                background-color: #4c4c4c;
+                background-color: #888;
                 transition: transform .5s ease, background-color .5s ease, box-shadow .5s ease;
             }
             &:after {
@@ -164,29 +164,29 @@ nav {
                 margin: 17px 28px;
                 width: 4px;
                 height: 36px;
-                background-color: rgba(0,0,0,.1);
+                background-color: #fff;
                 transform: scale(1);
-                transition: transform .5s ease-in .3s;
-                opacity: .9;
+                transition: opacity .5s;
+                opacity: .1;
             }
             a {
                 display: block;
                 text-decoration: none;
-                color: #333;
                 margin-left: 60px;
                 height: 100%;
                 pointer-events: none;
+                opacity: 0;
+                transition: opacity .5s ease;
                 span {
                     display: block;
                     line-height: 36px;
                     height: 36px;
                     position: relative;
-                    transition: transform .5s ease, opacity .5s ease;
                     text-align: left;
                     font-size: 1.3rem;
                     font-family: 'Roboto Mono', sans-serif;
                     font-weight: 400;
-                    opacity: 0;
+                    color: #fff;
                 }
             }
         }
