@@ -2,8 +2,6 @@
 
 trait Permissions {
 
-
-
     function getUserID($username) {
         return $this->db->query("
             SELECT id
