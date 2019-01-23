@@ -2,7 +2,7 @@
 
 trait Permissions {
 
-    
+
 
     function getUserID($username) {
         return $this->db->query("
@@ -53,7 +53,7 @@ trait Permissions {
 
 
     function canAccess($location) {
-
+        return true;
         // $protected = $this->protected_paths;
         // $private = $this->private_paths;
         //
