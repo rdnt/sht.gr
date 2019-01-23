@@ -161,11 +161,23 @@ trait Renderer {
         }
     }
 
+    function detect_mime_type($filename) {
+        $result = new finfo();
+
+        if (is_resource($result) === true) {
+            return $result->file($filename, FILEINFO_MIME_TYPE);
+        }
+
+        return false;
+    }
+
     function serveAsset($location) {
         $path = $this->getRoot() . $location;
         if (file_exists($path)) {
-            global $core;
-            require $path;
+            $mime_type = getMimeType($path);
+            header ('X-Sendfile: ' . ltrim($location, '/'));
+            header("Content-Type: $mime_type");
+            readfile($path);
         }
         else {
             $this->serveErrorPage(404, $location);

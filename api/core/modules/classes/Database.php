@@ -22,7 +22,7 @@ class DB extends mysqli {
             // No db password file? Throw a 503 error and log it
             $core->log("DATABASE", "Missing password file");
             $core->setCurrentPage("/error/503");
-            return false;
+            return;
         }
         // Get the db server password
         $pass = file_get_contents($pass_path);
@@ -38,8 +38,8 @@ class DB extends mysqli {
             $core->log("DATABASE", mysqli_connect_error());
             // Error during connecting to the database? Throw a 503 error
             $core->setCurrentPage("/error/503");
-            return false;
         }
+        $this->set_charset("utf8");
     }
 
     /**
