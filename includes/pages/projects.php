@@ -1,3 +1,6 @@
+<div class="projects-header">
+    <span>Some stuff I've been working on</span>
+</div>
 <div class="cards-container">
     <div class="card">
         <div class="inner">

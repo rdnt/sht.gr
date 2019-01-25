@@ -1,10 +1,23 @@
 // out: ../css/projects.css, compress: true, autoprefixer: defaults
+.projects-header {
+    position: absolute;
+    top: 30vh;
+    left: 50%;
+    margin-top: 20px;
+    transform: translateX(-50%);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: #fff;
+    font-size: 2rem;
+    opacity: .75;
+}
 .cards-container {
     width: calc(~"100% - 120px");
     overflow: hidden;
     display: flex;
     flex-wrap: wrap;
-    margin: 90vh 60px 0 60px;
+    margin: 60vh 60px 0 60px;
     .card {
         flex-grow: 1;
         width: 25%;
@@ -23,6 +36,7 @@
             }
             img.bg {
                 transform: scale(1.03);
+                filter: grayscale(0%);
             }
             .inner {
                 opacity: 1;
@@ -87,47 +101,13 @@
                 cursor: pointer;
                 overflow: hidden;
                 z-index: 0;
-                &:after {
-                    content: '';
-                    position: absolute;
-                    display: block;
-                    width: 100%;
-                    height: 100%;
-                    background-color: transparent;
-                    top: 0;
-                    left: 0;
-                    transition: background-color .3s ease;
-                    z-index: -2;
-                }
-                &:before {
-                    content: '';
-                    position: absolute;
-                    display: block;
-                    width: 100%;
-                    height: 100%;
-                    background-color: #1a1b1c;
-                    top: 0;
-                    left: 0;
-                    transform: translateX(-100%);
-                    transition: transform .4s ease;
-                    z-index: -1;
-                }
                 &:hover {
                     color: #000;
-                    box-shadow: none;
-                    &:after {
-                        background-color: #fff;
-                    }
+                    background-color: #fff;
                 }
-                &:focus {
-                    color: #fff;
-                    &:after {
-                        background-color: #fff;
-                    }
-                    &:before {
-                        transform: translateX(0);
-                    }
-                    box-shadow: none;
+                &:active {
+                    color: #000;
+                    background-color: #ddd;
                 }
             }
         }
