@@ -90,7 +90,7 @@ html, body {
     }
 }
 .cards-container {
-    width: calc(~"100%");
+    width: 100%;
     overflow: hidden;
     display: flex;
     flex-wrap: wrap;
@@ -141,7 +141,6 @@ html, body {
             }
             img.bg {
                 transform: scale(1.03);
-                filter: blur(2px);
             }
             .inner {
                 opacity: 1;
@@ -163,9 +162,9 @@ html, body {
         .inner {
             z-index: 1;
             position: absolute;
-            width: calc(~"100% - 20px");
+            width: calc(~"100% - 80px");
             top: 50%;
-            margin: 0 10px;
+            margin: 0 40px;
             transform: perspective(1px) scale(1.05) translateY(-50%);
             text-align: center;
             opacity: 0;
@@ -238,7 +237,7 @@ html, body {
                         background-color: #fff;
                     }
                 }
-                &:active {
+                &:focus {
                     color: #fff;
                     &:after {
                         background-color: #fff;

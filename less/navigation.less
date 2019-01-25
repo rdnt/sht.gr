@@ -1,4 +1,7 @@
 // out: ../css/navigation.css, compress: true, autoprefixer: defaults
+body {
+    background: linear-gradient(to bottom, #15171d 0%,#0a0b0c 100%);
+}
 nav {
     width: 260px;
     padding: 40px;
@@ -189,6 +192,46 @@ nav {
                     font-weight: 400;
                     color: #fff;
                 }
+            }
+        }
+    }
+    .social {
+        position: absolute;
+        bottom: 0;
+        height: 280px;
+        margin-bottom: 40px;
+        .btn {
+            display: block;
+            width: auto;
+            height: 30px;
+            margin: 10px 0;
+            &:hover {
+                img {
+                    opacity: 1;
+                }
+                span {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            img {
+                width: 30px;
+                height: 30px;
+                float: left;
+                opacity: .5;
+                transition: opacity .3s ease;
+            }
+            span {
+                float: left;
+                display: block;
+                height: 30px;
+                line-height: 30px;
+                color: #fff;
+                margin: 0 20px;
+                font-family: 'Roboto Mono', sans-serif;
+                opacity: 0;
+                transform: translateX(-5px);
+                transition: .3s ease;
             }
         }
     }

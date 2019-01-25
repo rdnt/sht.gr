@@ -8,4 +8,26 @@
     <ul class="navigation">
         <?=$sht->renderNav()?>
     </ul>
+    <div class="social">
+        <a href="#" class="btn">
+            <img src="/images/ui/social/instagram.svg">
+            <span>Instagram</span>
+        </a>
+        <a href="#" class="btn">
+            <img src="/images/ui/social/instagram.svg">
+            <span>Instagram</span>
+        </a>
+        <a href="#" class="btn">
+            <img src="/images/ui/social/instagram.svg">
+            <span>Instagram</span>
+        </a>
+        <a href="#" class="btn">
+            <img src="/images/ui/social/instagram.svg">
+            <span>Instagram</span>
+        </a>
+        <a href="#" class="btn">
+            <img src="/images/ui/social/instagram.svg">
+            <span>Instagram</span>
+        </a>
+    </div>
 </nav>
