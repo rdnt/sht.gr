@@ -1,11 +1,12 @@
 <div class="slider">
     <div class="content">
         <div class="welcome">
-            <span>Yes hello.</span>
+            <span>Yes hello.<span class="fade">¬</span></span>
         </div>
         <div class="introduction">
             <span>
                 My name's Tasos and I am a web developer based in Corfu, Greece.
+                <br>
                 <br>
                 I create websites and interactive web applications from the ground up using leading technologies in the field such as PHP, MySQL and Javascript. From mockups to web design, development and testing, I make sure that an application is built with optimization and performance in mind, is deployed on a secure and robust environment and is friendly and appealing to the end-user, whether that is a systems' administrator or simply a website's visitor.
                 <br>
