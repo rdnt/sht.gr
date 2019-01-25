@@ -4,6 +4,7 @@
 <meta name="keywords" content="">
 <meta name="author" content="SHT">
 <link href="/css/reset.css?v=<?=$this->getLatestCommit()?>" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/css/grid.css?v=<?=$this->getLatestCommit()?>" type="text/css" rel="stylesheet" media="screen"/>
 <link href="/css/sht.css?v=<?=$this->getLatestCommit()?>" type="text/css" rel="stylesheet" media="screen"/>
 <link href="/css/navigation.css?v=<?=$this->getLatestCommit()?>" type="text/css" rel="stylesheet" media="screen"/>
 <link href="/css/home.css?v=<?=$this->getLatestCommit()?>" type="text/css" rel="stylesheet" media="screen"/>

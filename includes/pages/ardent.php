@@ -1,5 +1,5 @@
-<div class="intro">
-    <img src="/images/ardent_black.png">
+<div class="page-header">
+    <img src="/images/ardent_white.png">
 </div>
 <div class="playlist">
     <div class="header">
@@ -17,7 +17,7 @@
         </div>
     </div>
     <?php for($i=1; $i<=17; $i++): ?>
-        <div class="track">
+        <div class="track" data-ep="<?=$i?>">
             <div class="inner">
                 <div class="button play"></div>
                 <div class="title">

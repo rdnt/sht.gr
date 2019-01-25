@@ -1,1 +1,1 @@
-html,body{overflow-x:hidden;background:linear-gradient(to bottom, #25272d 0, #17191c 60%, #141516 100%);background-repeat:no-repeat;background-attachment:fixed}main{width:100vw;min-height:100vh}
+html,body{overflow-x:hidden;background:linear-gradient(to bottom, #25272d 0, #17191c 60%, #141516 100%);background-repeat:no-repeat;background-attachment:fixed}main{width:100vw;min-height:100vh}.unselectable{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}

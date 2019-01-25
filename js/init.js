@@ -45,3 +45,8 @@ $(window).on("load", function() {
     });
 
 });
+
+$(".playlist .track").hover(function() {
+    var ep = $(this).data("ep");
+    $("#background-img::before").css("background-img", "url(\"/images/ardent/covers/bg" + ep + ".jpg\");");
+});
