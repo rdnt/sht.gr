@@ -1,12 +1,13 @@
 // out: ../css/scrollbar.css, compress: true, autoprefixer: defaults
-@media screen and (min-width: 993px) {
+//@media screen and (min-width: 993px) {
     ::-webkit-scrollbar {
         background: transparent;
+        width: 10px;
     }
     ::-webkit-scrollbar-thumb {
         background: #333;
-        border: 6px solid #0a0b0c;
-        border-radius: 10px;
+        border: 4px solid #0a0b0c;
+        border-radius: 5px;
     }
     ::-webkit-scrollbar-thumb:hover {
         background: #666;
@@ -16,6 +17,9 @@
     }
     ::-webkit-scrollbar-corner {
         background: transparent;
-        border-radius: 10px;
+        border-radius: 2px;
     }
-}
+    ::-webkit-scrollbar * {
+        background: transparent;
+    }
+//}
