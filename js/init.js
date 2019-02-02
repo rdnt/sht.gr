@@ -51,6 +51,31 @@ $(".playlist .track").hover(function() {
     $("#background-img::before").css("background-img", "url(\"/images/ardent/covers/bg" + ep + ".jpg\");");
 });
 
+var parallax_items = [];
+
+parallax(".red", .1);
+parallax(".green", .3);
+parallax(".blue", .5);
+
+parallax();
 $(window).scroll(function() {
-    $("#articles").css("transform", "translateY(+" + $(window).scrollTop() * 0.1 + "px)");
+    parallax();
 });
+
+function __parallax(element, multiplier) {
+    $(element).css("transform", "translateY(" + (($(element).offset().top - $(element).height() - $(window).scrollTop()) / 2) * multiplier + "px)");
+}
+
+function parallax(element = null, multiplier = null) {
+    if (element && multiplier) {
+        parallax_items.push([element, multiplier]);
+    }
+    else if (element) {
+        parallax_items.push([element, .5]);
+    }
+    else {
+        $(parallax_items).each(function() {
+            __parallax(this[0], this[1]);
+        });
+    }
+}

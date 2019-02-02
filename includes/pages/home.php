@@ -43,6 +43,10 @@
         </div>
     </div>
 </div>
+<div class="red"></div>
+<div class="green"></div>
+<div class="blue"></div>
+
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <div class="social">
     <a href="https://github.com/ShtHappens796" target="_blank" class="btn">
