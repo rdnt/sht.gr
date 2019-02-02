@@ -2,15 +2,23 @@
 
 html, body {
     overflow-x: hidden;
-    background: linear-gradient(to bottom, #25272d 0%, #17191c 60%, #141516 100%);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    overflow-y: auto;
 }
 
 main {
-    width: 100vw;
-    min-height: 100vh;
+    &:before {
+        content: '';
+        display: block;
+        height: 100vh;
+        width: 100vw;
+        position: fixed;
+        background: linear-gradient(to bottom, #25272d 0%, #17191c 60%, #141516 100%);
+        background-repeat: no-repeat;
+        backface-visibility: hidden;
+    }
 }
+
+
 
 .unselectable {
     user-select: none;

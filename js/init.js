@@ -52,7 +52,5 @@ $(".playlist .track").hover(function() {
 });
 
 $(window).scroll(function() {
-    var offset = $(window).scrollTop();
-    var translate = offset * 0.1;
-    $("#articles").css("transform", "translateY(+" + translate + "px)");
+    $("#articles").css("transform", "translateY(+" + $(window).scrollTop() * 0.1 + "px)");
 });
