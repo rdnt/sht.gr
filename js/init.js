@@ -1,17 +1,4 @@
-
-function toggleTheme() {
-    // setTimeout(function() {
-    // 	$(".theme-overlay").addClass("dark");
-    // 	$("nav, main").addClass("theming");
-    // 	setTimeout(function() {
-    // 		$("nav, main").addClass("dark");
-    // 		setTimeout(function() {
-    // 			$("nav, main").removeClass("theming");
-    // 		}, 500);
-    // 	}, 900);
-    // }, 1000);
-}
-//
+parallax("#articles", -0.1);
 $(window).on("load", function() {
 
     $("nav").hover(
@@ -50,32 +37,3 @@ $(".playlist .track").hover(function() {
     var ep = $(this).data("ep");
     $("#background-img::before").css("background-img", "url(\"/images/ardent/covers/bg" + ep + ".jpg\");");
 });
-
-var parallax_items = [];
-
-parallax(".red", .1);
-parallax(".green", .3);
-parallax(".blue", .5);
-
-parallax();
-$(window).scroll(function() {
-    parallax();
-});
-
-function __parallax(element, multiplier) {
-    $(element).css("transform", "translateY(" + (($(element).offset().top - $(element).height() - $(window).scrollTop()) / 2) * multiplier + "px)");
-}
-
-function parallax(element = null, multiplier = null) {
-    if (element && multiplier) {
-        parallax_items.push([element, multiplier]);
-    }
-    else if (element) {
-        parallax_items.push([element, .5]);
-    }
-    else {
-        $(parallax_items).each(function() {
-            __parallax(this[0], this[1]);
-        });
-    }
-}
