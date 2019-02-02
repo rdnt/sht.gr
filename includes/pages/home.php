@@ -21,7 +21,7 @@
         <div class="next"></div>
         <div class="prev"></div>
     </div>
-    <div class="pinned-articles">
+    <div id="articles" class="pinned-articles">
         <div class="header">
             <span>Latest articles</span>
         </div>
@@ -32,9 +32,9 @@
             <div class="description">
                 <span>That is a very very long description indeed so it will be trimmed down.</span>
             </div>
-            <div class="date">
-                <span>Posted 5 days ago</span>
-            </div>
+            <a href="#" class="more">
+                <span>READ MORE</span>
+            </a>
         </div>
         <div class="indicators">
             <div class="indicator active"></div>
@@ -43,6 +43,7 @@
         </div>
     </div>
 </div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <div class="social">
     <a href="https://github.com/ShtHappens796" target="_blank" class="btn">
         <img src="/images/ui/social/github.svg">

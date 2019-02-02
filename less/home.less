@@ -43,7 +43,10 @@
         }
     }
     .pinned-articles {
+        transition-property: transform;
+        transition: 0s linear;
         position: absolute;
+        backface-visibility: hidden;
         right: 0;
         bottom: 0;
         width: calc(~"50vw - 80px");
@@ -86,20 +89,25 @@
                 line-height: 30px;
                 font-weight: 400;
                 font-size: 1.15rem;
-                color: #99999f;
+                color: #77777f;
                 margin-bottom: 5px;
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 overflow: hidden;
             }
-            .date {
+            .more {
                 height: 20px;
                 width: 100%;
                 font-family: 'Montserrat', sans-serif;
                 line-height: 20px;
                 font-weight: 400;
                 font-size: 1rem;
-                color: #55555f;
+                color: #44444f;
+                text-decoration: none;
+                transition: color .3s ease;
+                &:hover {
+                    color: #dde;
+                }
             }
         }
         .indicators {

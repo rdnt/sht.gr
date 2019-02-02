@@ -50,3 +50,9 @@ $(".playlist .track").hover(function() {
     var ep = $(this).data("ep");
     $("#background-img::before").css("background-img", "url(\"/images/ardent/covers/bg" + ep + ".jpg\");");
 });
+
+$(window).scroll(function() {
+    var offset = $(window).scrollTop();
+    var translate = offset * 0.1;
+    $("#articles").css("transform", "translateY(+" + translate + "px)");
+});
