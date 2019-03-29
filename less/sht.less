@@ -3,16 +3,24 @@
 html, body {
     overflow-x: hidden;
     overflow-y: auto;
+    height: 100vh;
 }
 
 main {
+    position: relative;
+    margin: 0 auto;
+    max-width: 1200px;
+    //overflow-y: scroll;
     &:before {
         content: '';
         display: block;
         height: 100vh;
         width: 100vw;
+        top: 0;
+        left: 0;
         position: fixed;
-        background: linear-gradient(to bottom, #25272d 0%, #17191c 60%, #141516 100%);
+        //background: linear-gradient(to bottom, #25272d 0%, #17191c 60%, #141516 100%);
+        background: linear-gradient(to bottom, #15171d 0%, #07090c 60%, #040506 100%);
         background-repeat: no-repeat;
         backface-visibility: hidden;
         z-index: -1;

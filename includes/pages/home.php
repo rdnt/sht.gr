@@ -1,4 +1,4 @@
-<div class="slider">
+<!-- <div class="slider">
     <div class="content">
         <div class="welcome">
             <span>Yes hello.<span class="fade">¬</span></span>
@@ -42,13 +42,34 @@
             <div class="indicator"></div>
         </div>
     </div>
-</div>
+</div> -->
 <div class="red"></div>
 <div class="green"></div>
 <div class="blue"></div>
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<div class="social">
+
+<div id="parallax1" class="parallax">
+    <div class="bg">
+        <img src="http://www.sompaisoscatalans.cat/simage/42/427163/forest-pictures-wallpaper.jpg">
+    </div>
+</div>
+
+<div id="parallax2" class="parallax">
+    <div class="bg">
+        <img src="https://images.unsplash.com/photo-1531150282924-fb334f20114a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80">
+    </div>
+</div>
+
+<div id="parallax3" class="parallax">
+    <div class="bg">
+        <img src="http://www.sompaisoscatalans.cat/simage/42/427163/forest-pictures-wallpaper.jpg">
+    </div>
+</div>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<!-- <div class="social">
     <a href="https://github.com/ShtHappens796" target="_blank" class="btn">
         <img src="/images/ui/social/github.svg">
         <span>Github</span>
@@ -69,4 +90,4 @@
         <img src="/images/ui/social/soundcloud.svg">
         <span>Soundcloud</span>
     </a>
-</div>
+</div> -->

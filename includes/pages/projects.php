@@ -3,13 +3,52 @@
 </div>
 <div class="cards-container">
     <? for ($i=0; $i<12; $i++): ?>
-        <div class="card col l3 m6 s12">
+        <!-- <div class="col l3 m6 s12">
+            <div class="card">
+                <div class="inner">
+                    <span class="title">Test title</span>
+                    <span class="description">Test description</span>
+                    <button class="btn">VIEW MORE</button>
+                </div>
+                <img class="bg" src="http://www.balkanventureforum.org/wp-content/uploads/2015/11/EBAN-Logo-16-9-Transparency-v3.png">
+            </div>
+        </div> -->
+    <? endfor; ?>
+    <div class="col l6 m6 s12">
+        <div class="card">
             <div class="inner">
                 <span class="title">Test title</span>
                 <span class="description">Test description</span>
                 <button class="btn">VIEW MORE</button>
             </div>
-            <img class="bg" src="https://carepharmaceuticals.com.au/wp-content/uploads/sites/19/2018/02/placeholder-600x400.png">
+            <img class="bg" src="http://www.balkanventureforum.org/wp-content/uploads/2015/11/EBAN-Logo-16-9-Transparency-v3.png">
         </div>
-    <? endfor; ?>
+        <div class="col l6 m6 s12">
+
+            <div class="card">
+                <div class="inner">
+                    <span class="title">Test title</span>
+                    <span class="description">Test description</span>
+                    <button class="btn">VIEW MORE</button>
+                </div>
+                <img class="bg" src="http://www.balkanventureforum.org/wp-content/uploads/2015/11/EBAN-Logo-16-9-Transparency-v3.png">
+            </div>
+
+
+        </div>
+        <div class="col l6 m6 s12">
+
+            <div class="card">
+                <div class="inner">
+                    <span class="title">Test title</span>
+                    <span class="description">Test description</span>
+                    <button class="btn">VIEW MORE</button>
+                </div>
+                <img class="bg" src="http://www.balkanventureforum.org/wp-content/uploads/2015/11/EBAN-Logo-16-9-Transparency-v3.png">
+            </div>
+
+
+        </div>
+    </div>
+
 </div>

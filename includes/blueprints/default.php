@@ -5,11 +5,11 @@
 <title><?=$sht->title?></title>
 </head>
 <body>
-<?php $sht->loadComponent("nav"); ?>
 <main>
+    <?php $sht->loadComponent("nav"); ?>
 <?php $sht->loadContent()?>
-</main>
 <?php $sht->loadComponent("footer"); ?>
+</main>
 <?php $sht->loadComponent("scripts"); ?>
 </body>
 </html>
