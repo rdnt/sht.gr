@@ -4,6 +4,7 @@
     margin: 0 auto;
     height: 100%;
     padding: 40px;
+    box-sizing: border-box;
 }
 .section {
     position: relative;
@@ -351,7 +352,7 @@
 }
 #prototyping {
     background-color:#0a0b0c;
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     position: relative;
     .title {
@@ -367,142 +368,176 @@
         position: relative;
         font-size: 6rem;
         font-family: 'Roboto Mono', monospace;
-        color: #fff;
+        color: #ccc;
         // padding-top: 100px;
-        opacity: .33;
         // display: block;
         // width: calc(~"100% - 1000px");
     }
-    .background {
-        position: relative;
-        // top: 50%;
-        // left: 50%;
-        left: calc(~"100% - 800px");
-        width: 800px;
+    .info {
+        float: left;
+        width: calc(~"100% - 720px");
+        span {
+            line-height: 32px;
+            font-size: 1.4rem;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 300;
 
-        height: 500px;
-        // background-color: #fff;
-        // right: 200px;
-        // perspective: 10000px;
-        // display: none;
-        // transform: perspective(100px) rotateZ(25deg) skewX(-40deg) scale(.5);
-        .layer {
-            // display: none;
-            width: 360px;
-            height: 640px;
-            // top: 150px;
-            right: 200px;
-            position: absolute;
-            pointer-events: none;
-            // margin-top: -10px;
-            // background: url('https://9to5google.com/wp-content/uploads/sites/4/2018/08/android-p-overview-3.png');
-            // background-size: contain;
-            @x: -120deg;
-            @y: 180deg;
-            @z: -130deg;
-            // rotateX(-137deg) skewX(-0) rotateZ(-60deg) rotateY(206deg)
-            // transform: translateZ(0);
-            // box-shadow: inset 0 0 0 2px #fff;
-            padding: 10px;
-            box-sizing: border-box;
-            // animation: load 2s ease;
-            transition: 2s ease;
-            transform: rotateX(@x) rotateY(@y) rotateZ(@z) translateZ(0);
-            font-size: 0;
-            // @keyframes load {
-            //     0% {
-            //
-            //     }
-            //     100% {
-            //
-            //     }
-            // }
-            &.load {
-                &:nth-child(1) {
-                    //background-color: #f00;
-                    transform: rotateX(@x) rotateY(@y) rotateZ(@z) translateZ(0);
-                }
-                &:nth-child(2) {
-                    //background-color: #ff0;
-                    transform: rotateX(@x) rotateY(@y) rotateZ(@z) translateZ(50px);
-                }
-
-                &:nth-child(3) {
-                    //background-color: #0f0;
-                    transform: rotateX(@x) rotateY(@y) rotateZ(@z) translateZ(100px);
-                }
-                &:nth-child(4) {
-                    //background-color: #0ff;
-                    transform: rotateX(@x) rotateY(@y) rotateZ(@z) translateZ(150px);
-                }
-                &:nth-child(5) {
-                    //background-color: #00f;
-                    transform: rotateX(@x) rotateY(@y) rotateZ(@z) translateZ(200px);
-                }
-            }
-
-
-
-
-            // perspective: 1px;
-            // &:nth-child(1) {
-            //     background-color: #f00;
-            //     transform: translateX(0px) translateY(80px);
-            // }
-            // &:nth-child(2) {
-            //     background-color: #ff0;
-            //     transform: translateX(-50px) translateY(40px);
-            // }
-            //
-            // &:nth-child(3) {
-            //     background-color: #0f0;
-            //     transform: translateX(-100px) translateY(0px);
-            // }
-            // &:nth-child(4) {
-            //     background-color: #0ff;
-            //     transform: translateX(-150px) translateY(-40px);
-            // }
-            // &:nth-child(5) {
-            //     background-color: #00f;
-            //     transform: translateX(-200px) translateY(-80px);
-            // }
-            .box {
-                background-color: #0a0b0c;
-                width: 100%;
-                height: 100%;
-                // background-color: #fff;
-                box-shadow: 0 0 0 4px #1de9b6;
-                // box-shadow: 0 0 0 8px #5df9c6;
-                // border-radius: 4px;
-                position: relative;
-                pointer-events: all;
-                transition: background-color .2s ease;
-                &:hover {
-                    transform: translateZ(100px);
-                    background-color: #1de9b6;
-                }
-                &.nav {
-                    height: 50px;
-                }
-                &.body {
-                    top: 50px;
-                    height: calc(~"100% - 150px");
-                }
-                &.footer {
-                    top: calc(~"100% - 150px");
-                    height: 100px;
-                }
-                &.hidden {
+            color: #666;
+            &.show {
+                &:before {
                     opacity: 0;
-                }
-                &.dot {
-                    height: 50px;
-                    width: 50px;
-                    left: calc(~"100% - 70px");
-                    top: calc(~"100% - 170px");
-                    border-radius: 50%;
                 }
             }
         }
     }
+    .layers-container {
+        position: relative;
+        width: 600px;
+        height: 600px;
+        float: right;
+        // bottom: 0;
+        top: -150px;
+        .background {
+            position: absolute;
+            // top: 50%;
+            // left: 50%;
+            left: 25%;
+            top: 25%;
+            width: 50%;
+            height: 50%;
+            // margin-left: 400px;
+            // background-color: #fff;
+            // right: 200px;
+            // perspective: 10000px;
+            // display: none;
+            // transform: perspective(100px) rotateZ(25deg) skewX(-40deg) scale(.5);
+            .layer {
+                // display: none;
+                // width: 360px;
+                // height: 640px;
+
+                width: 100%;
+                height: 177%;
+                // top: 150px;
+                background-color: rgba(255,255,255,.01);
+                // right: 200px;
+                position: absolute;
+                pointer-events: none;
+                // margin-top: -10px;
+                // background: url('https://9to5google.com/wp-content/uploads/sites/4/2018/08/android-p-overview-3.png');
+                // background-size: contain;
+                @x: -120deg;
+                @y: 180deg;
+                @z: -130deg;
+                // rotateX(-137deg) skewX(-0) rotateZ(-60deg) rotateY(206deg)
+                // transform: translateZ(0);
+                // box-shadow: inset 0 0 0 2px #fff;
+                padding: 10px;
+                box-sizing: border-box;
+                // animation: load 2s ease;
+                transition: 2s ease;
+                transform: rotateX(@x) rotateY(@y) rotateZ(@z) translateZ(0);
+                font-size: 0;
+                // @keyframes load {
+                //     0% {
+                //
+                //     }
+                //     100% {
+                //
+                //     }
+                // }
+                &.load {
+                    &:nth-child(1) {
+                        //background-color: #f00;
+                        transform: rotateX(@x) rotateY(@y) rotateZ(@z) translateZ(0);
+                    }
+                    &:nth-child(2) {
+                        //background-color: #ff0;
+                        transform: rotateX(@x) rotateY(@y) rotateZ(@z) translateZ(50px);
+                    }
+
+                    &:nth-child(3) {
+                        //background-color: #0f0;
+                        transform: rotateX(@x) rotateY(@y) rotateZ(@z) translateZ(100px);
+                    }
+                    &:nth-child(4) {
+                        //background-color: #0ff;
+                        transform: rotateX(@x) rotateY(@y) rotateZ(@z) translateZ(150px);
+                    }
+                    &:nth-child(5) {
+                        //background-color: #00f;
+                        transform: rotateX(@x) rotateY(@y) rotateZ(@z) translateZ(200px);
+                    }
+                }
+
+
+
+
+                // perspective: 1px;
+                // &:nth-child(1) {
+                //     background-color: #f00;
+                //     transform: translateX(0px) translateY(80px);
+                // }
+                // &:nth-child(2) {
+                //     background-color: #ff0;
+                //     transform: translateX(-50px) translateY(40px);
+                // }
+                //
+                // &:nth-child(3) {
+                //     background-color: #0f0;
+                //     transform: translateX(-100px) translateY(0px);
+                // }
+                // &:nth-child(4) {
+                //     background-color: #0ff;
+                //     transform: translateX(-150px) translateY(-40px);
+                // }
+                // &:nth-child(5) {
+                //     background-color: #00f;
+                //     transform: translateX(-200px) translateY(-80px);
+                // }
+                .box {
+                    background-color: #0d0e0f;
+                    // width: 100%;
+                    // height: 100%;
+                    // background-color: #fff;
+                    box-shadow: 0 0 0 4px #1de9b6;
+                    // box-shadow: 0 0 0 8px #5df9c6;
+                    // border-radius: 4px;
+                    position: relative;
+                    pointer-events: all;
+                    transition: background-color .2s ease;
+                    top: 0;
+                    padding-bottom: 182.5%;
+                    &.nav {
+                        padding-bottom: 10%;
+                        background-color: #131415;
+                    }
+                    &.body {
+                        top: 6%;
+                        padding-bottom: 150%;
+                        background-color: #101112;
+                    }
+                    &.footer {
+                        // top: 70%;
+                        margin-top: 152.5%;
+                        padding-bottom: 20%;
+                        background-color: #131415;
+                    }
+                    &.dot {
+                        padding-bottom: 10%;
+                        width: 10%;
+                        left: 85%;
+                        top: 79.6666%;
+                        border-radius: 50%;
+                        background-color: #161718;
+                    }
+                    &:hover {
+                        // transform: translateZ(100px);
+                        background-color: #1de9b6;
+                    }
+                }
+            }
+        }
+    }
+
 }

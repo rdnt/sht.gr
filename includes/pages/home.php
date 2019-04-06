@@ -64,22 +64,26 @@
         <div class="title">
             Prototyping
         </div>
-        <div class="background">
-            <div class="layer">
-                <div class="box"></div>
-            </div>
-            <div class="layer">
-                <div class="box"></div>
-            </div>
-            <div class="layer">
-            <div class="box body"></div>
-            </div>
-            <div class="layer">
-                <div class="box nav"></div>
-                <div class="box footer"></div>
-            </div>
-            <div class="layer">
-                <div class="box dot"></div>
+        <div class="info">
+            <span>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tempus maximus nisi ac imperdiet. Curabitur condimentum luctus tincidunt. Suspendisse potenti. Fusce sed iaculis ex, id varius massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras eget tempor nulla, sit amet molestie erat. Aliquam eu luctus tortor, non interdum odio. In id risus et lorem finibus tincidunt ut non quam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas eu massa odio. Morbi ornare ante non elementum ultrices.
+            </span>
+        </div>
+        <div class="layers-container">
+            <div class="background">
+                <div class="layer">
+                    <div class="box"></div>
+                </div>
+                <div class="layer">
+                <div class="box body"></div>
+                </div>
+                <div class="layer">
+                    <div class="box nav"></div>
+                    <div class="box footer"></div>
+                </div>
+                <div class="layer">
+                    <div class="box dot"></div>
+                </div>
             </div>
         </div>
     </div>
