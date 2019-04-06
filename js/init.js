@@ -6,6 +6,17 @@ $(window).on("load", function() {
 
     parallax("#articles", -.1);
 
+    // $(".layer").each(function(index, element) {
+    //     setTimeout(function() {
+    //         $(element).addClass("load");
+    //     }, ($(".layer").length - 1) * 175 - index * 175);
+    // });
+
+    $(".layer").addClass("load");
+
+
+
+
 
     $("nav").hover(
         function() {
