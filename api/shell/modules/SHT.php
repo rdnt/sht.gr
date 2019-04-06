@@ -2,7 +2,7 @@
 trait SHT {
     function renderNav() {
         foreach ($this->pages as $url => $data) {
-            $name = strtoupper($data[0]);
+            $name = $data[0];
             if ($url === $_SERVER['REQUEST_URI']) {
                 $active = " class=\"active\"";
             }

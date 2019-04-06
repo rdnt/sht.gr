@@ -6,6 +6,7 @@ $(window).on("load", function() {
 
     parallax("#articles", -.1);
 
+
     $("nav").hover(
         function() {
             $(this).addClass("hover");

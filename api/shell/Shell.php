@@ -34,7 +34,8 @@ class Shell extends Core {
         );
         $this->pages = array(
             "/" => ["Home", "home", "default"],
-            "/projects" => ["Projects", "projects", "default"],
+            "/blog" => ["Blog", "blog", "default"],
+            "/portfolio" => ["Portfolio", "projects", "default"],
             "/ardent" => ["Ardent Radio", "ardent", "default"],
             "/login" => ["Login", "login", "default"],
         );

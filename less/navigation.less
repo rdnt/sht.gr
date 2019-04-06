@@ -1,69 +1,80 @@
 // out: ../css/navigation.css, compress: true, autoprefixer: defaults
-.logo {
-    position: absolute;
-    width: auto;
-    height: auto;
-    top: 0;
-    opacity: 1;
-    transition: opacity .3s ease;
-    margin-left: 20px;
-    &:hover .logo {
-        opacity: 1;
-    }
+#navigation {
+    position: relative;
+    width: 100%;
+    height: 140px;
+    margin: 0 auto;
+    max-width: 1500px;
+    padding: 0 40px;
+    box-sizing: border-box;
+    // z-index: 1000;
     .logo {
-        margin: 40px;
-        height: 60px;
-        width: 105px;
-        transform: translateX(-4px);
+        position: absolute;
+        width: auto;
+        height: auto;
+        display: block;
+        top: 0;
+        opacity: 1;
         transition: opacity .3s ease;
-        background-image: url("/images/logo.svg");
-        background-size: 100% 100%;
-        opacity: .5;
+        //margin-left: 20px;
+        margin: 40px 0;
+        &:hover .logo {
+            opacity: 1;
+        }
+        .inner {
+            height: 60px;
+            width: 105px;
+            transition: opacity .3s ease;
+            background-image: url("/images/logo.svg");
+            background-size: 100% 100%;
+            opacity: .9;
+            filter: invert(1);
+        }
     }
-}
-
-nav {
-    height: 40px;
-    display: block;
-    position: absolute;
-    backface-visibility: hidden;
-    z-index: 1000;
-    top: 0;
-    margin: 50px;
-    right: 0;
-    ul {
+    nav {
         height: 40px;
-        li {
-            float: left;
-            font-size: 0;
-            margin-left: 50px;
-            &:first-child {
-                margin-left: 0;
-            }
-            &.active {
+        display: block;
+        position: absolute;
+        z-index: 1000;
+        top: 0;
+        margin: 50px 0;
+        right: 40px;
+        ul {
+            height: 40px;
+            li {
+                float: left;
+                font-size: 0;
+                margin-left: 10px;
+                padding: 5px;
+                &:first-child {
+                    margin-left: 0;
+                }
+                &.active {
+                    a {
+                        opacity: 1;
+                        color: #000;
+                    }
+                }
                 a {
-                    opacity: 1;
-                }
-            }
-            a {
-                display: block;
-                width: auto;
-                margin: 5px;
-                padding: 0 8px;
-                text-decoration: none;
-                color: #fff;
-                opacity: .5;
-                transition: opacity .3s ease;
-                &:hover {
-                    opacity: 1;
-                }
-                span {
-                    height: 30px;
-                    line-height: 30px;
-                    font-size: 1.2rem;
-                    font-family: 'Montserrat', sans-serif;
-                    font-weight: 400;
-                    letter-spacing: 2px;
+                    display: block;
+                    width: auto;
+                    padding: 0 8px;
+                    text-decoration: none;
+                    color: #000;
+                    opacity: .5;
+                    transition: opacity .3s ease;
+                    &:hover {
+                        opacity: 1;
+                    }
+                    span {
+                        height: 30px;
+                        line-height: 30px;
+                        font-size: 1.2rem;
+                        font-family: 'Oswald', sans-serif;
+                        font-weight: 400;
+                        letter-spacing: 2px;
+                        display: block;
+                    }
                 }
             }
         }

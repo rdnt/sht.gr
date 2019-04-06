@@ -1,16 +1,15 @@
 // out: ../css/sht.css, compress: true, autoprefixer: defaults
-
 html, body {
     overflow-x: hidden;
-    overflow-y: auto;
-    height: 100vh;
 }
-
 main {
     position: relative;
     margin: 0 auto;
-    max-width: 1200px;
+    // max-width: 1600px;
+    min-height: 100vh;
     //overflow-y: scroll;
+    background-color: #fff;
+    height: 100%;
     &:before {
         content: '';
         display: block;
@@ -20,15 +19,19 @@ main {
         left: 0;
         position: fixed;
         //background: linear-gradient(to bottom, #25272d 0%, #17191c 60%, #141516 100%);
-        background: linear-gradient(to bottom, #15171d 0%, #07090c 60%, #040506 100%);
+        //background: linear-gradient(to bottom, #07090c 0%, #05070a 60%, #040506 100%);
+
+        //background-color: #f6f6f8;
         background-repeat: no-repeat;
         backface-visibility: hidden;
         z-index: -1;
+        background: linear-gradient(to bottom, #fff 0%, #f6f6f8 100%);
+        //background: linear-gradient(to bottom, #fff 0%, #aaa 100%);
+        background: #fff;
     }
 }
 
-
-
-.unselectable {
+* {
     user-select: none;
+    backface-visibility: hidden;
 }
