@@ -17,7 +17,7 @@
     </div>
 </div>
 <div class="social">
-    <a href="https://github.com/ShtHappens796" target="_blank" class="btn">
+    <a href="https://github.com/SHT" target="_blank" class="btn">
         <img src="/images/ui/social/github.svg">
         <span>Github</span>
     </a>
@@ -29,7 +29,7 @@
         <img src="/images/ui/social/instagram.svg">
         <span>Instagram</span>
     </a>
-    <a href="https://www.mixcloud.com/shtofficial/" target="_blank" class="btn m">
+    <a href="https://www.mixcloud.com/SHT/" target="_blank" class="btn m">
         <img src="/images/ui/social/mixcloud.svg">
         <span>Mixcloud</span>
     </a>
@@ -62,3 +62,4 @@
         <div class="indicator"></div>
     </div>
 </div>
+<div style="clear:both;width:100%;height:100vh;background-color:#0a0b0c"></div>
