@@ -1,4 +1,4 @@
-<div id="projects">
+<div id="projects" class="container">
     <div class="intro">
         Here are some of the projects I've been working on
     </div>

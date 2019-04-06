@@ -28,6 +28,7 @@
             font-family: 'Roboto Mono', monospace;
             color: #000;
             opacity: .85;
+            user-select: text;
             .fade {
                 opacity: .15;
             }
@@ -47,6 +48,7 @@
 
             color: #222;
             opacity: .75;
+            user-select: text;
             &.show {
                 &:before {
                     opacity: 0;
@@ -213,9 +215,9 @@
         left: 0;
         transform: scale(1);
         transform-origin: center right;
-        transition: .4s ease .4s;
+        transition: .4s ease;
         z-index: -1;
-        pointer-events: none;
+        //pointer-events: none;
     }
     &:after {
         content: '';
@@ -228,7 +230,7 @@
         left: -100%;
         transform: scale(1);
         transform-origin: center right;
-        transition: transform .4s ease, opacity .4s ease;
+        transition: transform .4s ease, opacity .1s ease;
         z-index: -1;
         pointer-events: none;
         background: url('https://i.ytimg.com/vi/ODVdEI93R3E/maxresdefault.jpg');
@@ -352,9 +354,10 @@
 }
 #prototyping {
     background-color:#0a0b0c;
-    min-height: 100vh;
+    // min-height: 100vh;
     width: 100%;
     position: relative;
+    font-size: 0;
     .title {
         display: block;
         height: 300px;
@@ -366,21 +369,30 @@
         // font-weight: 700;
         // top: 100px;
         position: relative;
-        font-size: 6rem;
-        font-family: 'Roboto Mono', monospace;
-        color: #ccc;
+
         // padding-top: 100px;
         // display: block;
         // width: calc(~"100% - 1000px");
+
+        span {
+            font-size: 6rem;
+            font-family: 'Roboto Mono', monospace;
+            color: #ccc;
+            user-select: text;
+        }
     }
     .info {
-        float: left;
+        display: inline-block;
+        font-size: 0;
+        vertical-align: top;
         width: calc(~"100% - 720px");
+        margin-bottom: 100px;
         span {
             line-height: 32px;
             font-size: 1.4rem;
             font-family: 'Roboto Mono', monospace;
             font-weight: 300;
+            user-select: text;
 
             color: #666;
             &.show {
@@ -393,10 +405,12 @@
     .layers-container {
         position: relative;
         width: 600px;
+        vertical-align: top;
         height: 600px;
-        float: right;
+        display: inline-block;
         // bottom: 0;
-        top: -150px;
+        margin-top: -200px;
+        margin-left: 120px;
         .background {
             position: absolute;
             // top: 50%;

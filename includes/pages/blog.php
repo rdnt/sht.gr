@@ -1,4 +1,4 @@
-<div id="blog-container">
+<div id="blog-container" class="container">
     <div id="posts">
         <div id="breadcrumbs">
             <span>

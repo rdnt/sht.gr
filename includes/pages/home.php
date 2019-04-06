@@ -62,7 +62,7 @@
 <div id="prototyping" class="section">
     <div class="container">
         <div class="title">
-            Prototyping
+            <span>Prototyping</span>
         </div>
         <div class="info">
             <span>
@@ -86,5 +86,10 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div id="" class="section">
+    <div class="container">
+
     </div>
 </div>
