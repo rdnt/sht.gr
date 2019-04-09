@@ -7,6 +7,7 @@
 <link href="/css/grid.css?v=<?=$this->getLatestCommit()?>" type="text/css" rel="stylesheet" media="screen"/>
 <link href="/css/sht.css?v=<?=$this->getLatestCommit()?>" type="text/css" rel="stylesheet" media="screen"/>
 <link href="/css/navigation.css?v=<?=$this->getLatestCommit()?>" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/css/footer.css?v=<?=$this->getLatestCommit()?>" type="text/css" rel="stylesheet" media="screen"/>
 <link href="/css/home.css?v=<?=$this->getLatestCommit()?>" type="text/css" rel="stylesheet" media="screen"/>
 <link href="/css/ardent.css?v=<?=$this->getLatestCommit()?>" type="text/css" rel="stylesheet" media="screen"/>
 <link href="/css/scrollbar.css?v=<?=$this->getLatestCommit()?>" type="text/css" rel="stylesheet" media="screen"/>

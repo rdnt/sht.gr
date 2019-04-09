@@ -1,0 +1,50 @@
+// out: ../css/footer.css, compress: true, autoprefixer: defaults
+footer {
+    background-color: #0a0b0c;
+    font-size: 0;
+    padding: 100px 0;
+    box-sizing: border-box;
+    // height: 500px;
+    .left, .center, .right {
+        display: inline-block;
+        height: 100%;
+        font-size: 2rem;
+        vertical-align: top;
+        &.left {
+            margin-right: 80px;
+        }
+        &.left, &.right {
+            width: 400px;
+        }
+        &.center {
+            width: calc(~"100% - 960px");
+            margin-right: 80px;
+            .social {
+                a {
+                    display: inline-block;
+                    img {
+                        width: 40px;
+                        height: 40px;
+                        margin: 5px;
+                    }
+                    span {
+                        display: none;
+                    }
+                }
+            }
+        }
+        & > .title {
+            height: 100px;
+            line-height: 100px;
+            font-size: 2rem;
+            font-family: 'Roboto Mono', monospace;
+            color: #ddd;
+        }
+        .detail {
+            font-size: 1.2rem;
+            font-family: 'Roboto Mono',monospace;
+            color: #77777a;
+            font-weight: 300;
+        }
+    }
+}

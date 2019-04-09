@@ -39,3 +39,55 @@ main {
         background: rgba(101,102,103,.1);
     }
 }
+
+.link {
+    position: relative;
+    padding: 1px;
+    background-color: transparent !important;
+    text-decoration: none;
+    color: #333;
+    &:hover {
+        color: #000;
+        &:after {
+            transform: scaleX(1);
+            border-bottom: 2px solid #000;
+        }
+    }
+    &:active {
+        color: #1a1a1a;
+        &:after {
+            border-bottom: 2px solid #1a1a1a;
+        }
+    }
+    &.light {
+        color: #ddd;
+        &:after {
+            border-bottom: 2px solid #ddd;
+        }
+        &:hover {
+            color: #fff;
+            &:after {
+                border-bottom: 2px solid #fff;
+            }
+        }
+        &:active {
+            color: #ddd;
+            &:after {
+                border-bottom: 2px solid #ddd;
+            }
+        }
+    }
+    &:after {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        border-bottom: 2px solid #1a1a1a;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .2s ease;
+        z-index: 0;
+    }
+}

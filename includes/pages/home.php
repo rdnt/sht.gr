@@ -13,7 +13,7 @@
         </span>
     </div>
 </div>
-<div class="social">
+<div id="social">
     <a href="https://github.com/SHT" target="_blank" class="btn">
         <img src="/images/ui/social/github.svg">
         <span>Github</span>
@@ -147,7 +147,7 @@
         </div>
         <div class="description">
             <span>
-                Implementing a usable frontend goes wasted without having a powerful backend to support it. I have experience working with modern content management systems such as Wordpress and Grav, and I have also developed a specialized framework in PHP called <a href="#" class="link dark">Core</a>, which enables me to create a fully working web application (like this one!) in hours.
+                Implementing a usable frontend goes wasted without having a powerful backend to support it. I have experience working with modern content management systems such as Wordpress and Grav, and I have also developed a specialized framework in PHP called <a href="#" class="link light">Core</a>, which enables me to create a fully working web application (like this one!) in hours.
             </span>
         </div>
 
