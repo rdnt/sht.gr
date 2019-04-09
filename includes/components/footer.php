@@ -55,6 +55,9 @@
             <div class="title">
                 Sitemap
             </div>
+            <ul class="sitemap">
+                <?=$sht->renderSitemap()?>
+            </ul>
         </div>
     </div>
 </footer>

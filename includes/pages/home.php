@@ -153,10 +153,10 @@
 
     </div>
 </div>
-<!-- <div id="aboutme" class="section">
+<div id="aboutme" class="section">
     <div class="container">
         <div class="title">
             <span>About Me</span>
         </div>
     </div>
-</div> -->
+</div>

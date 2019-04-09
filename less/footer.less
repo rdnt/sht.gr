@@ -1,10 +1,40 @@
 // out: ../css/footer.css, compress: true, autoprefixer: defaults
 footer {
     background-color: #0a0b0c;
+        background-color: #0a0b0c;
     font-size: 0;
     padding: 100px 0;
     box-sizing: border-box;
     // height: 500px;
+    padding-top: 200px;
+    z-index: 1;
+    &:before {
+        content: '';
+        position: absolute;
+        top: -200px;
+        top: -100px;
+        left: 0;
+        height: 300px;
+        width: 100%;
+        display: block;
+        background-color: #fff;
+        z-index: -1;
+        // z-index: 999;
+    }
+    &:after {
+        content: '';
+        position: absolute;
+        top: -200px;
+        top: -100px;
+        left: 0;
+        height: 300px;
+        width: 100%;
+        display: block;
+        clip-path: polygon(0 75%, 100% 50%, 100% 100%, 0% 100%);
+        background-color: #0a0b0c;
+        // z-index: 999;
+        z-index: -1;
+    }
     .left, .center, .right {
         display: inline-block;
         height: 100%;
@@ -45,6 +75,23 @@ footer {
             font-family: 'Roboto Mono',monospace;
             color: #77777a;
             font-weight: 300;
+        }
+        .sitemap {
+            li {
+                display: block;
+                float: left;
+                width: 50%;
+                a {
+                    color: #ddd;
+                    text-decoration: none;
+                    font-family: 'Roboto Mono',monospace;
+                    font-size: 1.2rem;
+                    font-weight: 300;
+                    span {
+
+                    }
+                }
+            }
         }
     }
 }
