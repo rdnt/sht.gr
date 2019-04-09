@@ -9,7 +9,7 @@
 <?php $sht->loadComponent("nav"); ?>
 <?php $sht->loadContent()?>
 </main>
-<?php $sht->loadComponent("footer"); ?>
+<?php $sht->loadComponent("light-footer"); ?>
 <?php $sht->loadComponent("scripts"); ?>
 </body>
 </html>

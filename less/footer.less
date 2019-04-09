@@ -1,20 +1,30 @@
 // out: ../css/footer.css, compress: true, autoprefixer: defaults
 footer {
     background-color: #0a0b0c;
-        background-color: #0a0b0c;
     font-size: 0;
     padding: 100px 0;
-    box-sizing: border-box;
-    // height: 500px;
-    padding-top: 200px;
-    z-index: 1;
+    // box-sizing: border-box;
+    height: 300px;
+    padding-top: 250px;
+    user-select: none;
+    &.light {
+        margin-top: -100px;
+        background-color: #000;
+        filter: invert(1);
+        &:before {
+            background-color: #f5f4f3;
+        }
+        &:after {
+            background-color: #000;
+        }
+    }
     &:before {
         content: '';
         position: absolute;
         top: -200px;
-        top: -100px;
+        top: -00px;
         left: 0;
-        height: 300px;
+        height: 200px;
         width: 100%;
         display: block;
         background-color: #fff;
@@ -25,9 +35,9 @@ footer {
         content: '';
         position: absolute;
         top: -200px;
-        top: -100px;
+        top: 1px;
         left: 0;
-        height: 300px;
+        height: 200px;
         width: 100%;
         display: block;
         clip-path: polygon(0 75%, 100% 50%, 100% 100%, 0% 100%);
@@ -52,6 +62,11 @@ footer {
             .social {
                 a {
                     display: inline-block;
+                    opacity: .8;
+                    transition: .3s ease;
+                    &:hover {
+                        opacity: 1;
+                    }
                     img {
                         width: 40px;
                         height: 40px;

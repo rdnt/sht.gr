@@ -67,7 +67,8 @@
     box-sizing: border-box;
     padding-right: 0;
     z-index: 1;
-    .btn {
+    user-select: none;
+    .social-btn {
         display: block;
         //width: 100%;
         height: auto;
@@ -193,18 +194,18 @@
         //         margin-right: 20px;
         //     }
         // }
-        .indicators {
-            .indicator {
-                background-color: #fff;
-                transition: .4s ease .4s;
-                &:hover {
-                    background-color: #eee;
-                }
-                &.active {
-                    background-color: #3a3b3c;
-                }
-            }
-        }
+        // .indicators {
+        //     .indicator {
+        //         background-color: #fff;
+        //         transition: .4s ease .4s;
+        //         &:hover {
+        //             background-color: #eee;
+        //         }
+        //         &.active {
+        //             background-color: #3a3b3c;
+        //         }
+        //     }
+        // }
     }
     &:before {
         content: '';
@@ -593,7 +594,7 @@
         font-size: 0;
         vertical-align: top;
         width: calc(~"100% - 720px");
-        margin-bottom: 100px;
+        //margin-bottom: 100px;
         text-align: right;
         span {
             line-height: 36px;
@@ -702,12 +703,13 @@
         }
     }
 }
-#aboutme {
+#projects {
     background-color:#fff;
     // min-height: 100vh;
     width: 100%;
     position: relative;
     font-size: 0;
+    text-align: center;
     .title {
         display: block;
         height: 300px;
@@ -727,7 +729,7 @@
         span {
             font-size: 6rem;
             font-family: 'Roboto Mono', monospace;
-            color: #ccc;
+            color: #333;
             user-select: text;
         }
     }
@@ -735,8 +737,7 @@
         display: inline-block;
         font-size: 0;
         vertical-align: top;
-        width: calc(~"100% - 720px");
-        margin-bottom: 100px;
+        //width: calc(~"100% - 320px");
         span {
             line-height: 36px;
             font-size: 1.6rem;

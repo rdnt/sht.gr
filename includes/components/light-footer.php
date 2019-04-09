@@ -1,19 +1,4 @@
-<!-- <div class="player">
-    <div class="progress"></div>
-    <div class="overlay"></div>
-    <div class="controls">
-        <div class="control left">
-
-        </div>
-        <div class="control center play">
-
-        </div>
-        <div class="control right">
-
-        </div>
-    </div>
-</div> -->
-<footer class="section">
+<footer class="section light">
     <div class="container">
         <div class="left">
             <div class="title">

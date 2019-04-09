@@ -14,20 +14,17 @@
         height: auto;
         display: block;
         top: 0;
-        opacity: 1;
+        opacity: .8;
         transition: opacity .3s ease;
         //margin-left: 20px;
         margin: 40px 0;
-        &:hover .logo {
+        user-select: none;
+        &:hover {
             opacity: 1;
         }
-        .inner {
+        img {
             height: 60px;
             width: 105px;
-            transition: opacity .3s ease;
-            background-image: url("/images/logo.svg");
-            background-size: 100% 100%;
-            opacity: .9;
             filter: invert(1);
         }
     }
@@ -56,6 +53,7 @@
                     }
                 }
                 a {
+                    user-select: none;
                     display: block;
                     width: auto;
                     padding: 0 8px;

@@ -14,31 +14,28 @@
     </div>
 </div>
 <div id="social">
-    <a href="https://github.com/SHT" target="_blank" class="btn">
+    <a href="https://github.com/SHT" target="_blank" class="social-btn">
         <img src="/images/ui/social/github.svg">
         <span>Github</span>
     </a>
-    <a href="https://www.linkedin.com/in/tasos-papalyras/" target="_blank" class="btn">
+    <a href="https://www.linkedin.com/in/tasos-papalyras/" target="_blank" class="social-btn">
         <img src="/images/ui/social/linkedin.svg">
         <span>LinkedIn</span>
     </a>
-    <a href="https://www.instagram.com/sht.gr/" target="_blank" class="btn">
+    <a href="https://www.instagram.com/sht.gr/" target="_blank" class="social-btn">
         <img src="/images/ui/social/instagram.svg">
         <span>Instagram</span>
     </a>
-    <a href="https://www.mixcloud.com/SHT/" target="_blank" class="btn m">
+    <a href="https://www.mixcloud.com/SHT/" target="_blank" class="social-btn m">
         <img src="/images/ui/social/mixcloud.svg">
         <span>Mixcloud</span>
     </a>
-    <a href="https://soundcloud.com/shtofficial" target="_blank" class="btn s">
+    <a href="https://soundcloud.com/shtofficial" target="_blank" class="social-btn s">
         <img src="/images/ui/social/soundcloud.svg">
         <span>Soundcloud</span>
     </a>
 </div>
-<div id="latest-articles">
-    <!-- <div class="header">
-        <span>Latest articles</span>
-    </div> -->
+<!-- <div id="latest-articles">
     <div class="article">
         <div class="title">
             <span>Article Title</span>
@@ -46,9 +43,6 @@
         <div class="description">
             <span>That is a very very very very very very very very long description indeed so it will be trimmed down.</span>
         </div>
-        <!-- <a href="#" class="more">
-            <span>READ MORE</span>
-        </a> -->
         <div class="bg">
             <img src="https://christianmoser.me/wp-content/uploads/2014/02/DSC_3415.jpeg" alt="">
         </div>
@@ -58,7 +52,7 @@
         <div class="indicator"></div>
         <div class="indicator"></div>
     </div>
-</div>
+</div> -->
 <div id="frontend" class="section">
     <div class="container">
         <div class="title">
@@ -101,7 +95,7 @@
                     <div class="control"></div>
                 </div>
                 <div class="content">
-                    <?php for($i=0; $i<40; $i++): ?>
+                    <?php for($i=0; $i<24; $i++): ?>
                         <div class="line">
                             <?php for($j=0; $j<rand(0,2); $j++): ?>
                                 <div class="ind"></div>
@@ -126,7 +120,7 @@
                     <div class="control"></div>
                 </div>
                 <div class="content">
-                    <?php for($i=0; $i<40; $i++): ?>
+                    <?php for($i=0; $i<24; $i++): ?>
                         <div class="line">
                             <?php for($j=0; $j<rand(0,2); $j++): ?>
                                 <div class="ind"></div>
@@ -147,16 +141,24 @@
         </div>
         <div class="description">
             <span>
-                Implementing a usable frontend goes wasted without having a powerful backend to support it. I have experience working with modern content management systems such as Wordpress and Grav, and I have also developed a specialized framework in PHP called <a href="#" class="link light">Core</a>, which enables me to create a fully working web application (like this one!) in hours.
+                Implementing a usable frontend goes wasted without having a powerful backend to support it. I have experience working with modern content management systems such as Wordpress and Grav, and I have also developed a specialized framework in PHP called <a class="link light" target="_blank" href="https://github.com/SHT/Core">Core</a>, which enables me to create a fully working web application (like this one!) in hours.
             </span>
         </div>
 
     </div>
 </div>
-<div id="aboutme" class="section">
+<!-- <div id="projects" class="section">
     <div class="container">
         <div class="title">
-            <span>About Me</span>
+            <span>Projects</span>
+        </div>
+        <div class="description">
+            <span>
+                You can view my portfolio by clicking the link below.
+            </span>
+        </div>
+        <div class="btn-container">
+            <a class="btn" href="/portfolio">Portfolio</a>
         </div>
     </div>
-</div>
+</div> -->
