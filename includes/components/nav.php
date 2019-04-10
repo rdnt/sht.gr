@@ -6,7 +6,7 @@
     </a>
     <nav>
         <ul class="navigation">
-            <?=$sht->renderNav()?>
+            <?=$core->renderNav()?>
         </ul>
     </nav>
 </div>

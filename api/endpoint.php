@@ -1,3 +1,8 @@
 <?php
 // Example response
-$core->response("SUCCESS", true);
+$params = array(
+    "password"
+);
+$post = $core->validate($params);
+$core->apply_rate_limiting("endpoint");
+$core->response("SUCCESS", $post['password']);

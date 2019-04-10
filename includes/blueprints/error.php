@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php $sht->loadComponent("head"); ?>
-<title><?=$sht->title?></title>
+<?php $core->loadComponent("head") ?>
+<title><?= $core->getTitle() ?></title>
 </head>
 <body>
 <main>
-<?php $sht->loadContent()?>
+<?php $core->loadContent() ?>
 </main>
-<?php $sht->loadComponent("scripts"); ?>
+<?php $core->loadComponent("scripts") ?>
 </body>
 </html>

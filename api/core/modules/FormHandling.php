@@ -11,10 +11,10 @@ trait FormHandling {
      */
     function response($response, $json = null) {
         // Initialize json array and echo it
-        $json_array = array(
+        $json_array = [
             "response" => $response,
             "data"     => $json
-        );
+        ];
         echo json_encode($json_array);
         // Stop script execution
         die();
@@ -28,6 +28,7 @@ trait FormHandling {
      */
     function validatePattern($key, $value) {
         if (!array_key_exists($key, $this->patterns)) {
+            $this->log("VALIDATION", "Key $key missing from the patterns array.");
             return false;
         }
         if (!preg_match($this->getPattern($key), $value)) {
@@ -51,83 +52,98 @@ trait FormHandling {
      *
      * @param string $data The sent POST keys
      */
-    function checkPOSTData() {
-        $response_data = array();
-        foreach (func_get_args() as $parameters) {
-            if (is_array($parameters)) {
-                foreach ($parameters as $outer_parameter => $data) {
-                    if (is_array($data)) {
-                        foreach ($data as $inner_parameter) {
-                            if (!isset($_POST[$outer_parameter][$inner_parameter])) {
-                                $this->response("FORM_DATA_MISSING");
-                            }
-                        }
-                    }
-                    else if ($data) {
-                        if (!isset($_POST[$outer_parameter])) {
-                            $this->response("FORM_DATA_MISSING");
-                        }
-                        $value = $_POST[$outer_parameter];
-                        $data = str_replace(' ', '', $data);
-                        $checks = explode(';', $data);
-                        foreach ($checks as $check) {
-                            if (substr($check, 0, strlen("validate:")) === "validate:") {
-                                $regex = substr($check, strlen("validate:"));
-                                $valid = $this->validatePattern($regex, $value);
-                            }
-                            else {
-                                $valid = true;
-                            }
-                            if (substr($check, 0, strlen("constraints:")) === "constraints:") {
-                                $constraints = substr($check, strlen("constraints:"));
-                                $escaped_value = addslashes($value);
-                                $escaped_value = "'" . $escaped_value . "'";
-                                $constraints = str_replace($outer_parameter, $escaped_value, $constraints);
-                                $in_range = $this->applyConstraints($value, $constraints);
-                            }
-                            else {
-                                $in_range = true;
-                            }
-                        }
-                        if (!$valid or !$in_range) {
-                            $response_data[] = $outer_parameter;
-                        }
-                    }
-                }
-            }
-            else {
-                foreach (func_get_args() as $parameter) {
-                    if (!isset($_POST[$parameter])) {
-                        $this->response("FORM_DATA_MISSING");
-                    }
-                }
-            }
+    function validate($parameters) {
+        $this->checkPOST();
+        $this->verifyCSRF();
+        $invalid_data = [];
+        $return_data = [];
+        $post_data = $_POST;
+        $this->validateParams($parameters, $post_data, $return_data, $invalid_data);
+        if (!empty($invalid_data)) {
+            $this->response("INVALID_DATA", $invalid_data);
         }
-        if (!empty($response_data)) {
-            $this->response("INVALID_DATA", $response_data);
-        }
-    }
-
-    function escapeString($string) {
-        return htmlspecialchars($string);
-    }
-
-    function applyConstraints($variable, $constraint) {
-        if (!eval("return $constraint;")) {
-            return false;
-        }
-        return true;
+        return $return_data;
     }
 
     /**
-     * Verifies POST data by combining the required checks
+     * Validates all the parameters set in the parameters array recursively,
+     * Allowing automatic validation on a multidimensional POST array
+     * Regex checking on the array elements that have a non-array value,
+     * using that value as the regex index on the patterns array
      *
-     * @param string $data The sent POST keys
+     * @param array &$parameters The parameters to validate
+     * @param array &$post_data On first iteration, the POST data, on following
+     *                          iterations, a subset of the POST data.
+     * @param array &$return_data The validated POST data array
+     * @param array &$invalid_data Contains elements that didn't pass their
+     *                             respective regex pattern, if any
      */
-    function verifyPOSTData() {
-        $this->checkPOST();
-        // Call the checkPOSTData functions with the input keys
-        call_user_func_array(array($this, 'checkPOSTData'), func_get_args());
+    function validateParams(&$parameters, &$post_data, &$return_data, &$invalid_data) {
+        foreach ($parameters as $parameter => $data) {
+            if (is_int($parameter)) {
+                // Only the parameter name is set, make sure it is received
+                if (!isset($post_data[$data])) {
+                    $this->response("FORM_DATA_MISSING");
+                }
+                // Add it to return data, since no validation is needed
+                $return_data[$data] = $post_data[$data];
+            }
+            else {
+                if (!is_array($data)) {
+                    // A regex is set, make sure the received value passes it
+                    if (!isset($post_data[$parameter])) {
+                        $this->response("FORM_DATA_MISSING");
+                    }
+                    $value = $post_data[$parameter];
+                    // Regex checking
+                    $valid = $this->validatePattern($data, $value);
+                    if ($valid) {
+                        // Add it to return data
+                        $return_data[$parameter] = $value;
+                    }
+                    else {
+                        // Add it to invalid_data array
+                        $invalid_data[] = $parameter;
+                    }
+                }
+                else {
+                    // A sub-array is set, recurse
+                    $this->validateParams($data, $post_data[$parameter], $parameters[$parameter], $invalid_data);
+                }
+            }
+
+        }
+    }
+
+    /**
+     * Generates a hidden csrf validation input element and echoes it in a form
+     *
+     * @param string $endpoint The endpoint URL to hash the csrf token with
+     */
+    function csrf($endpoint) {
+        $hash = hash_hmac('sha256', $endpoint, $_SESSION['csrf']);
+        $token = substr($hash, -12);
+        echo '<input name="csrf" value="' . escape($token) . '" hidden>' . "\n";
+    }
+
+    /**
+     * Verifies the CSRF field was sent on POST and matches the hash for the
+     * current endpoint.
+     *
+     * @param string $endpoint The endpoint URL to hash the csrf token with
+     */
+    function verifyCSRF() {
+        $endpoint = $this->getCurrentPage();
+        if (!isset($_POST['csrf'])) {
+            $this->response("NO_CSRF_TOKEN_PROVIDED");
+        }
+        else {
+            $hash = hash_hmac('sha256', $endpoint, $_SESSION['csrf']);
+            $token = substr($hash, -12);
+            if (!hash_equals($token, $_POST['csrf'])) {
+                $this->response("INVALID_CSRF_TOKEN");
+            }
+        }
     }
 
 }

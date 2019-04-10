@@ -41,7 +41,7 @@
                 Sitemap
             </div>
             <ul class="sitemap">
-                <?=$sht->renderSitemap()?>
+                <?=$core->renderSitemap()?>
             </ul>
         </div>
     </div>
