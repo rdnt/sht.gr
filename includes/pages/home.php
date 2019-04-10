@@ -1,16 +1,18 @@
 <div id="intro" class="container">
-    <div class="hello">
-        <span>Yes hello.<span class="fade">¬</span></span>
-    </div>
-    <div class="introduction">
-        <span>
-            My name is Tasos, and I am a Full-Stack Web Developer based in Corfu, Greece.
-            <br>
-            <br>
-            I create websites and interactive web applications from the ground up using leading technologies in the field such as PHP, MySQL and Javascript. From mockups to web design, development and testing, I make sure that an application is built with optimization and performance in mind, is deployed on a secure and robust environment and is friendly and appealing to the end-user, whether that is a systems' administrator or just a visitor.
-            <br>
-            On my free time I create 3D graphics and animations, and I also host my own online radioshow, among other things.
-        </span>
+    <div class="contents">
+        <div class="hello">
+            <span>Yes hello.<span class="fade">¬</span></span>
+        </div>
+        <div class="introduction">
+            <span>
+                My name is Tasos, and I am a Full-Stack Web Developer based in Corfu, Greece.
+                <br>
+                <br>
+                I create websites and interactive web applications from the ground up using leading technologies in the field such as PHP, MySQL and Javascript. From mockups to web design, development and testing, I make sure that an application is built with optimization and performance in mind, is deployed on a secure and robust environment and is friendly and appealing to the end-user, whether that is a systems' administrator or just a visitor.
+                <br>
+                On my free time I create 3D graphics and animations, and I also host my own online radioshow, among other things.
+            </span>
+        </div>
     </div>
 </div>
 <div id="social">
@@ -35,7 +37,7 @@
         <span>Soundcloud</span>
     </a>
 </div>
-<!-- <div id="latest-articles">
+<div id="latest-articles">
     <div class="article">
         <div class="title">
             <span>Article Title</span>
@@ -52,7 +54,7 @@
         <div class="indicator"></div>
         <div class="indicator"></div>
     </div>
-</div> -->
+</div>
 <div id="frontend" class="section">
     <div class="container">
         <div class="title">
@@ -147,18 +149,3 @@
 
     </div>
 </div>
-<!-- <div id="projects" class="section">
-    <div class="container">
-        <div class="title">
-            <span>Projects</span>
-        </div>
-        <div class="description">
-            <span>
-                You can view my portfolio by clicking the link below.
-            </span>
-        </div>
-        <div class="btn-container">
-            <a class="btn" href="/portfolio">Portfolio</a>
-        </div>
-    </div>
-</div> -->

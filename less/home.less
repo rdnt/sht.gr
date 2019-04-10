@@ -13,15 +13,23 @@
     overflow: hidden;
 }
 #intro {
+    position: relative;
     width: 100%;
     min-height: calc(~"100vh - 320px");
     box-sizing: border-box;
+    // top: 50%;
+    // transform: translateY(-50%);
+    .contents {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
     .hello {
         display: block;
         // width: 80%;
         // left: 20%;
-        // top: 30%;
-        //transform: translateY(-50%);
+        // top: 50%;
+        // transform: translateY(-50%);
         margin-top: 0;
         span {
             font-size: 8rem;
