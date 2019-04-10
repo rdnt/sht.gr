@@ -254,7 +254,7 @@ trait Renderer {
      */
     function loadComponent($component) {
         $core = $this;
-        require_once($this->getRoot() . "/includes/components/$component.php");
+        require($this->getRoot() . "/includes/components/$component.php");
     }
 
     /**

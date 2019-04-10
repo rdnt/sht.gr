@@ -20,9 +20,9 @@
     // top: 50%;
     // transform: translateY(-50%);
     .contents {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+        position: relative;
+        margin-top: 4vh;
+        // transform: translateY(-50%);
     }
     .hello {
         display: block;
@@ -66,81 +66,83 @@
     }
 }
 #social {
-    // position: fixed;
-    position: relative;
-    float: left;
-    height: 180px;
-    bottom: 110px;
-    padding: 40px;
-    box-sizing: border-box;
-    padding-right: 0;
-    z-index: 1;
-    user-select: none;
-    .social-btn {
-        display: block;
-        //width: 100%;
-        height: auto;
-        //float: left;
-        height: 30px;
-        margin-bottom: 15px;
-        // &.m {
-        //     height: 30px;
-        // }
-        // &.s {
-        //     height: 20px;
-        // }
-        // &:first-child {
-        //     margin: 0;
-        // }
-        &:hover {
-            img {
-                opacity: 1;
-            }
-            span {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        img {
-            width: 30px;
-            height: 30px;
-            float: left;
-            opacity: .5;
-            transition: opacity .3s ease;
-            filter: invert(1);
-            // background: #0f0;
-        }
-        span {
-            float: left;
-            display: block;
-            height: 30px;
-            line-height: 30px;
-            color: #000;
-            margin: 0 15px;
-            font-family: 'Oswald', sans-serif;
-            letter-spacing: 1px;
-            opacity: 0;
-            transform: translateX(-5px);
-            transition: .3s ease;
-        }
-    }
-    @media screen and (max-width: 1840px) {
+    .social-icons {
+        // position: fixed;
         position: relative;
-        height: 30px;
-        bottom: -70px;
-        //left: 50%;
-        // left: 0;
-        // transform: translateX(-100%);
-        // margin: 0;
-        // display: none;
-        .btn {
-            width: 30px;
-            display: inline-block;
-            font-size: 0;
-            span {
-                display: none;
+        float: left;
+        height: 180px;
+        bottom: 110px;
+        padding: 40px;
+        box-sizing: border-box;
+        padding-right: 0;
+        z-index: 1;
+        user-select: none;
+        .icon {
+            display: block;
+            //width: 100%;
+            height: auto;
+            //float: left;
+            height: 30px;
+            margin-bottom: 15px;
+            // &.m {
+            //     height: 30px;
+            // }
+            // &.s {
+            //     height: 20px;
+            // }
+            // &:first-child {
+            //     margin: 0;
+            // }
+            &:hover {
+                img {
+                    opacity: 1;
+                }
+                span {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
             }
-            margin-right: 20px;
+            img {
+                width: 30px;
+                height: 30px;
+                float: left;
+                opacity: .5;
+                transition: opacity .3s ease;
+                filter: invert(1);
+                // background: #0f0;
+            }
+            span {
+                float: left;
+                display: block;
+                height: 30px;
+                line-height: 30px;
+                color: #000;
+                margin: 0 15px;
+                font-family: 'Oswald', sans-serif;
+                letter-spacing: 1px;
+                opacity: 0;
+                transform: translateX(-5px);
+                transition: .3s ease;
+            }
+        }
+        @media screen and (max-width: 1840px) {
+            position: relative;
+            height: 30px;
+            bottom: -70px;
+            //left: 50%;
+            // left: 0;
+            // transform: translateX(-100%);
+            // margin: 0;
+            // display: none;
+            .icon {
+                width: 30px;
+                display: inline-block;
+                font-size: 0;
+                span {
+                    display: none;
+                }
+                margin-right: 20px;
+            }
         }
     }
 }
