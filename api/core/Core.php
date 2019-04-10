@@ -45,7 +45,7 @@ abstract class Core {
         $project_folder = substr($this->root, strlen($_SERVER['DOCUMENT_ROOT']) );
         $this->project_folder = str_replace("\\", "/", $project_folder);
         // Set current request url
-        $this->current_page = $_SERVER['REQUEST_URI'];
+        $this->current_page = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         // Get the code version hash
         $this->version = $this->getCommitHash();
         // Set default timezone
@@ -142,8 +142,8 @@ abstract class Core {
      *
      * @param string $page The page to redirect to
      */
-    function redirect($page) {
-        header("Location: " . $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['SERVER_NAME'] . $page);
+    function redirect($page, $code = 302) {
+        header("Location: " . $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['SERVER_NAME'] . $page, true, $code);
         die();
     }
 

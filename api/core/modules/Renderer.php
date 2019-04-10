@@ -46,6 +46,8 @@ trait Renderer {
      * @param string $page The page path to force
      */
     function setCurrentPage($url) {
+        // echo $url;
+        // echo " set";
         $page = $this->pages[$url];
         $this->current_page = $url;
         $this->name = $page->name;
@@ -62,19 +64,28 @@ trait Renderer {
 
     function findCurrentPage() {
         $folder = $this->getProjectFolder();
+        $current_page = $this->getCurrentPage();
         // Loop all pages
-        foreach ($this->pages as $page) {
 
+
+
+        if ($current_page != '/') {
+            $current_page = rtrim($current_page, '/');
+        }
+        //echo $current_page;
+        foreach ($this->pages as $page) {
 
             // If URL starts with a hash it is a dropdown and index 3 is an
             // array with the dropdown items
+            if ($current_page === $page->url) {
+                // echo "found";
 
-            if ($this->getCurrentPage() === $page->url) {
+            //if ($this->getCurrentPage() === rtrim($page->url, "/") . "/") {
                 $this->setCurrentPage($page->url);
             }
             if ($page->children) {
                 foreach ($page->children as $child) {
-                    if ($this->getCurrentPage() === $child->url) {
+                    if ($current_page === $child->url) {
                         $this->setCurrentPage($child->url);
                     }
                 }
@@ -100,6 +111,7 @@ trait Renderer {
 
     function isEndpoint($actual_page) {
         $parameters = explode("/", $actual_page);
+        // var_dump($parameters);
         array_shift($parameters);
         if ($parameters[0] == "api") {
             return true;
@@ -119,6 +131,10 @@ trait Renderer {
     }
 
     function isPage($location) {
+        if ($location != "/") {
+            // Get rid of trailing slashes when checking
+            $location = rtrim($location, "/");
+        }
         if (array_key_exists($location, $this->pages)) {
             return true;
         }
@@ -128,15 +144,29 @@ trait Renderer {
     }
 
     function servePage($location) {
+        $current_page = $this->getCurrentPage();
+        $query = $_SERVER['QUERY_STRING'];
+
+        // var_dump($this->blueprint);
+        if (!$query && (endsWith($this->getCurrentPage(), "//") || !endsWith($this->getCurrentPage(), "/"))) {
+            $this->redirect(rtrim($location, "/") . "/", 301);
+        }
+        else if ($query && endsWith($this->getCurrentPage(), "/")) {
+            $location = rtrim($location, "/");
+            $location = $location . "?" . $query;
+            $this->redirect($location);
+        }
+
         $path = $this->getRoot() . "/includes/blueprints/" . $this->blueprint . ".php";
         $template = $this->getRoot() . "/includes/pages/" . $this->template . ".php";
-        if (!file_exists($path)) {
-            $this->log("RENDERER", "Error while serving " . $this->getCurrentPage() . ": Blueprint $this->blueprint does not exist, falling back to default blueprint.");
-            $this->serveErrorPage(501, $location);
 
+        if (!file_exists($path)) {
+            // echo $path;
+            $this->log("RENDERER", "Error while serving " . $current_page . ": Blueprint $this->blueprint does not exist, falling back to default blueprint.");
+            $this->serveErrorPage(501, $location);
         }
         else if (!file_exists($template)) {
-            $this->log("RENDERER", "Error while serving " . $this->getCurrentPage() . ": Template $this->template does not exist.");
+            $this->log("RENDERER", "Error while serving " . $current_page . ": Template $this->template does not exist.");
             $this->serveErrorPage(501, $location);
         }
         else {
@@ -201,12 +231,22 @@ trait Renderer {
 
         $this->findCurrentPage();
 
+
         // Acquire the first segment of the requested path
-        $dir = $this->getProjectFolder();
-        $url = substr($this->getCurrentPage(), strlen($dir));
+        //$dir = $this->getProjectFolder();
+        //$url = substr($this->getCurrentPage(), strlen($dir));
 
+        // $location = strtok($url, '?');
 
-        $location = strtok($url, '?');
+        $location = $this->getCurrentPage();
+
+        if ($location === false) {
+            $this->redirect("/");
+        }
+        //var_dump($path);
+        //die();
+        //$location = rtrim($location, '/');
+        //var_dump($location);
 
         $accessible = $this->isAccessible($location);
 

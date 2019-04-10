@@ -48,13 +48,14 @@
                 font-size: 1.6rem;
                 line-height: 150px;
                 color: #666;
-                font-weight: 300;
+                // font-weight: 300;
                 font-family: 'Source Sans Pro', sans-serif;
                 a {
                     text-decoration: none;
                     color: #111;
                     font-weight: 400;
                     opacity: .9;
+                    font-family: 'Source Sans Pro', sans-serif;
                 }
                 &:after {
                     content: '/';
@@ -78,6 +79,17 @@
             max-height: 240px;
             .content {
                 max-height: 200px;
+
+                .date {
+                    display: block;
+                    font-size: 1rem;
+                    line-height: 50px;
+                    color: #aaa;
+                    font-weight: 300;
+                    font-family: 'Source Sans Pro', sans-serif;
+                    height: 50px;
+
+                }
                 .title {
                     //display: block;
                     height: 40px;
@@ -88,6 +100,7 @@
                     font-family: 'Lato', sans-serif;
                     color: #333;
                     text-decoration: none;
+                    margin-left: -2px;
 
                     white-space: nowrap;
                     overflow: hidden;
@@ -102,19 +115,9 @@
                     }
 
                 }
-                .date {
-                    display: block;
-                    font-size: 1.3rem;
-                    line-height: 40px;
-                    color: #aaa;
-                    font-weight: 300;
-                    font-family: 'Source Sans Pro', sans-serif;
-                    height: 40px;
-
-                }
                 .description {
                     display: block;
-                    margin: 10px 0;
+                    margin: 20px 0;
                     font-size: 1.5rem;
 
                     height: 30px;

@@ -11,12 +11,12 @@
         <? for($i=0; $i<10; $i++): ?>
             <div class="post">
                 <div class="content">
-                    <a href="#" class="title link">
-                        abcdefghijklmnopqrstuvwxyz
-                    </a>
                     <span class="date">
                         23/02/2019
                     </span>
+                    <a href="#" class="title link">
+                        abcdefghijklmnopqrstuvwxyz
+                    </a>
                     <span class="description">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in erat consectetur, facilisis quam ut, feugiat orci.
                     </span>
