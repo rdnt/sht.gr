@@ -175,6 +175,9 @@ trait Renderer {
         $path = $this->getRoot() . $location;
         if (file_exists($path)) {
             $mime_type = getMimeType($path);
+            header("Expires: " . gmdate("D, d M Y H:i:s", time() + 86400) . " GMT");
+            header("Pragma: cache");
+            header("Cache-Control: max-age=86400");
             header ('X-Sendfile: ' . ltrim($location, '/'));
             header("Content-Type: $mime_type");
             readfile($path);
@@ -183,7 +186,6 @@ trait Renderer {
             $this->serveErrorPage(404, $location);
         }
     }
-
 
     function serveErrorPage($code, $location) {
         $this->throwError($code);

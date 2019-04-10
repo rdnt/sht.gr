@@ -1,10 +1,10 @@
 $(window).on("load", function() {
 
-    parallax(".red", .3);
-    parallax(".green", .5);
-    parallax(".blue", .7);
-
-    parallax("#articles", -.1);
+    // parallax(".red", .3);
+    // parallax(".green", .5);
+    // parallax(".blue", .7);
+    //
+    // parallax("#articles", -.1);
 
     // $(".layer").each(function(index, element) {
     //     setTimeout(function() {
