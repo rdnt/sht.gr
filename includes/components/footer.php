@@ -1,62 +1,30 @@
-<!-- <div class="player">
-    <div class="progress"></div>
-    <div class="overlay"></div>
-    <div class="controls">
-        <div class="control left">
-
-        </div>
-        <div class="control center play">
-
-        </div>
-        <div class="control right">
-
-        </div>
-    </div>
-</div> -->
-<footer class="section">
+<? if ($core->current_page == "/"): $footer_class = "light"; $link_class = ""; else: $footer_class = ""; $link_class = "light"; endif; ?>
+<footer class="section <?=$footer_class?>">
     <div class="container">
-        <div class="left">
+        <div class="source segment">
             <div class="title">
                 Source
             </div>
-            <div class="detail">
-                The source code of my website is available on <a class="link light" href="https://github.com/SHT/sht.gr" target="_blank">GitHub</a>.
+            <div class="details">
+                The source code of my website is available on <a class="link <?=$link_class?>" href="https://github.com/SHT/sht.gr" target="_blank">GitHub</a>.
             </div>
         </div>
-        <div class="center">
+        <div class="social segment">
             <div class="title">
                 Social
             </div>
-            <div class="social">
-                <a href="https://github.com/SHT" target="_blank" class="social-btn">
-                    <img src="/images/ui/social/github.svg">
-                    <span>Github</span>
-                </a>
-                <a href="https://www.linkedin.com/in/tasos-papalyras/" target="_blank" class="social-btn">
-                    <img src="/images/ui/social/linkedin.svg">
-                    <span>LinkedIn</span>
-                </a>
-                <a href="https://www.instagram.com/sht.gr/" target="_blank" class="social-btn">
-                    <img src="/images/ui/social/instagram.svg">
-                    <span>Instagram</span>
-                </a>
-                <a href="https://www.mixcloud.com/SHT/" target="_blank" class="social-btn m">
-                    <img src="/images/ui/social/mixcloud.svg">
-                    <span>Mixcloud</span>
-                </a>
-                <a href="https://soundcloud.com/shtofficial" target="_blank" class="social-btn s">
-                    <img src="/images/ui/social/soundcloud.svg">
-                    <span>Soundcloud</span>
-                </a>
-            </div>
-
+            <? $core->loadComponent("social-icons"); ?>
         </div>
-        <div class="right">
+        <div class="sitemap segment">
             <div class="title">
                 Sitemap
             </div>
-            <ul class="sitemap">
-                <?=$core->renderSitemap()?>
+            <ul class="page-sitemap">
+                <? foreach ($this->pages as $page): ?>
+                    <? if ($page->visible): ?>
+                        <li><a class="link <?=$link_class?>" href="<?=$page->url?>"><?=$page->name?></a></li>
+                    <? endif; ?>
+                <? endforeach; ?>
             </ul>
         </div>
     </div>

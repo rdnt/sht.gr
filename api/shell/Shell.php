@@ -56,7 +56,7 @@ class Shell extends Core {
             "/css"
         ];
 
-        new Page("/", "Home", "home", "homepage");
+        new Page("/", "Home", "home", "default");
         new Page("/blog", "Blog", "blog", "default");
         new Page("/portfolio", "Portfolio", "projects", "default");
         new Page("/ardent", "Ardent Radio", "ardent", "default");

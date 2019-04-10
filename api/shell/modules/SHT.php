@@ -15,14 +15,4 @@ trait SHT {
             }
         }
     }
-
-    function renderSitemap() {
-        foreach ($this->pages as $page) {
-            if ($page->visible) {
-                $name = $page->name;
-                $url = $page->url;
-                echo "<li><a class=\"link light\" href=\"$url\"><span>$name</span></a></li>\n";
-            }
-        }
-    }
 }
