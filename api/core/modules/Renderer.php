@@ -149,6 +149,9 @@ trait Renderer {
 
         // var_dump($this->blueprint);
         if (!$query && (endsWith($this->getCurrentPage(), "//") || !endsWith($this->getCurrentPage(), "/"))) {
+            header("Expires: " . gmdate("D, d M Y H:i:s", time() + 86400) . " GMT");
+            header("Pragma: cache");
+            header("Cache-Control: max-age=86400");
             $this->redirect(rtrim($location, "/") . "/", 301);
         }
         else if ($query && endsWith($this->getCurrentPage(), "/")) {
