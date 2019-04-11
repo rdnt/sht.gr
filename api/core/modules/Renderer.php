@@ -69,9 +69,9 @@ trait Renderer {
 
 
 
-        if ($current_page != '/') {
-            $current_page = rtrim($current_page, '/');
-        }
+        // if ($current_page != '/') {
+        //     $current_page = rtrim($current_page, '/');
+        // }
         //echo $current_page;
         foreach ($this->pages as $page) {
 
@@ -131,10 +131,10 @@ trait Renderer {
     }
 
     function isPage($location) {
-        if ($location != "/") {
-            // Get rid of trailing slashes when checking
-            $location = rtrim($location, "/");
-        }
+        // if ($location != "/") {
+        //     // Get rid of trailing slashes when checking
+        //     $location = rtrim($location, "/");
+        // }
         if (array_key_exists($location, $this->pages)) {
             return true;
         }
@@ -148,17 +148,17 @@ trait Renderer {
         $query = $_SERVER['QUERY_STRING'];
 
         // var_dump($this->blueprint);
-        if (!$query && (endsWith($this->getCurrentPage(), "//") || !endsWith($this->getCurrentPage(), "/"))) {
-            header("Expires: " . gmdate("D, d M Y H:i:s", time() + 86400) . " GMT");
-            header("Pragma: cache");
-            header("Cache-Control: max-age=86400");
-            $this->redirect(rtrim($location, "/") . "/", 301);
-        }
-        else if ($query && endsWith($this->getCurrentPage(), "/")) {
-            $location = rtrim($location, "/");
-            $location = $location . "?" . $query;
-            $this->redirect($location);
-        }
+        // if (!$query && (endsWith($this->getCurrentPage(), "//") || !endsWith($this->getCurrentPage(), "/"))) {
+        //     header("Expires: " . gmdate("D, d M Y H:i:s", time() + 86400) . " GMT");
+        //     header("Pragma: cache");
+        //     header("Cache-Control: max-age=86400");
+        //     $this->redirect(rtrim($location, "/") . "/", 301);
+        // }
+        // else if ($query && endsWith($this->getCurrentPage(), "/")) {
+        //     $location = rtrim($location, "/");
+        //     $location = $location . "?" . $query;
+        //     $this->redirect($location);
+        // }
 
         $path = $this->getRoot() . "/includes/blueprints/" . $this->blueprint . ".php";
         $template = $this->getRoot() . "/includes/pages/" . $this->template . ".php";
