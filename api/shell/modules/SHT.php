@@ -5,6 +5,7 @@ trait SHT {
             if ($page->visible) {
                 $name = $page->name;
                 $url = $page->url;
+                $url = rtrim($url, "/") . "/";
                 if ($url === $_SERVER['REQUEST_URI']) {
                     $active = " class=\"active\"";
                 }
