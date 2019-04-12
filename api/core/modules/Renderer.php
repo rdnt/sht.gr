@@ -274,20 +274,6 @@ trait Renderer {
             $this->serveErrorPage(404, $location);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     /**

@@ -1,4 +1,11 @@
-<? if ($core->current_page == "/"): $footer_class = "light"; $link_class = ""; else: $footer_class = ""; $link_class = "light"; endif; ?>
+<?php
+    if ($core->current_page == "/"){
+        $footer_class = "light"; $link_class = "";
+    }
+    else {
+        $footer_class = ""; $link_class = "light";
+    }
+?>
 <footer class="section <?=$footer_class?>">
     <div class="container">
         <div class="source segment">
