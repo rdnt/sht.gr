@@ -112,6 +112,9 @@ class DB extends mysqli {
                 }
                 return $data;
             }
+            else {
+                return array();
+            }
         }
         else if ($this->stmt->affected_rows === -1) {
             return false;

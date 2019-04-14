@@ -12,7 +12,7 @@
             <div class="post">
                 <div class="content">
                     <span class="date">
-                        <?=date('d/m/Y', $post->timestamp) ?>
+                        <?= date('d/m/Y', $post->timestamp) ?>
                     </span>
                     <a href="#" class="title link">
                         <?=$post->title?>
