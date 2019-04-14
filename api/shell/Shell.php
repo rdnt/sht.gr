@@ -21,8 +21,10 @@ class Shell extends Core {
     use Permissions;
     use Renderer;
     use RateLimiting;
+    use Strings;
 
     use SHT;
+    use Posts;
 
     /**
      * Shell constructor method

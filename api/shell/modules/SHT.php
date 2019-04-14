@@ -1,4 +1,5 @@
 <?php
+
 trait SHT {
     function renderNav() {
         foreach ($this->pages as $page) {

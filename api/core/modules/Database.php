@@ -7,7 +7,10 @@ trait Database {
     }
 
     function query($sql, $format = null, &...$args) {
-        $this->prepare($sql);
+        $this->db->stmt = $this->prepare($sql);
+        if ($this->db->stmt === FALSE) {
+            die ("Mysql Error: " . $this->db->error);
+        }
         if ($format) {
             $this->bind($format, ...$args);
         }
@@ -16,6 +19,7 @@ trait Database {
 
     function prepare($sql) {
         $this->db->stmt = $this->db->prepare($sql);
+        return $this->db->stmt;
     }
 
     function bind($format, &...$args) {
@@ -26,10 +30,14 @@ trait Database {
             $params[$key+1] = &$args[$key];
         }
         // Call the bind_param function on the stmt and pass it the params
-        call_user_func_array(array($this->db->stmt, 'bind_param'), $params);
+        return call_user_func_array(array($this->db->stmt, 'bind_param'), $params);
     }
 
     function exec() {
         return $this->db->exec();
+    }
+
+    function lastInsertID() {
+        return $this->db->insert_id;
     }
 }

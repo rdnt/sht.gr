@@ -66,7 +66,7 @@ class DB extends mysqli {
      * @return mixed The result of the query
      */
     function query($sql, $associative = true) {
-        $response = parent::query($sql, null);
+        $response = parent::query($sql, MYSQLI_USE_RESULT);
         return $this->getResults($response, $associative);
     }
 
@@ -86,8 +86,8 @@ class DB extends mysqli {
      *                               of the columns.
      */
     function getResults($response, $associative = true) {
-        if (!is_bool($response)) {
-            if (mysqli_num_rows($response) != 0) {
+        if ($response !== false) {
+            if ($response->num_rows != 0) {
                 $data = array();
                 // return all rows
                 while($row = $response->fetch_assoc()) {
@@ -113,10 +113,15 @@ class DB extends mysqli {
                 return $data;
             }
         }
-        else {
-            return $response;
+        else if ($this->stmt->affected_rows === -1) {
+            return false;
         }
-        return false;
+        else if ($this->stmt->affected_rows >= 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     /**
@@ -133,11 +138,13 @@ class DB extends mysqli {
      */
     function exec() {
         // Execute the query
-        $this->stmt->execute();
+        $executed = $this->stmt->execute();
         // Get the response from the database
         $response = $this->stmt->get_result();
         // Parse the result in the appropriate form
         $result = $this->getResults($response);
+        // Free the result from memory
+        $this->stmt->free_result();
         // Close the prepared statement
         $this->stmt->close();
         // Return the result

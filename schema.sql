@@ -5,15 +5,14 @@
 --
 
 --
--- OPTIONS
+-- POSTS
 --
 
-CREATE TABLE `options` (
+CREATE TABLE `posts` (
 	`id` INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	`option` VARCHAR(64) NOT NULL UNIQUE,
-	`value` VARCHAR(64)
+	`title` VARCHAR(128) NOT NULL UNIQUE,
+    `description` VARCHAR(256) NOT NULL,
+    `slug` VARCHAR(128) NOT NULL UNIQUE,
+	`content` TEXT NOT NULL,
+    `date` TIMESTAMP DEFAULT NOW()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-INSERT INTO options (option, value)
-VALUES
-('hash', NULL);

@@ -8,23 +8,21 @@
                 Example Post Title
             </span>
         </div>
-        <? for($i=0; $i<10; $i++): ?>
+        <? foreach ($core->getPosts() as $post):?>
             <div class="post">
                 <div class="content">
                     <span class="date">
-                        23/02/2019
+                        <?=date('d/m/Y', $post->timestamp) ?>
                     </span>
                     <a href="#" class="title link">
-                        abcdefghijklmnopqrstuvwxyz
+                        <?=$post->title?>
                     </a>
                     <span class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in erat consectetur, facilisis quam ut, feugiat orci.
+                        <?=$post->description?>
                     </span>
                 </div>
-
-                <!-- <div class="spacer" style="clear: both;"></div> -->
             </div>
-        <? endfor; ?>
+        <? endforeach; ?>
         <div id="pagination">
             <a href="#" class="start"></a>
             <a href="#" class="prev"></a>
