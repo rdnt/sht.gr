@@ -10,6 +10,7 @@ class Page {
     public $blueprint;
     public $children;
     public $visible;
+    public $current;
 
     private $properties = array();
 
@@ -21,6 +22,7 @@ class Page {
         $this->template = $template;
         $this->blueprint = $blueprint;
         $this->visible = true;
+        $this->current = false;
 
         if ($parent) {
             //$pages[$parent] = $parent;
@@ -47,7 +49,7 @@ class Page {
 
 }
 
-class ErrorPage extends Page {
+class HiddenPage extends Page {
 
     function __construct($url, $name, $template, $blueprint, $parent = null) {
         parent::__construct($url, $name, $template, $blueprint, $parent);

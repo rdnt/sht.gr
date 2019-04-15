@@ -9,10 +9,8 @@
 //     $post = $core->newPost($data);
 // }
 
-$currentPage = 1;
-
-$count = $core->totalPosts();
-$totalPages = (int)($count / 10) + 1;
+$currentPage = $core->currentPage;
+$totalPages = $core->getBlogPageCount();
 
 $left = false;
 $first = false;
@@ -54,18 +52,18 @@ else {
 
 <div id="pagination">
     <? if($first): ?>
-        <a href="#" class="page">1</a>
+        <a href="/blog/page/1" class="page">1</a>
     <? endif; ?>
     <? if($left): ?>
         <div class="spacer">•••</div>
     <? endif; ?>
     <? foreach ($pages as $page): ?>
-        <a href="#" class="page <?= ($currentPage == $page) ? "active" : "" ?>"><?=$page?></a>
+        <a href="/blog<?= ($page != 1) ? "/page/$page" : "" ?>" class="page <?= ($currentPage == $page) ? "active" : "" ?>"><?=$page?></a>
     <? endforeach; ?>
     <? if($right): ?>
         <div class="spacer">•••</div>
     <? endif; ?>
     <? if($last): ?>
-        <a href="#" class="page"><?=$totalPages?></a>
+        <a href="/blog/page/<?=$totalPages?>" class="page"><?=$totalPages?></a>
     <? endif; ?>
 </div>

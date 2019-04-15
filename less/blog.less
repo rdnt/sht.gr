@@ -30,50 +30,51 @@
 //         }
 //     }
 // }
+#breadcrumbs {
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+    background-color: #fff;
+    height: 150px;
+    margin-bottom: 30px;
+    // font-size: 0;
+    span {
+        top: 0;
+        height: 150px;
+        font-size: 1.6rem;
+        line-height: 150px;
+        color: #666;
+        // font-weight: 300;
+        font-family: 'Source Sans Pro', sans-serif;
+        a {
+            text-decoration: none;
+            color: #111;
+            font-weight: 400;
+            opacity: .9;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+        &:after {
+            content: '/';
+            opacity: .75;
+            margin: 0 8px;
+            // display: inline-block;
+            // vertical-align: middle;
+            // width: 10px;
+            // height: 10px;
+            // margin: 15px 8px;
+            // background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSAzbDMuMDU3LTMgMTEuOTQzIDEyLTExLjk0MyAxMi0zLjA1Ny0zIDktOXoiLz48L3N2Zz4=');
+            // background-size: 100%;
+        }
+        &:last-child:after {
+            content: none;
+        }
+    }
+}
 #blog-container {
     width: calc(~"100% - 0px");
     #posts {
         width: calc(~"70%");
-        #breadcrumbs {
-            position: relative;
-            height: 40px;
-            line-height: 40px;
-            background-color: #fff;
-            height: 150px;
-            margin-bottom: 30px;
-            // font-size: 0;
-            span {
-                top: 0;
-                height: 150px;
-                font-size: 1.6rem;
-                line-height: 150px;
-                color: #666;
-                // font-weight: 300;
-                font-family: 'Source Sans Pro', sans-serif;
-                a {
-                    text-decoration: none;
-                    color: #111;
-                    font-weight: 400;
-                    opacity: .9;
-                    font-family: 'Source Sans Pro', sans-serif;
-                }
-                &:after {
-                    content: '/';
-                    opacity: .75;
-                    margin: 0 8px;
-                    // display: inline-block;
-                    // vertical-align: middle;
-                    // width: 10px;
-                    // height: 10px;
-                    // margin: 15px 8px;
-                    // background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSAzbDMuMDU3LTMgMTEuOTQzIDEyLTExLjk0MyAxMi0zLjA1Ny0zIDktOXoiLz48L3N2Zz4=');
-                    // background-size: 100%;
-                }
-                &:last-child:after {
-                    content: none;
-                }
-            }
-        }
+
         .post {
             margin-bottom: 80px;
             max-height: 240px;

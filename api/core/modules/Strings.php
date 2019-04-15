@@ -5,7 +5,7 @@ function escape($string) {
 }
 
 function startsWith($string, $prefix) {
-    if (substr($string, 0, strlen($suffix)) === $suffix) {
+    if (substr($string, 0, strlen($prefix)) === $prefix) {
         return true;
     }
     return false;

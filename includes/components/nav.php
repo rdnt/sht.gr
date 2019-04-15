@@ -7,15 +7,7 @@
         <ul class="navigation">
             <? foreach ($core->pages as $page): ?>
                 <? if ($page->visible): ?>
-                    <?php
-                        if ($page->url === $core->getCurrentPage()) {
-                            $active = "active";
-                        }
-                        else {
-                            $active = "";
-                        }
-                    ?>
-                    <li class="<?=$active?>"><a href="<?=$page->url?>"><span><?=$page->name?></span></a></li>
+                    <li class="<?= $page->current ? "active" : "" ?>"><a href="<?=$page->url?>"><span><?=$page->name?></span></a></li>
                 <? endif; ?>
             <? endforeach; ?>
         </ul>

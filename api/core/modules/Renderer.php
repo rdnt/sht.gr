@@ -53,6 +53,7 @@ trait Renderer {
         $this->name = $page->name;
         $this->template = $page->template;
         $this->blueprint = $page->blueprint;
+        $this->pages[$url]->current = true;
         // Re-format the title since the page data was changed
         $this->formatTitle();
     }
@@ -67,45 +68,31 @@ trait Renderer {
         $current_page = $this->getCurrentPage();
         // Loop all pages
 
-
-
-        // if ($current_page != '/') {
-        //     $current_page = rtrim($current_page, '/');
-        // }
-        //echo $current_page;
-        foreach ($this->pages as $page) {
-
-            // If URL starts with a hash it is a dropdown and index 3 is an
-            // array with the dropdown items
-            if ($current_page === $page->url) {
-                // echo "found";
-
-            //if ($this->getCurrentPage() === rtrim($page->url, "/") . "/") {
-                $this->setCurrentPage($page->url);
+        foreach ($this->pages as $url => $page) {
+            // echo "$url <br>";
+            if (endsWith($url, "/*")) {
+                $url = substr($url, 0, -2);
+                if (startsWith($current_page, $url)) {
+                    $this->setCurrentPage($page->url);
+                    return;
+                }
             }
-            if ($page->children) {
-                foreach ($page->children as $child) {
-                    if ($current_page === $child->url) {
-                        $this->setCurrentPage($child->url);
+            else {
+                if ($current_page == $page->url) {
+                    $this->setCurrentPage($page->url);
+                    return;
+                }
+                if ($page->children) {
+                    foreach ($page->children as $child) {
+                        if ($current_page === $child->url) {
+                            $this->setCurrentPage($child->url);
+                            return;
+                        }
                     }
                 }
             }
         }
     }
-
-    // function pageExists($page) {
-    //     return array_key_exists($page, $this->pages);
-    // }
-
-    // function includePage() {
-    //     $path = $this->getRoot() . "/includes/blueprints/" . $this->blueprint . ".php";
-    //     if (!file_exists($path)) {
-    //         $path = $this->getRoot() . "/includes/blueprints/default.php";
-    //         $this->log("RENDERER", "Page blueprint file $this->blueprint.php doesn't exist. Using default blueprint.");
-    //     }
-    //     $core = $this;
-    //     require_once $path;
-    // }
 
 
 
@@ -135,18 +122,42 @@ trait Renderer {
         //     // Get rid of trailing slashes when checking
         //     $location = rtrim($location, "/");
         // }
-        if (array_key_exists($location, $this->pages)) {
-            return true;
+        // $found = false;
+        // foreach ($this->pages as $url => $page) {
+        //     echo "$url $location<br>";
+        //
+        //     if (startsWith($location, $url)) {
+        //         return true;
+        //     }
+        // }
+        foreach ($this->pages as $url => $page) {
+            if (endsWith($url, "/*")) {
+                // echo "$location $url<br>";
+                $url = substr($url, 0, -2);
+                if (startsWith($location, $url)) {
+                    return true;
+                }
+            }
+            else {
+                if ($location == $url) {
+                    return true;
+                }
+            }
+
         }
-        else {
-            return false;
-        }
+        return false;
+        // die();
+        // if (array_key_exists($location, $this->pages)) {
+        //     return true;
+        // }
+        // else {
+        //     return false;
+        // }
     }
 
     function servePage($location) {
         $current_page = $this->getCurrentPage();
         $query = $_SERVER['QUERY_STRING'];
-
         // var_dump($this->blueprint);
         // if (!$query && (endsWith($this->getCurrentPage(), "//") || !endsWith($this->getCurrentPage(), "/"))) {
         //     header("Expires: " . gmdate("D, d M Y H:i:s", time() + 86400) . " GMT");
@@ -232,6 +243,7 @@ trait Renderer {
      */
     function renderPage() {
 
+
         $this->findCurrentPage();
 
 
@@ -242,6 +254,12 @@ trait Renderer {
         // $location = strtok($url, '?');
 
         $location = $this->getCurrentPage();
+
+        if (endsWith($location, "/") && $location != "/") {
+            $this->redirect(rtrim($location, "/"));
+            die();
+        }
+
 
         if ($location === false) {
             $this->redirect("/");
@@ -266,6 +284,7 @@ trait Renderer {
             $this->serveAsset($location);
         }
         else if ($this->isPage($location)) {
+
             //echo "serving page<br>";
             $this->servePage($location);
         }
