@@ -1,14 +1,5 @@
 <?php
 
-// for ($i=0; $i<115; $i++) {
-//     $data = array(
-//         "title" => "Post $i",
-//         "description" => "Post $i description",
-//         "content" => "Post Content $i"
-//     );
-//     $post = $core->newPost($data);
-// }
-
 $currentPage = $core->currentPage;
 $totalPages = $core->getBlogPageCount();
 

@@ -18,18 +18,20 @@
 <div id="social">
     <? $core->loadComponent("social-icons"); ?>
 </div>
-<div id="latest-articles">
-    <div class="article">
-        <div class="title">
-            <span>Article Title</span>
+<div id="latest-articles"><? $posts = $core->getPosts(1) ?>
+    <? foreach ($posts as $post): ?>
+        <div class="article">
+            <div class="title">
+                <span><?=$post->title?></span>
+            </div>
+            <div class="description">
+                <span><?=$post->description?></span>
+            </div>
+            <!-- <div class="bg">
+                <img src="https://christianmoser.me/wp-content/uploads/2014/02/DSC_3415.jpeg" alt="">
+            </div> -->
         </div>
-        <div class="description">
-            <span>That is a very very very very very very very very long description indeed so it will be trimmed down.</span>
-        </div>
-        <div class="bg">
-            <img src="https://christianmoser.me/wp-content/uploads/2014/02/DSC_3415.jpeg" alt="">
-        </div>
-    </div>
+    <? endforeach; ?>
     <div class="indicators">
         <div class="indicator active"></div>
         <div class="indicator"></div>

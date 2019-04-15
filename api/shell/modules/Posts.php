@@ -16,8 +16,8 @@ trait Posts {
         return $totalPages;
     }
 
-    function getPosts($limit = 0, $offset = 0) {
-        if ($this->totalPostsPerPage != null && $limit >= 0) {
+    function getPosts($limit = null, $offset = 0) {
+        if ($this->totalPostsPerPage != null && $limit == null) {
             $limit = $this->totalPostsPerPage;
         }
         if ($this->currentPage) {
@@ -85,6 +85,11 @@ trait Posts {
 
             $timestamp = time();
             $data['slug'] = $this->slugify($data['title']);
+
+            if (isset($data['content'])) {
+                $this->processCodeBlocks($data['content']);
+            }
+
             $sql = "INSERT INTO posts
                     (title, description, slug, content, timestamp)
                     VALUES
@@ -109,6 +114,28 @@ trait Posts {
         ";
         $data = $this->query($sql);
         return (int)$data;
+    }
+
+    function processCodeBlocks(&$content) {
+        $content = preg_replace_callback(
+            "/<code( lang=\"([^\"]*)\")?>(.*?)(<\/code>)/sm",
+            function ($groups) {
+                if (isset($groups[2])) {
+                    $lang = $groups[2];
+                }
+                else {
+                    $lang = "text";
+                }
+                if (isset($groups[3])) {
+                    $inner = htmlspecialchars($groups[3]);
+                }
+                return "<div class=\"code-block\">
+                            <div class=\"lang\">$lang</div>
+                            <pre class=\"lang-$lang line-numbers\"><code class=\"lang-$lang\">$inner</code></pre>
+                        </div>";
+            },
+            $content
+        );
     }
 
 }
