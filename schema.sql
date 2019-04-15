@@ -14,5 +14,5 @@ CREATE TABLE `posts` (
     `description` VARCHAR(256) NOT NULL,
     `slug` VARCHAR(128) NOT NULL UNIQUE,
 	`content` TEXT NOT NULL,
-    `date` TIMESTAMP DEFAULT NOW()
+    `timestamp` BIGINT UNSIGNED DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

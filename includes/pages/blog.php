@@ -23,19 +23,6 @@
                 </div>
             </div>
         <? endforeach; ?>
-        <div id="pagination">
-            <a href="#" class="start"></a>
-            <a href="#" class="prev"></a>
-
-            <a href="#" class="active page">1</a>
-            <a href="#" class="page">2</a>
-            <a href="#" class="page">3</a>
-            <div class="spacer">•••</div>
-            <a href="#" class="page">23</a>
-
-            <a href="#" class="next"></a>
-            <a href="#" class="end"></a>
-        </div>
+        <? $core->loadComponent("pagination"); ?>
     </div>
-
 </div>

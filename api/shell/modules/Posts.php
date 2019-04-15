@@ -2,14 +2,14 @@
 
 trait Posts {
 
-    function getPosts() {
-        $sql = "SELECT
-                    id,
-                    title,
-                    description,
-                    slug,
-                    content,
-                    UNIX_TIMESTAMP(date) AS timestamp
+    function getPosts($count = -1, $offset = 0) {
+        if ($count == -1) {
+            // Get all posts
+            $sql = "SELECT *
+                    FROM posts;
+            ";
+        }
+        $sql = "SELECT *
                 FROM posts;
         ";
         $response = $this->query($sql);
@@ -23,13 +23,7 @@ trait Posts {
     function getPost($id) {
         if (is_int($id)) {
 
-            $sql = "SELECT
-                        id,
-                        title,
-                        description,
-                        slug,
-                        content,
-                        UNIX_TIMESTAMP(date) AS timestamp
+            $sql = "SELECT *
                     FROM posts
                     WHERE id = ?;
             ";
@@ -53,9 +47,9 @@ trait Posts {
             $timestamp = time();
             $data['slug'] = $this->slugify($data['title']);
             $sql = "INSERT INTO posts
-                    (title, description, slug, content, date)
+                    (title, description, slug, content, timestamp)
                     VALUES
-                    (?, ?, ?, ?, FROM_UNIXTIME(?));
+                    (?, ?, ?, ?, ?);
             ";
             $response = $this->query($sql, "ssssi", $data['title'], $data['description'], $data['slug'], $data['content'], $timestamp);
             if ($response) {
@@ -68,6 +62,14 @@ trait Posts {
             }
         }
         return false;
+    }
+
+    function totalPosts() {
+        $sql = "SELECT count(*)
+                FROM posts;
+        ";
+        $data = $this->query($sql);
+        return (int)$data;
     }
 
 }
