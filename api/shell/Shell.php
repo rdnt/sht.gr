@@ -66,6 +66,8 @@ class Shell extends Core {
         new Page("/ardent", "Ardent Radio", "ardent", "default");
         new Page("/login", "Login", "login", "default");
 
+        new Page("/admin/editor", "Editor", "admin/editor", "admin");
+
 
         new HiddenPage("/error/403", "403 Forbidden", "error/403", "error");
         new HiddenPage("/error/404", "404 Not Found", "error/404", "error");

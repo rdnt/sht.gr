@@ -13,6 +13,7 @@
 <link href="/css/scrollbar.css?v=<?=$this->getCommitHash()?>" type="text/css" rel="stylesheet" media="screen"/>
 <link href="/css/projects.css?v=<?=$this->getCommitHash()?>" type="text/css" rel="stylesheet" media="screen"/>
 <link href="/css/blog.css?v=<?=$this->getCommitHash()?>" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/css/admin/editor.css?v=<?=$this->getCommitHash()?>" type="text/css" rel="stylesheet" media="screen"/>
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,300,400,500,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:300,400,700,800" rel="stylesheet">
