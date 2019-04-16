@@ -7,8 +7,26 @@
 
 var editor = document.getElementById("editor");
 var preview = document.getElementById("preview");
-var invisibles = document.getElementById("invisibles-overlay");
+var invisibles = document.getElementById("invisibles");
 var converter = new showdown.Converter();
+converter.setOption("simplifiedAutoLink", true);
+converter.setOption("literalMidWordUnderscores", true);
+converter.setOption("strikethrough", true);
+converter.setOption("tables", true);
+converter.setOption("tasklists", true);
+
+
+
+converter.setOption("smoothLivePreview", true);
+converter.setOption("smartIndentationFix", true);
+converter.setOption("disableForced4SpacesIndentedSublists", true);
+converter.setOption("simpleLineBreaks", true);
+converter.setOption("emoji", true);
+converter.setOption("parseImgDimensions", true);
+converter.setOption("tables", true);
+converter.setOption("tables", true);
+
+
 
 editor.addEventListener("input", renderMarkdown);
 editor.addEventListener("change", renderMarkdown);
@@ -17,13 +35,13 @@ window.addEventListener("load", init);
 
 function init() {
     processInvisibles(editor.innerHTML);
-    var content = converter.makeHtml(editor.innerHTML);
+    var content = converter.makeHtml(editor.textContent);
     preview.innerHTML = content;
 }
 
 // function highlightLine() {
 //     var line = markdown.value.substr(0, markdown.selectionStart).split("\n").length - 1;
-//     var lines = document.querySelectorAll("#invisibles-overlay .line");
+//     var lines = document.querySelectorAll("#invisibles .line");
 //     lines.forEach(function(element, index) {
 //         if (index != line) {
 //             element.classList.remove("active");
