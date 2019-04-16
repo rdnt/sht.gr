@@ -2,59 +2,67 @@
 #markdown-editor {
     position: relative;
     font-size: 0;
-    #editor {
+    #markdown {
         position: relative;
-        z-index: 2;
         display: inline-block;
         width: 50%;
-        height: calc(~"100vh - 200px");
         height: 100vh;
-        font-size: 16px;
-        box-sizing: border-box;
-        background-color: #20252d;
-        border: none;
-        resize: none;
-        padding: 40px;
-        color: #abb2bf;
-        overflow-x: hidden;
-        overflow-y: auto;
-        font-family: 'Roboto Mono', monospace;
-        white-space: pre;
-    }
-    #invisibles-overlay {
-        top: 0;
-        left: 0;
-        width: 50%;
-        height: 100%;
-        position: absolute;
-        background-color: transparent;
-        z-index: 999;
-        opacity: 1;
-        pointer-events: none;
-        font-size: 16px;
-        padding: 40px;
-        color: #bbb;
-        font-family: 'Roboto Mono', monospace;
-        font-weight: 400;
-        white-space: pre;
-        box-sizing: border-box;
-        .line {
-            height: 21px;
-            .c {
-                color: #abb2bf;
-            }
-            .spc {
-                color: #353c45;
-                opacity: 1;
-            }
-        }
+        z-index: 1;
+        #editor {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
 
+            font-size: 16px;
+            box-sizing: border-box;
+            border: none;
+            resize: none;
+            padding: 40px;
+            color: #abb2bf;
+            font-family: 'Roboto Mono', monospace;
+            white-space: pre;
+            z-index: 2;
+            background-color: transparent;
+            overflow: auto;
+        }
+        #invisibles-overlay {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-color: transparent;
+            z-index: 1;
+            opacity: 1;
+            pointer-events: none;
+            font-size: 16px;
+            background-color: #20252d;
+            padding: 40px;
+            color: #bbb;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 400;
+            white-space: pre;
+            box-sizing: border-box;
+            overflow: auto;
+            .line {
+                height: 21px;
+                .c {
+                    color: #abb2bf;
+                }
+                .spc {
+                    color: #353c45;
+                    opacity: 1;
+                }
+            }
+
+        }
     }
+
     #preview {
+        position: relative;
         top: 0;
         padding: 40px;
-        overflow-x: hidden;
-        overflow-y: auto;
         display: inline-block;
         box-sizing: border-box;
         width: 50%;
@@ -65,10 +73,10 @@
 
 
 
-
+        overflow: auto;
         white-space: pre;
 
-
+        z-index: 2;
 
 
         h1, h2, h3, h4, h5, h6 {
@@ -110,7 +118,8 @@
             position: relative;
             margin: 0 auto;
             background-color: #fff;
-            font-size: 1.5rem;
+
+            font-size: 1.4rem;
         }
         [id^="alth1"] {
             border-bottom: 1px solid #dadcdf;

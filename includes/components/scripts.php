@@ -99,6 +99,10 @@ editor.onscroll = function() {
     if (!isSyncingLeftScroll) {
         isSyncingRightScroll = true;
         preview.scrollTop = this.scrollTop;
+        invisibles.scrollTop = this.scrollTop;
+
+        preview.scrollLeft = this.scrollLeft;
+        invisibles.scrollLeft = this.scrollLeft;
     }
     isSyncingLeftScroll = false;
 }
@@ -107,6 +111,10 @@ preview.onscroll = function() {
     if (!isSyncingRightScroll) {
         isSyncingLeftScroll = true;
         editor.scrollTop = this.scrollTop;
+        invisibles.scrollTop = this.scrollTop;
+
+        editor.scrollLeft = this.scrollLeft;
+        invisibles.scrollLeft = this.scrollLeft;
     }
     isSyncingRightScroll = false;
 }

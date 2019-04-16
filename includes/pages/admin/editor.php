@@ -1,4 +1,5 @@
 <div id="markdown-editor">
+    <div id="markdown">
 <textarea id="editor" name="content" value="">
 # Header 1
 ## Header 2
@@ -15,6 +16,7 @@ Alt-H1
 Alt-H2
 ------
 </textarea>
-<div id="invisibles-overlay"></div>
-<div id="preview"></div>
+        <div id="invisibles-overlay"></div>
+    </div>
+    <div id="preview"></div>
 </div>
