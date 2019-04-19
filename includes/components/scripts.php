@@ -7,7 +7,7 @@
 
 var editor = document.getElementById("editor");
 var preview = document.getElementById("preview");
-var invisibles = document.getElementById("invisibles");
+// var invisibles = document.getElementById("invisibles");
 var converter = new showdown.Converter();
 converter.setOption("simplifiedAutoLink", true);
 converter.setOption("literalMidWordUnderscores", true);
@@ -34,7 +34,7 @@ editor.addEventListener("change", renderMarkdown);
 window.addEventListener("load", init);
 
 function init() {
-    processInvisibles(editor.innerHTML);
+    // processInvisibles(editor.innerHTML);
     var content = converter.makeHtml(editor.textContent);
     preview.innerHTML = content;
 }
@@ -57,51 +57,26 @@ function init() {
 
 function renderMarkdown() {
     var content = editor.value;
+
+    content = content.replace(/<code.*?(lang=\"([^\"]*)\")?>\n(.*?)<\/code>/sm, `<div class=\"code-block\">
+                <div class=\"lang\">$2</div>
+                <pre class=\"language-$2 line-numbers\"><code class=\"language-$2\">$3</code></pre>
+            </div>`);
+
     // processInvisibles(content);
     // console.log(content);
     processMarkdown(content);
+    Prism.highlightAll();
 }
 
-function processInvisibles(content) {
-    // content = content.replace(" ", "<div id=\"space-dot\">·</div>");
-    // markdown.value = content;
-    // /\S+/
-    //overlay.innerHTML = content;
-    // console.log();
 
-
-    // ovc = ovc.replace(/[\040]/gm, '•');
-    // ovc = ovc.replace(/[\n]/gm, '¬\n');
-    // ovc = ovc.replace(/[^•¬\n]/gm, ' ');
-
-
-    content = content.replace(/[\040]/gm, '•');
-    content = content.replace(/[\n]/gm, '¬\n');
-    content = content.replace(/[^•¬\n]/gm, ' ');
-
-
-    content = content.replace(/[•]/gm, '<span class="spc">•</span>');
-    content = content.replace(/[¬]/gm, '<span class="spc">¬</span>');
-
-    content = content.replace(/((.*?)\n*[^\n]$)/gm, '<div class="line">$1</div>');
-    if (content.endsWith("\n")) {
-        content += '<div class="line"></div>';
-    }
-    content = content.replace(/\n/gm, '');
-
-
-
-
-    // console.log(ovc);
-    invisibles.innerHTML = content;
-}
 
 function processMarkdown(content) {
 
 
 
     var result = converter.makeHtml(content);
-    processInvisibles(content);
+    // processInvisibles(content);
     preview.innerHTML = result;
 }
 
@@ -117,10 +92,8 @@ editor.onscroll = function() {
     if (!isSyncingLeftScroll) {
         isSyncingRightScroll = true;
         preview.scrollTop = this.scrollTop;
-        invisibles.scrollTop = this.scrollTop;
 
         preview.scrollLeft = this.scrollLeft;
-        invisibles.scrollLeft = this.scrollLeft;
     }
     isSyncingLeftScroll = false;
 }
@@ -129,10 +102,8 @@ preview.onscroll = function() {
     if (!isSyncingRightScroll) {
         isSyncingLeftScroll = true;
         editor.scrollTop = this.scrollTop;
-        invisibles.scrollTop = this.scrollTop;
 
         editor.scrollLeft = this.scrollLeft;
-        invisibles.scrollLeft = this.scrollLeft;
     }
     isSyncingRightScroll = false;
 }

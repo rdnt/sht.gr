@@ -26,13 +26,15 @@ trait Posts {
         if ($limit == -1) {
             // Get all posts
             $sql = "SELECT *
-                    FROM posts;
+                    FROM posts
+                    ORDER BY timestamp DESC, id DESC;
             ";
             $response = $this->query($sql);
         }
         else {
             $sql = "SELECT *
                     FROM posts
+                    ORDER BY timestamp DESC, id DESC
                     LIMIT ?
                     OFFSET ?;
             ";

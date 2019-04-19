@@ -12,7 +12,6 @@
     </div>
 <div id="markdown">
 <textarea id="editor" name="content" value=""></textarea>
-<div id="invisibles"></div>
 <div id="preview"></div>
 </div>
 </div>
